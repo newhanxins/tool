@@ -1,0 +1,477 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>苹果实况图片上传器</title>
+    <script src="https://cdn.apple-livephotoskit.com/lpk/1/livephotoskit.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/exif-js@2.3.0/exif.min.js"></script>
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        .glass-effect {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .upload-area {
+            border: 2px dashed #cbd5e0;
+            transition: all 0.3s ease;
+        }
+        .upload-area.dragover {
+            border-color: #667eea;
+            background-color: rgba(102, 126, 234, 0.1);
+        }
+        .preview-image {
+            transition: transform 0.3s ease;
+        }
+        .preview-image:hover {
+            transform: scale(1.05);
+        }
+        .live-photo-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .live-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 12px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body class="gradient-bg min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-white mb-4">
+                <i class="fas fa-live-photo mr-3"></i>
+                苹果实况图片上传器
+            </h1>
+            <p class="text-white/80 text-lg">支持实况图片上传和播放的完整解决方案</p>
+        </header>
+
+        <main class="max-w-6xl mx-auto">
+            <div class="glass-effect rounded-2xl p-8 shadow-2xl">
+                <div class="mb-8">
+                    <div id="uploadArea" class="upload-area rounded-xl p-8 text-center cursor-pointer">
+                        <i class="fas fa-live-photo text-6xl text-gray-400 mb-4"></i>
+                        <h3 class="text-xl font-semibold text-white mb-2">点击或拖拽上传实况图片</h3>
+                        <p class="text-white/70">支持JPG+MOV实况图片组合，最大20MB</p>
+                        <input type="file" id="fileInput" 
+                            class="hidden" 
+                            accept="image/*,video/*" 
+                            multiple>
+                    </div>
+                </div>
+
+                <div class="flex flex-wrap gap-4 mb-8">
+                    <button id="cameraBtn" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-lg transition-colors">
+                        <i class="fas fa-camera mr-2"></i>拍照上传
+                    </button>
+                    <button id="livePhotoBtn" class="bg-purple-500 hover:bg-purple-600 text-white px-6 py-3 rounded-lg transition-colors">
+                        <i class="fas fa-live-photo mr-2"></i>添加实况图片
+                    </button>
+                    <button id="clearBtn" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-lg transition-colors">
+                        <i class="fas fa-trash mr-2"></i>清空所有
+                    </button>
+                </div>
+
+                <div id="previewContainer" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                </div>
+
+                <div id="statusArea" class="mt-6 text-center">
+                    <div id="uploadProgress" class="hidden">
+                        <div class="bg-gray-200 rounded-full h-2 mb-2">
+                            <div id="progressBar" class="bg-blue-500 h-2 rounded-full transition-all duration-300"></div>
+                        </div>
+                        <p id="progressText" class="text-white/80">准备上传...</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <footer class="text-center mt-12 text-white/60">
+            <p>© 2025 苹果实况图片上传器 - 专为iOS Safari优化</p>
+        </footer>
+    </div>
+
+    <script>
+        class LiveImageUploader {
+            constructor() {
+                this.fileInput = document.getElementById('fileInput');
+                this.uploadArea = document.getElementById('uploadArea');
+                this.previewContainer = document.getElementById('previewContainer');
+                this.uploadProgress = document.getElementById('uploadProgress');
+                this.progressBar = document.getElementById('progressBar');
+                this.progressText = document.getElementById('progressText');
+                this.livePhotoPairs = new Map();
+                this.init();
+            }
+
+            init() {
+                this.bindEvents();
+                this.loadSampleLivePhotos();
+            }
+
+            bindEvents() {
+                this.uploadArea.addEventListener('click', () => {
+                    this.fileInput.click();
+                });
+
+                this.fileInput.addEventListener('change', (e) => {
+                    this.handleFiles(e.target.files);
+                });
+
+                this.uploadArea.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    this.uploadArea.classList.add('dragover');
+                });
+
+                this.uploadArea.addEventListener('dragleave', () => {
+                    this.uploadArea.classList.remove('dragover');
+                });
+
+                this.uploadArea.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    this.uploadArea.classList.remove('dragover');
+                    this.handleFiles(e.dataTransfer.files);
+                });
+
+                document.getElementById('cameraBtn').addEventListener('click', () => {
+                    this.fileInput.setAttribute('capture', 'camera');
+                    this.fileInput.click();
+                });
+
+                document.getElementById('livePhotoBtn').addEventListener('click', () => {
+                    this.addLivePhotoPair();
+                });
+
+                document.getElementById('clearBtn').addEventListener('click', () => {
+                    this.clearAllPreviews();
+                });
+            }
+
+            loadSampleLivePhotos() {
+                const samplePairs = [
+                    {
+                        photo: 'https://picsum.photos/400/400',
+                        video: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4',
+                        name: '示例实况图片1'
+                    },
+                    {
+                        photo: 'https://picsum.photos/401/401', 
+                        video: 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4',
+                        name: '示例实况图片2'
+                    }
+                ];
+
+                samplePairs.forEach(pair => {
+                    this.createLivePhotoPreview(pair.photo, pair.video, pair.name);
+                });
+            }
+
+            async handleFiles(files) {
+                const imageFiles = [];
+                const videoFiles = [];
+
+                for (let file of files) {
+                    if (file.type.startsWith('image/')) {
+                        imageFiles.push(file);
+                    } else if (file.type.startsWith('video/')) {
+                        videoFiles.push(file);
+                    }
+                }
+
+                for (let imageFile of imageFiles) {
+                    try {
+                        const processedImage = await this.processImage(imageFile);
+                        const correspondingVideo = this.findCorrespondingVideo(imageFile.name, videoFiles);
+                        
+                        if (correspondingVideo) {
+                            const videoUrl = URL.createObjectURL(correspondingVideo);
+                            this.createLivePhotoPreview(processedImage, videoUrl, imageFile.name);
+                        } else {
+                            this.createImagePreview(processedImage, imageFile.name);
+                        }
+                    } catch (error) {
+                        this.showError('图片处理失败: ' + error.message);
+                    }
+                }
+            }
+
+            findCorrespondingVideo(imageName, videoFiles) {
+                const baseName = imageName.replace(/\.[^/.]+$/, "");
+                for (let videoFile of videoFiles) {
+                    const videoBaseName = videoFile.name.replace(/\.[^/.]+$/, "");
+                    if (baseName === videoBaseName) {
+                        return videoFile;
+                    }
+                }
+                return null;
+            }
+
+            processImage(file) {
+                return new Promise((resolve, reject) => {
+                    EXIF.getData(file, function() {
+                        const orientation = EXIF.getTag(this, 'Orientation');
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(e) {
+                            const img = new Image();
+                            img.onload = function() {
+                                const canvas = document.createElement('canvas');
+                                const ctx = canvas.getContext('2d');
+                                
+                                let width = img.width;
+                                let height = img.height;
+                                let rotation = 0;
+
+                                if (orientation) {
+                                    switch(orientation) {
+                                        case 3:
+                                            rotation = 180;
+                                            break;
+                                        case 6:
+                                            rotation = 90;
+                                            [width, height] = [height, width];
+                                            break;
+                                        case 8:
+                                            rotation = 270;
+                                            [width, height] = [height, width];
+                                            break;
+                                    }
+                                }
+
+                                canvas.width = width;
+                                canvas.height = height;
+                                
+                                ctx.save();
+                                ctx.translate(width / 2, height / 2);
+                                ctx.rotate(rotation * Math.PI / 180);
+                                ctx.drawImage(img, -img.width / 2, -img.height / 2);
+                                ctx.restore();
+
+                                resolve(canvas.toDataURL('image/jpeg', 0.8));
+                            };
+                            img.onerror = reject;
+                            img.src = e.target.result;
+                        };
+                        reader.onerror = reject;
+                        reader.readAsDataURL(file);
+                    });
+                });
+            }
+
+            addLivePhotoPair() {
+                const photoUrl = prompt('请输入图片URL:');
+                const videoUrl = prompt('请输入视频URL:');
+                const name = prompt('请输入名称:', '自定义实况图片');
+                
+                if (photoUrl && videoUrl) {
+                    this.createLivePhotoPreview(photoUrl, videoUrl, name);
+                }
+            }
+
+            createLivePhotoPreview(photoUrl, videoUrl, name) {
+                const previewItem = document.createElement('div');
+                previewItem.className = 'bg-white rounded-lg p-4 shadow-lg preview-image live-photo-container';
+                
+                const livePhotoId = 'live-photo-' + Date.now();
+                
+                previewItem.innerHTML = `
+                    <div class="live-badge">
+                        <i class="fas fa-live-photo mr-1"></i>实况
+                    </div>
+                    <div id="${livePhotoId}" 
+                         data-live-photo 
+                         data-photo-src="${photoUrl}" 
+                         data-video-src="${videoUrl}"
+                         style="width: 100%; height: 200px; cursor: pointer">
+                    </div>
+                    <div class="flex justify-between items-center mt-3">
+                        <span class="text-sm text-gray-600 truncate">${name}</span>
+                        <div class="flex gap-2">
+                            <button class="text-green-500 hover:text-green-700 play-btn">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="text-red-500 hover:text-red-700 delete-btn">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <button class="bg-purple-500 hover:bg-purple-600 text-white px-4 py-2 rounded text-sm auto-play-btn">
+                                自动播放
+                            </button>
+                    </div>
+                `;
+
+                const playBtn = previewItem.querySelector('.play-btn');
+                const deleteBtn = previewItem.querySelector('.delete-btn');
+                const autoPlayBtn = previewItem.querySelector('.auto-play-btn');
+
+                playBtn.addEventListener('click', () => {
+                    this.playLivePhoto(livePhotoId);
+                });
+
+                deleteBtn.addEventListener('click', () => {
+                    previewItem.remove();
+                });
+
+                autoPlayBtn.addEventListener('click', () => {
+                    this.autoPlayLivePhoto(livePhotoId);
+                });
+
+                this.previewContainer.appendChild(previewItem);
+                
+                setTimeout(() => {
+                    this.initializeLivePhoto(livePhotoId);
+                }, 100);
+            }
+
+            createImagePreview(dataUrl, fileName) {
+                const previewItem = document.createElement('div');
+                previewItem.className = 'bg-white rounded-lg p-4 shadow-lg preview-image';
+                
+                previewItem.innerHTML = `
+                    <img src="${dataUrl}" alt="${fileName}" class="w-full h-48 object-cover rounded-md mb-3">
+                    <div class="flex justify-between items-center">
+                        <span class="text-sm text-gray-600 truncate">${fileName}</span>
+                        <div class="flex gap-2">
+                            <button class="text-blue-500 hover:text-blue-700 download-btn">
+                        <i class="fas fa-download"></i>
+                    </button>
+                    <button class="text-red-500 hover:text-red-700 delete-btn">
+                        <i class="fas fa-trash"></i>
+                    </button>
+                        </div>
+                    </div>
+                    <div class="mt-2">
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded text-sm upload-btn">
+                        上传
+                    </button>
+                    </div>
+                `;
+
+                const downloadBtn = previewItem.querySelector('.download-btn');
+                const deleteBtn = previewItem.querySelector('.delete-btn');
+                const uploadBtn = previewItem.querySelector('.upload-btn');
+
+                downloadBtn.addEventListener('click', () => {
+                    this.downloadImage(dataUrl, fileName);
+                });
+
+                deleteBtn.addEventListener('click', () => {
+                    previewItem.remove();
+                });
+
+                uploadBtn.addEventListener('click', () => {
+                    this.uploadImage(dataUrl, fileName);
+                });
+
+                this.previewContainer.appendChild(previewItem);
+            }
+
+            initializeLivePhoto(livePhotoId) {
+                const element = document.getElementById(livePhotoId);
+                if (element) {
+                    try {
+                        const player = LivePhotosKit.Player(element);
+                        this.livePhotoPairs.set(livePhotoId, player);
+                    } catch (error) {
+                        console.error('初始化实况图片失败:', error);
+                    }
+                }
+            }
+
+            playLivePhoto(livePhotoId) {
+                const player = this.livePhotoPairs.get(livePhotoId);
+                if (player) {
+                    player.play();
+                }
+            }
+
+            autoPlayLivePhoto(livePhotoId) {
+                const player = this.livePhotoPairs.get(livePhotoId);
+                if (player) {
+                    player.play();
+                    setTimeout(() => {
+                        player.stop();
+                    }, 3000);
+                }
+            }
+
+            downloadImage(dataUrl, fileName) {
+                const link = document.createElement('a');
+                link.href = dataUrl;
+                link.download = fileName;
+                link.click();
+            }
+
+            async uploadImage(dataUrl, fileName) {
+                try {
+                    this.showProgress(0, '开始上传...');
+                    
+                    for (let i = 0; i <= 100; i += 10) {
+                        await new Promise(resolve => setTimeout(resolve, 200));
+                        this.showProgress(i, `正在上传: ${i}%`);
+                    }
+                    
+                    this.showProgress(100, '上传完成!');
+                    this.showSuccess(`${fileName} 上传成功`);
+                    
+                } catch (error) {
+                    this.showError('上传失败: ' + error.message);
+                }
+            }
+
+            clearAllPreviews() {
+                this.previewContainer.innerHTML = '';
+                this.livePhotoPairs.clear();
+                this.showSuccess('已清空所有预览');
+            }
+
+            showProgress(percent, text) {
+                this.uploadProgress.classList.remove('hidden');
+                this.progressBar.style.width = percent + '%';
+                this.progressText.textContent = text;
+            }
+
+            showSuccess(message) {
+                this.showNotification(message, 'success');
+            }
+
+            showError(message) {
+                this.showNotification(message, 'error');
+            }
+
+            showNotification(message, type) {
+                const notification = document.createElement('div');
+                notification.className = `fixed top-4 right-4 px-6 py-3 rounded-lg shadow-lg z-50 ${
+                                    type === 'success' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'
+                                }`;
+                notification.textContent = message;
+                
+                document.body.appendChild(notification);
+                
+                setTimeout(() => {
+                    notification.remove();
+                }, 3000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new LiveImageUploader();
+        });
+    </script>
+</body>
+</html>

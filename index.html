@@ -1,0 +1,696 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevTools Pro - 一站式开发工具平台</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* 自定义样式补充 */
+:root {
+    --primary-color: #3b82f6;
+    --success-color: #10b981;
+    --warning-color: #f59e0b;
+    --error-color: #ef4444;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.tool-card {
+    border: 2px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.tool-card:hover {
+    border-color: var(--primary-color);
+}
+
+.tool-card.active {
+    border-color: var(--primary-color);
+    background-color: #f0f9ff;
+}
+
+.tool-section {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* 滚动条样式 */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* JSON 语法高亮 */
+.language-json .string { color: #22863a; }
+.language-json .number { color: #005cc5; }
+.language-json .boolean { color: #d73a49; }
+.language-json .null { color: #6f42c1; }
+.language-json .key { color: #24292e; }
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+    .grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .tool-card {
+        margin-bottom: 1rem;
+    }
+}
+
+/* 加载动画 */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid #f3f3f3;
+    border-top: 3px solid var(--primary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* 主题切换 */
+.dark-mode {
+    background: #1f2937;
+    color: #f9fafb;
+}
+
+/* 输入框焦点效果 */
+input:focus, textarea:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-tools text-blue-600 text-xl"></i>
+                <h1 class="text-2xl font-bold text-gray-800">DevTools Pro</h1>
+                </div>
+                <div class="flex items-center space-x-6">
+                    <button id="themeToggle" class="p-2 rounded-lg hover:bg-gray-100 transition-colors">
+                    <i class="fas fa-moon text-gray-600"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 主内容区域 -->
+    <main class="max-w-7xl mx-auto px-4 py-8">
+        <!-- 工具选择器 -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="tool-card bg-white rounded-xl shadow-lg p-6 cursor-pointer transform transition-all duration-300 hover:scale-105 active:scale-95" data-tool="json">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-code text-blue-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-800">JSON 格式化工具</h3>
+                    <p class="text-gray-600 text-sm mt-1">美化、验证和压缩JSON数据</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tool-card bg-white rounded-xl shadow-lg p-6 cursor-pointer transform transition-all duration-300 hover:scale-105 active:scale-95" data-tool="image">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-image text-green-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-800">图片压缩工具</h3>
+                    <p class="text-gray-600 text-sm mt-1">优化图片大小，保持质量</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tool-card bg-white rounded-xl shadow-lg p-6 cursor-pointer transform transition-all duration-300 hover:scale-105 active:scale-95" data-tool="html">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-file-code text-purple-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-800">HTML 压缩工具</h3>
+                    <p class="text-gray-600 text-sm mt-1">压缩HTML代码，优化性能</p>
+                    </div>
+                </div>
+            </div>
+            <div class="tool-card bg-white rounded-xl shadow-lg p-6 cursor-pointer transform transition-all duration-300 hover:scale-105 active:scale-95" data-tool="ios-photo">
+                <div class="flex items-center space-x-4">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
+                    <i class="fas fa-file-code text-purple-600 text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-800">ios</h3>
+                    <p class="text-gray-600 text-sm mt-1">ios 实况图片</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- JSON 格式化工具 -->
+        <div id="jsonTool" class="tool-section bg-white rounded-xl shadow-lg p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-800">JSON 格式化工具</h2>
+                <div class="flex space-x-2">
+                    <button id="formatJson" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                    格式化
+                    </button>
+                    <button id="minifyJson" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
+                    压缩
+                    </button>
+                    <button id="validateJson" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                    验证
+                    </button>
+                    <button id="clearJson" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
+                    清空
+                    </button>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">输入 JSON</label>
+                    <textarea id="jsonInput" class="w-full h-64 border border-gray-300 rounded-lg p-4 font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder='{"name": "示例", "data": [1, 2, 3]}'></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">格式化结果</label>
+                    <pre id="jsonOutput" class="w-full h-64 border border-gray-300 rounded-lg p-4 bg-gray-50 overflow-auto text-sm"><code class="language-json">等待输入...</code></pre>
+                </div>
+            </div>
+            <div id="jsonStatus" class="mt-4 text-sm"></div>
+        </div>
+
+        <!-- 图片压缩工具 -->
+        <div id="imageTool" class="tool-section hidden bg-white rounded-xl shadow-lg p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-800">图片压缩工具</h2>
+                <div class="flex items-center space-x-4">
+                    <label class="text-sm text-gray-600">质量:</label>
+                    <input id="qualitySlider" type="range" min="1" max="100" value="80" class="w-32">
+                    <span id="qualityValue" class="text-sm font-medium text-gray-800">80%</span>
+                </div>
+            </div>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">上传图片</label>
+                    <div class="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                        <i class="fas fa-cloud-upload-alt text-gray-400 text-3xl mb-4"></i>
+                        <p class="text-gray-600 mb-4">拖拽图片到这里或点击上传</p>
+                        <input type="file" id="imageUpload" accept="image/*" class="hidden">
+                        <button onclick="document.getElementById('imageUpload').click()" class="bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                        选择图片
+                        </button>
+                    </div>
+                    <div id="originalInfo" class="mt-4 text-sm text-gray-600 hidden"></div>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">压缩结果</label>
+                    <div id="compressedPreview" class="w-full h-64 border border-gray-300 rounded-lg p-4 bg-gray-50 flex items-center justify-center">
+                        <p class="text-gray-500">压缩后的图片将在这里显示</p>
+                    </div>
+                </div>
+            </div>
+            <div id="compressionInfo" class="mt-4 text-sm hidden"></div>
+            <div class="mt-6">
+                <button id="downloadBtn" class="bg-green-600 text-white px-6 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                下载压缩图片
+                </button>
+            </div>
+        </div>
+
+        <!-- HTML 压缩工具 -->
+        <div id="htmlTool" class="tool-section hidden bg-white rounded-xl shadow-lg p-6">
+            <div class="flex items-center justify-between mb-6">
+                <h2 class="text-xl font-bold text-gray-800">HTML 压缩工具</h2>
+                <div class="flex space-x-2">
+                    <button id="minifyHtml" class="bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+                压缩 HTML
+                </button>
+                <button id="copyHtml" class="bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
+                复制结果
+                </button>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-2">输入 HTML</label>
+            <textarea id="htmlInput" class="w-full h-64 border border-gray-300 rounded-lg p-4 font-mono text-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="<html>...</html>"></textarea>
+        </div>
+        <div>
+            <label class="block text-sm font-medium text-gray-700 mb-2">压缩结果</label>
+            <pre id="htmlOutput" class="w-full h-64 border border-gray-300 rounded-lg p-4 bg-gray-50 overflow-auto text-sm"><code class="language-html">等待输入...</code></pre>
+    </div>
+</div>
+<div id="htmlStatus" class="mt-4 text-sm"></div>
+        </div>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="bg-white border-t border-gray-200 mt-12">
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-600 text-sm">© 2025 DevTools Pro - 一站式开发工具平台</p>
+                <div class="flex space-x-4 mt-4 md:mt-0">
+                    <a href="#" class="text-gray-500 hover:text-gray-700 transition-colors">
+                    <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="text-gray-500 hover:text-gray-700 transition-colors">
+                    <i class="fab fa-twitter"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // 工具状态管理
+class ToolManager {
+    constructor() {
+        this.currentTool = 'json';
+        this.init();
+        this.currentImage = null;
+        this.compressedImage = {name: '', dataUrl: ''};
+    }
+
+    init() {
+        this.bindEvents();
+        this.loadFromStorage();
+    }
+
+    bindEvents() {
+        // 工具卡片点击事件
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.addEventListener('click', (e) => {
+                const tool = e.currentTarget.dataset.tool;
+                if (tool=="ios-photo") {
+                    window.location.href="./pages/ios-photo/index.html"
+                }else{
+                    this.switchTool(tool);
+                }
+                
+            });
+        });
+
+        // JSON 工具按钮事件
+        document.getElementById('formatJson').addEventListener('click', () => this.formatJSON());
+        document.getElementById('minifyJson').addEventListener('click', () => this.minifyJSON());
+        document.getElementById('validateJson').addEventListener('click', () => this.validateJSON());
+        document.getElementById('clearJson').addEventListener('click', () => this.clearJSON());
+
+        // 图片上传事件
+        document.getElementById('imageUpload').addEventListener('change', (e) => this.handleImageUpload(e));
+        
+        // 质量滑块事件
+        document.getElementById('qualitySlider').addEventListener('input', (e) => {
+            document.getElementById('qualityValue').textContent = `${e.target.value}%`;
+        if (this.currentImage) {
+                this.compressImage(this.currentImage, parseInt(e.target.value));
+            }
+        });
+
+        document.getElementById('downloadBtn').addEventListener('click', () => {
+                    this.downloadImage();
+                });
+        // HTML 工具按钮事件
+        document.getElementById('minifyHtml').addEventListener('click', () => this.minifyHTML());
+        document.getElementById('copyHtml').addEventListener('click', () => this.copyHTML());
+
+        // 主题切换
+        document.getElementById('themeToggle').addEventListener('click', () => this.toggleTheme());
+    }
+
+    switchTool(tool) {
+        this.currentTool = tool;
+        
+        // 更新工具卡片状态
+        document.querySelectorAll('.tool-card').forEach(card => {
+            card.classList.remove('active');
+            if (card.dataset.tool === tool) {
+                card.classList.add('active');
+            }
+        });
+
+        // 显示对应的工具区域
+        document.querySelectorAll('.tool-section').forEach(section => {
+            section.classList.add('hidden');
+        });
+        document.getElementById(`${tool}Tool`).classList.remove('hidden');
+    }
+
+    // JSON 格式化功能
+    formatJSON() {
+        const input = document.getElementById('jsonInput').value;
+        const status = document.getElementById('jsonStatus');
+        
+        if (!input.trim()) {
+            this.showStatus('请输入 JSON 数据', 'warning');
+            return;
+        }
+
+        try {
+            const parsed = JSON.parse(input);
+            const formatted = JSON.stringify(parsed, null, 2);
+            document.getElementById('jsonOutput').innerHTML = this.syntaxHighlight(formatted);
+            this.showStatus('JSON 格式化成功！', 'success');
+            this.saveToStorage('lastJson', input);
+        } catch (error) {
+            this.showStatus(`JSON 解析错误: ${error.message}`, 'error');
+        }
+    }
+
+    minifyJSON() {
+        const input = document.getElementById('jsonInput').value;
+        const status = document.getElementById('jsonStatus');
+        
+        if (!input.trim()) {
+            this.showStatus('请输入 JSON 数据', 'warning');
+            return;
+        }
+
+        try {
+            const parsed = JSON.parse(input);
+            const minified = JSON.stringify(parsed);
+            document.getElementById('jsonOutput').innerHTML = `<code class="language-json">${minified}</code>`;
+            this.showStatus('JSON 压缩成功！', 'success');
+        } catch (error) {
+            this.showStatus(`JSON 解析错误: ${error.message}`, 'error');
+        }
+    }
+
+    validateJSON() {
+        const input = document.getElementById('jsonInput').value;
+        
+        if (!input.trim()) {
+            this.showStatus('请输入 JSON 数据', 'warning');
+            return;
+        }
+
+        try {
+            JSON.parse(input);
+            this.showStatus('JSON 格式正确！', 'success');
+        } catch (error) {
+            this.showStatus(`JSON 格式错误: ${error.message}`, 'error');
+        }
+    }
+
+    clearJSON() {
+        document.getElementById('jsonInput').value = '';
+        document.getElementById('jsonOutput').innerHTML = '<code class="language-json">等待输入...</code>';
+        this.showStatus('已清空输入和输出', 'info');
+    }
+
+    // JSON 语法高亮
+    syntaxHighlight(json) {
+        json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        
+        return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+            var cls = 'number';
+            if (/^"/.test(match)) {
+                if (/:$/.test(match)) {
+                    cls = 'key';
+                } else {
+                    cls = 'string';
+                }
+            } else if (/true|false/.test(match)) {
+                cls = 'boolean';
+            } else if (/null/.test(match)) {
+                cls = 'null';
+            }
+            return `<span class="language-json ${cls}">${match}</span>`;
+        })
+    }
+
+    // 图片压缩功能
+    handleImageUpload(event) {
+        const file = event.target.files[0];
+        if (!file) return;
+
+        if (!file.type.startsWith('image/')) {
+            this.showStatus('请上传图片文件', 'error');
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = (e) => {
+            this.currentImage = new Image();
+            this.currentImage.onload = () => {
+                this.displayOriginalInfo(file);
+                this.compressImage(this.currentImage, parseInt(document.getElementById('qualitySlider').value));
+            };
+            this.currentImage.src = e.target.result;
+        };
+        reader.readAsDataURL(file);
+    }
+
+    displayOriginalInfo(file) {
+        const infoDiv = document.getElementById('originalInfo');
+        const size = (file.size / 1024).toFixed(2);
+        this.compressedImage.name = file.name;
+        infoDiv.innerHTML = `
+            <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                <div class="flex items-center justify-between">
+                    <span class="font-medium text-blue-800">原始图片信息</span>
+                    <span class="text-blue-600">${size} KB</span>
+                </div>
+            </div>
+        `;
+        infoDiv.classList.remove('hidden');
+    }
+
+    compressImage(image, quality) {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = image.width;
+        canvas.height = image.height;
+        ctx.drawImage(image, 0, 0);
+        
+        canvas.toBlob((blob) => {
+            const url = URL.createObjectURL(blob);
+            const size = (blob.size / 1024).toFixed(2);
+            
+            document.getElementById('compressedPreview').innerHTML = `
+                <div class="text-center">
+                    <img src="${url}" alt="压缩后的图片" class="max-w-full max-h-52 mx-auto rounded-lg">
+                    <div class="mt-2 text-sm text-gray-600">
+                        压缩后: ${size} KB
+                    </div>
+                </div>
+            `;
+            
+            this.displayCompressionInfo(image, blob, quality);
+
+            this.compressedImage.dataUrl=url
+        }, 'image/jpeg', quality / 100);
+
+    }
+    downloadImage() {
+        if (!this.compressedImage) {
+            this.showStatus('请先压缩图片', 'error');
+            return;
+        }
+
+        const link = document.createElement('a');
+        link.href = this.compressedImage.dataUrl;
+        link.download = this.compressedImage.name;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        this.showStatus('图片下载成功！', 'success');
+    }
+    displayCompressionInfo(originalImage, compressedBlob, quality) {
+        const infoDiv = document.getElementById('compressionInfo');
+        const originalSize = (originalImage.src.length * 3 / 4 / 1024).toFixed(2);
+        const compressedSize = (compressedBlob.size / 1024).toFixed(2);
+        const reduction = (((originalSize - compressedSize) / originalSize) * 100).toFixed(1);
+        
+        infoDiv.innerHTML = `
+            <div class="bg-green-50 border border-green-200 rounded-lg p-3">
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                <div>
+                    <span class="font-medium text-green-800">压缩质量:</span>
+                    <span class="text-green-600">${quality}%</span>
+                </div>
+                <div>
+                    <span class="font-medium text-green-800">大小减少:</span>
+                    <span class="text-green-600">${reduction}%</span>
+                </div>
+            </div>
+        `;
+        infoDiv.classList.remove('hidden');
+    }
+
+    // HTML 压缩功能
+    minifyHTML() {
+        const input = document.getElementById('htmlInput').value;
+        const status = document.getElementById('htmlStatus');
+        
+        if (!input.trim()) {
+            this.showStatus('请输入 HTML 代码', 'warning');
+            return;
+        }
+
+        // 基础 HTML 压缩
+        let minified = input.replace(/<!--[\s\S]*?-->/g, '') // 移除注释
+            .replace(/\s+/g, ' ') // 合并空白字符
+            .replace(/>\s+</g, '><') // 移除标签间的空格
+            .trim();
+        
+        document.getElementById('htmlOutput').innerHTML = `<code class="language-html">${this.escapeHtml(minified)}</code>`;
+        this.showStatus('HTML 压缩成功！', 'success');
+        this.saveToStorage('lastHtml', input);
+    }
+
+    copyHTML() {
+        const output = document.getElementById('htmlOutput').textContent;
+        navigator.clipboard.writeText(output).then(() => {
+            this.showStatus('已复制到剪贴板', 'success');
+        });
+    }
+
+    // 工具函数
+    escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+
+    showStatus(message, type) {
+        const statusDiv = document.getElementById(`${this.currentTool}Status`);
+        if (!statusDiv) return;
+        
+        const colors = {
+            success: 'bg-green-50 border-green-200 text-green-800',
+            error: 'bg-red-50 border-red-200 text-red-800',
+            warning: 'bg-yellow-50 border-yellow-200 text-yellow-800',
+            info: 'bg-blue-50 border-blue-200 text-blue-800'
+        };
+        
+        statusDiv.innerHTML = `
+            <div class="${colors[type] || colors.info} border rounded-lg p-3 transition-all duration-300">
+                <div class="flex items-center space-x-2">
+                    <i class="fas fa-${
+                        type === 'success' ? 'check-circle' : 
+                        type === 'error' ? 'exclamation-circle' :
+                        type === 'warning' ? 'exclamation-triangle' : 'info-circle'}"></i>
+                    <span>${message}</span>
+                </div>
+            </div>
+        `;
+        
+        // 3秒后自动清除状态
+        setTimeout(() => {
+            statusDiv.innerHTML = '';
+        }, 3000);
+    }
+
+    toggleTheme() {
+        document.body.classList.toggle('dark-mode');
+        const icon = document.querySelector('#themeToggle i');
+        if (document.body.classList.contains('dark-mode')) {
+                icon.classList.remove('fa-moon');
+                icon.classList.add('fa-sun');
+            } else {
+                icon.classList.remove('fa-sun');
+                icon.classList.add('fa-moon');
+            }
+    }
+
+    // 本地存储功能
+    saveToStorage(key, value) {
+        try {
+            localStorage.setItem(key, value);
+        } catch (e) {
+            console.warn('本地存储失败:', e);
+        }
+    }
+
+    loadFromStorage() {
+        try {
+            const lastJson = localStorage.getItem('lastJson');
+            if (lastJson) {
+                document.getElementById('jsonInput').value = lastJson;
+            }
+        } catch (e) {
+            console.warn('从本地存储加载失败:', e);
+        }
+    }
+}
+
+// 初始化应用
+document.addEventListener('DOMContentLoaded', () => {
+    new ToolManager();
+    
+    // 设置默认工具
+    document.querySelector('[data-tool="json"]').classList.add('active');
+});
+
+// 文件拖拽功能
+document.addEventListener('DOMContentLoaded', () => {
+    const dropArea = document.querySelector('#imageTool .border-dashed');
+    
+    ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, preventDefaults, false);
+    });
+    
+    function preventDefaults(e) {
+        e.preventDefault();
+        e.stopPropagation();
+    }
+    
+    ['dragenter', 'dragover'].forEach(eventName => {
+            dropArea.addEventListener(eventName, () => {
+                dropArea.classList.add('border-blue-400', 'bg-blue-50');
+        });
+    })
+    ['dragleave', 'drop'].forEach(eventName => {
+        dropArea.addEventListener(eventName, () => {
+            dropArea.classList.remove('border-blue-400', 'bg-blue-50');
+    });
+})
+    dropArea.addEventListener('drop', (e) => {
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            document.getElementById('imageUpload').files = files;
+            const event = new Event('change', { bubbles: true });
+            document.getElementById('imageUpload').dispatchEvent(event);
+    }})
+});
+</script>
+</body>
+</html>
