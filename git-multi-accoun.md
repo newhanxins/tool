@@ -10,7 +10,6 @@
 ```bash
 ssh-keygen -t rsa -C "new_email@example.com" -f ~/.ssh/id_rsa_new
 ```
-
 执行命令后：
 - 提示输入文件名：直接回车使用默认
 - 提示输入密码：直接回车跳过（或设置简单密码）
@@ -119,6 +118,12 @@ cd my-new-project
 ### 添加远程仓库地址
 ```bash
 git remote add origin git@github-new:New-Username/my-new-project.git
+# 如果使用HTTPS协议，则使用以下命令：
+git remote add origin https://github-new.com/New-Username/my-new-project.git
+# 更新远程仓库地址
+git remote set-url origin git@github-new:New-Username/my-new-project.git
+# 如果使用HTTPS协议，则使用以下命令：
+git remote set-url origin https://github-new.com/New-Username/my-new-project.git
 ```
 
 ## 9. 初始提交和推送
@@ -161,5 +166,7 @@ git pull origin main --allow-unrelated-histories
 3. 检查提交记录显示正确的账号信息
 
 ---
+
+参考连接：[GitHub多账号管理](https://blog.csdn.net/MACHENIC/article/details/116212321)
 
 **文档说明**：本指南涵盖了从SSH密钥生成到项目部署的完整流程，适用于需要在同一台电脑上管理多个GitHub账号的开发场景。
