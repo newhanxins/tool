@@ -222,6 +222,8 @@
             processImage(file) {
                 return new Promise((resolve, reject) => {
                     EXIF.getData(file, function() {
+                        console.log('处理图片:', file);
+                        console.log('EXIF 数据:', EXIF.getAllTags(file));
                         const orientation = EXIF.getTag(this, 'Orientation');
                         const reader = new FileReader();
                         
