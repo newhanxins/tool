@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Time Axis with Range Distribution</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+
+    .container {
+      width: 300px;
+      height: 100px;
+      border: 1px solid black;
+      position: relative;
+    }
+
+    .range {
+      position: absolute;
+      bottom: 0;
+      height: 10px;
+      background-color: lightblue;
+    }
+
+    .label {
+      position: absolute;
+      top: -20px;
+      font-size: 12px;
+      text-align: center;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h1>Time Axis with Range Distribution</h1>
+  <div class="container" id="container"></div>
+
+  <script>
+    // 定义时间轴的范围
+    var ranges = [
+      [1, 2],
+      [2, 10],
+      [10, 20],
+      [20, 98],
+      [98, 100],
+      [100, 110], // 额外数据，模拟数据量过多
+      [110, 130], // 额外数据，模拟数据量过多
+      [130, 150], // 额外数据，模拟数据量过多
+      [150, 170]  // 额外数据，模拟数据量过多
+    ];
+
+    var containerWidth = 300; // 初始容器宽度
+    var minWidth = 30; // 每个范围的最小宽度
+    var totalRange = 100 - 1; // 总范围从 1 到 100
+
+    // 计算所有范围的总长度
+    var totalRangeLength = 0;
+    for (var i = 0; i < ranges.length; i++) {
+      totalRangeLength += ranges[i][1] - ranges[i][0];
+    }
+
+    // 计算分配给每个范围的宽度
+    var totalMinWidth = ranges.length * minWidth; // 总的最小宽度
+    var remainingWidth = containerWidth - totalMinWidth; // 剩余宽度
+
+    // 如果剩余宽度不足以满足最小宽度的需求，动态增加容器宽度
+    if (remainingWidth < 0) {
+      containerWidth += Math.abs(remainingWidth); // 增加容器宽度
+      remainingWidth = 0; // 剩余宽度为 0
+    }
+
+    // 计算每个范围可以分配到的额外宽度
+    var extraWidthPerRange = Math.floor(remainingWidth / totalRangeLength);
+
+    // 获取容器元素
+    var container = document.getElementById("container");
+
+    // 更新容器的宽度
+    container.style.width = containerWidth + 'px';
+
+    var currentLeft = 0; // 当前时间轴的起始位置
+    for (var j = 0; j < ranges.length; j++) {
+      var range = ranges[j];
+      var rangeLength = range[1] - range[0]; // 当前范围的长度
+      var baseWidth = minWidth + extraWidthPerRange * rangeLength; // 基础宽度
+
+      // 确保宽度不小于最小宽度
+      var rangeWidth = Math.max(baseWidth, minWidth);
+
+      // 创建时间轴范围元素
+      var rangeDiv = document.createElement('div');
+      rangeDiv.classList.add('range');
+      rangeDiv.style.width = rangeWidth + 'px';
+      rangeDiv.style.left = currentLeft + 'px';
+
+      // 创建范围的标签
+      var labelDiv = document.createElement('div');
+      labelDiv.classList.add('label');
+      labelDiv.textContent = range[0] + ' - ' + range[1];
+
+      // 将标签添加到范围内，并将范围元素添加到容器
+      rangeDiv.appendChild(labelDiv);
+      container.appendChild(rangeDiv);
+
+      // 更新当前位置
+      currentLeft += rangeWidth;
+    }
+  </script>
+</body>
+</html>

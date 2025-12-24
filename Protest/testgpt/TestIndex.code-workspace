@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "../../web-demo/TestIndex"
+		},
+		{
+			"path": "../../Project/onsite/twosite"
+		},
+		{
+			"path": "../../Project/newSpectrum"
+		},
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"fileheader.customMade": {},
+		"Codegeex.CompletionDelay": 1
+	}
+}

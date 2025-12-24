@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module and File System Example</title>
+</head>
+<body>
+
+  <!-- 第一个模块脚本，导入 freqChart -->
+  <script type="module">
+    import freqChart from './freqChart.js';
+    const chart1 = new freqChart({ /* 配置项 */ });
+    chart1.draw();
+  </script>
+
+  <!-- 第二个模块脚本，导入 freqChart -->
+  <script type="module">
+    import freqChart from './freqChart.js';
+    const chart2 = new freqChart({ /* 另一个配置项 */ });
+    chart2.draw();
+  </script>
+
+  <!-- 文件选择部分 -->
+  <input type="file" id="fileInput" />
+  <script>
+    document.getElementById('fileInput').addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        console.log('Selected file:', file.name);
+      }
+    });
+  </script>
+
+  <!-- 使用 File System Access API 示例（需要浏览器支持） -->
+  <button onclick="checkDirectory()">打开目录</button>
+  <script>
+    async function checkDirectory() {
+      try {
+        const directoryHandle = await window.showDirectoryPicker();
+        for await (const entry of directoryHandle.values()) {
+          console.log(entry.name);  // 输出目录中的每个文件或子目录的名称
+        }
+      } catch (error) {
+        console.error('无法访问目录:', error);
+      }
+    }
+  </script>
+
+</body>
+</html>

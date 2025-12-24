@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebSocket 客服聊天</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        #chat { width: 300px; height: 400px; border: 1px solid #ccc; padding: 10px; overflow-y: scroll; margin-bottom: 10px; }
+        #message { width: 100%; padding: 10px; box-sizing: border-box; }
+        button { padding: 10px 20px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+    <h2>与客服对话</h2>
+    <div id="chat"></div>
+    <input type="text" id="message" placeholder="请输入消息...">
+    <button onclick="sendMessage()">发送</button>
+
+    <script>
+        let ws;
+        const serverUrl = 'ws://localhost:3000';  // 服务器 WebSocket URL
+        const HEARTBEAT_INTERVAL = 30000;  // 30秒发送一次心跳包
+        const RECONNECT_INTERVAL = 5000;  // 5秒后重连
+        const chatBox = document.getElementById('chat');
+        const messageInput = document.getElementById('message');
+
+        function connect() {
+            console.log('Attempting to connect to WebSocket server...');
+            ws = new WebSocket(serverUrl);
+            
+            ws.onopen = () => {
+                console.log('连接到客服服务器');
+                startHeartbeat();  // 连接成功后开始发送心跳包
+            };
+
+            ws.onmessage = (event) => {
+                console.log('收到消息:', event);
+                const data = JSON.parse(event.data);
+                if(data.message === 'pong') {
+                    console.log('收到心跳包响应');
+                } else {
+                    
+                    const messageElement = document.createElement('div');
+                    // messageElement.textContent = data.sender === 'support' ? `客服: ${data.message}` : `我: ${data.message}`;
+                    messageElement.textContent = `客服: ${data.message}`;
+                    chatBox.appendChild(messageElement);
+                    chatBox.scrollTop = chatBox.scrollHeight; // 滚动到最新消息
+                }
+            };
+
+            ws.onclose = () => {
+                console.log('与客服服务器断开连接');
+                setTimeout(connect, RECONNECT_INTERVAL);  // 尝试重连
+            };
+            // 发生错误
+            ws.onerror=(error) => {
+                console.error('WebSocket error:', error);
+                ws.close();  // 发生错误时关闭连接
+            };
+        }
+        function sendMessage() {
+            const message = messageInput.value;
+            if (message.trim()) {
+                // 发送用户消息
+                const messageData = {
+                    action: 'broadcast', 
+                    content: message
+                };
+                ws.send(JSON.stringify(messageData));
+                const messageElement = document.createElement('div');
+                messageElement.textContent = `我: ${message}`;
+                chatBox.appendChild(messageElement);
+                messageInput.value = '';
+                chatBox.scrollTop = chatBox.scrollHeight; // 滚动到最新消息
+            }
+        }
+        // 心跳机制：每隔一定时间发送一次心跳包
+        function startHeartbeat() {
+            setInterval(() => {
+                if (ws && ws.readyState === WebSocket.OPEN) {
+                console.log('Sending heartbeat...');
+                let messageData={
+                    action: 'heartbeat', 
+                    content: "ping"
+                }  // 发送心跳包
+                ws.send(JSON.stringify(messageData));
+                }
+                
+            }, HEARTBEAT_INTERVAL);
+        }
+        connect()
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+{
+    // 使用 IntelliSense 了解相关属性。 
+    // 悬停以查看现有属性的描述。
+    // 欲了解更多信息，请访问: https://go.microsoft.com/fwlink/?linkid=830387
+    // name: 自定义，会在Debug launch configuration （调试启动配置） 下拉列表中被显示。
+    // type: 即使用的调试器，按照之前的选择，这里是debugpy。（如果版本<3.6则为debugpy-old）
+    // request: 定义这个程序启动的方式，有launch和attach可选。launch即是运行一个新的python程序来调试，attach则是基于一个已经运行的程序进行调试。
+    // program: 要调试的文件路径，${file}代表调试当前激活的python文件（所谓激活就是你当前在的vscode页面打开的代码文件）
+    // console:‌即（控制台类型）‌
+    // 作用‌：指定调试时使用的控制台类型。
+    // ‌可选值‌：
+    // “externalTerminal”：使用外部终端（如系统终端或 VS Code 的集成终端）。
+    // “internalConsole”（默认）：使用 VS Code 内置的控制台（输出显示在调试面板）。
+    // “integratedTerminal”：使用 VS Code 的集成终端（需终端已打开）。
+    // “none”：禁用控制台输出（仅适用于某些特殊场景）。
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Python: 当前文件",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Python 调试程序: 当前文件",
+            "type": "debugpy",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal"
+        }
+    ]
+}

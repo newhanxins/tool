@@ -1,0 +1,28 @@
+{
+  "manifest_version": 3,
+  "default_locale": "zh_CN",
+  "name": "__MSG_extensionName__",
+  "version": "1.0.9",
+  "description": "__MSG_extensionDescription__",
+  "icons": {
+    "16": "icons/icon16.png",
+    "48": "icons/icon48.png",
+    "128": "icons/icon128.png"
+  },
+  "chrome_url_overrides": {
+    "newtab": "index.html"
+  },
+  "host_permissions": [
+    "https://api.nbtab.com/*",
+    "https://v1.jinrishici.com/*",
+    "https://www.baidu.com/*",
+    "https://hm.baidu.com/*",
+    "https://hmcdn.baidu.com/*",
+    "https://hme.baidu.com/*",
+    "https://cdn.dcloud.net.cn/*"
+  ],
+  "permissions": ["storage", "search"],
+  "content_security_policy": {
+    "extension_pages": "script-src 'self'; object-src 'self'"
+  }
+}

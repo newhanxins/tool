@@ -1,0 +1,596 @@
+/* JsonViewer component styles */
+.json-viewer {
+  background: var(--bg-primary);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  container-type: inline-size; /* Enable container queries */
+}
+
+.json-viewer-controls {
+  background: rgb(50, 50, 50);
+  /* backdrop-filter: blur(2px); */
+  /* border: 1px solid rgba(55, 65, 81, 0.3); */
+  padding: 8px 14px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 0; /* Allow flex children to shrink */
+}
+
+.json-viewer-controls-left {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow: hidden; /* Hide overflow instead of wrapping */
+  min-width: 0; /* Allow shrinking */
+  flex-shrink: 2; /* Allow left side to shrink more than right */
+}
+
+.json-viewer-controls-right {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow: hidden; /* Hide overflow instead of wrapping */
+  min-width: 0; /* Allow shrinking */
+  flex-shrink: 0; /* Right side should not shrink too much */
+}
+
+/* Action buttons container */
+.json-viewer-action-buttons {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  flex-wrap: nowrap; /* Prevent wrapping */
+  overflow: hidden; /* Hide overflow instead of wrapping */
+  position: relative;
+}
+
+.json-viewer-action-buttons .json-viewer-btn {
+  transition: background 0.2s, color 0.2s;
+}
+
+.json-viewer-action-buttons .json-viewer-btn:hover {
+  background: #23272e;
+  color: #b5e3c8;
+}
+
+.json-viewer-action-buttons .json-viewer-btn:hover svg {
+  color: #b5e3c8;
+  stroke: #b5e3c8;
+}
+
+.json-viewer-action-buttons .json-viewer-btn.btn-copy:hover {
+  background: #193c2b;
+  color: #4ade80;
+}
+.json-viewer-action-buttons .json-viewer-btn.btn-copy:hover svg {
+  color: #4ade80;
+  stroke: #4ade80;
+}
+
+.json-viewer-action-buttons .json-viewer-btn.btn-simulate:hover {
+  background: #172a3a;
+  color: #60a5fa;
+}
+.json-viewer-action-buttons .json-viewer-btn.btn-simulate:hover svg {
+  color: #60a5fa;
+  stroke: #60a5fa;
+}
+
+.json-viewer-action-buttons .json-viewer-btn.btn-favorite:hover {
+  background: #3a2e17;
+  color: #fde68a;
+}
+.json-viewer-action-buttons .json-viewer-btn.btn-favorite:hover svg {
+  color: #fde68a;
+  stroke: #fde68a;
+}
+
+.json-viewer-action-buttons .json-viewer-btn.btn-nested:hover {
+  background: #2e1a3a;
+  color: #c4b5fd;
+}
+.json-viewer-action-buttons .json-viewer-btn.btn-nested:hover svg {
+  color: #c4b5fd;
+  stroke: #c4b5fd;
+}
+
+/* Animated buttons that appear on first simulate click in JsonViewer */
+.json-viewer-animated-buttons {
+  display: flex;
+  gap: 4px;
+  animation: slideInFromLeft 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  margin-right: 6px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+}
+
+/* After animation completes, buttons stay in place */
+.json-viewer-animated-buttons.animated {
+  animation: none;
+}
+
+.json-viewer-animated-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.json-viewer-animated-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.json-viewer-animated-btn:hover::before {
+  left: 100%;
+}
+
+.json-viewer-animated-btn.heart-btn {
+  background: #000000;
+  color: white;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+}
+
+.json-viewer-animated-btn.heart-btn:hover {
+  background: #1a1a1a;
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.json-viewer-animated-btn.github-btn {
+  background: linear-gradient(135deg, #333, #24292e);
+  color: white;
+  box-shadow: 0 1px 4px rgba(51, 51, 51, 0.3);
+}
+
+.json-viewer-animated-btn.github-btn:hover {
+  background: linear-gradient(135deg, #24292e, #1b1f23);
+  transform: translateY(-1px) scale(1.05);
+  box-shadow: 0 2px 8px rgba(51, 51, 51, 0.4);
+}
+
+.json-viewer-action-buttons .json-viewer-btn.btn-wrap:hover {
+  background: #23272e;
+  color: #d1d5db;
+}
+.json-viewer-action-buttons .json-viewer-btn.btn-wrap:hover svg {
+  color: #d1d5db;
+  stroke: #d1d5db;
+}
+
+/* Button styles */
+.json-viewer-btn {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 2px 4px;
+  border-radius: 6px;
+  border: 1px solid;
+  background: transparent;
+  color: #9ca3af;
+  font-size: 11px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  min-height: 20px;
+  white-space: nowrap; /* Prevent text wrapping */
+  flex-shrink: 1; /* Allow button shrinking but not to zero */
+  min-width: 0; /* Allow for ellipsis */
+  overflow: hidden; /* Hide overflowing text */
+}
+
+.json-viewer-btn span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+/* Hide button text when space is very limited */
+@container (max-width: 450px) {
+  .json-viewer-controls {
+    padding: 6px 8px;
+  }
+  
+  .json-viewer-btn span.json-viewer-controls-left {
+    display: none; /* Hide text, show only icons */
+  }
+  
+  .json-viewer-btn {
+    padding: 3px;
+    min-width: 24px;
+    justify-content: center;
+  }
+  
+  .json-viewer-controls-left {
+    gap: 2px;
+  }
+  
+  .json-viewer-controls-right {
+    gap: 4px;
+  }
+  
+  .json-viewer-action-buttons {
+    gap: 2px;
+  }
+  
+  /* Also hide text in badges when space is limited */
+  .json-viewer-badge span {
+    display: none;
+  }
+  
+  .json-viewer-badge {
+    padding: 3px;
+    min-width: 18px;
+    justify-content: center;
+  }
+}
+
+/* For very small containers, further compress */
+@container (max-width: 250px) {
+  .json-viewer-controls {
+    padding: 4px 6px;
+  }
+  
+  .json-viewer-btn {
+    padding: 2px;
+    min-width: 20px;
+  }
+  
+  .json-viewer-controls-left {
+    gap: 1px;
+  }
+  
+  .json-viewer-controls-right {
+    gap: 2px;
+  }
+  
+  .json-viewer-action-buttons {
+    gap: 1px;
+  }
+  
+  .json-viewer-badge {
+    padding: 2px;
+    min-width: 16px;
+  }
+}
+
+.json-viewer-btn-inactive {
+  background: rgb(51 51 51);
+  border-color: rgb(123 123 123);
+  color: #c6c6c6;
+}
+
+.json-viewer-btn-inactive:hover {
+  filter: brightness(1.2);
+}
+
+.json-viewer-btn:hover {
+  filter: brightness(1.2);
+}
+
+.json-viewer-btn-active-green {
+  background: #1ed69d24;
+  border-color: #0cf7ae40;
+  color: #15eca5;
+}
+
+.json-viewer-btn-active-orange {
+  background: rgba(234, 88, 12, 0.15);
+  border-color: rgba(234, 88, 12, 0.25);
+  color: #f97316;
+}
+
+.json-viewer-btn-active-purple {
+  background: #7033a933;
+  border-color: #aa56f7;
+  color: #d787ff;
+}
+
+.json-viewer-btn-active-blue {
+  background: rgba(37, 99, 235, 0.15);
+  border-color: rgba(37, 99, 235, 0.25);
+  color: #3b82f6;
+}
+
+.json-viewer-btn-disabled {
+  background: rgba(55, 65, 81, 0.2) !important;
+  border-color: rgba(75, 85, 99, 0.2) !important;
+  color: #6b7280 !important;
+  cursor: not-allowed !important;
+  opacity: 0.6;
+}
+
+.json-viewer-btn-disabled:hover {
+  background: rgba(55, 65, 81, 0.2) !important;
+  border-color: rgba(75, 85, 99, 0.2) !important;
+}
+
+.json-viewer-divider {
+  width: 1px;
+  height: 18px;
+  background-color: #4b5563;
+  margin: 0 3px;
+}
+
+/* Badge styles */
+.json-viewer-badge {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid;
+  background: transparent;
+  font-size: 10px;
+  font-weight: 500;
+  font-family: inherit;
+  white-space: nowrap;
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.json-viewer-badge span {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+.json-viewer-badge-green {
+  border-color: rgba(5, 150, 105, 0.4);
+  color: #10b981;
+  background: #10b9810d;
+}
+
+.json-viewer-badge-yellow {
+  border-color: rgba(217, 119, 6, 0.4);
+  color: #f59e0b;
+}
+
+.json-viewer-badge-blue {
+  border-color: rgba(37, 99, 235, 0.4);
+  color: #3b82f6;
+}
+
+.json-viewer-badge-purple {
+  border-color: rgba(147, 51, 234, 0.4);
+  color: #bb73ff;
+}
+
+.json-viewer-status {
+  font-size: 10px;
+  color: var(--success-color);
+  font-weight: 600;
+  background-color: rgba(40, 167, 69, 0.1);
+  padding: 2px 6px;
+  border-radius: 8px;
+  border: 1px solid rgba(40, 167, 69, 0.3);
+}
+
+.json-viewer-copy-btn {
+  padding: 4px 8px;
+  font-size: 11px;
+  background-color: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary);
+  cursor: pointer;
+  border-radius: 3px;
+  transition: all 0.2s;
+  font-family: inherit;
+}
+
+.json-viewer-copy-btn:hover {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+  border-color: var(--accent-color);
+}
+
+.json-viewer-copy-btn.copied {
+  background-color: var(--success-color);
+  color: white;
+  border-color: var(--success-color);
+}
+
+.json-viewer-copy-btn.copied:hover {
+  background-color: var(--success-color);
+  border-color: var(--success-color);
+}
+
+.json-viewer-container {
+  flex: 1;
+  overflow: hidden;
+  background-color: #262626;
+  position: relative;
+  min-height: 0;
+}
+
+.json-viewer-codemirror {
+  height: 100%;
+  width: 100%;
+}
+
+.json-viewer-codemirror .cm-editor {
+  height: 100%;
+  border: none;
+  background: transparent;
+}
+
+.json-viewer-codemirror .cm-scroller {
+  overflow-x: auto;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--text-muted) transparent;
+  max-height: 100%;
+}
+
+.json-viewer-codemirror .cm-scroller::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.json-viewer-codemirror .cm-scroller::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.json-viewer-codemirror .cm-scroller::-webkit-scrollbar-thumb {
+  background-color: var(--text-muted);
+  border-radius: 4px;
+  border: 1px solid transparent;
+}
+
+.json-viewer-codemirror .cm-scroller::-webkit-scrollbar-thumb:hover {
+  background-color: var(--text-secondary);
+}
+
+.json-viewer-codemirror .cm-scroller::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+.json-viewer-codemirror .cm-gutter {
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+}
+
+.json-viewer-codemirror .cm-gutters {
+  background-color: var(--bg-secondary);
+  border-right: 1px solid var(--border-color);
+}
+
+.json-viewer-codemirror .cm-lineNumbers .cm-gutterElement {
+  color: var(--text-muted);
+  padding: 0 6px;
+}
+
+.json-viewer-codemirror .cm-foldGutter .cm-gutterElement {
+  color: var(--text-muted);
+  padding: 0 4px;
+}
+
+.json-viewer-codemirror .cm-foldGutter .cm-gutterElement:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Compact JSON viewer (for details panel) */
+.json-viewer.compact .json-viewer-controls {
+  /* border-top-left-radius: 16px;
+  border-top-right-radius: 16px; */
+  padding: 10px 14px 8px 14px;
+}
+
+.json-viewer.compact .json-viewer-wrap-control {
+  font-size: 10px;
+}
+
+.json-viewer.compact .json-viewer-copy-btn {
+  font-size: 10px;
+  padding: 2px 6px;
+}
+
+.json-viewer.compact .json-viewer-codemirror .cm-content {
+  padding: 6px 8px;
+  font-size: 12px;
+}
+
+.json-viewer.compact .json-viewer-codemirror .cm-scroller {
+  font-size: 10px;
+}
+
+/* Ensure CodeMirror scrolls properly even at small heights */
+.json-viewer-container {
+  min-height: 100px;
+  overflow: auto;
+}
+
+.json-viewer-codemirror .cm-editor.cm-focused {
+  outline: none;
+}
+
+/* Force show scrollbar when there isn't enough space */
+.json-viewer-codemirror .cm-scroller {
+  min-height: 100%;
+}
+
+/* Simulate editor specific styles */
+.json-viewer.simulate-editor {
+  height: 100%;
+  min-height: 200px;
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius);
+  overflow: hidden;
+}
+
+.json-viewer.simulate-editor .json-viewer-container {
+  flex: 1;
+  min-height: 0;
+}
+
+.json-viewer.simulate-editor .json-viewer-codemirror {
+  height: 100%;
+}
+
+.json-viewer.simulate-editor .json-viewer-codemirror .cm-editor {
+  height: 100%;
+  min-height: 150px;
+}
+
+.json-viewer.simulate-editor .json-viewer-codemirror .cm-scroller {
+  height: 100%;
+  min-height: 150px;
+  overflow-y: auto;
+}
+
+/* Add special styles for nested parsed JSON content */
+.json-viewer-codemirror .cm-content[data-nested="true"] {
+  border-left: 3px solid var(--accent-color);
+  padding-left: 12px;
+}
+
+/* Ensure text selection styles match theme */
+.json-viewer-codemirror .cm-selectionBackground {
+  background-color: rgba(0, 122, 204, 0.3) !important;
+}
+
+.json-viewer-codemirror .cm-focused .cm-selectionBackground {
+  background-color: rgba(0, 122, 204, 0.4) !important;
+}
+
+/* Fix height calculation issues */
+.json-viewer-codemirror .cm-editor.cm-focused .cm-scroller {
+  outline: none;
+}
+
+/* Add styles for search functionality */
+.json-viewer-codemirror .cm-searchMatch {
+  background-color: rgba(255, 193, 7, 0.3);
+  border: 1px solid rgba(255, 193, 7, 0.6);
+}
+
+.json-viewer-codemirror .cm-searchMatch-selected {
+  background-color: rgba(255, 193, 7, 0.6);
+  border: 1px solid rgba(255, 193, 7, 0.9);
+}

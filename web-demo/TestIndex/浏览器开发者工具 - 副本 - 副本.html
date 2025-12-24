@@ -1,0 +1,865 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DevTools Pro - 增强版浏览器开发者工具</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .panel-shadow { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); }
+        .status-success { color: #10b981; }
+        .status-error { color: #ef4444; }
+        .status-warning { color: #f59e0b; }
+        .resource-type-http { border-left-color: #3b82f6; }
+        .resource-type-js { border-left-color: #f59e0b; }
+        .resource-type-css { border-left-color: #8b5cf6; }
+        .resource-type-image { border-left-color: #10b981; }
+        .resource-type-font { border-left-color: #ef4444; }
+        .code-line:hover { background-color: #f3f4f6; }
+        .memory-chart { height: 200px; }
+        
+        /* 暗色主题支持 */
+        .dark-mode { 
+            background-color: #1f2937; 
+            color: #f9fafb;
+        }
+        .dark-panel {
+            background-color: #374151;
+            color: #f9fafb;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto px-4 py-6">
+        <!-- 头部导航 -->
+        <header class="bg-white rounded-xl shadow-lg p-4 mb-6">
+            <div class="flex justify-between items-center">
+                <h1 class="text-2xl font-bold text-gray-800">
+                    <i class="fas fa-tools mr-2"></i>DevTools Pro
+                </h1>
+                <div class="flex items-center space-x-4">
+                    <button id="toggleTheme" class="bg-gray-200 hover:bg-gray-300 px-4 py-2 rounded-lg transition-colors">
+                        <i class="fas fa-moon"></i> 主题切换
+                    </button>
+                    <button id="toggleLayout" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+                        <i class="fas fa-columns"></i> 布局切换
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <main class="grid grid-cols-1 xl:grid-cols-4 gap-6">
+            <!-- 左侧控制面板 -->
+            <div class="xl:col-span-1">
+                <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">工具面板</h2>
+                    <div class="space-y-3">
+                        <button class="tab-btn w-full bg-blue-50 hover:bg-blue-100 text-blue-700 px-4 py-3 rounded-lg transition-all active" data-tab="elements">
+                        <i class="fas fa-code mr-2"></i>元素审查
+                    </button>
+                    <button class="tab-btn w-full bg-gray-50 hover:bg-gray-100 text-gray-700 px-4 py-3 rounded-lg transition-all" data-tab="console">
+                        <i class="fas fa-terminal mr-2"></i>控制台
+                    </button>
+                    <button class="tab-btn w-full bg-green-50 hover:bg-green-100 text-green-700 px-4 py-3 rounded-lg transition-all" data-tab="network">
+                        <i class="fas fa-network-wired mr-2"></i>网络监控
+                    </button>
+                    <button class="tab-btn w-full bg-purple-50 hover:bg-purple-100 text-purple-700 px-4 py-3 rounded-lg transition-all" data-tab="performance">
+                        <i class="fas fa-tachometer-alt mr-2"></i>性能分析
+                    </button>
+                    <button class="tab-btn w-full bg-yellow-50 hover:bg-yellow-100 text-yellow-700 px-4 py-3 rounded-lg transition-all" data-tab="memory">
+                        <i class="fas fa-memory mr-2"></i>内存分析
+                    </button>
+                    <button class="tab-btn w-full bg-red-50 hover:bg-red-100 text-red-700 px-4 py-3 rounded-lg transition-all" data-tab="sources">
+                        <i class="fas fa-file-code mr-2"></i>源代码调试
+                    </button>
+                </div>
+            </div>
+
+            <!-- 主功能区域 -->
+            <div class="xl:col-span-3">
+                <!-- 元素审查面板 -->
+                <div id="elements" class="tab-content active bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">元素审查</h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-medium text-gray-700 mb-2">DOM树结构</h3>
+                    <div id="domTree" class="bg-gray-50 rounded-lg p-4 h-80 overflow-auto">
+                        <!-- DOM树将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+                <div>
+                    <h3 class="font-medium text-gray-700 mb-2">样式面板</h3>
+                            <div class="bg-gray-50 rounded-lg p-4 h-80 overflow-auto">
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">元素选择器</label>
+                            <input type="text" id="elementSelector" class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="输入CSS选择器...">
+                        </div>
+                        <button id="inspectElement" class="w-full bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+                                <i class="fas fa-crosshairs mr-2"></i>检查元素
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 控制台面板 -->
+                <div id="console" class="tab-content bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">控制台</h2>
+                    <div class="bg-gray-900 text-green-400 rounded-lg p-4 h-80 overflow-auto font-mono text-sm">
+                        <div id="consoleOutput" class="space-y-2">
+                            <!-- 控制台输出将通过JavaScript动态生成 -->
+                        </div>
+                        <div class="mt-4">
+                            <input type="text" id="consoleInput" class="w-full px-3 py-2 bg-gray-800 text-white rounded-md focus:outline-none focus:ring-2 focus:ring-green-500" placeholder="输入JavaScript代码...">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 网络监控面板 -->
+                <div id="network" class="tab-content bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">网络请求监控</h2>
+                    <div class="mb-4">
+                        <button id="clearNetwork" class="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg transition-colors">
+                        <i class="fas fa-trash mr-2"></i>清空记录
+                    </button>
+                    <button id="exportNetwork" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg transition-colors ml-2">
+                        <i class="fas fa-download mr-2">导出数据
+                    
+                </div>
+                <div id="networkRequests" class="space-y-2 max-h-96 overflow-auto">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 性能分析面板 -->
+                <div id="performance" class="tab-content bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">性能分析</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-medium text-gray-700 mb-2">FPS监控</h3>
+                            <canvas id="fpsChart" class="bg-gray-50 rounded-lg p-4"></canvas>
+                        </div>
+                        <div>
+                            <h3 class="font-medium text-gray-700 mb-2">性能指标</h3>
+                            <div id="performanceMetrics" class="bg-gray-50 rounded-lg p-4 h-64 overflow-auto">
+                            <!-- 性能指标将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 内存分析面板 -->
+                <div id="memory" class="tab-content bg-white rounded-xl shadow-lg p-6">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">内存分析</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div>
+                            <h3 class="font-medium text-gray-700 mb-2">内存使用情况</h2>
+                            <canvas id="memoryChart" class="memory-chart bg-gray-50 rounded-lg p-4">
+                        
+                        <div>
+                            <h3 class="font-medium text-gray-700 mb-2">内存快照</h3>
+                            <button id="takeMemorySnapshot" class="w-full bg-purple-500 hover:bg-purple-600 text-white px-4 py-3 rounded-lg transition-colors">
+                                <i class="fas fa-camera mr-2"></i>拍摄内存快照
+                            </button>
+                            <button id="compareSnapshots" class="w-full bg-yellow-500 hover:bg-yellow-600 text-white px-4 py-3 rounded-lg transition-colors mt-2">
+                                <i class="fas fa-balance-scale mr-2"></i>对比快照
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 源代码调试面板 -->
+                <div id="sources" class="tab-content bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">源代码调试</h2>
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        <div class="lg:col-span-1">
+                            <h3 class="font-medium text-gray-700 mb-2">文件浏览器</h3>
+                    <div id="fileExplorer" class="bg-gray-50 rounded-lg p-4 h-80 overflow-auto">
+                        <!-- 文件列表将通过JavaScript动态生成 -->
+                    </div>
+                </div>
+                <div class="lg:col-span-2">
+                    <h3 class="font-medium text-gray-700 mb-2">代码编辑器</h3>
+                            <div class="bg-gray-900 text-gray-200 rounded-lg p-4 h-80 overflow-auto font-mono text-sm">
+                        <div id="codeEditor" class="space-y-1">
+                            <!-- 代码将通过JavaScript动态生成 -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 页脚信息 -->
+        <footer class="mt-8 text-center text-gray-600 text-sm">
+            <p>DevTools Pro - 增强版浏览器开发者工具 | 基于原生JavaScript开发</p>
+        </footer>
+    </div>
+
+    <script>
+        /**
+         * DevTools Pro 核心类
+         * 集成所有开发者工具功能模块
+         */
+        class DevToolsPro {
+            constructor() {
+                this.modules = {
+                    elements: new ElementsPanel(),
+                    console: new ConsolePanel(),
+                    network: new NetworkPanel(),
+                    performance: new PerformancePanel(),
+                    memory: new MemoryPanel(),
+                    sources: new SourcesPanel()
+                };
+                this.currentTheme = 'light';
+                this.init();
+            }
+
+            init() {
+                console.log('DevTools Pro 初始化中...');
+                this.setupEventListeners();
+                this.loadInitialData();
+                this.startPerformanceMonitoring();
+            }
+
+            setupEventListeners() {
+                // 标签页切换
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.addEventListener('click', (e) => {
+                        const tabId = e.currentTarget.getAttribute('data-tab');
+                        this.switchTab(tabId);
+                    });
+                });
+
+                // 主题切换
+                document.getElementById('toggleTheme').addEventListener('click', () => {
+                    this.toggleTheme();
+                });
+
+                // 布局切换
+                document.getElementById('toggleLayout').addEventListener('click', () => {
+                    this.toggleLayout();
+                });
+
+                // 控制台输入
+                document.getElementById('consoleInput').addEventListener('keypress', (e) => {
+                    if (e.key === 'Enter') {
+                        this.executeConsoleCommand(e.target.value);
+                        e.target.value = '';
+                    }
+                });
+            }
+
+            switchTab(tabId) {
+                // 隐藏所有标签内容
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+
+                // 移除所有按钮的激活状态
+                document.querySelectorAll('.tab-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+
+                // 显示选中的标签内容
+                document.getElementById(tabId).classList.add('active');
+                document.querySelector(`[data-tab="${tabId}"]`).classList.add('active');
+            }
+
+            toggleTheme() {
+                this.currentTheme = this.currentTheme === 'light' ? 'dark' : 'light';
+                
+                if (this.currentTheme === 'dark') {
+                    document.body.classList.add('dark-mode');
+                    document.body.classList.remove('bg-gray-100');
+                } else {
+                    document.body.classList.remove('dark-mode');
+                    document.body.classList.add('bg-gray-100');
+                }
+            }
+
+            toggleLayout() {
+                const mainElement = document.querySelector('main');
+                const currentLayout = mainElement.className.includes('xl:grid-cols-4') ? 'vertical' : 'horizontal';
+                
+                if (currentLayout === 'vertical') {
+                    mainElement.className = 'grid grid-cols-1 gap-6';
+                } else {
+                    mainElement.className = 'grid grid-cols-1 xl:grid-cols-4 gap-6';
+                }
+            }
+
+            executeConsoleCommand(command) {
+                try {
+                    const result = eval(command);
+                    this.modules.console.addLog({
+                        level: 'log',
+                        args: [result],
+                        timestamp: new Date().toISOString()
+                    });
+                } catch (error) {
+                    this.modules.console.addLog({
+                        level: 'error',
+                        args: [error.message],
+                        timestamp: new Date().toISOString()
+                    });
+                }
+            }
+
+            startPerformanceMonitoring() {
+                this.modules.performance.startMonitoring();
+                this.modules.memory.startMonitoring();
+            }
+
+            loadInitialData() {
+                this.modules.elements.loadDOMTree();
+                this.modules.sources.loadFileSystem();
+            }
+        }
+
+        /**
+         * 元素审查面板模块
+         */
+        class ElementsPanel {
+            constructor() {
+                this.selectedElement = null;
+            }
+
+            loadDOMTree() {
+                const container = document.getElementById('domTree');
+                container.innerHTML = this.generateDOMTree(document.documentElement);
+            }
+
+            generateDOMTree(element, depth = 0) {
+                if (!element) return '';
+                
+                const indent = '  '.repeat(depth);
+                const tagName = element.tagName ? element.tagName.toLowerCase() : '#text';
+                const id = element.id ? `#${element.id}` : '';
+                const classes = element.className ? `.${element.className.split(' ').join('.')}` : '';
+                
+                let html = `${indent}<div class="element-node cursor-pointer hover:bg-blue-50 p-1 rounded" data-element="${element.tagName}">
+                    ${tagName}${id}${classes}
+                </div>`;
+                
+                // 递归处理子元素
+                element.childNodes.forEach(child => {
+                    if (child.nodeType === Node.ELEMENT_NODE) {
+                        html += this.generateDOMTree(child, depth + 1);
+                    }
+                })
+                
+                return html;
+            }
+
+            inspectElement(selector) {
+                const element = document.querySelector(selector);
+                if (element) {
+                    this.selectedElement = element;
+                    this.highlightElement(element);
+                    this.showElementStyles(element);
+                }
+            }
+
+            highlightElement(element) {
+                // 移除之前的高亮
+                const existingHighlights = document.querySelectorAll('.element-highlight');
+                existingHighlights.forEach(el => el.remove());
+                
+                // 添加新的高亮
+                const rect = element.getBoundingClientRect();
+                const highlight = document.createElement('div');
+                highlight.className = 'element-highlight fixed border-2 border-red-500 bg-red-200 bg-opacity-20 pointer-events-none';
+                highlight.style.left = `${rect.left}px`;
+                highlight.style.top = `${rect.top}px`;
+                highlight.style.width = `${rect.width}px`;
+                highlight.style.height = `${rect.height}px`;
+                document.body.appendChild(highlight);
+            }
+
+            showElementStyles(element) {
+                const styles = window.getComputedStyle(element);
+                let stylesHTML = '<h4 class="font-medium mb-2">计算样式</h4>';
+                
+                for (let i = 0; i < styles.length; i++) {
+                    const property = styles[i];
+                    const value = styles.getPropertyValue(property);
+                    stylesHTML += `<div class="text-sm"><span class="text-blue-600">${property}</span>: ${value}</div>`;
+                }
+                
+                document.getElementById('stylesPanel').innerHTML = stylesHTML;
+            }
+        }
+
+        /**
+         * 控制台面板模块
+         */
+        class ConsolePanel {
+            constructor() {
+                this.logs = [];
+            }
+
+            addLog(logData) {
+                this.logs.push(logData);
+                this.displayLog(logData);
+            }
+
+            displayLog(data) {
+                const container = document.getElementById('consoleOutput');
+                const item = document.createElement('div');
+                item.className = `console-item ${data.level}`;
+                
+                const timestamp = new Date(data.timestamp).toLocaleTimeString();
+                const argsString = data.args.map(arg => 
+                    typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+                ).join(' ');
+                
+                item.innerHTML = `
+                    <span class="text-gray-500 text-xs">${timestamp}</span>
+                    <span class="${data.level === 'error' ? 'text-red-400' : data.level === 'warn' ? 'text-yellow-400' : 'text-green-400'}">${argsString}</span>
+                `;
+                
+                container.appendChild(item);
+                container.scrollTop = container.scrollHeight;
+            }
+
+            clearConsole() {
+                this.logs = [];
+                document.getElementById('consoleOutput').innerHTML = '';
+            }
+        }
+
+        /**
+         * 网络监控面板模块
+         */
+        class NetworkPanel {
+            constructor() {
+                this.requests = [];
+                this.originalFetch = null;
+                this.originalXHR = null;
+            }
+
+            startMonitoring() {
+                this.interceptFetch();
+                this.interceptXHR();
+            }
+
+            stopMonitoring() {
+                this.restoreFetch();
+                this.restoreXHR();
+            }
+
+            interceptFetch() {
+                const self = this;
+                this.originalFetch = window.fetch;
+                
+                window.fetch = function() {
+                    const args = arguments;
+                    const startTime = Date.now();
+                    const url = typeof args[0] === 'string' ? args[0] : args[0].url;
+                    
+                    return self.originalFetch.apply(this, args)
+                        .then(response => {
+                            const duration = Date.now() - startTime;
+                            self.recordRequest({
+                                type: 'fetch',
+                                method: args[1]?.method || 'GET',
+                                url: url,
+                                status: response.status,
+                                duration: duration,
+                                timestamp: new Date().toISOString()
+                            });
+                            return response;
+                        })
+                        .catch(error => {
+                            const duration = Date.now() - startTime;
+                            self.recordRequest({
+                                type: 'fetch',
+                                method: args[1]?.method || 'GET',
+                                url: url,
+                                status: 0,
+                                duration: duration,
+                                timestamp: new Date().toISOString(),
+                                error: error.message
+                            });
+                            throw error;
+                        });
+                };
+            }
+
+            interceptXHR() {
+                const self = this;
+                this.originalXHR = window.XMLHttpRequest;
+                
+                window.XMLHttpRequest = function() {
+                    const xhr = new self.originalXHR();
+                    self.setupXHREvents(xhr);
+                    return xhr;
+                };
+            }
+
+            setupXHREvents(xhr) {
+                const originalOpen = xhr.open;
+                const originalSend = xhr.send;
+                
+                xhr.open = function(method, url) {
+                    this._method = method;
+                    this._url = url;
+                    this._startTime = Date.now();
+                    
+                    return originalOpen.apply(this, arguments);
+                };
+                
+                xhr.send = function(data) {
+                    self.recordRequest({
+                        type: 'xhr',
+                        method: this._method,
+                        url: this._url,
+                        data: data,
+                        timestamp: new Date().toISOString()
+                    });
+                    
+                    xhr.addEventListener('load', function() {
+                        const duration = Date.now() - this._startTime;
+                        self.recordRequest({
+                            type: 'xhr',
+                            method: this._method,
+                            url: this._url,
+                            status: this.status,
+                            duration: duration,
+                            timestamp: new Date().toISOString()
+                        })
+                    });
+                    
+                    return originalSend.apply(this, arguments);
+                };
+            }
+
+            recordRequest(request) {
+                this.requests.push(request);
+                this.displayRequest(request);
+            }
+
+            displayRequest(request) {
+                const container = document.getElementById('networkRequests');
+                const item = document.createElement('div');
+                item.className = `network-item bg-white rounded-lg p-3 border-l-4 resource-type-${this.getResourceType(request.url)}`;
+                
+                item.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <div>
+                            <span class="font-medium">${request.method} ${request.url}</span>
+                        </div>
+                        <div class="flex items-center space-x-2">
+                            <span class="text-xs ${request.status >= 400 ? 'text-red-500' : 'text-green-500'}">
+                                ${request.status} - ${request.duration}ms
+                            </span>
+                        </div>
+                    </div>
+                `;
+                
+                container.appendChild(item);
+            }
+
+            getResourceType(url) {
+                if (url.match(/\.js$/)) return 'js';
+                if (url.match(/\.css$/)) return 'css';
+                if (url.match(/\.(jpg|jpeg|png|gif|svg|webp)$/)) return 'image';
+                if (url.match(/\.(woff|woff2|ttf|eot)$/)) return 'font';
+                return 'http';
+            }
+
+            clearNetwork() {
+                this.requests = [];
+                document.getElementById('networkRequests').innerHTML = '';
+            }
+
+            exportNetworkData() {
+                const exportData = {
+                    timestamp: new Date().toISOString(),
+                    requests: this.requests
+                };
+                
+                const dataStr = JSON.stringify(exportData, null, 2);
+                const dataBlob = new Blob([dataStr], { type: 'application/json' });
+                const url = URL.createObjectURL(dataBlob);
+                const link = document.createElement('a');
+                link.href = url;
+                link.download = `network-data-${new Date().getTime()}.json`;
+                link.click();
+                URL.revokeObjectURL(url);
+            }
+
+            restoreFetch() {
+                if (this.originalFetch) {
+                    window.fetch = this.originalFetch;
+                }
+            }
+
+            restoreXHR() {
+                if (this.originalXHR) {
+                    window.XMLHttpRequest = this.originalXHR;
+                }
+            }
+        }
+
+        /**
+         * 性能分析面板模块
+         */
+        class PerformancePanel {
+            constructor() {
+                this.metrics = {
+                    fps: 0,
+                    cpuUsage: 0,
+                    memoryUsage: 0,
+                    domContentLoaded: 0,
+                    loadTime: 0
+                };
+                this.fpsData = [];
+                this.maxDataPoints = 60;
+            }
+
+            startMonitoring() {
+                this.startFPSMonitoring();
+                this.startCPUMonitoring();
+            }
+
+            startFPSMonitoring() {
+                let lastTime = Date.now();
+                let frames = 0;
+                
+                const fpsLoop = () => {
+                    frames++;
+                    const currentTime = Date.now();
+                    
+                    if (currentTime >= lastTime + 1000) {
+                        this.metrics.fps = Math.round((frames * 1000) / (currentTime - lastTime));
+                    }
+                    lastTime = currentTime;
+                    frames = 0;
+                    
+                    this.updateFPSChart();
+                    
+                    requestAnimationFrame(fpsLoop);
+                };
+                
+                requestAnimationFrame(fpsLoop);
+            }
+
+            updateFPSChart() {
+                const ctx = document.getElementById('fpsChart').getContext('2d');
+                
+                // 更新FPS数据
+                this.fpsData.push(this.metrics.fps);
+                if (this.fpsData.length > this.maxDataPoints) {
+                    this.fpsData.shift();
+                }
+                
+                // 使用Chart.js更新图表
+                if (this.fpsChart) {
+                    this.fpsChart.data.labels = Array.from({length: this.fpsData.length}, (_, i) => i + 1);
+                    this.fpsChart.data.datasets[0].data = this.fpsData;
+                    this.fpsChart.update('none');
+                } else {
+                    this.fpsChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {labels: Array.from({length: this.fpsData.length}, (_, i) => i + 1)}})
+                    this.fpsChart.data.datasets[0].data = this.fpsData;
+                }
+            }
+
+            startCPUMonitoring() {
+                // 模拟CPU使用率监控
+                setInterval(() => {
+                    this.metrics.cpuUsage = Math.random() * 100;
+                    this.displayPerformanceMetrics();
+                }, 1000);
+            }
+
+            displayPerformanceMetrics() {
+                const container = document.getElementById('performanceMetrics');
+                container.innerHTML = `
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span>FPS:</span>
+                            <span class="${this.metrics.fps < 30 ? 'status-error' : this.metrics.fps < 50 ? 'status-warning' : 'status-success'}">
+                                ${this.metrics.fps}
+                            </span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span>CPU使用率:</span>
+                            <span class="${this.metrics.cpuUsage > 80 ? 'status-error' : this.metrics.cpuUsage > 50 ? 'status-warning' : 'status-success'}">
+                                ${this.metrics.cpuUsage.toFixed(1)}%
+                            </span>
+                        </div>
+                    </div>
+                `;
+            }
+        }
+
+        /**
+         * 内存分析面板模块
+         */
+        class MemoryPanel {
+            constructor() {
+                this.snapshots = [];
+                this.memoryData = [];
+                this.maxDataPoints = 60;
+            }
+
+            startMonitoring() {
+                this.startMemoryMonitoring();
+            }
+
+            startMemoryMonitoring() {
+                setInterval(() => {
+                    if (performance.memory) {
+                        const memory = performance.memory;
+                        this.memoryData.push({
+                            used: memory.usedJSHeapSize,
+                            total: memory.totalJSHeapSize,
+                            limit: memory.jsHeapSizeLimit,
+                            timestamp: new Date().toISOString()
+                        });
+                        
+                        if (this.memoryData.length > this.maxDataPoints) {
+                            this.memoryData.shift();
+                        }
+                        
+                        this.updateMemoryChart();
+                    }
+                }, 1000);
+            }
+
+            updateMemoryChart() {
+                const ctx = document.getElementById('memoryChart').getContext('2d');
+                
+                if (this.memoryChart) {
+                    this.memoryChart.data.labels = Array.from({length: this.memoryData.length}, (_, i) => i + 1);
+                    this.memoryChart.update('none');
+                } else {
+                    this.memoryChart = new Chart(ctx, {
+                        type: 'line',
+                        data: {
+                            labels: Array.from({length: this.memoryData.length}, (_, i) => i + 1)
+                        }
+                    })
+                    this.memoryChart.update('none');
+                }
+            }
+
+            takeMemorySnapshot() {
+                const snapshot = {
+                    timestamp: new Date().toISOString(),
+                    memory: performance.memory ? {
+                        used: performance.memory.usedJSHeapSize,
+                        total: performance.memory.totalJSHeapSize,
+                        limit: performance.memory.jsHeapSizeLimit
+                    } : null
+                };
+                
+                this.snapshots.push(snapshot);
+                console.log('内存快照已拍摄:', snapshot);
+            }
+
+            compareSnapshots() {
+                if (this.snapshots.length < 2) {
+                    console.warn('需要至少两个快照才能比较');
+                    return;
+                }
+                
+                const latest = this.snapshots[this.snapshots.length - 1];
+                const previous = this.snapshots[this.snapshots.length - 2];
+                
+                console.log('内存快照对比:', { latest, previous });
+            }
+        }
+
+        /**
+         * 源代码调试面板模块
+         */
+        class SourcesPanel {
+            constructor() {
+                this.files = [];
+            }
+
+            loadFileSystem() {
+                // 模拟文件系统结构
+                this.files = [
+                    { name: 'index.html', type: 'html', content: '<!DOCTYPE html>...' },
+                    { name: 'styles.css', type: 'css', content: 'body { margin: 0; }' },
+                    { name: 'app.js', type: 'js', content: 'console.log("Hello World");' }
+                ];
+                
+                this.displayFileExplorer();
+            }
+
+            displayFileExplorer() {
+                const container = document.getElementById('fileExplorer');
+                container.innerHTML = `
+                    <div class="space-y-1">
+                        ${this.files.map(file => `
+                            <div class="file-item cursor-pointer hover:bg-gray-200 p-2 rounded" data-file="${file.name}">
+                                <i class="fas fa-file-${file.type} mr-2 text-gray-500"></i>
+                                ${file.name}
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+
+            openFile(filename) {
+                const file = this.files.find(f => f.name === filename);
+                if (file) {
+                    this.displayCodeEditor(file);
+                }
+            }
+
+            displayCodeEditor(file) {
+                const container = document.getElementById('codeEditor');
+                const lines = file.content.split('\n');
+                
+                container.innerHTML = `
+                    <div class="space-y-1">
+                        ${lines.map((line, index) => `
+                            <div class="code-line flex">
+                                <span class="w-12 text-right pr-2 text-gray-500">${index + 1}</span>
+                                <span class="flex-1">${line}</span>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            }
+        }
+
+        // 初始化DevTools Pro系统
+        const devTools = new DevToolsPro();
+
+        // 设置网络监控按钮事件
+        document.getElementById('clearNetwork').addEventListener('click', () => {
+            devTools.modules.network.clearNetwork();
+        });
+
+        document.getElementById('exportNetwork').addEventListener('click', () => {
+            devTools.modules.network.exportNetworkData();
+        });
+
+        // 设置内存分析按钮事件
+        document.getElementById('takeMemorySnapshot').addEventListener('click', () => {
+            devTools.modules.memory.takeMemorySnapshot();
+        });
+
+        document.getElementById('compareSnapshots').addEventListener('click', () => {
+            devTools.modules.memory.compareSnapshots();
+        });
+
+        // 设置元素检查按钮事件
+        document.getElementById('inspectElement').addEventListener('click', () => {
+            const selector = document.getElementById('elementSelector').value;
+            devTools.modules.elements.inspectElement(selector);
+        });
+    </script>
+</body>
+</html>

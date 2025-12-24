@@ -1,0 +1,10 @@
+{
+  "extensionName": {
+    "message": "NBtab New Tab",
+    "description": "Extension name in English"
+  },
+  "extensionDescription": {
+    "message": "An ad-free, safe and efficient, modular, customizable browser new tab page",
+    "description": "Extension description in English"
+  }
+}

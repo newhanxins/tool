@@ -1,0 +1,212 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>高德地图角度测量</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css">
+    <style>
+        .angle-display {
+            background: linear-gradient(135deg, #6b7280, #4b5563);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .marker-label {
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body class="bg-gray-100">
+    <div class="container mx-auto p-4">
+        <div class="flex flex-col h-screen">
+            <header class="bg-blue-600 text-white p-4 rounded-t-lg shadow-md">
+                <h1 class="text-2xl font-bold">高德地图角度测量工具</h1>
+                <p class="text-blue-100">点击三个点测量角度(0-360度范围)</p>
+            </header>
+            
+            <div class="flex-1 relative">
+                <div id="map-container" class="h-full w-full rounded-b-lg overflow-hidden"></div>
+                
+                <div class="absolute bottom-4 left-4 bg-white p-4 rounded-lg shadow-lg angle-display">
+                    <div class="flex items-center space-x-4">
+                        <button id="start-measure" class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded transition">
+                            开始测量
+                        </button>
+                        <button id="clear-all" class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded transition">
+                            清除
+                        </button>
+                    </div>
+                    <div id="angle-result" class="mt-4 text-white text-xl font-mono">
+                        角度值: <span class="text-yellow-300">--</span>°
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://webapi.amap.com/maps?v=2.0&key=您的高德地图key"></script>
+    <script>
+        // 初始化地图
+        const map = new AMap.Map('map-container', {
+            zoom: 12,
+            center: [116.397428, 39.90923],
+            viewMode: '2D'
+        });
+
+        let markers = [];
+        let lines = [];
+        let angleArc = null;
+        let isMeasuring = false;
+
+        // 开始测量按钮
+        document.getElementById('start-measure').addEventListener('click', function() {
+            if (!isMeasuring) {
+                clearAll();
+                isMeasuring = true;
+                this.textContent = '测量中...';
+                this.classList.remove('bg-green-500');
+                this.classList.add('bg-blue-500');
+                
+                // 添加地图点击事件
+                map.on('click', handleMapClick);
+            }
+        });
+
+        // 清除按钮
+        document.getElementById('clear-all').addEventListener('click', clearAll);
+
+        function handleMapClick(e) {
+            if (!isMeasuring) return;
+            
+            // 添加标记点
+            const marker = new AMap.Marker({
+                position: e.lnglat,
+                content: `<div class="bg-blue-500 text-white rounded-full w-8 h-8 flex items-center justify-center font-bold marker-label">
+                            ${String.fromCharCode(65 + markers.length)}
+                          </div>`,
+                offset: new AMap.Pixel(-12, -12)
+            });
+            marker.setMap(map);
+            markers.push(marker);
+            
+            // 绘制连线
+            if (markers.length > 1) {
+                const line = new AMap.Polyline({
+                    path: [markers[markers.length-2].getPosition(), markers[markers.length-1].getPosition()],
+                    strokeColor: markers.length === 2 ? '#FF0000' : '#0000FF',
+                    strokeWeight: 3,
+                    strokeStyle: 'solid'
+                });
+                line.setMap(map);
+                lines.push(line);
+            }
+            
+            // 当有三个点时计算角度
+            if (markers.length === 3) {
+                calculateAngle();
+                isMeasuring = false;
+                document.getElementById('start-measure').textContent = '开始测量';
+                document.getElementById('start-measure').classList.remove('bg-blue-500');
+                document.getElementById('start-measure').classList.add('bg-green-500');
+                map.off('click', handleMapClick);
+            }
+        }
+
+        function calculateAngle() {
+            const [A, B, C] = markers.map(m => m.getPosition());
+            
+            // 计算向量BA和BC
+            const BA = { x: A.lng - B.lng, y: A.lat - B.lat };
+            const BC = { x: C.lng - B.lng, y: C.lat - B.lat };
+            
+            // 计算点积
+            const dotProduct = BA.x * BC.x + BA.y * BC.y;
+            
+            // 计算模
+            const magnitudeBA = Math.sqrt(BA.x * BA.x + BA.y * BA.y);
+            const magnitudeBC = Math.sqrt(BC.x * BC.x + BC.y * BC.y);
+            
+            // 计算夹角(弧度)
+            let angleRad = Math.acos(dotProduct / (magnitudeBA * magnitudeBC));
+            
+            // 转换为角度
+            let angleDeg = angleRad * (180 / Math.PI);
+            
+            // 计算叉积确定方向(顺时针/逆时针)
+            const crossProduct = BA.x * BC.y - BA.y * BC.x;
+            
+            // 转换为0-360度范围(高德地图逆时针为正方向)
+            if (crossProduct < 0) {
+                angleDeg = 360 - angleDeg;
+            }
+            
+            // 显示结果
+            document.getElementById('angle-result').innerHTML = 
+                `角度值: <span class="text-yellow-300">${angleDeg.toFixed(2)}</span>°`;
+            
+            // 绘制角度弧线
+            drawAngleArc(A, B, C, angleDeg);
+        }
+
+        function drawAngleArc(A, B, C, angle) {
+            if (angleArc) {
+                angleArc.setMap(null);
+            }
+            
+            // 计算向量BA和BC的角度
+            const BA = { x: A.lng - B.lng, y: A.lat - B.lat };
+            const BC = { x: C.lng - B.lng, y: C.lat - B.lat };
+            
+            let startAngle = Math.atan2(BA.y, BA.x);
+            let endAngle = Math.atan2(BC.y, BC.x);
+            
+            // 确保角度在0-2π范围内
+            if (startAngle < 0) startAngle += 2 * Math.PI;
+            if (endAngle < 0) endAngle += 2 * Math.PI;
+            
+            // 计算半径(使用两点间距离的1/3作为半径)
+            const radius = AMap.GeometryUtil.distance(A, B) / 3;
+            
+            // 创建弧线点集
+            const arcPoints = [];
+            const steps = 20;
+            for (let i = 0; i <= steps; i++) {
+                const t = i / steps;
+                const currentAngle = startAngle + t * (endAngle - startAngle);
+                const x = B.lng + radius * Math.cos(currentAngle) / 111320;
+                const y = B.lat + radius * Math.sin(currentAngle) / 110574;
+                arcPoints.push([x, y]);
+            }
+            
+            // 添加弧线
+            angleArc = new AMap.Polyline({
+                path: arcPoints,
+                strokeColor: '#00FF00',
+                strokeWeight: 2,
+                strokeStyle: 'dashed'
+            });
+            angleArc.setMap(map);
+        }
+
+        function clearAll() {
+            // 清除所有标记和线条
+            markers.forEach(marker => marker.setMap(null));
+            lines.forEach(line => line.setMap(null));
+            if (angleArc) angleArc.setMap(null);
+            
+            markers = [];
+            lines = [];
+            angleArc = null;
+            isMeasuring = false;
+            
+            document.getElementById('angle-result').innerHTML = 
+                '角度值: <span class="text-yellow-300">--</span>°';
+            document.getElementById('start-measure').textContent = '开始测量';
+            document.getElementById('start-measure').classList.remove('bg-blue-500');
+            document.getElementById('start-measure').classList.add('bg-green-500');
+            
+            map.off('click', handleMapClick);
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,524 @@
+{
+  "notes_list": [
+    {
+      "note_id": "CHN1",
+      "language": [
+        {
+          "code": 2052,
+          "content": "90-95 kHz 频段内的水上移动业务，限于海岸电台无线电报。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "Water mobile services within the frequency range of 90-95 kHz are limited to coastal radio telegraphy. (2001)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN2",
+      "language": [
+        {
+          "code": 2052,
+          "content": "68.5±1 kHz、100±10 kHz 可用于标准频率和时间信号业务。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "68.5 ± 1 kHz and 100 ± 10 kHz can be used for standard frequency and time signal services. (2001)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN3",
+      "language": [
+        {
+          "code": 2052,
+          "content": "1 650 kHz、1 750 kHz、1 800 kHz 系国内无线电导航频率，其他业务不得对其产生有害干扰。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "1650 kHz, 1750 kHz, and 1800 kHz are domestic radio navigation frequencies, and other services must not cause harmful interference to them. (2001)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN4",
+      "language": [
+        {
+          "code": 2052,
+          "content": "该频段可有限制地用于无线电定位业务，不得对其他业务产生有害干扰。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "This frequency band can be used for radio positioning services with restrictions and must not cause harmful interference to other services. (2001)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN5",
+      "language": [
+        {
+          "code": 2052,
+          "content": "4 292-4 305 kHz、6 443-6 457 kHz、8 803-8 813 kHz、10 555-10 655 kHz、10 740-10 760 kHz、13 155-13 165 kHz、14 815-14 825 kHz，17 155-17 165 kHz、19 750-19 760 kHz、22 510-22 520 kHz 和25 080-25 090 kHz 系国内保护频段，用于水上移动业务。20 015 kHz 为国内保护频点。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "4 292-4 305 kHz, 6 443-6 457 kHz, 8 803-8 813 kHz, 10 555-10 655 kHz, 10 740-10 760 kHz, 13 155-13 165 kHz, 14 815-14 825 kHz, 17 155-17 165 kHz, 19 750-19 760 kHz, 22 510-22 520 kHz, and 25 080-25 090 kHz are domestically protected frequency bands used for water mobile services. 20 015 kHz is the domestic protection frequency point. (2001)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN6",
+      "language": [
+        {
+          "code": 2052,
+          "content": "广播业务需经协调后方可使用5 900-5 950 kHz、7 300-7 350 kHz、9 400-9 500 kHz、11 600-11 650 kHz、12 050-12 100 kHz、13 570-13 600 kHz、13 800-13 870 kHz、15 600- 15 800 kHz、17 480-17 550 kHz 和18 900-19 020 kHz 频段。（2018 年修订）"
+        },
+        {
+          "code": 1033,
+          "content": "Broadcasting services require coordination before using the frequency bands of 590-5950 kHz, 7300-7350 kHz, 9400-9 500 kHz, 11600-11 650 kHz, 12050-12 100 kHz, 13570-13 600 kHz, 13800-13 870 kHz, 15600-15 800 kHz, 17480-17 550 kHz, and 18900-19 020 kHz. (Revised in 2018)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN7",
+      "language": [
+        {
+          "code": 2052,
+          "content": "31-35 MHz 频段可用于水上移动业务，为主要业务。其中33.0 MHz 可用于近海安全救助通信，其他业务不得对其产生有害干扰。27.5-29.7 MHz 频段内现有渔业电台可用至报废为止。29.7-39.5 MHz 频段内的其他频率可用于水上移动业务，在沿海各省、直辖市和自治区为主要业务，在其他地区为次要业务。（2010 年修订）"
+        },
+        {
+          "code": 1033,
+          "content": "The 31-35 MHz frequency band can be used for water mobile services and is the main service. 33.0 MHz can be used for offshore safety rescue communication, and other services must not cause harmful interference to it. The existing fishery radio stations in the 27.5-29.7 MHz frequency band are available until they are scrapped. Other frequencies within the frequency range of 29.7-39.5 MHz can be used for water mobile services, with primary services in coastal provinces, municipalities, and autonomous regions, and secondary services in other regions. (Revised in 2010)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN8",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在不干扰广播业务条件下，48.5-72.5 MHz、76-84 MHz 可用于固定、移动业务。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "Under the condition of not interfering with broadcasting services, 48.5-72.5 MHz and 76-84 MHz can be used for fixed and mobile services. (2001)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN9",
+      "language": [
+        {
+          "code": 2052,
+          "content": "（2010 年删除）"
+        },
+        {
+          "code": 1033,
+          "content": "(Deleted in 2010)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN10",
+      "language": [
+        {
+          "code": 2052,
+          "content": "76-108 MHz 无线电定位业务限于现有设备，可以继续有控制地使用；100-108 MHz 航空移动业务限于现有设备，可以继续使用。76-84 MHz 和87-108 MHz频段内，遇有固定、移动、航空移动、无线电定位业务干扰广播业务时，应采取措施消除干扰。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The 76-108 MHz radio positioning service is limited to existing equipment and can continue to be used in a controlled manner; The 100-108 MHz aviation mobile service is limited to existing equipment and can continue to be used. In the frequency bands of 76-84 MHz and 87-108 MHz, measures should be taken to eliminate interference from fixed, mobile, aviation mobile, and radio positioning services that interfere with broadcasting services. (2001)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN11",
+      "language": [
+        {
+          "code": 2052,
+          "content": "229-235MHz 在北京密云区不老屯镇、贵州省黔南州可用于射电天文业务，其他业务不得对其产生有害干扰。（2018 年修订）"
+        },
+        {
+          "code": 1033,
+          "content": "229-235MHz can be used for radio astronomy services in Bulaotun Town, Miyun District, Beijing and Qiannan Prefecture, Guizhou Province, and other services must not cause harmful interference to it. (Revised in 2018)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN12",
+      "language": [
+        {
+          "code": 2052,
+          "content": "608-614MHz 频段射电天文为主要业务，现用于北京密云区不老屯镇、新疆乌鲁木齐南山地区、贵州省黔南州、内蒙古正镶白旗；"
+        },
+        {
+          "code": 1033,
+          "content": "The 608-614MHz frequency band is mainly used for radio astronomy and is currently used in Bulaotun Town, Miyun District, Beijing, Nanshan District, Urumqi, Xinjiang, Qiannan Prefecture, Guizhou Province, and Zhengxiangbai Banner, Inner Mongolia;"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN14",
+      "language": [
+        {
+          "code": 2052,
+          "content": "广播业务限用于珠海船底山电视发射台使用582-590 MHz，中山五桂山电视发射台使用590-598 MHz。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The broadcasting service is limited to use 582-590 MHz for Zhuhai Chuandi Mountain TV transmitter and 590-598 MHz for Zhongshan Wugui Mountain TV transmitter. (2001)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN15",
+      "language": [
+        {
+          "code": 2052,
+          "content": "无线电导航业务需与广播业务协调后方可使用606-610 MHz 频段。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The radio navigation service needs to coordinate with the broadcasting service before using the 606-610 MHz frequency band. (2001)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN16",
+      "language": [
+        {
+          "code": 2052,
+          "content": "905-925 MHz 可用于航空无线电导航业务，为次要业务；925-930 MHz 可用于航空无线电导航业务，为主要业务，其他业务不得对其产生有害干扰。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "905-925 MHz can be used for aviation radio navigation services as a secondary service; 925-930 MHz can be used for aviation radio navigation services as the main service, and other services must not cause harmful interference to it. (2001)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN17",
+      "language": [
+        {
+          "code": 2052,
+          "content": "1270-1375 MHz 频段使用的无线电定位业务可用于风廓线雷达，并遵守《无线电规则》第217 号决议，优先考虑使用1295-1375MHz。（2014 年修订）"
+        },
+        {
+          "code": 1033,
+          "content": "The radio positioning service used in the 1270-1375 MHz frequency band can be used for wind profile radar, and in accordance with Resolution 217 of the Radio Regulations, priority should be given to using 1295-1375 MHz. (Revised in 2014)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN17-1",
+      "language": [
+        {
+          "code": 2052,
+          "content": "470-494 MHz 频段以次要使用条件可用于风廓线雷达，并遵守《无线电规则》第217 号决议。（2014 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The 470-494 MHz frequency band can be used for wind profile radar under the following conditions, and must comply with Resolution 217 of the Radio Regulations. (2014)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN18",
+      "language": [
+        {
+          "code": 2052,
+          "content": "现有无线电定位业务应尽早移出1 535-1 544 MHz、1 545-1 645.5 MHz、1 645.5-1 660 MHz、1 850-1 880 MHz、2 085-2 120 MHz、3 400-3 800 MHz、5 925-6 425 MHz、7 500-8 185 MHz、14-15.35 GHz 频段，从2005 年底起不能启用新设备，但现有设备可用至设备报废为止。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The existing radio positioning services should be moved out of the 1535-1544 MHz, 1545-1645.5 MHz, 1645.5-1660 MHz, 1850-1880 MHz, 2085-2 120 MHz, 3440-3800 MHz, 5925-6 425 MHz, 7500-8185 MHz, and 14-15.35 GHz frequency bands as soon as possible. New equipment cannot be used from the end of 2005, but existing equipment can be used until it is scrapped. (2001)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN19",
+      "language": [
+        {
+          "code": 2052,
+          "content": "1 545-1 559 MHz 频段的现有无线电导航设备可用至报废为止，从2005 年底起不能启用新设备。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The existing radio navigation equipment in the 545-1 559 MHz frequency band is available until it is scrapped, and new equipment cannot be activated from the end of 2005. (2001)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN20",
+      "language": [
+        {
+          "code": 2052,
+          "content": "自本规定颁布之日起，在该频段不得研制、生产、和启用新的无线电定位业务的无线电台，现有无线电定位业务电台设备用到报废为止。在此期间，该类电台按主要业务进行干扰协调。（2010 年修订）"
+        },
+        {
+          "code": 1033,
+          "content": "From the date of promulgation of these regulations, new radio stations for radio positioning services shall not be developed, produced, or activated in this frequency band, and existing radio station equipment for radio positioning services shall be scrapped until it is used. During this period, this type of radio station conducts interference coordination according to its main business. (Revised in 2010)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN21",
+      "language": [
+        {
+          "code": 2052,
+          "content": "3 600-4 200 MHz、4 500-4 800 MHz、5 925-6 425 MHz、6 425-7 110 MHz 固定业务主要用于大容量微波接力干线网路，其他微波线路建设时，对已建或已规划建设的大容量微波接力干线网路不得产生有害干扰。（2018 年修订）"
+        },
+        {
+          "code": 1033,
+          "content": "The fixed services of 3 600-4 200 MHz, 4 500-4 800 MHz, 5 925-6 425 MHz, and 6 425-7 110 MHz are mainly used for high-capacity microwave relay trunk networks. When constructing other microwave lines, harmful interference must not be caused to the already built or planned high-capacity microwave relay trunk networks. (Revised in 2018)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN22",
+      "language": [
+        {
+          "code": 2052,
+          "content": "无线电定位业务需与水上无线电导航业务协调后方可使用5 470-5 650 MHz频段。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The radio positioning service needs to be coordinated with the waterborne radio navigation service before using the 5470-5650 MHz frequency band. (2001)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN23",
+      "language": [
+        {
+          "code": 2052,
+          "content": "6 425-7 250 MHz 频段在个别地区经协调后方可使用部分频段用于无线电定位业务。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The 6 425-7 250 MHz frequency band can only be partially used for radio positioning services after coordination in certain regions. (2001)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN24",
+      "language": [
+        {
+          "code": 2052,
+          "content": "24.45-24.65 GHz 频段可用于无线电定位次要业务，但应逐步移出。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The 24.45-24.65 GHz frequency band can be used for secondary radio positioning services, but it should be gradually phased out. (2001)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN25",
+      "language": [
+        {
+          "code": 2052,
+          "content": "卫星移动（空对地）业务使用1 544-1 545 MHz 频段，限于遇险和安全通信，其他业务不得对其产生有害干扰。（2006 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The satellite mobile (air to ground) service uses the 1544-1545 MHz frequency band, limited to distress and safety communication, and other services must not cause harmful interference to it. (2006)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN26",
+      "language": [
+        {
+          "code": 2052,
+          "content": "自本规定颁布之日起，在该频段不得研制、生产、和启用新的移动业务（航空移动除外）的无线电台，现有移动业务电台设备用到报废为止。在此期间，该类电台按主要业务进行干扰协调。（2010 年）"
+        },
+        {
+          "code": 1033,
+          "content": "From the date of promulgation of these regulations, no new mobile service (excluding aviation mobile) radio stations shall be developed, produced, or activated in this frequency band, and existing mobile service radio station equipment shall be scrapped until it is used. During this period, this type of radio station conducts interference coordination according to its main business. (2010)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN27",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在5 091-5 150MHz 频段内的航空移动（R）业务不应对该频段的航空无线电导航业务产生有害干扰。（2010 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The aviation mobile (R) service in the frequency band of 5091-5 150MHz should not cause harmful interference to the aviation radio navigation service in this frequency band. (2010)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN28",
+      "language": [
+        {
+          "code": 2052,
+          "content": "该频段引入的有关IMT 应用的国际注脚，不改变移动业务在划分表中现有业务主次地位。同时，应尽快研究该频段已划分业务的应用模式、频率使用规划、业务间的兼容共存条件及协调程序。在此之前，IMT 应用不投入实际部署使用，但在2300-2400MHz频段，IMT 可在室内使用。（2010 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The introduction of international footnotes related to IMT applications in this frequency band does not change the existing primary and secondary status of mobile services in the classification table. At the same time, it is necessary to study the application mode, frequency usage planning, compatibility and coexistence conditions between services, and coordination procedures of the divided services in this frequency band as soon as possible. Prior to this, IMT applications were not deployed in actual use, but in the 2300-2400MHz frequency band, IMT can be used indoors. (2010)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN29",
+      "language": [
+        {
+          "code": 2052,
+          "content": "水上移动业务VHF频段的使用，应符合国际电联《无线电规则》第31条、第52条和附录18中的规定。（2014年）\n\tCHN30  4438-4488kHz 、5250-5275kHz 、9305-9355kHz 、13450-13550kHz 、16100-16200kHz、24450-24600kHz、26200-26350kHz 频段可以次要使用条件用于海洋雷达，39.5-40MHz 频段可以主要使用条件用于海洋雷达，并遵循《无线电规则》第612 号决议（WRC-12, 修订版）。（2014 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The use of VHF frequency bands for water mobile services shall comply with the provisions of Article 31, Article 52, and Appendix 18 of the International Telecommunication Union's Radio Regulations. (2014)\nCHN30  4438-4488kHz 、5250-5275kHz 、9305-9355kHz 、13450-13550kHz 、16100-16200kHz、24450-24600kHz、26200-26350kHz  The frequency band can be used as a secondary condition for marine radar, and the 39.5-40MHz frequency band can be used as a primary condition for marine radar, in accordance with Resolution 612 of the Radio Regulations (WRC-12, revised version). (2014)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN31",
+      "language": [
+        {
+          "code": 2052,
+          "content": "798-806MHz 频段现指配的地面电视台站设备用到报废为止。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The terrestrial television station equipment currently assigned to the 798-806MHz frequency band will be used until it is scrapped. (2018)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN32",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在1668.4-1675MH 频段，卫星移动业务在与气象辅助业务和卫星气象业务完成协调后方可投入使用。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "In the 1668.4-1675MH frequency band, satellite mobile services can only be put into use after coordination with meteorological auxiliary services and satellite meteorological services. (2018)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN33",
+      "language": [
+        {
+          "code": 2052,
+          "content": "2200-2300MHz、8400-8500MHz、31.8-32.3GHz 和37-38GHz 频段的空间研究业务电台（月球与深空），现用于佳木斯地区和喀什地区，其他地面业务电台不得对上述电台产生有害干扰。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The space research service radio stations (Moon and Deep Space) in the frequency bands of 2200-2300MHz, 8400-8500MHz, 31.8-32.3GHz, and 37-38GHz are currently used in the Jiamusi and Kashgar regions. Other ground service radio stations are not allowed to cause harmful interference to the above-mentioned radio stations. (2018)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN34",
+      "language": [
+        {
+          "code": 2052,
+          "content": "3300-3400MHz 频段的移动业务确定用于国际移动通信（IMT）系统，原则上限于室内使用。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The mobile services in the 3300-3400MHz frequency band are designated for use in the International Mobile Telecommunications (IMT) system, with a principle limit for indoor use. (2018)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN35",
+      "language": [
+        {
+          "code": 2052,
+          "content": "4400-4500MHz 频段的移动业务可用于国际移动通信（IMT）系统。IMT 系统不得对4200-4400MHz 频段的航空无线电导航业务造成有害干扰，相关兼容共存条件确定前IMT 系统不能投入使用。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The mobile services in the 4400-4500MHz frequency band can be used for the International Mobile Telecommunications (IMT) system. The IMT system shall not cause harmful interference to the aviation radio navigation services in the 4200-4400MHz frequency band. The IMT system cannot be put into use until the relevant compatibility and coexistence conditions are determined. (2018)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN36",
+      "language": [
+        {
+          "code": 2052,
+          "content": "4400-4500MHz 频段的移动业务在2020 年12 月底前可用于飞行试验的航空移动遥测，该应用限于西安市阎良地区为中心的300 公里区域内机载电台传输发射。该应用不被视为一种安全业务应用，其遥测台站发射的等效全向辐射功率峰值密度不得超过-2.2dB(W/MHz)，且不得对4200-4400MHz 频段航空无线电导航业务台站造成有害干扰，相关兼容共存条件确定前不能投入使用。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The mobile service in the 4400-4500MHz frequency band can be used for aviation mobile telemetry during flight tests by the end of December 2020. This application is limited to airborne radio transmission and transmission within a 300 kilometer area centered around Yanliang, Xi'an. This application is not considered a secure business application, and its equivalent omnidirectional radiation power peak density emitted by telemetry stations shall not exceed -2.2dB (W/MHz), and shall not cause harmful interference to aviation radio navigation service stations in the 4200-4400MHz frequency band. It cannot be put into use until the relevant compatibility and coexistence conditions are determined. (2018)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN37",
+      "language": [
+        {
+          "code": 2052,
+          "content": "4800-5000MHz 频段的移动业务确定用于国际移动通信（IMT）系统，具体"
+        },
+        {
+          "code": 1033,
+          "content": "The mobile services in the 4800-5000MHz frequency band are determined to be used for the International Mobile Telecommunications (IMT) system, specifically"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN38",
+      "language": [
+        {
+          "code": 2052,
+          "content": "5925-6700MHz 频段的移动业务可用于飞行试验的航空移动遥测，该应用限于西安市阎良地区为中心的300km 区域内机载电台传输发射。该应用不被视为一种安全业务应用，其遥测台站发射的等效全向辐射功率峰值密度不得超过-2.2dB(W/MHz),不得对同频段的卫星固定和固定业务台站造成有害干扰。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The mobile service in the 5925-6700MHz frequency band can be used for aviation mobile telemetry in flight tests, which is limited to airborne radio transmission and transmission within a 300km area centered on Yanliang area in Xi'an city. This application is not considered a security service application, and the peak density of equivalent omnidirectional radiation power emitted by its telemetry station shall not exceed -2.2dB (W/MHz), and shall not cause harmful interference to satellite fixed and fixed service stations in the same frequency band. (2018)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN39",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在14.5-14.8 GHz 频段，卫星广播业务馈线链路卫星网络的申报和使用优先于轨位间隔在其正负2.5 度范围内依据国际电信联盟第164 号决议（WRC-15）卫星固定业务卫星网络的申报和使用。对于已向国际电联报送通知资料的卫星固定业务卫星网络，该脚注不适用。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "In the 14.5-14.8 GHz frequency band, the application and use of satellite broadcasting service feeder link satellite networks take priority over the application and use of satellite fixed service satellite networks with orbital spacing within plus or minus 2.5 degrees in accordance with International Telecommunication Union Resolution 164 (WRC-15). This footnote does not apply to satellite fixed service satellite networks that have already submitted notification materials to the International Telecommunication Union. (2018)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN40",
+      "language": [
+        {
+          "code": 2052,
+          "content": "22-22.21GHz 频段可用于航空移动业务，应避免对CHN12 涉及的同频段射电天文台站造成有害干扰。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "The 22-22.21GHz frequency band can be used for aviation mobile services, and harmful interference should be avoided to the radio observatory stations involved in CHN12 in the same frequency band. (2018)"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN41",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在25.5-27GHz 频段，设置使用卫星地球探测（空对地）业务接收地球站，需电磁环境保护以免受固定和移动业务有害干扰的，需征得国家无线电管理机构同意。"
+        },
+        {
+          "code": 1033,
+          "content": "In the 25.5-27GHz frequency band, if the use of satellite Earth exploration (air to ground) service receiving earth stations requires electromagnetic environment protection to avoid harmful interference from fixed and mobile services, the consent of the national radio management agency must be obtained."
+        }
+      ]
+    }
+  ]
+}

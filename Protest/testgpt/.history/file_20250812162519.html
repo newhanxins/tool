@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module and File System Example</title>
+</head>
+<body>
+
+  <!-- 文件选择部分 -->
+  <input type="file" id="fileInput" />
+  <script>
+    document.getElementById('fileInput').addEventListener('change', (event) => {
+      const file = event.target.files[0];
+      if (file) {
+        console.log('Selected file:', file.name);
+      }
+    });
+  </script>
+
+  <!-- 使用 File System Access API 示例（需要浏览器支持） -->
+  <button onclick="checkDirectory()">打开目录</button>
+  <script>
+    async function checkDirectory() {
+      try {
+        const directoryHandle = await window.showDirectoryPicker();
+        for await (const entry of directoryHandle.values()) {
+          console.log(entry.name);  // 输出目录中的每个文件或子目录的名称
+        }
+      } catch (error) {
+        console.error('无法访问目录:', error);
+      }
+    }
+  </script>
+<button id="openfile"> 文件目录</button>
+<script>
+        // 文件句柄
+let fileHandle;
+let button = document.getElementById('openfile');
+button.addEventListener('click', async (e) => {
+  fileHandle = await window.chooseFileSystemEntries();
+   // 打开文件选择器，解构返回的数组中的第一个元素
+  [fileHandle] = await window.showOpenFilePicker(pickerOpts);
+  console.log(fileHandle);
+});
+</script>
+</body>
+</html>

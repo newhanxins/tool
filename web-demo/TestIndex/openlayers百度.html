@@ -1,0 +1,866 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>在线/离线地图测向系统</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@7.3.0/ol.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #1a2a6c, #b21f1f, #1a2a6c);
+            min-height: 100vh;
+            color: #fff;
+        }
+        
+        .app-container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .header {
+            background: rgba(0, 15, 46, 0.85);
+            padding: 1.5rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid rgba(0, 200, 255, 0.3);
+        }
+        
+        .header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(to right, #4facfe, #00f2fe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            color: #a0d2ff;
+            font-size: 1.1rem;
+        }
+        
+        .main-content {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 2rem;
+            padding: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        
+        .map-section {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+        
+        .map {
+            width: 100%;
+            height: 600px;
+            background: #0a1929;
+        }
+        
+        .map-overlay {
+            position: absolute;
+            top: 1rem;
+            left: 4rem;
+            z-index: 1000;
+        }
+        
+        .coordinate-display {
+            background: rgba(5, 25, 55, 0.85);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            font-weight: 500;
+            color: #4facfe;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(0, 150, 255, 0.3);
+        }
+        
+        .map-controls {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(5, 25, 55, 0.85);
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            border: 1px solid rgba(0, 150, 255, 0.3);
+        }
+        
+        .map-type-selector {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .map-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            background: rgba(10, 40, 80, 0.7);
+            color: #a0d2ff;
+        }
+        
+        .map-btn.active {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: #001a33;
+        }
+        
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+        
+        .status-online {
+            background: rgba(40, 167, 69, 0.2);
+            color: #28a745;
+        }
+        
+        .status-offline {
+            background: rgba(220, 53, 69, 0.2);
+            color: #dc3545;
+        }
+        
+        .control-section {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .control-card, .data-card {
+            background: rgba(5, 25, 55, 0.85);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 150, 255, 0.3);
+        }
+        
+        .control-card h3, .data-card h3 {
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+            color: #4facfe;
+        }
+        
+        .input-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: #a0d2ff;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid rgba(0, 150, 255, 0.4);
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: rgba(0, 30, 60, 0.7);
+            color: #fff;
+        }
+        
+        .input-group input:focus {
+            outline: none;
+            border-color: #4facfe;
+            box-shadow: 0 0 0 3px rgba(79, 172, 254, 0.2);
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex: 1;
+            justify-content: center;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, #4facfe, #00f2fe);
+            color: #001a33;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4);
+        }
+        
+        .btn-secondary {
+            background: #6b7280;
+            color: white;
+        }
+        
+        .btn-secondary:hover {
+            background: #4b5563;
+            transform: translateY(-1px);
+        }
+        
+        .data-list {
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        
+        .data-item {
+            background: rgba(0, 30, 60, 0.7);
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+            border-radius: 6px;
+            border-left: 4px solid #4facfe;
+            transition: all 0.3s ease;
+        }
+        
+        .data-item:hover {
+            background: rgba(10, 50, 100, 0.8);
+            transform: translateX(4px);
+        }
+        
+        .notification {
+            position: fixed;
+            top: 2rem;
+            right: 2rem;
+            background: rgba(5, 25, 55, 0.95);
+            padding: 1rem 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 10000;
+            border-left: 4px solid #4facfe;
+            opacity: 0;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        
+        .notification-success {
+            border-left-color: #28a745;
+        }
+        
+        .notification-error {
+            border-left-color: #dc3545;
+        }
+        
+        .notification-info {
+            border-left-color: #4facfe;
+        }
+        
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+            
+            .map {
+                height: 400px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="app-container">
+        <header class="header">
+            <h1><i class="fas fa-layer-group"></i> 在线/离线地图测向系统</h1>
+            <p>基于OpenLayers 7.3.0 | 支持坐标偏移校正 | 双模式切换</p>
+        </header>
+
+        <main class="main-content">
+            <div class="map-section">
+                <div id="map" class="map"></div>
+                <div class="map-overlay">
+                    <div class="coordinate-display">
+                        <i class="fas fa-location-dot"></i> 
+                        <span id="currentCoords">经度: 116.3974, 纬度: 39.9093</span>
+                    </div>
+                </div>
+                <div class="map-controls">
+                    <div class="map-type-selector">
+                        <button id="onlineBtn" class="map-btn active">
+                            <i class="fas fa-wifi"></i> 在线
+                        </button>
+                        <button id="offlineBtn" class="map-btn">
+                            <i class="fas fa-download"></i> 离线
+                        </button>
+                    </div>
+                    <div class="status-indicator status-online" id="statusIndicator">
+                            <i class="fas fa-circle"></i> 在线模式
+                        </div>
+                </div>
+            </div>
+
+            <div class="control-section">
+                <div class="control-card">
+                    <h3><i class="fas fa-draw-polygon"></i> 测向线绘制</h3>
+                    <div class="input-group">
+                        <label for="longitude">经度</label>
+                        <input type="number" id="longitude" step="0.000001" value="116.3974" placeholder="输入经度坐标">
+                    </div>
+                    <div class="input-group">
+                        <label for="latitude">纬度</label>
+                        <input type="number" id="latitude" step="0.000001" value="39.9093" placeholder="输入纬度坐标">
+                    </div>
+                    <div class="input-group">
+                        <label for="angle">方向角度 (0-360°)</label>
+                        <input type="number" id="angle" min="0" max="360" value="45" placeholder="输入角度值">
+                    </div>
+                    <div class="input-group">
+                        <label for="lineLength">测向线长度 (米)</label>
+                        <input type="number" id="lineLength" min="100" max="10000" value="100">
+                    </div>
+                    <div>
+                        <label class="block text-blue-200 mb-2">线条颜色</label>
+                        <input type="color" id="color" value="#ef4444" 
+                            class="w-full h-10 bg-transparent border border-blue-400/40 rounded-lg cursor-pointer">
+                    </div>
+                    <div class="mb-8">
+                        <h3 class="text-lg font-medium text-gray-700 mb-4">选择类型</h3>
+                        <div class="space-y-3">
+                            <label class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
+                                <input type="radio" name="type" value="direction-line" class="text-blue-500" checked>
+                                <span class="text-gray-700">测向线</span>
+                            </label>
+                            <label class="flex items-center space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-blue-50 transition-colors cursor-pointer">
+                                <input type="radio" name="type" value="point" class="text-blue-500">
+                                <span class="text-gray-700">点</span>
+                            </label>
+                        </div>
+                    </div>
+                    <div class="button-group">
+                        <button id="drawBtn" class="btn btn-primary">
+                            <i class="fas fa-play"></i> 绘制测向线
+                        </button>
+                        <button id="clearBtn" class="btn btn-secondary">
+                            <i class="fas fa-trash"></i> 清除所有
+                        </button>
+                    </div>
+                </div>
+
+                <div class="data-card">
+                    <h3><i class="fas fa-database"></i> 测向数据管理</h3>
+                    <div id="dataList" class="data-list"></div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/ol@7.3.0/dist/ol.js"></script>
+    <script>
+        class DirectionMapSystem {
+            constructor() {
+                this.map = null;
+                this.vectorSource = new ol.source.Vector();
+                this.currentMapType = 'online';
+                this.dataPoints = [];
+                this.init();
+            }
+
+            init() {
+                this.createMap();
+                this.setupEventListeners();
+                this.loadInitialData();
+            }
+
+            createMap() {
+                const view = new ol.View({
+                    center: ol.proj.fromLonLat([116.3974, 39.9093]),
+                    zoom: 10,
+                    maxZoom: 18,
+                    minZoom: 3
+                });
+                
+                
+                // 初始化地图
+                this.map = new ol.Map({
+                    target: 'map',
+                    layers: [
+                        this.createOnlineLayer(),
+                        new ol.layer.Vector({
+                            source: this.vectorSource,
+                            style: this.getLineStyle()
+                        })
+                        
+                    ],
+                    view: view
+                });
+                const azimuthLayer = new ol.layer.Vector({
+                    source: new ol.source.Vector(),
+                    style: new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            color: 'red',
+                            width: 2
+                        }),
+                        fill: new ol.style.Fill({
+                            color: 'red'
+                        })
+                    })
+                });
+                this.azimuthLayer = azimuthLayer;
+                this.map.addLayer(azimuthLayer);
+
+                
+
+                
+                this.setupMapEventListeners();
+            }
+
+            createOnlineLayer() {
+                // 使用OpenStreetMap作为在线地图源（稳定可靠）
+                return new ol.layer.Tile({
+                source: new ol.source.TileImage({
+                projection: "baidu",
+                // tilePixelRatio: 2,
+                tileGrid: new ol.tilegrid.TileGrid({
+                    origin: [0, 0],
+                    resolutions: Array.from({ length: 19 }).map((_, i) =>
+                    Math.pow(2, 18 - i)
+                    ),
+                }),
+                tileUrlFunction(tileCoord) {
+                    if (!tileCoord) return ""
+                    
+                    let z= tileCoord[0]
+                    let x= tileCoord[1]
+                    let y= -tileCoord[2] - 1
+
+                    if (x < 0) x = "M" + -x
+                    
+                    if (y < 0) y = "M" + -y
+
+                    /* 本地离线地图 */
+                    // return `/baidu_tiles/${z}/${x}/${y}.png`
+
+                    /* 在线地图 */
+                    // return (
+                    //   "http://online3.map.bdimg.com/onlinelabel/?qt=tile&x=" +
+                    //   x +
+                    //   "&y=" +
+                    //   y +
+                    //   "&z=" +
+                    //   z +
+                    //   "&styles=pl&udt=20151021&scaler=1&p=1"
+                    // )
+
+                    return `https://maponline2.bdimg.com/tile/?qt=vtile&x=${x}&y=${y}&z=${z}&styles=pl&scaler=1&udt=20240805&from=jsapi2_0`
+                },
+                })
+    
+                });
+            }
+
+            createOfflineLayer() {
+                const resolutions = [];
+                for (let i = 0; i < 19; i++) {
+                    resolutions[i] = Math.pow(2, 18 - i);
+                }
+
+                const tileGrid = new ol.tilegrid.TileGrid({
+                    origin: [0, 0],
+                    resolutions: resolutions
+                });
+
+                return new ol.layer.Tile({
+                    source: new ol.source.TileImage({
+                        projection: 'EPSG:3857',
+                        tileGrid: tileGrid,
+                        tileUrlFunction: (tileCoord) => {
+                        if (!tileCoord) return '';
+                        const z = tileCoord[0];
+                        let x = tileCoord[1];
+                        let y = tileCoord[2];
+                        
+                        if (x < 0) x = 'M' + (-x);
+                        if (y < 0) y = 'M' + (-y);
+                        
+                        // 离线地图URL - 需要根据实际的离线瓦片路径调整
+                        return `./offline_tiles/${z}/${x}/${y}.png`;
+                    }
+                    })
+                });
+            }
+
+            setupEventListeners() {
+                document.getElementById('onlineBtn').addEventListener('click', () => {
+                    this.switchToOnline();
+                });
+
+                document.getElementById('offlineBtn').addEventListener('click', () => {
+                    this.switchToOffline();
+                });
+
+                document.getElementById('drawBtn').addEventListener('click', () => {
+                    this.drawDirectionLine();
+                });
+
+                document.getElementById('clearBtn').addEventListener('click', () => {
+                    this.clearAllData();
+                });
+            }
+            setupMapEventListeners() {
+                // 监听缩放结束事件
+                this.map.getView().on('change:resolution', () => {
+                    
+                        this.updateData('zoom');
+                    
+                });
+
+                // 监听拖动结束事件
+                this.map.on('moveend', () => {
+                    
+                        this.updateData('drag');
+                    
+                });
+
+                // 监听指针移动事件
+                this.map.on('pointermove', (event) => {
+                    if (event.dragging) return;
+                    const coordinate = ol.proj.toLonLat(event.coordinate);
+                    //this.updateCoordinateDisplay(coordinate[0], coordinate[1]);
+                });
+
+                // 监听地图点击事件
+                this.map.on('click', (event) => {
+                    const coordinate = ol.proj.toLonLat(event.coordinate);
+                    document.getElementById('longitude').value = coordinate[0].toFixed(6);
+                    document.getElementById('latitude').value = coordinate[1].toFixed(6);
+                    this.updateCoordinateDisplay(coordinate[0], coordinate[1]);
+                });
+            }
+            switchToOnline() {
+                this.currentMapType = 'online';
+                this.updateMapLayer();
+                this.updateUIState();
+                this.showNotification('已切换到在线地图模式', 'success');
+            }
+
+            switchToOffline() {
+                this.currentMapType = 'offline';
+                this.updateMapLayer();
+                this.updateUIState();
+                this.showNotification('已切换到离线地图模式', 'info');
+            }
+
+            updateMapLayer() {
+                const layers = this.map.getLayers();
+                layers.clear();
+                
+                const baseLayer = this.currentMapType === 'online' 
+                    ? this.createOnlineLayer() 
+                    : this.createOfflineLayer();
+                    
+                layers.push(baseLayer);
+                layers.push(new ol.layer.Vector({
+                    source: this.vectorSource,
+                    style: this.getLineStyle()
+                }));
+            }
+
+            updateUIState() {
+                const onlineBtn = document.getElementById('onlineBtn');
+                const offlineBtn = document.getElementById('offlineBtn');
+                const statusIndicator = document.getElementById('statusIndicator');
+
+                onlineBtn.classList.toggle('active', this.currentMapType === 'online');
+                offlineBtn.classList.toggle('active', this.currentMapType === 'offline');
+
+                if (this.currentMapType === 'online') {
+                    statusIndicator.className = 'status-indicator status-online';
+                    statusIndicator.innerHTML = '<i class="fas fa-circle"></i> 在线模式';
+                } else {
+                    statusIndicator.className = 'status-indicator status-offline';
+                    statusIndicator.innerHTML = '<i class="fas fa-circle"></i> 离线模式';
+                }
+            }
+
+            wgs84ToBaidu(lon, lat) {
+                return [lon * 1.0002 + 0.0003, lat * 1.0002 + 0.0002];
+            }
+
+            calculateEndPoint(start, angle, length) {
+                const rad = (angle * Math.PI) / 180;
+                const deltaX = Math.cos(rad) * length;
+                const deltaY = Math.sin(rad) * length;
+                return [start[0] + deltaX, start[1] + deltaY];
+            }
+
+            getLineStyle() {
+                return (feature) => {
+                    const geometry = feature.getGeometry();
+                    const coords = geometry.getCoordinates();
+                    const styles = [
+                        new ol.style.Style({
+                            stroke: new ol.style.Stroke({
+                                color: '#ef4444',
+                                width: 3,
+                                lineDash: [5, 5]
+                            })
+                        })
+                    ];
+
+                    const end = coords[1];
+                    const angle = Math.atan2(end[1] - coords[0][1], end[0] - coords[0][0]);
+                    
+                    const arrowStyle = new ol.style.Style({
+                        geometry: new ol.geom.Point(end),
+                        image: new ol.style.Icon({
+                            src: 'data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24"><path d="M12 2 L20 22 L4 22 Z" fill="#ef4444"/></svg>',
+                            rotation: angle,
+                            scale: 1.5,
+                            anchor: [0.5, 0.5]
+                        })
+                    });
+
+                    styles.push(arrowStyle);
+                    return styles;
+                };
+            }
+            addAzimuthLine(startLonLat, lengthPixels, angle) {
+                const view = this.map.getView();
+                const resolution = view.getResolution(); // 当前地图分辨率
+                const distance  = lengthPixels * resolution; // 粗略换算
+                //角度转为正北顺时针
+                const adjustedAngle = (450 - angle) % 360;
+                const angleRad = adjustedAngle * Math.PI / 180;
+                const startProjectionCoord = ol.proj.fromLonLat(startLonLat); // 转换为投影坐标
+                // 获取当前投影坐标
+                const startX = startProjectionCoord[0];
+                const startY = startProjectionCoord[1];
+
+                // 计算目标点的偏移量（X 和 Y 方向上的偏移）
+                const offsetX = distance * Math.cos(angleRad); // X 方向上的偏移（单位：米）
+                const offsetY = distance * Math.sin(angleRad); // Y 方向上的偏移（单位：米）
+
+                // 计算目标投影坐标
+                const targetX = startX + offsetX;
+                const targetY = startY + offsetY;
+
+                const targetCoord = [targetX, targetY];
+                // 将目标投影坐标转换回经纬度坐标
+                const targetLonLat = ol.proj.toLonLat(targetCoord);
+
+                console.log("起点坐标:", startLonLat, "目标点坐标:", targetLonLat);
+                console.log("起点投影坐标:", startProjectionCoord, "目标点投影坐标:", targetCoord);
+                // 创建测向线
+                const line = new ol.geom.LineString([startProjectionCoord, targetCoord]);
+                // 创建测向线
+                const lineFeature = new ol.Feature({
+                    geometry: new ol.geom.LineString([startProjectionCoord, targetCoord])
+                });
+
+                // 箭头坐标（三角形）
+                const arrowLength = 30* resolution; // 投影坐标单位
+                console.log("箭头长度:", arrowLength);
+                const arrowCoords = [
+                    
+                    [
+                        targetCoord[0] - arrowLength * Math.cos(angleRad - Math.PI / 6),
+                        targetCoord[1] - arrowLength * Math.sin(angleRad - Math.PI / 6)
+                    ],
+                    targetCoord,
+                    [
+                        targetCoord[0] - arrowLength * Math.cos(angleRad + Math.PI / 6),
+                        targetCoord[1] - arrowLength * Math.sin(angleRad + Math.PI / 6)
+                    ]
+                ];
+                console.log("箭头坐标:", arrowCoords);
+                const arrowFeature = new ol.Feature({
+                    geometry: new ol.geom.LineString(arrowCoords)
+                });
+                console.log("添加测向线和箭头")
+                // 把线和箭头都加入同一个图层
+                this.azimuthLayer.getSource().addFeature(lineFeature);
+                this.azimuthLayer.getSource().addFeature(arrowFeature);
+            }
+            addPoint(element){
+                const point = new ol.geom.Point(
+                    ol.proj.fromLonLat([element.longitude, element.latitude])
+                );
+                const feature = new ol.Feature({
+                    geometry: point,
+                    size: element.length,
+                    color: "#000",
+                    type: element.type
+                });
+                feature.setStyle(new ol.style.Style({
+                    image: new ol.style.Circle({
+                        radius: element.length,
+                        fill: new ol.style.Fill({ color: element.color || '#ef4444' }),
+                        stroke: new ol.style.Stroke({ color: '#fff', width: 2 })
+                    })
+                }));
+                this.azimuthLayer.getSource().addFeature(feature);
+            }
+            drawDirectionLine() {
+                const lon = parseFloat(document.getElementById('longitude').value);
+                const lat = parseFloat(document.getElementById('latitude').value);
+                const angle = parseFloat(document.getElementById('angle').value);
+                const length = parseFloat(document.getElementById('lineLength').value);
+                const type  = document.querySelector('input[name="type"]:checked').value;
+                const color = document.getElementById('color').value;
+                if (isNaN(lon) || isNaN(lat) || isNaN(angle)) {
+                    this.showNotification('请填写完整的经度、纬度和角度数据', 'error');
+                    return;
+                }
+
+                const correctedCoord = this.wgs84ToBaidu(lon, lat);
+                const startPoint = ol.proj.fromLonLat(correctedCoord);
+                const endPoint = this.calculateEndPoint(startPoint, angle, length);
+
+                const lineGeometry = new ol.geom.LineString([startPoint, endPoint]);
+                const lineFeature = new ol.Feature({
+                    geometry: lineGeometry,
+                    angle: angle,
+                    length: length,
+                    type: 'direction-line'
+                });
+
+                // this.vectorSource.addFeature(lineFeature);
+                let newData={
+                        longitude: lon,
+                        latitude: lat,
+                        angle: angle,
+                        length: length,
+                        type:type==="point"?"point":"direction-line",
+                        color:color,
+                        id: Date.now() + Math.random()
+                    }
+                console.log("新数据:", newData);
+                if(type==="point"){
+                    this.addPoint(newData);
+                }else{
+                    this.addAzimuthLine(correctedCoord, length, angle);
+                }
+                this.dataPoints.push(newData);
+
+                this.updateDataList();
+                this.showNotification('测向线绘制成功', 'success');
+            }
+
+            updateCoordinateDisplay(lon, lat) {
+                document.getElementById('currentCoords').textContent = 
+                    `经度: ${lon.toFixed(6)}, 纬度: ${lat.toFixed(6)}`;
+            }
+
+            updateDataList() {
+                const container = document.getElementById('dataList');
+                container.innerHTML = '';
+
+                this.dataPoints.forEach(point => {
+                    const item = document.createElement('div');
+                    item.className = 'data-item';
+                    item.innerHTML = `
+                        <div class="data-item-header">
+                            <strong>测向点 ${point.id.toString().slice(-4)}</strong>
+                        </div>
+                        <div>坐标: ${point.longitude.toFixed(6)}, ${point.latitude.toFixed(6)}</div>
+                        <div>角度: ${point.angle}° | 长度: ${point.length}m</div>
+                    `;
+                    container.appendChild(item);
+                });
+            }
+            updateData(){
+                // 清除现有图层数据
+                this.azimuthLayer.getSource().clear();
+                this.map.getLayers().forEach(layer => {
+                    if (layer instanceof ol.layer.Vector) {
+                        layer.getSource().clear();
+                    }
+                });
+                this.dataPoints.forEach(element => {
+                    if(element.type==="point"){
+                        this.addPoint(element);
+                    }else if(element.type==="direction-line"){
+                        this.addAzimuthLine([element.longitude, element.latitude], element.length, element.angle);
+                    }
+                });
+            }
+            clearAllData() {
+                this.vectorSource.clear();
+                this.lineLayer.getSource().clear();
+                this.dataPoints = [];
+                this.updateDataList();
+                this.showNotification('所有数据已清除', 'info');
+            }
+
+            loadInitialData() {
+                const sampleData = [
+                    { longitude: 116.3974, latitude: 39.9093, angle: 45, length: 1000 },
+                    { longitude: 116.4074, latitude: 39.9193, angle: 120, length: 1500 },
+                    { longitude: 116.3874, latitude: 39.8993, angle: 300, length: 800 }
+                ];
+
+                sampleData.forEach(data => {
+                    this.dataPoints.push({
+                        id: Date.now() + Math.random(),
+                        ...data
+                    });
+                });
+
+                this.updateDataList();
+            }
+
+            showNotification(message, type = 'info') {
+                const notification = document.createElement('div');
+                notification.className = `notification notification-${type}`;
+                notification.innerHTML = `
+                    <i class="fas fa-${type === 'success' ? 'check-circle' : type === 'error' ? 'exclamation-circle' : 'info-circle'}"></i>
+                    ${message}
+                `;
+
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.classList.add('show');
+                }, 100);
+
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                    setTimeout(() => {
+                        if (document.body.contains(notification)) {
+                            document.body.removeChild(notification);
+                        }
+                    }, 300);
+                }, 3000);
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            window.directionSystem = new DirectionMapSystem();
+        });
+    </script>
+</body>
+</html>

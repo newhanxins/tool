@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PageSpy 页面监控系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .monitor-panel {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .network-item {
+            transition: all 0.3s ease;
+        }
+        .network-item:hover {
+            transform: translateX(5px);
+            background: rgba(59, 130, 246, 0.1);
+        }
+        .log-level-error { border-left-color: #ef4444; }
+        .log-level-warn { border-left-color: #f59e0b; }
+        .log-level-info { border-left-color: #3b82f6; }
+        .log-level-log { border-left-color: #10b981; }
+        .log-level-debug { border-left-color: #6b7280; }
+        
+        .dynamic-div {
+            position: absolute;
+            min-width: 120px;
+            min-height: 80px;
+            border: 2px solid;
+            cursor: move;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            user-select: none;
+            background-size: cover;
+            background-position: center;
+        }
+        .div-controls {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            display: none;
+        }
+        .dynamic-div:hover .div-controls {
+            display: flex;
+        }
+        .control-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-800 mb-2">PageSpy 页面监控系统</h1>
+            <p class="text-gray-600">实时捕获请求、日志、错误和设备信息</p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- 控制面板 -->
+            <div class="lg:col-span-1">
+                <div class="monitor-panel rounded-xl shadow-lg p-6">
+                    <h2 class="text-xl font-semibold text-gray-800 mb-4">监控控制台</h2>
+                    
+                    <div class="space-y-4">
+                        <button id="startMonitor" class="w-full bg-green-500 hover:bg-green-600 text-white px-4 py-3 rounded-lg transition-all transform hover:scale-105">
+                            <i class="fas fa-play mr-2"></i>开始监控
+                        </button>
+                        
+                        <button id="clearLogs" class="w-full bg-gray-500 hover:bg-gray-600 text-white px-4 py-3 rounded-lg transition-all">
+                            <i class="fas fa-trash mr-2"></i>清空日志
+                        </button>
+                        
+                        <div class="bg-gray-100 rounded-lg p-4">
+                            <h3 class="font-medium text-gray-700 mb-2">监控状态</h3>
+                            <div id="monitorStatus" class="text-sm text-gray-600">未启动</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 监控数据显示区域 -->
+            <div class="lg:col-span-3">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- 网络请求监控 -->
+                    <div class="monitor-panel rounded-xl shadow-lg p-6">
+                        <h2 class="text-lg font-semibold text-gray-800 mb-4">
+                            <i class="fas fa-network-wired mr-2"></i>网络请求
+                        </h2>
+                        <div id="networkRequests" class="space-y-2 max-h-60 overflow-y-auto">
+                    </div>
+                </div>
+
+                <!-- 日志输出 -->
+                <div class="monitor-panel rounded-xl shadow-lg p-6 mt-6">
+                            <h2 class="text-lg font-semibold text-gray-800 mb-4">
+                                <i class="fas fa-terminal mr-2"></i>控制台日志
+                            </h2>
+                            <div id="consoleLogs" class="space-y-2 max-h-60 overflow-y-auto">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 设备信息面板 -->
+        <div class="mt-8">
+            <div class="monitor-panel rounded-xl shadow-lg p-6">
+                    <h2 class="text-lg font-semibold text-gray-800 mb-4">
+                        <i class="fas fa-laptop mr-2"></i>设备信息
+                    </h2>
+                    <div id="deviceInfo" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        /**
+         * PageSpy 核心监控类
+         * 负责协调各个监控模块的工作
+         */
+        class PageSpy {
+            constructor() {
+                this.modules = {
+                    network: null,
+                    console: null,
+                    device: null,
+                    dom: null
+                };
+                this.isMonitoring = false;
+                this.init();
+            }
+
+            init() {
+                console.log('PageSpy 监控系统初始化中...');
+                
+                // 初始化各个监控模块
+                this.modules.network = new NetworkMonitor();
+                this.modules.console = new ConsoleMonitor();
+                this.modules.device = new DeviceMonitor();
+                this.modules.dom = new DOMMonitor();
+                
+                this.setupUIEvents();
+                this.loadInitialData();
+            }
+
+            setupUIEvents() {
+                document.getElementById('startMonitor').addEventListener('click', () => {
+                    this.toggleMonitoring();
+                });
+
+                document.getElementById('clearLogs').addEventListener('click', () => {
+                    this.clearAllLogs();
+                });
+            }
+
+            toggleMonitoring() {
+                this.isMonitoring = !this.isMonitoring;
+                
+                if (this.isMonitoring) {
+                    this.startAllMonitors();
+                } else {
+                    this.stopAllMonitors();
+                }
+            }
+
+            startAllMonitors() {
+                this.modules.network.start();
+                this.modules.console.start();
+                this.modules.device.start();
+                this.modules.dom.start();
+                
+                document.getElementById('monitorStatus').textContent = '监控中...';
+                document.getElementById('startMonitor').innerHTML = '<i class="fas fa-stop mr-2"></i>停止监控';
+                
+                console.log('PageSpy 监控已启动');
+            }
+
+            stopAllMonitors() {
+                this.modules.network.stop();
+                this.modules.console.stop();
+                this.modules.device.stop();
+                this.modules.dom.stop();
+                
+                document.getElementById('monitorStatus').textContent = '已停止';
+                document.getElementById('startMonitor').innerHTML = '<i class="fas fa-play mr-2"></i>开始监控';
+                
+                console.log('PageSpy 监控已停止');
+            }
+
+            clearAllLogs() {
+                document.getElementById('networkRequests').innerHTML = '';
+                document.getElementById('consoleLogs').innerHTML = '';
+                
+                console.log('所有日志已清空');
+            }
+
+            loadInitialData() {
+                this.modules.device.collectDeviceInfo();
+            }
+        }
+
+        /**
+         * 网络请求监控模块
+         * 拦截和记录所有网络请求
+         */
+        class NetworkMonitor {
+            constructor() {
+                this.requests = [];
+                this.originalXHR = null;
+                this.originalFetch = null;
+            }
+
+            start() {
+                this.interceptXHR();
+                this.interceptFetch();
+                console.log('网络请求监控已启动');
+            }
+
+            stop() {
+                this.restoreXHR();
+                this.restoreFetch();
+                console.log('网络请求监控已停止');
+            }
+
+            /**
+             * 拦截XMLHttpRequest请求
+             */
+            interceptXHR() {
+                const self = this;
+                this.originalXHR = window.XMLHttpRequest;
+                
+                window.XMLHttpRequest = function() {
+                    const xhr = new self.originalXHR();
+                    self.setupXHREvents(xhr);
+                    return xhr;
+                };
+            }
+
+            /**
+             * 拦截Fetch API请求
+             */
+            interceptFetch() {
+                const self = this;
+                this.originalFetch = window.fetch;
+                
+                window.fetch = function() {
+                    const args = arguments;
+                    const startTime = Date.now();
+                    const url = typeof args[0] === 'string' ? args[0] : args[0].url;
+                    
+                    return self.originalFetch.apply(this, args)
+                        .then(response => {
+                            const duration = Date.now() - startTime;
+                            self.recordFetchRequest(args, response, duration);
+                            return response;
+                        })
+                        .catch(error => {
+                            console.error('Fetch 请求失败:', error);
+                            throw error;
+                        });
+                };
+            }
+
+            setupXHREvents(xhr) {
+                const originalOpen = xhr.open;
+                const originalSend = xhr.send;
+                const self = this;
+                
+                xhr.open = function(method, url, async, user, password) {
+                    this._method = method;
+                    this._url = url;
+                    this._startTime = Date.now();
+                    
+                    return originalOpen.apply(this, arguments);
+                };
+                
+                xhr.send = function(data) {
+                    const requestData = {
+                        type: 'xhr',
+                        method: method,
+                        url: url,
+                        data: data,
+                        timestamp: new Date().toISOString()
+                    };
+                    
+                    self.recordXHRRequest(requestData);
+                    
+                    xhr.addEventListener('load', function() {
+                        const duration = Date.now() - this._startTime;
+                        self.recordXHRResponse(this, duration);
+                    });
+                    
+                    return originalSend.apply(this, arguments);
+                };
+            }
+
+            recordXHRRequest(data) {
+                this.requests.push(data);
+                this.displayNetworkRequest(data);
+            }
+
+            recordXHRResponse(xhr, duration) {
+                const responseData = {
+                    status: xhr.status,
+                    statusText: xhr.statusText,
+                    duration: duration
+                };
+                
+                console.log('XHR 请求完成:', data);
+            }
+
+            recordFetchRequest(args, response, duration) {
+                const data = {
+                    type: 'fetch',
+                    url: args[0],
+                    method: args[1]?.method || 'GET',
+                    data: args[1]?.body,
+                    status: response.status,
+                    duration: duration,
+                    timestamp: new Date().toISOString()
+                };
+                
+                this.requests.push(data);
+                this.displayNetworkRequest(data);
+            }
+
+            displayNetworkRequest(data) {
+                const container = document.getElementById('networkRequests');
+                const item = document.createElement('div');
+                item.className = 'network-item bg-white rounded-lg p-3 border-l-4 border-blue-500'
+                
+                item.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <span class="font-medium">${data.method} ${data.url}</span>
+                        <span class="text-xs ${data.status >= 400 ? 'text-red-500' : 'text-green-500'}">
+                            ${data.status} - ${data.duration}ms
+                        </span>
+                    </div>
+                `;
+                
+                container.appendChild(item);
+            }
+
+            restoreXHR() {
+                if (this.originalXHR) {
+                    window.XMLHttpRequest = this.originalXHR;
+                }
+            }
+
+            restoreFetch() {
+                if (this.originalFetch) {
+                    window.fetch = this.originalFetch;
+                }
+            }
+        }
+
+        /**
+         * 控制台日志监控模块
+         * 拦截所有console输出并记录
+         */
+        class ConsoleMonitor {
+            constructor() {
+                this.logs = [];
+                this.originalConsole = {};
+                this.init();
+            }
+
+            init() {
+                ['log', 'error', 'warn', 'info', 'debug'].forEach(method => {
+                    this.originalConsole[method] = console[method];
+                });
+            }
+
+            start() {
+                this.overrideConsole();
+                console.log('控制台日志监控已启动');
+            }
+
+            stop() {
+                this.restoreConsole();
+                console.log('控制台日志监控已停止');
+            }
+
+            /**
+             * 重写console方法
+             */
+            overrideConsole() {
+                const self = this;
+                
+                ['log', 'error', 'warn', 'info', 'debug'].forEach(method => {
+                    console[method] = function() {
+                        // 调用原始方法
+                        self.originalConsole[method].apply(console, arguments);
+                        
+                        // 记录日志
+                        const logData = {
+                            type: 'console',
+                            level: method,
+                            args: Array.from(arguments),
+                            timestamp: new Date().toISOString(),
+                            stack: new Error().stack
+                        };
+                        
+                        self.recordConsoleLog(logData);
+                    };
+                });
+            }
+
+            /**
+             * 恢复原始console方法
+             */
+            restoreConsole() {
+                ['log', 'error', 'warn', 'info', 'debug'].forEach(method => {
+                    console[method] = this.originalConsole[method];
+                });
+            }
+
+            recordConsoleLog(data) {
+                this.logs.push(data);
+                this.displayConsoleLog(data);
+            }
+
+            displayConsoleLog(data) {
+                const container = document.getElementById('consoleLogs');
+                const item = document.createElement('div');
+                item.className = `network-item bg-white rounded-lg p-3 border-l-4 log-level-${data.level}`;
+                
+                item.innerHTML = `
+                    <div class="flex justify-between items-center">
+                        <div class="flex items-center">
+                            <span class="w-3 h-3 rounded-full mr-2 ${
+                            data.level === 'error' ? 'bg-red-500' : 
+                            data.level === 'warn' ? 'bg-yellow-500' :
+                            data.level === 'info' ? 'bg-blue-500' :
+                            data.level === 'debug' ? 'bg-gray-500' : 'bg-green-500'}"></span>
+                            <span class="font-medium capitalize">${data.level}</span>
+                        </div>
+                        <span class="text-xs text-gray-500">${new Date(data.timestamp).toLocaleTimeString()}</span>
+                    </div>
+                    <div class="mt-2 text-sm">
+                        ${data.args.map(arg => 
+                            typeof arg === 'object' ? JSON.stringify(arg) : String(arg)
+                        ).join(' ')}
+                    </div>
+                `;
+                
+                container.appendChild(item);
+            }
+        }
+
+        /**
+         * 设备信息监控模块
+         * 收集浏览器、操作系统和硬件信息
+         */
+        class DeviceMonitor {
+            constructor() {
+                this.deviceInfo = {};
+            }
+
+            start() {
+                this.collectDeviceInfo();
+                console.log('设备信息监控已启动');
+            }
+
+            stop() {
+                console.log('设备信息监控已停止');
+            }
+
+            collectDeviceInfo() {
+                this.deviceInfo = {
+                    browser: {
+                        name: this.getBrowserName(),
+                        version: this.getBrowserVersion(),
+                        userAgent: navigator.userAgent,
+                        language: navigator.language,
+                        languages: navigator.languages,
+                        cookieEnabled: navigator.cookieEnabled,
+                        onLine: navigator.onLine
+                    },
+                    
+                    os: {
+                        platform: navigator.platform,
+                        vendor: navigator.vendor
+                    },
+                    
+                    hardware: {
+                        cores: navigator.hardwareConcurrency || '未知',
+                        memory: navigator.deviceMemory || '未知',
+                        touchSupport: 'ontouchstart' in window,
+                        maxTouchPoints: navigator.maxTouchPoints || 0
+                    },
+                    
+                    screen: {
+                        width: screen.width,
+                        height: screen.height,
+                        colorDepth: screen.colorDepth,
+                        pixelDepth: screen.pixelDepth
+                    },
+                    
+                    performance: {
+                        timing: performance.timing ? {
+                            loadTime: performance.timing.loadEventEnd - performance.timing.navigationStart
+                        } : null,
+                        memory: performance.memory || null
+                    }
+                };
+                
+                this.displayDeviceInfo();
+            }
+
+            getBrowserName() {
+                const userAgent = navigator.userAgent;
+                if (userAgent.includes('Chrome')) return 'Chrome';
+                if (userAgent.includes('Firefox')) return 'Firefox';
+                if (userAgent.includes('Safari')) return 'Safari';
+                if (userAgent.includes('Edge')) return 'Edge';
+                return '未知';
+            }
+
+            getBrowserVersion() {
+                const userAgent = navigator.userAgent;
+                const match = userAgent.match(/(chrome|firefox|safari|edge)\/([0-9.]+)/i);
+                return match ? match[2] : '未知';
+            }
+
+            displayDeviceInfo() {
+                const container = document.getElementById('deviceInfo');
+                container.innerHTML = '';
+                
+                Object.keys(this.deviceInfo).forEach(category => {
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.className = 'bg-white rounded-lg p-4';
+                    
+                    categoryDiv.innerHTML = `
+                        <h3 class="font-semibold text-gray-700 mb-2 capitalize">${category}</h3>
+                        <div class="space-y-1">
+                            ${Object.keys(this.deviceInfo[category]).map(key => `
+                                <div class="flex justify-between">
+                                    <span class="text-sm text-gray-600">${key}</span>
+                                    <span class="text-sm font-medium">${this.deviceInfo[category][key]}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    
+                    container.appendChild(categoryDiv);
+                });
+            }
+        }
+
+
+
+        /**
+ * 优化后的DOM元素监控模块
+ * 添加防抖机制和过滤规则
+ */
+class OptimizedDOMMonitor {
+    constructor() {
+        this.observer = null;
+        this.changes = [];
+        this.debounceTimer = null;
+        this.batchChanges = [];
+    }
+
+    start() {
+        this.setupMutationObserver();
+        console.log('DOM元素监控已启动（优化版）');
+    }
+
+    stop() {
+        if (this.observer) {
+            this.observer.disconnect();
+        }
+        if (this.debounceTimer) {
+            clearTimeout(this.debounceTimer);
+        }
+        console.log('DOM元素监控已停止');
+    }
+
+    /**
+     * 设置优化的DOM变化监听器
+     */
+    setupMutationObserver() {
+        const self = this;
+        this.observer = new MutationObserver((mutations) => {
+            // 使用防抖机制，避免频繁更新
+            if (this.debounceTimer) {
+                clearTimeout(this.debounceTimer);
+            }
+            
+            this.debounceTimer = setTimeout(() => {
+                self.processBatchMutations(mutations);
+            }, 100); // 100ms防抖延迟
+        })
+
+        // 优化观察配置，减少监听范围
+        this.observer.observe(document.body, {
+            childList: true,
+            attributes: true,
+            subtree: true,
+            attributeFilter: ['class', 'style', 'id'] // 只监听重要属性变化
+        });
+    }
+
+    /**
+     * 批量处理DOM变化，减少日志输出
+     */
+    processBatchMutations(mutations) {
+        const batch = {
+            timestamp: new Date().toISOString(),
+            changes: []
+        };
+
+        mutations.forEach((mutation) => {
+            // 过滤掉不重要的变化
+            if (this.isSignificantChange(mutation)) {
+                const change = {
+                    type: mutation.type,
+                    target: this.getSimplifiedTarget(mutation.target),
+                    addedNodes: this.getSignificantAddedNodes(mutation.addedNodes),
+                    removedNodes: this.getSignificantRemovedNodes(mutation.removedNodes),
+                    attributeName: mutation.attributeName
+                };
+                
+                batch.changes.push(change);
+                this.changes.push(change);
+            }
+        });
+
+        // 只有当有重要变化时才输出日志
+        if (batch.changes.length > 0) {
+            console.log(`DOM批量变化记录: ${batch.changes.length}个重要变更`, batch);
+        }
+    }
+
+    /**
+     * 判断是否是重要的DOM变化
+     */
+    isSignificantChange(mutation) {
+        // 过滤掉样式微调和文本内容变化
+        if (mutation.type === 'characterData') {
+            return false;
+        }
+        
+        // 过滤掉不重要的属性变化
+        if (mutation.type === 'attributes') {
+            const attrName = mutation.attributeName;
+            // 只关注重要的属性变化
+            const importantAttrs = ['class', 'style', 'id', 'src', 'href'];
+        return importantAttrs.includes(attrName);
+        }
+        
+        return true;
+    }
+
+    /**
+     * 获取简化的目标元素信息
+     */
+    getSimplifiedTarget(target) {
+        if (!target || !target.tagName) return null;
+        
+        return {
+            tagName: target.tagName.toLowerCase(),
+            id: target.id || null,
+            className: target.className || null
+        };
+    }
+
+    /**
+     * 获取重要的新增节点
+     */
+    getSignificantAddedNodes(addedNodes) {
+        return Array.from(addedNodes)
+            .filter(node => 
+                node.nodeType === Node.ELEMENT_NODE && 
+                !this.isInsignificantElement(node)
+            )
+            .map(node => ({
+                tagName: node.tagName ? node.tagName.toLowerCase() : 'text',
+                nodeType: node.nodeType
+            }))
+    }
+
+    /**
+     * 获取重要的移除节点
+     */
+    getSignificantRemovedNodes(removedNodes) {
+        return Array.from(removedNodes)
+            .filter(node => 
+                node.nodeType === Node.ELEMENT_NODE
+            )
+            .map(node => ({
+                tagName: node.tagName ? node.tagName.toLowerCase() : 'text',
+                nodeType: node.nodeType
+            }))
+    }
+
+    /**
+     * 判断是否是不重要的元素
+     */
+    isInsignificantElement(node) {
+        if (node.nodeType !== Node.ELEMENT_NODE) return false;
+        
+        const tagName = node.tagName.toLowerCase();
+        const insignificantTags = ['script', 'style', 'meta', 'link'];
+        return insignificantTags.includes(tagName);
+    }
+}
+        /**
+         * DOM元素监控模块
+         * 监听页面元素变化和状态
+         */
+        class DOMMonitor extends OptimizedDOMMonitor {
+
+                constructor() {
+                    super();
+                    
+                }
+
+            }
+
+            // 初始化PageSpy系统
+            const pageSpy = new PageSpy();
+        </script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+/* 主样式文件 - 引入所有子样式 */
+
+/* 基础样式 */
+@import './variables.css';
+
+/* 通用组件样式 */
+@import './components.css';
+
+/* 布局样式 */
+@import './layout.css';
+
+/* 组件专用样式 */
+@import './ControlPanel.css';
+@import './WebSocketList.css';
+@import './MessageDetails.css';
+@import './JsonViewer.css';
+@import './SimulateMessagePanel.css';
+@import './FloatingSimulate.css';
+@import './FavoritesTab.css';
+@import './SystemEventsTab.css';
+@import './LanguageSelector.css';
+
+/* Extension Icon Styles */
+.extension-icon-panel:hover {
+  background: rgba(71, 85, 105, 0.1) !important;
+  border-color: rgba(148, 163, 184, 0.4) !important;
+  transform: scale(1.05) !important;
+  filter: brightness(1.1) !important;
+}
+
+.extension-icon-panel:active {
+  background: rgba(71, 85, 105, 0.2) !important;
+  transform: scale(0.95) !important;
+}
+
+.extension-icon-panel:focus {
+  outline: none !important;
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.3) !important;
+}
+ 

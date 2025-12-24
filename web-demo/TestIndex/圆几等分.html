@@ -1,0 +1,80 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background: #f5f5f5;
+  }
+  .pie-container {
+    position: relative;
+    width: 300px;
+    height: 300px;
+  }
+  .pie {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(
+      #FF5252 0deg 60deg,
+      #FFD740 60deg 120deg,
+      #69F0AE 120deg 180deg,
+      #40C4FF 180deg 240deg,
+      #B388FF 240deg 300deg,
+      #FF80AB 300deg 360deg
+    );
+    position: relative;
+  }
+  .slice {
+    position: absolute;
+    width: 50%;
+    height: 50%;
+    left: 50%;
+    top: 0;
+    transform-origin: left bottom;
+    clip-path: polygon(0 0, 100% 0, 100% 100%);
+    border:1px solid #fff;
+    cursor: pointer;
+  }
+  .slice:nth-child(1) { transform: rotate(0deg); }
+  .slice:nth-child(2) { transform: rotate(60deg); }
+  .slice:nth-child(3) { transform: rotate(120deg); }
+  .slice:nth-child(4) { transform: rotate(180deg); }
+  .slice:nth-child(5) { transform: rotate(240deg); }
+  .slice:nth-child(6) { transform: rotate(300deg); }
+  .selected {
+    background: rgba(0, 100, 255, 0.5) !important;
+    z-index: 10;
+  }
+</style>
+</head>
+<body>
+<div class="pie-container">
+  <div class="pie">
+    <div class="slice" data-color="#FF5252"></div>
+    <div class="slice" data-color="#FFD740"></div>
+    <div class="slice" data-color="#69F0AE"></div>
+    <div class="slice" data-color="#40C4FF"></div>
+    <div class="slice" data-color="#B388FF"></div>
+    <div class="slice" data-color="#FF80AB"></div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.slice').forEach(slice => {
+    slice.addEventListener('click', function() {
+      document.querySelectorAll('.slice').forEach(s => {
+        s.classList.remove('selected');
+      });
+      this.classList.add('selected');
+      //document.body.style.backgroundColor = this.dataset.color;
+    });
+  });
+</script>
+</body>
+</html>

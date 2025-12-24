@@ -1,0 +1,10 @@
+{
+  "extensionName": {
+    "message": "NBtab 新标签页",
+    "description": "Extension name in Chinese"
+  },
+  "extensionDescription": {
+    "message": "一个无广告、安全高效、组件式、可自定义的浏览器全新标签页",
+    "description": "Extension description in Chinese"
+  }
+}

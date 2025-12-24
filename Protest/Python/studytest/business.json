@@ -1,0 +1,590 @@
+[
+  {
+    "business_id": 1,
+    "color": "#FFDADC",
+    "language": [
+      {
+        "code": 2052,
+        "name": "测试业务"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 2,
+    "color": "#F4EBE0",
+    "language": [
+      {
+        "code": 2052,
+        "name": "水上移动"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 3,
+    "color": "#F1B6E5",
+    "language": [
+      {
+        "code": 2052,
+        "name": "水上无线电导航"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 4,
+    "color": "#FDE3B8",
+    "language": [
+      {
+        "code": 2052,
+        "name": "气象辅助"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 5,
+    "color": "#F6E8D8",
+    "language": [
+      {
+        "code": 2052,
+        "name": "水上无线电"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 6,
+    "color": "#BAE5CD",
+    "language": [
+      {
+        "code": 2052,
+        "name": "无线电导航"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 7,
+    "color": "#CFC4BC",
+    "language": [
+      {
+        "code": 2052,
+        "name": "固定"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 8,
+    "color": "#BCE1BB",
+    "language": [
+      {
+        "code": 2052,
+        "name": "标准频率和时间信号（20kHz）"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 9,
+    "color": "#D6B9B0",
+    "language": [
+      {
+        "code": 2052,
+        "name": "[固定]"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 10,
+    "color": "#F6BBF2",
+    "language": [
+      {
+        "code": 2052,
+        "name": "[水上移动]"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 11,
+    "color": "#FAFEC1",
+    "language": [
+      {
+        "code": 2052,
+        "name": "[业余]"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 12,
+    "color": "#D1DCBE",
+    "language": [
+      {
+        "code": 2052,
+        "name": "航空无线电导航"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 13,
+    "color": "#D1D4C4",
+    "language": [
+      {
+        "code": 2052,
+        "name": "[航空移动]"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 14,
+    "color": "#E8C4F5",
+    "language": [
+      {
+        "code": 2052,
+        "name": "水上无线电导航（无线电信标）"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 15,
+    "color": "#B0B6D7",
+    "language": [
+      {
+        "code": 2052,
+        "name": "[陆地移动]"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 16,
+    "color": "#D7BED6",
+    "language": [
+      {
+        "code": 2052,
+        "name": "广播"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 17,
+    "color": "#D4DCB5",
+    "language": [
+      {
+        "code": 2052,
+        "name": "[移动]"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 18,
+    "color": "#E2C8D4",
+    "language": [
+      {
+        "code": 2052,
+        "name": "[航空无线电导航]"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 19,
+    "color": "#E1E0EF",
+    "language": [
+      {
+        "code": 2052,
+        "name": "移动"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 20,
+    "color": "#B7D6C6",
+    "language": [
+      {
+        "code": 2052,
+        "name": "无线电定位"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 21,
+    "color": "#B5E5FA",
+    "language": [
+      {
+        "code": 2052,
+        "name": "业余"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 22,
+    "color": "#E6BEC2",
+    "language": [
+      {
+        "code": 2052,
+        "name": "移动（航空移动除外）"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 23,
+    "color": "#F5DFF5",
+    "language": [
+      {
+        "code": 2052,
+        "name": "[无线电定位]"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 24,
+    "color": "#E4D9DB",
+    "language": [
+      {
+        "code": 2052,
+        "name": "移动（遇险和呼叫）"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 25,
+    "color": "#EBBFC5",
+    "language": [
+      {
+        "code": 2052,
+        "name": "标准频率和时间信号（2500kHz）"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 26,
+    "color": "#E7F2D5",
+    "language": [
+      {
+        "code": 2052,
+        "name": "标准频率和时间信号"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 27,
+    "color": "#DDF5D6",
+    "language": [
+      {
+        "code": 2052,
+        "name": "[空间研究]"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 28,
+    "color": "#F9D2CE",
+    "language": [
+      {
+        "code": 2052,
+        "name": "航空移动（R）"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 29,
+    "color": "#B9C5C1",
+    "language": [
+      {
+        "code": 2052,
+        "name": "航空移动（OR）"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 30,
+    "color": "#C5F4E2",
+    "language": [
+      {
+        "code": 2052,
+        "name": "移动（航空移动（R）除外）"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 31,
+    "color": "#C8E5BA",
+    "language": [
+      {
+        "code": 2052,
+        "name": "航空移动"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 32,
+    "color": "#E9D1FF",
+    "language": [
+      {
+        "code": 2052,
+        "name": "陆地移动"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 33,
+    "color": "#FCC7CA",
+    "language": [
+      {
+        "code": 2052,
+        "name": "标准频率和时间信号（5000kHz）"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 34,
+    "color": "#D9CFE8",
+    "language": [
+      {
+        "code": 2052,
+        "name": "[移动（航空移动除外）]"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 35,
+    "color": "#BEFAB9",
+    "language": [
+      {
+        "code": 2052,
+        "name": "卫星业余"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 36,
+    "color": "#E6F1B7",
+    "language": [
+      {
+        "code": 2052,
+        "name": "标准频率和时间信号（10000kHz）"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 37,
+    "color": "#CDBDC1",
+    "language": [
+      {
+        "code": 2052,
+        "name": "[移动（航空移动（R）除外）]"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 38,
+    "color": "#D1B1B1",
+    "language": [
+      {
+        "code": 2052,
+        "name": "射电天文"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 39,
+    "color": "#DEDCE5",
+    "language": [
+      {
+        "code": 2052,
+        "name": "[移动(航空移动(R)除外)]"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 40,
+    "color": "#B6B9B5",
+    "language": [
+      {
+        "code": 2052,
+        "name": "标准频率和时间信号（15000kHz）"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 41,
+    "color": "#FEFCB6",
+    "language": [
+      {
+        "code": 2052,
+        "name": "标准频率和时间信号（20000kHz）"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  },
+  {
+    "business_id": 42,
+    "color": "#EBECD2",
+    "language": [
+      {
+        "code": 2052,
+        "name": "标准频率和时间信号（25000kHz）"
+      },
+      {
+        "code": 1033,
+        "name": ""
+      }
+    ]
+  }
+]

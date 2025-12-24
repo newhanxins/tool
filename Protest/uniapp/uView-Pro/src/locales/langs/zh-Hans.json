@@ -1,0 +1,20 @@
+{
+    "components": {
+        "desc": "uView Pro，是全面支持Vue3.0、TypeScript的uni-app生态框架，全面的组件和便捷的工具会让您信手拈来，如鱼得水。"
+    },
+    "js": {
+        "desc": "众多的贴心小工具，是你开发过程中召之即来的利器，让你飞镖在手，百步穿杨"
+    },
+    "template": {
+        "desc": "收集众多的常用页面和布局，减少开发者的重复工作，让你专注逻辑，事半功倍"
+    },
+    "nav": {
+        "components": "组件",
+        "js": "工具",
+        "template": "模板"
+    },
+    "common": {
+        "intro": "多平台快速开发的UI框架",
+        "title": "uView UI"
+    }
+}

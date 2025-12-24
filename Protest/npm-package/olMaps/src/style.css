@@ -1,0 +1,8 @@
+/* src/style.css */
+.popup {
+    background-color: white;
+    border: 1px solid black;
+    padding: 5px;
+    border-radius: 3px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }

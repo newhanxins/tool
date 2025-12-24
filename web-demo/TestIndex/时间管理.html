@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+#container {
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  position: relative;
+  touch-action: none;
+}
+#timeline {
+  display: block;
+}
+.tooltip {
+  position: fixed;
+  background: rgba(255,255,255,0.95);
+  padding: 8px 12px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  pointer-events: none;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  transition: opacity 0.2s;
+  border: 1px solid #eee;
+}
+.event {
+  cursor: move;
+  transition: box-shadow 0.2s;
+}
+.event:hover {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<body>
+<div id="container">
+  <canvas id="timeline"></canvas>
+</div>
+<div id="tooltip" class="tooltip"></div>
+
+<script>
+class TimelineVisualizer {
+  constructor(containerId, canvasId) {
+    // 可视化配置
+    this.config = {
+      baseWidth: 1200,
+      axisRange: [800, 2600],
+      axisHeight: 40,
+      trackHeight: 50,
+      padding: 5,
+      minScale: 0.3,
+      maxScale: 5,
+      zoomSensitivity: 0.001,
+      colors: ['#4E79A7', '#F28E2B', '#E15759', '#76B7B2', '#59A14F'],
+      minUnitWidth: 4,
+      maxUnitWidth: 20
+    };
+
+    // 交互状态
+    this.state = {
+      scale: 1,
+      offsetX: 0,
+      events: this.generateDemoEvents(),
+      isDragging: false,
+      dragStartX: 0,
+      lastTouchDistance: null,
+      draggedEvent: null,
+      hoveredEvent: null
+    };
+
+    // DOM元素
+    this.container = document.getElementById(containerId);
+    this.canvas = document.getElementById(canvasId);
+    this.ctx = this.canvas.getContext('2d');
+    this.tooltip = document.getElementById('tooltip');
+
+    // 初始化
+    this.initCanvas();
+    this.bindEvents();
+    this.render();
+  }
+
+  // 初始化画布（适配高清屏幕）
+  initCanvas() {
+    const dpr = window.devicePixelRatio || 1;
+    const rect = this.container.getBoundingClientRect();
+    
+    this.canvas.width = rect.width * dpr;
+    this.canvas.height = rect.height * dpr;
+    this.canvas.style.width = `${rect.width}px`;
+    this.canvas.style.height = `${rect.height}px`;
+    
+    this.ctx.scale(dpr, dpr);
+    this.ctx.font = '12px system-ui';
+  }
+
+  // 事件绑定
+  bindEvents() {
+    // 桌面端事件
+    this.canvas.addEventListener('mousedown', e => this.handleDragStart(e));
+    this.canvas.addEventListener('mousemove', e => this.handleHover(e));
+    this.canvas.addEventListener('mouseleave', () => this.tooltip.style.opacity = 0);
+    
+    // 移动端事件
+    this.canvas.addEventListener('touchstart', e => this.handleTouchStart(e));
+    this.canvas.addEventListener('touchmove', e => this.handleTouchMove(e));
+    this.canvas.addEventListener('touchend', () => this.handleTouchEnd());
+
+    // 窗口调整
+    window.addEventListener('resize', () => {
+      this.initCanvas();
+      this.render();
+    });
+
+    // 全局事件
+    document.addEventListener('mousemove', e => this.handleDragMove(e));
+    document.addEventListener('mouseup', () => this.handleDragEnd());
+    this.canvas.addEventListener('wheel', e => this.handleWheel(e), { passive: false });
+  }
+
+  // 生成测试数据
+  generateDemoEvents() {
+    const events = [];
+    for(let i=0; i<20; i++) {
+      const start = Math.floor(Math.random()*400);
+      const end = start + 60 + Math.random()*100;
+      events.push({
+        id: `event-${i}`,
+        startValue: start,
+        endValue: Math.min(end,500),
+        label: `Event ${i+1}`,
+        color: this.config.colors[i%this.config.colors.length]
+      });
+    }
+    console.log("事件",events)
+    let datas=[
+      {id: 'event-0', startValue: 890, endValue: 915, label: 'P-GSM-上行', color: '#4E79A7'},
+      {id: 'event-2', startValue: 935, endValue: 960, label: 'P-GSM-下行', color: '#4E79A7'},
+      {id: 'event-3', startValue: 880, endValue: 915, label: 'E-GSM-上行', color: '#4E69b7'},
+      {id: 'event-4', startValue: 925, endValue: 960, label: 'E-GSM-下行', color: '#4E69b7'},
+      {id: 'event-1', startValue: 2402, endValue: 2830, label: '2.4G wifi', color: '#F28E2B'}
+    ]
+    
+    return datas;
+  }
+
+  // 核心布局算法（优化版）
+  layoutEvents(events) {
+    const sorted = [...events].sort((a, b) => 
+      a.startValue - b.startValue || 
+      (a.endValue - a.startValue) - (b.endValue - b.startValue)
+    );
+
+    const tracks = [];
+    const trackEnds = [];
+    
+    sorted.forEach(event => {
+      let targetTrack = -1;
+      let low = 0, high = trackEnds.length;
+      
+      // 二分查找可插入轨道
+      while (low < high) {
+        const mid = (low + high) >>> 1;
+        if (trackEnds[mid] <= event.startValue) {
+          high = mid;
+        } else {
+          low = mid + 1;
+        }
+      }
+      
+      if (low < trackEnds.length) {
+        trackEnds[low] = event.endValue;
+        tracks[low].push(event);
+      } else {
+        trackEnds.push(event.endValue);
+        tracks.push([event]);
+      }
+    });
+    //console.log("轨道",tracks)
+    return tracks;
+  }
+
+  // 主渲染流程
+  render() {
+    const tracks = this.layoutEvents(this.state.events);
+    this.updateCanvasSize(tracks.length);
+    this.clearCanvas();
+    this.drawValueAxis();
+    this.drawTracks(tracks);
+  }
+
+  // 更新画布尺寸
+  updateCanvasSize(trackCount) {
+    const totalHeight = this.config.axisHeight + trackCount * this.config.trackHeight;
+    this.canvas.height = Math.max(
+      this.container.clientHeight, 
+      totalHeight
+    ) * window.devicePixelRatio;
+  }
+
+  // 清除画布
+  clearCanvas() {
+    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+
+  // 绘制时间轴
+  drawValueAxis() {
+    this.ctx.save();
+    this.ctx.fillStyle = '#666';
+    
+    const [minVal, maxVal] = this.config.axisRange;
+    const visibleStart = this.xToValue(-this.state.offsetX);
+    console.log(visibleStart)
+    const visibleEnd = this.xToValue(this.container.clientWidth - this.state.offsetX);
+    
+    // 绘制主要刻度
+    for (let value = Math.floor(visibleStart); value <= visibleEnd; value++) {
+      if(value % 50 === 0) {
+        const x = this.valueToX(value) + this.state.offsetX;
+		
+        this.ctx.beginPath();
+      this.ctx.moveTo(x, 0);
+      this.ctx.lineTo(x, 15);
+      this.ctx.strokeStyle = '#666';
+      this.ctx.stroke();
+      this.ctx.fillStyle = '#333';
+      this.ctx.fillText(value, x + 4, 30);
+      }
+    }
+	// 次刻度
+    for (let value = Math.ceil(visibleStart / 10) * 10; value <= visibleEnd; value += 10) {
+      const x = this.valueToX(value);
+      this.ctx.beginPath();
+      this.ctx.moveTo(x, 0);
+      this.ctx.lineTo(x, 8);
+      this.ctx.strokeStyle = '#999';
+      this.ctx.stroke();
+    }
+	
+    this.ctx.beginPath();
+    this.ctx.moveTo(0, this.config.axisHeight);
+    this.ctx.lineTo(this.canvas.width, this.config.axisHeight);
+    this.ctx.strokeStyle = '#444';
+    this.ctx.stroke();
+    this.ctx.restore();
+  }
+
+  // 绘制轨道和事件
+  drawTracks(tracks) {
+    tracks.forEach((track, trackIndex) => {
+      const y = this.config.axisHeight + trackIndex * this.config.trackHeight;
+      
+      // 轨道背景
+      this.ctx.fillStyle = trackIndex % 2 === 0 ? '#f8f8f8' : '#fff';
+      this.ctx.fillRect(0, y, this.canvas.width, this.config.trackHeight);
+      track.forEach(event => {
+        const isActive = event === this.state.hoveredEvent || event === this.state.draggedEvent;
+        const x1 = this.valueToX(event.startValue) + this.state.offsetX;
+        const x2 = this.valueToX(event.endValue) + this.state.offsetX;
+        const width = x2 - x1;
+        
+        // 绘制事件块
+        this.ctx.fillStyle = isActive ? this.lightenColor(event.color) : event.color;
+        this.ctx.fillRect(
+          x1, 
+          y + this.config.padding, 
+          width, 
+          this.config.trackHeight - 2*this.config.padding
+        );
+        
+        // 绘制文字
+        //if(width > 30) {
+          this.ctx.fillStyle = '#333';
+          this.ctx.font = '12px system-ui';
+          this.ctx.textBaseline = 'middle';
+          this.ctx.fillText(
+            `${event.startValue.toFixed(1)}-${event.endValue.toFixed(1)}-${event.label}`, 
+            x1 + 5, 
+            y + this.config.trackHeight/2 + 4
+          );
+        //}
+      });
+    });
+  }
+
+  // 工具方法：颜色亮化
+  lightenColor(color, amount=0.2) {
+    const hex = color.replace('#','');
+    const rgb = parseInt(hex, 16);
+    const r = Math.min(255, (rgb >> 16) + 255 * amount);
+    const g = Math.min(255, (rgb >> 8 & 0xFF) + 255 * amount);
+    const b = Math.min(255, (rgb & 0xFF) + 255 * amount);
+    return `rgb(${r},${g},${b})`;
+  }
+
+  // 坐标转换方法
+  valueToX(value) {
+    const [minVal, maxVal] = this.config.axisRange;
+    const range = maxVal - minVal;
+    const ratio = (value - minVal) / range;
+    return ratio * this.config.baseWidth * this.state.scale + this.state.offsetX;
+  }
+
+  xToValue(x) {
+    const [minVal, maxVal] = this.config.axisRange;
+    const range = maxVal - minVal;
+    const denominator = this.config.baseWidth * this.state.scale;
+    
+    if (denominator <= 0) return minVal;
+    
+    const ratio = (x - this.state.offsetX) / denominator;
+    let value = minVal + ratio * range;
+    if (isNaN(value) || value === null || value === undefined) {
+      value= 0; // 返回默认值或抛出错误
+    }
+    return value
+  }
+
+  // 交互处理方法
+  handleHover(e) {
+    const rect = this.canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left - this.state.offsetX;
+    const y = e.clientY - rect.top;
+    
+    // 查找悬停事件
+    this.state.hoveredEvent = this.findEventAt(x, y);
+    
+    if(this.state.hoveredEvent) {
+      this.tooltip.style.left = `${e.clientX + 15}px`;
+      this.tooltip.style.top = `${e.clientY + 15}px`;
+      this.tooltip.innerHTML = `
+        ${this.state.hoveredEvent.label}<br>
+        Start: ${this.state.hoveredEvent.startValue.toFixed(1)}<br>
+        End: ${this.state.hoveredEvent.endValue.toFixed(1)}
+      `;
+      this.tooltip.style.opacity = 1;
+    } else {
+      this.tooltip.style.opacity = 0;
+    }
+    
+    this.render();
+  }
+
+  findEventAt(x, y) {
+    const value = this.xToValue(x);
+    const trackIndex = Math.floor(
+      (y - this.config.axisHeight) / this.config.trackHeight
+    );
+    
+    const track = this.layoutEvents(this.state.events)[trackIndex];
+    if(!track) return null;
+    
+    return track.find(event => 
+      value >= event.startValue && 
+      value <= event.endValue
+    );
+  }
+  //滚轮缩放
+  handleWheel(e){
+    const rect = this.canvas.getBoundingClientRect();
+      const centerX = e.clientX - rect.left;
+      const centerValue = this.xToValue(centerX);
+      
+      const delta = e.deltaY > 0 ? 0.9 : 1.1;
+      this.state.scale = Math.min(
+        this.config.maxUnitWidth / (this.config.baseWidth / 300), 
+        Math.max(
+          this.config.minUnitWidth / (this.config.baseWidth / 300), 
+          this.state.scale * delta
+        )
+      );
+      
+      // 保持缩放中心
+      const newCenterX = this.valueToX(centerValue);
+      this.state.offsetX += (centerX - newCenterX);
+      
+      this.render();
+      e.preventDefault();
+  }
+  // 拖拽和缩放处理
+  handleDragStart(e) {
+    this.state.isDragging = true;
+    this.state.dragStartX = e.clientX;
+    this.canvas.style.cursor = 'grabbing';
+    
+    // 尝试开始事件拖拽
+    const rect = this.canvas.getBoundingClientRect();
+    const x = e.clientX - rect.left - this.state.offsetX;
+    const y = e.clientY - rect.top;
+    this.state.draggedEvent = this.findEventAt(x, y);
+    
+    if(this.state.draggedEvent) {
+      this.state.dragStartValue = this.state.draggedEvent.startValue;
+    }
+  }
+
+  handleDragMove(e) {
+    if(!this.state.isDragging) return;
+    
+    if(this.state.draggedEvent) {
+      // 事件拖拽处理
+      const delta = this.xToValue(e.clientX - this.state.dragStartX);
+      const newStart = this.state.dragStartValue + delta;
+      
+      // 碰撞检测和边界限制
+      if(newStart >= 0 && newStart + (this.state.draggedEvent.endValue - this.state.draggedEvent.startValue) <= this.config.axisRange) {
+        this.state.draggedEvent.startValue = newStart;
+        this.state.draggedEvent.endValue = newStart + (this.state.draggedEvent.endValue - this.state.draggedEvent.startValue);
+        this.render();
+      }
+    } else {
+      // 画布拖拽处理
+      const delta = e.clientX - this.state.dragStartX;
+      this.state.offsetX += delta;
+      this.state.dragStartX = e.clientX;
+      
+      // 边界限制
+      const maxOffset = this.canvas.width/window.devicePixelRatio - this.container.clientWidth;
+      this.state.offsetX = Math.min(0, Math.max(-maxOffset, this.state.offsetX));
+      this.render();
+    }
+  }
+
+  handleDragEnd() {
+    this.state.isDragging = false;
+    this.state.draggedEvent = null;
+    this.canvas.style.cursor = 'default';
+    this.render();
+  }
+
+  // 移动端触摸处理
+  handleTouchStart(e) {
+    if(e.touches.length === 1) {
+      this.handleDragStart(e.touches);
+    } else if(e.touches.length === 2) {
+      this.state.lastTouchDistance = this.getTouchDistance(e.touches);
+    }
+  }
+
+  handleTouchMove(e) {
+    if(e.touches.length === 1) {
+      this.handleDragMove(e.touches);
+    } else if(e.touches.length === 2) {
+      this.handlePinchZoom(e.touches);
+    }
+  }
+
+  handleTouchEnd() {
+    this.handleDragEnd();
+  }
+
+  handlePinchZoom(touches) {
+    const currentDistance = this.getTouchDistance(touches);
+    
+    if(this.state.lastTouchDistance) {
+      const scaleFactor = currentDistance / this.state.lastTouchDistance;
+      let newScale = this.state.scale * scaleFactor;
+      
+      // 限制缩放范围
+      newScale = Math.max(this.config.minScale, 
+        Math.min(this.config.maxScale, newScale));
+      
+      // 计算缩放中心点
+      const center = this.getTouchCenter(touches);
+      const centerValue = this.xToValue(center.x - this.state.offsetX);
+      
+      // 调整偏移保持中心稳定
+      const scaleRatio = newScale / this.state.scale;
+      this.state.offsetX = center.x - (centerValue * this.config.baseWidth / 
+        (this.config.axisRange - this.config.axisRange)) * newScale;
+      
+      this.state.scale = newScale;
+      this.state.lastTouchDistance = currentDistance;
+      this.render();
+    }
+  }
+
+  getTouchDistance(touches) {
+    const [t1, t2] = touches;
+    return Math.hypot(t2.clientX - t1.clientX, t2.clientY - t1.clientY);
+  }
+
+  getTouchCenter(touches) {
+    return {
+      x: (touches.clientX + touches.clientX)/2,
+      y: (touches.clientY + touches.clientY)/2
+    };
+  }
+}
+
+// 初始化时间轴
+new TimelineVisualizer('container', 'timeline');
+</script>
+</body>
+</html>

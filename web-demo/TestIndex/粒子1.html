@@ -1,0 +1,608 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手势控制粒子系统</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@3.18.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow-models/hand-pose-detection@2.0.0"></script>
+    <style>
+        body { 
+            margin: 0; 
+            overflow: hidden; 
+            font-family: 'Inter', sans-serif;
+        }
+        .control-panel {
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .shape-btn.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .color-option.active {
+            transform: scale(1.2);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+        }
+        #handCanvas {
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        .mode-btn.active {
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: white;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-purple-900 to-violet-600">
+    <!-- 控制面板 -->
+    <div class="control-panel fixed top-6 left-6 w-80 rounded-2xl p-6 text-white">
+        <h1 class="text-2xl font-bold mb-6 flex items-center">
+            <i class="fas fa-hand-sparkles mr-3 text-yellow-300"></i>
+            手势控制粒子系统
+        </h1>
+
+        <!-- 控制模式选择 -->
+        <div class="mb-6">
+            <h2 class="text-lg font-semibold mb-3">控制模式</h2>
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="switchControlMode('mouse')" class="mode-btn active py-3 rounded-xl transition-all bg-gray-700 hover:bg-gray-600">
+                <i class="fas fa-mouse mr-2"></i>鼠标控制
+                </button>
+                <button onclick="switchControlMode('hand')" class="mode-btn py-3 rounded-xl transition-all bg-gray-700 hover:bg-gray-600">
+                <i class="fas fa-hand-paper mr-2"></i>手势控制
+                </button>
+            </div>
+        </div>
+
+        <!-- 形状选择 -->
+        <div class="mb-6">
+            <h2 class="text-lg font-semibold mb-3">选择形状</h2>
+            <div class="grid grid-cols-2 gap-2">
+                <button onclick="changeShape('earth')" class="shape-btn active py-3 rounded-xl transition-all bg-gray-700 hover:bg-gray-600">
+                <i class="fas fa-globe mr-2"></i>地球
+                </button>
+                <button onclick="changeShape('flower')" class="shape-btn py-3 rounded-xl transition-all bg-gray-700 hover:bg-gray-600">
+                <i class="fas fa-flower mr-2"></i>花朵
+                </button>
+                <button onclick="changeShape('saturn')" class="shape-btn py-3 rounded-xl transition-all bg-gray-700 hover:bg-gray-600">
+                <i class="fas fa-ring mr-2"></i>土星
+                </button>
+                <button onclick="changeShape('firework')" class="shape-btn py-3 rounded-xl transition-all bg-gray-700 hover:bg-gray-600">
+                <i class="fas fa-fire mr-2"></i>烟花
+                </button>
+                <button onclick="changeShape('heart')" class="shape-btn py-3 rounded-xl transition-all bg-gray-700 hover:bg-gray-600">
+                <i class="fas fa-heart mr-2"></i>爱心
+                </button>
+            </div>
+        </div>
+
+        <!-- 颜色选择 -->
+        <div class="mb-6">
+            <h2 class="text-lg font-semibold mb-3">选择颜色</h2>
+            <div class="grid grid-cols-6 gap-2">
+                <div onclick="changeColor('#3B82F6')" class="color-option active w-8 h-8 bg-blue-500 rounded-full cursor-pointer transition-all"></div>
+                <div onclick="changeColor('#EF4444')" class="color-option w-8 h-8 bg-red-500 rounded-full cursor-pointer transition-all"></div>
+                <div onclick="changeColor('#10B981')" class="color-option w-8 h-8 bg-green-500 rounded-full cursor-pointer transition-all"></div>
+                <div onclick="changeColor('#F59E0B')" class="color-option w-8 h-8 bg-yellow-500 rounded-full cursor-pointer transition-all"></div>
+                <div onclick="changeColor('#8B5CF6')" class="color-option w-8 h-8 bg-purple-500 rounded-full cursor-pointer transition-all"></div>
+                <div onclick="changeColor('#EC4899')" class="color-option w-8 h-8 bg-pink-500 rounded-full cursor-pointer transition-all"></div>
+            </div>
+        </div>
+
+        <!-- 粒子设置 -->
+        <div class="mb-6">
+            <h2 class="text-lg font-semibold mb-3">粒子设置</h2>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm mb-2">粒子数量: <span id="particleCount">2000</span></label>
+                    <input type="range" id="particleSlider" min="500" max="5000" value="2000" class="w-full">
+                </div>
+                <div>
+                    <label class="block text-sm mb-2">粒子大小: <span id="particleSize">2</span></label>
+                    <input type="range" id="sizeSlider" min="1" max="5" value="2" class="w-full">
+                </div>
+            </div>
+        </div>
+
+        <!-- 手势状态 -->
+        <div class="bg-gray-800 rounded-xl p-4">
+            <div class="flex items-center mb-2">
+                <i class="fas fa-video mr-2 text-green-400"></i>
+                <span id="handStatus">当前模式: 鼠标控制</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- 手势检测画布 -->
+    <canvas id="handCanvas" class="fixed top-6 right-6 w-64 h-48 rounded-xl"></canvas>
+
+    <!-- 状态信息 -->
+    <div class="fixed bottom-6 left-6 text-white">
+        <div class="flex items-center space-x-4">
+            <div class="flex items-center">
+                <i class="fas fa-search mr-2"></i>
+                <span id="zoomLevel">缩放级别: 正常</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Three.js 容器 -->
+    <div id="threeContainer"></div>
+
+    <script>
+        // 粒子系统主类
+        class ParticleSystem {
+            constructor() {
+                this.scene = null;
+                this.camera = null;
+                this.renderer = null;
+                this.particles = null;
+                this.currentShape = 'earth';
+                this.currentColor = '#3B82F6';
+                this.handDetector = null;
+                this.zoom = 1.0;
+                this.particleCount = 2000;
+                this.controlMode = 'mouse'; // 默认鼠标控制
+                this.mouseDown = false;
+                this.lastMouseX = 0;
+                this.init();
+            }
+
+            async init() {
+                await this.initThreeJS();
+                await this.initControlSystem();
+                this.animate();
+            }
+
+            async initThreeJS() {
+                // 创建场景
+                this.scene = new THREE.Scene();
+                this.scene.background = new THREE.Color(0x000011);
+                
+                // 创建相机
+                this.camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+                this.camera.position.z = 100;
+                
+                // 创建渲染器
+                this.renderer = new THREE.WebGLRenderer({ antialias: true });
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+                this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+                document.getElementById('threeContainer').appendChild(this.renderer.domElement);
+                
+                // 创建粒子系统
+                this.createParticles();
+                
+                // 窗口大小调整
+                window.addEventListener('resize', () => this.onWindowResize());
+            }
+
+            async initControlSystem() {
+                this.handDetector = new HandDetector();
+                this.setupMouseControls();
+            }
+
+            setupMouseControls() {
+                const container = this.renderer.domElement;
+                
+                // 鼠标滚轮缩放
+                container.addEventListener('wheel', (e) => {
+                    e.preventDefault();
+                    const zoomSpeed = 0.001;
+                    this.zoom = Math.max(0.1, Math.min(3.0, this.zoom - e.deltaY * zoomSpeed));
+                    this.camera.position.z = 100 / this.zoom;
+                    document.getElementById('zoomLevel').textContent = `缩放级别: ${this.zoom.toFixed(1)}`;
+                });
+
+                // 鼠标拖拽旋转
+                container.addEventListener('mousedown', (e) => {
+                    this.mouseDown = true;
+                    this.lastMouseX = e.clientX;
+                });
+
+                container.addEventListener('mousemove', (e) => {
+                    if (this.mouseDown) {
+                        const deltaX = e.clientX - this.lastMouseX;
+                        this.lastMouseX = e.clientX;
+                        
+                        if (this.particles) {
+                            this.particles.rotation.y += deltaX * 0.01;
+                        }
+                    }
+                });
+
+                container.addEventListener('mouseup', () => {
+                    this.mouseDown = false;
+                });
+
+                container.addEventListener('mouseleave', () => {
+                    this.mouseDown = false;
+                });
+            }
+
+            createParticles() {
+                const geometry = new THREE.BufferGeometry();
+                const positions = new Float32Array(this.particleCount * 3);
+                const colors = new Float32Array(this.particleCount * 3);
+                
+                // 根据当前形状生成粒子位置
+                this.generateShape(positions, colors);
+                
+                geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+                geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+                
+                const material = new THREE.PointsMaterial({
+                    size: 2,
+                    vertexColors: true,
+                    transparent: true,
+                    opacity: 0.8
+                });
+                
+                this.particles = new THREE.Points(geometry, material);
+                this.scene.add(this.particles);
+            }
+
+            generateShape(positions, colors) {
+                const baseColor = new THREE.Color(this.currentColor);
+                
+                switch(this.currentShape) {
+                    case 'earth':
+                        this.generateEarthShape(positions, colors, baseColor);
+                        break;
+                    case 'flower':
+                        this.generateFlowerShape(positions, colors, baseColor);
+                        break;
+                    case 'saturn':
+                        this.generateSaturnShape(positions, colors, baseColor);
+                        break;
+                    case 'firework':
+                        this.generateFireworkShape(positions, colors, baseColor);
+                        break;
+                    case 'heart':
+                        this.generateHeartShape(positions, colors, baseColor);
+                        break;
+                }
+            }
+
+            generateEarthShape(positions, colors, baseColor) {
+                const radius = 30;
+                for (let i = 0; i < positions.length; i += 3) {
+                    const theta = Math.random() * Math.PI * 2;
+                    const phi = Math.acos(2 * Math.random() - 1);
+                    
+                    positions[i] = radius * Math.sin(phi) * Math.cos(theta);
+                    positions[i+1] = radius * Math.sin(phi) * Math.sin(theta);
+                    positions[i+2] = radius * Math.cos(phi);
+                    
+                    const variation = 0.1 + Math.random() * 0.3;
+                    colors[i] = baseColor.r * variation;
+                    colors[i+1] = baseColor.g * variation;
+                    colors[i+2] = baseColor.b * variation;
+                }
+            }
+
+            generateFlowerShape(positions, colors, baseColor) {
+                const petalCount = 5;
+                for (let i = 0; i < positions.length; i += 3) {
+                    const angle = (i / positions.length) * Math.PI * 2;
+                    const radius = 25 + Math.sin(angle * petalCount) * 8;
+                    
+                    positions[i] = radius * Math.cos(angle);
+                    positions[i+1] = radius * Math.sin(angle);
+                    positions[i+2] = (Math.random() - 0.5) * 10;
+                    
+                    colors[i] = baseColor.r;
+                    colors[i+1] = baseColor.g;
+                    colors[i+2] = baseColor.b;
+                }
+            }
+
+            generateSaturnShape(positions, colors, baseColor) {
+                const planetRadius = 25;
+                const ringRadius = 40;
+                
+                for (let i = 0; i < positions.length; i += 3) {
+                    if (i % 9 === 0) {
+                        const ringAngle = Math.random() * Math.PI * 2;
+                        positions[i] = ringRadius * Math.cos(ringAngle);
+                        positions[i+1] = (Math.random() - 0.5) * 5;
+                        positions[i+2] = ringRadius * Math.sin(ringAngle);
+                    } else {
+                        const theta = Math.random() * Math.PI * 2;
+                        const phi = Math.acos(2 * Math.random() - 1);
+                        
+                        positions[i] = planetRadius * Math.sin(phi) * Math.cos(theta);
+                        positions[i+1] = planetRadius * Math.sin(phi) * Math.sin(theta);
+                        positions[i+2] = planetRadius * Math.cos(phi);
+                    }
+                    
+                    colors[i] = baseColor.r;
+                    colors[i+1] = baseColor.g;
+                    colors[i+2] = baseColor.b;
+                }
+            }
+
+            generateFireworkShape(positions, colors, baseColor) {
+                for (let i = 0; i < positions.length; i += 3) {
+                    const angle = Math.random() * Math.PI * 2;
+                    const distance = Math.random() * 50;
+                    positions[i] = Math.cos(angle) * distance;
+                    positions[i+1] = Math.sin(angle) * distance;
+                    positions[i+2] = (Math.random() - 0.5) * 50;
+                    
+                    colors[i] = baseColor.r * (0.5 + Math.random() * 0.5);
+                    colors[i+1] = baseColor.g * (0.5 + Math.random() * 0.5);
+                    colors[i+2] = baseColor.b * (0.5 + Math.random() * 0.5);
+                }
+            }
+
+            generateHeartShape(positions, colors, baseColor) {
+                for (let i = 0; i < positions.length; i += 3) {
+                    const t = Math.random() * Math.PI * 2;
+                    const x = 16 * Math.pow(Math.sin(t), 3);
+                    const y = 13 * Math.cos(t) - 5 * Math.cos(2*t) - 2 * Math.cos(3*t) - Math.cos(4*t);
+                    
+                    positions[i] = x * 2;
+                    positions[i+1] = y * 2;
+                    positions[i+2] = (Math.random() - 0.5) * 10;
+                    
+                    colors[i] = baseColor.r;
+                    colors[i+1] = baseColor.g;
+                    colors[i+2] = baseColor.b;
+                }
+            }
+
+            onWindowResize() {
+                this.camera.aspect = window.innerWidth / window.innerHeight;
+                this.camera.updateProjectionMatrix();
+                this.renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+
+            animate() {
+                requestAnimationFrame(() => this.animate());
+                
+                if (this.particles && this.controlMode === 'mouse') {
+                    // 鼠标模式下保持自动旋转
+                    this.particles.rotation.y += 0.002;
+                    this.particles.rotation.x += 0.001;
+                }
+                
+                this.renderer.render(this.scene, this.camera);
+            }
+
+            changeShape(shape) {
+                this.currentShape = shape;
+                this.updateParticles();
+            }
+
+            changeColor(color) {
+                this.currentColor = color;
+                this.updateParticles();
+            }
+
+            updateParticles() {
+                if (this.particles) {
+                    this.scene.remove(this.particles);
+                }
+                this.createParticles();
+            }
+
+            switchControlMode(mode) {
+                this.controlMode = mode;
+                this.updateControlDisplay();
+            }
+
+            updateControlDisplay() {
+                if (this.controlMode === 'mouse') {
+                    document.getElementById('handStatus').textContent = '当前模式: 鼠标控制';
+                    document.querySelectorAll('.mode-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    document.querySelector('[onclick="switchControlMode(\'mouse\')"]').classList.add('active');
+                    
+                    // 隐藏手势画布
+                    document.getElementById('handCanvas').style.display = 'none';
+                } else {
+                    document.getElementById('handStatus').textContent = '当前模式: 手势控制';
+                    document.querySelectorAll('.mode-btn').forEach(btn => {
+                        btn.classList.remove('active');
+                    });
+                    document.querySelector('[onclick="switchControlMode(\'hand\')"]').classList.add('active');
+                    
+                    // 显示手势画布
+                    document.getElementById('handCanvas').style.display = 'block';
+                    this.handDetector.init();
+                }
+            }
+        }
+
+        // 手势检测类
+        class HandDetector {
+            constructor() {
+                this.detector = null;
+                this.video = null;
+                this.canvas = null;
+                this.ctx = null;
+                this.isDetecting = false;
+            }
+
+            async init() {
+                try {
+                    await this.setupCamera();
+                    await this.setupDetector();
+                    this.startDetection();
+                } catch (error) {
+                    console.error('摄像头初始化失败:', error);
+                    document.getElementById('handStatus').textContent = '摄像头不可用，已自动切换到鼠标模式';
+                    particleSystem.switchControlMode('mouse');
+                }
+            }
+
+            async setupCamera() {
+                this.video = document.createElement('video');
+                this.canvas = document.getElementById('handCanvas');
+                this.ctx = this.canvas.getContext('2d');
+                
+                const stream = await navigator.mediaDevices.getUserMedia({
+                    video: { width: 640, height: 480 }
+                });
+                
+                this.video.srcObject = stream;
+                await new Promise((resolve) => {
+                    this.video.onloadedmetadata = () => {
+                        this.video.play();
+                        resolve();
+                    };
+                });
+            }
+
+            async setupDetector() {
+                const model = handPoseDetection.SupportedModels.MediaPipeHands;
+                const detectorConfig = {
+                    runtime: 'tfjs',
+                    modelType: 'full',
+                    maxHands: 1
+                };
+                
+                this.detector = await handPoseDetection.createDetector(model, detectorConfig);
+            }
+
+            async startDetection() {
+                this.isDetecting = true;
+                await this.detectFrame();
+            }
+
+            async detectFrame() {
+                if (!this.isDetecting) return;
+                
+                try {
+                    const hands = await this.detector.estimateHands(this.video);
+                    
+                    if (hands.length > 0) {
+                        this.drawHands(hands);
+                        this.handleGesture(hands[0]);
+                    }
+                    
+                    requestAnimationFrame(() => this.detectFrame());
+                } catch (error) {
+                    console.error('手势检测错误:', error);
+                    this.isDetecting = false;
+                }
+            }
+
+            drawHands(hands) {
+                this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+                
+                this.ctx.drawImage(this.video, 0, 0, this.canvas.width, this.canvas.height);
+                
+                hands.forEach(hand => {
+                    this.drawHandLandmarks(hand);
+                });
+            }
+
+            drawHandLandmarks(hand) {
+                const landmarks = hand.keypoints;
+                
+                this.ctx.fillStyle = '#00FF00';
+                landmarks.forEach(point => {
+                    this.ctx.beginPath();
+                    this.ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
+                    this.ctx.fill();
+                });
+            }
+
+            handleGesture(hand) {
+                const landmarks = hand.keypoints;
+                
+                if (landmarks.length >= 21) {
+                    const thumbTip = landmarks[4];
+                    const indexTip = landmarks[8];
+                    
+                    const distance = Math.sqrt(
+                        Math.pow(thumbTip.x - indexTip.x, 2) + Math.pow(thumbTip.y - indexTip.y, 2)
+                    );
+                    
+                    particleSystem.zoom = Math.max(0.1, Math.min(3.0, distance / 100));
+                    
+                    document.getElementById('zoomLevel').textContent = `缩放级别: ${particleSystem.zoom.toFixed(1)}`;
+                    document.getElementById('handStatus').textContent = `手势检测中 - 距离: ${distance.toFixed(1)}`;
+                }
+            }
+        }
+
+        // 全局变量
+        let particleSystem;
+
+        // 全局函数 - 添加缺失的switchControlMode函数
+        function switchControlMode(mode) {
+            if (particleSystem) {
+                particleSystem.switchControlMode(mode);
+            }
+        }
+
+        function changeShape(shape) {
+            if (particleSystem) {
+                particleSystem.changeShape(shape);
+                updateActiveButton('shape', shape);
+            }
+        }
+
+        function changeColor(color) {
+            if (particleSystem) {
+                particleSystem.changeColor(color);
+                updateActiveButton('color', color);
+            }
+        }
+
+        function updateActiveButton(type, value) {
+            if (type === 'shape') {
+                document.querySelectorAll('.shape-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                const activeBtn = document.querySelector(`[onclick="changeShape('${value}')"]`);
+                if (activeBtn) {
+                    activeBtn.classList.add('active');
+                }
+            } else if (type === 'color') {
+                document.querySelectorAll('.color-option').forEach(option => {
+                    option.classList.remove('active');
+                });
+                
+                const activeOption = document.querySelector(`[onclick="changeColor('${value}')"]`);
+                if (activeOption) {
+                    activeOption.classList.add('active');
+                }
+            } else if (type === 'mode') {
+                document.querySelectorAll('.mode-btn').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                
+                const activeModeBtn = document.querySelector(`[onclick="switchControlMode('${value}')"]`);
+                if (activeModeBtn) {
+                    activeModeBtn.classList.add('active');
+                }
+            }
+        }
+
+        // 初始化粒子数量滑块
+        document.getElementById('particleSlider').addEventListener('input', (e) => {
+            const count = parseInt(e.target.value);
+            document.getElementById('particleCount').textContent = count;
+            if (particleSystem) {
+                particleSystem.particleCount = count;
+                particleSystem.updateParticles();
+            }
+        });
+
+        // 页面加载后初始化
+        window.addEventListener('DOMContentLoaded', async () => {
+            particleSystem = new ParticleSystem();
+        });
+    </script>
+</body>
+</html>

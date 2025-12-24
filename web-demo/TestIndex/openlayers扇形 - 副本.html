@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>增强版测距工具</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css">
+  <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
+  <style>
+    /* 弹窗基础样式 */
+    .measure-tooltip {
+      position: relative;
+      border-radius: 4px;
+      color: white;
+      padding: 6px 12px;
+      font-size: 12px;
+      white-space: nowrap;
+      pointer-events: none;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    /* 不同类型弹窗配色 */
+    .start-point { background: #00C853; }  /* 绿色-起点 */
+    .segment { background: #2962FF; }       /* 蓝色-分段 */
+    .total { background: #D50000; }         /* 红色-总距 */
+    
+    /* 控制按钮样式 */
+    .toolbar {
+      position: absolute;
+      top: 10px;
+      left: 50px;
+      z-index: 1000;
+      background: white;
+      padding: 8px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    button {
+      padding: 6px 12px;
+      margin: 0 4px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div id="map" style="width: 100%; height: 600px;"></div>
+  <div class="toolbar">
+    <button onclick="startMeasure()">开始测量</button>
+    <button onclick="clearAll()">清除全部</button>
+  </div>
+
+  <script>
+    let map=null;
+
+    // 初始化地图
+    map = new ol.Map({
+      target: 'map',
+      layers: [new ol.layer.Tile({
+          source: new ol.source.XYZ({
+            url: 'http://wprd0{1-4}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x={x}&y={y}&z={z}'
+          }),
+        })],
+      view: new ol.View({ center: ol.proj.fromLonLat([116.40, 39.90]), zoom: 10 })
+    });
+
+// 在初始化时创建矢量图层
+const vectorLayer = new ol.layer.Vector({
+  source: new ol.source.Vector(),
+  style: new ol.style.Style({
+    stroke: new ol.style.Stroke({  // 必须配置线条样式‌:ml-citation{ref="5" data="citationList"}
+      color: '#FF4081',
+      width: 3
+    })
+  })
+});
+map.addLayer(vectorLayer);
+    // 启动测量功能
+    let listeners =null;
+    let draw = null; // 绘制交互对象
+    let measureOverlays = []; // 存储弹窗对象
+    let darwpoints = 0; // 新增顶点数量
+    function startMeasure() {
+      clearAll(); // 清除旧数据
+      
+      draw = new ol.interaction.Draw({
+        type: 'LineString',
+        source: vectorLayer.getSource(),
+        style: new ol.style.Style({
+          fill: new ol.style.Fill({
+                        color:'rgba(255,255,255,0.2)'
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: '#e21e0a',
+                        width:2
+                    }),
+                    image: new ol.style.Circle({
+                        radius: 5,
+                        fill: new ol.style.Fill({
+                            color:'#ffcc33'
+                        })
+                    })
+        })
+      });
+
+      // 绘制开始事件
+      draw.on('drawstart', evt => {
+        console.log("绘制开始",evt,evt.feature.getGeometry(),evt.feature.getGeometry().getLastCoordinate());
+        // 在绘制开始时，显示帮助提示框
+        console.log("getActive",draw.getActive());
+        console.log("getOverlay",draw.getOverlay());
+      const tooltipCoord = evt.coordinate;
+      
+      console.log("提示框坐标",tooltipCoord);
+      darwpoints=0
+        createTooltip('0 米', 'start-point', evt.feature.getGeometry().getFirstCoordinate());
+        const sketch = evt.feature; // 获取当前绘制的要素
+        listeners= sketch.getGeometry().on('change', (e) => {
+          const coords = e.target.getCoordinates();
+          console.log('当前坐标:', coords.length,darwpoints);
+          if(coords.length -2>0&&coords.length-2==darwpoints) {
+            const newVertex = coords[coords.length - 1];
+            console.log('新增顶点:', ol.proj.toLonLat(newVertex));
+            createTooltip(`${formatLength(sketch.getGeometry())}`, 'start-point', newVertex);
+          }
+        });
+      });
+
+      // 节点添加事件
+      draw.on('drawabort', evt => {
+        console.log("drawabort")
+        const coords = evt.feature.getGeometry().getCoordinates();
+        if(coords.length < 2) return;
+
+        // 计算分段距离
+        const prevCoord = coords[coords.length-2];
+        const currCoord = coords[coords.length-1];
+        const segment = new ol.geom.LineString([prevCoord, currCoord]);
+        createTooltip(formatLength(segment), 'segment', currCoord);
+      });
+
+      // 绘制结束事件
+      draw.on('drawend', evt => {
+        console.log("绘制结束",evt.feature.getGeometry().getCoordinates(),evt);
+        const line = evt.feature.getGeometry();
+        //createTooltip(`总长: ${formatLength(line)}`, 'total', line.getLastCoordinate());
+        const geometry = evt.feature.getGeometry();
+        const coords = geometry.getCoordinates();
+        console.log('所有坐标:', coords);
+        // coords.forEach((coord, index) => {
+        //   console.log(`顶点 ${index}:`, coord); // 输出所有顶点
+        // });
+      });
+
+      map.addInteraction(draw);
+    }
+
+    // 创建弹窗
+    function createTooltip(text, type, coord) {
+      const element = document.createElement('div');
+      element.className = `measure-tooltip ${type}`;
+      element.innerHTML = text;
+      console.log("弹窗内容",text,type, coord);
+      const overlay = new ol.Overlay({
+        element: element,
+        position: coord,
+        positioning: 'bottom-center',
+        stopEvent: false
+      });
+      
+      map.addOverlay(overlay);
+      measureOverlays.push(overlay);
+      console.log("弹窗",measureOverlays);
+      darwpoints++
+    }
+
+    // 格式化距离
+    function formatLength(geom) {
+      const meters = ol.sphere.getLength(geom, { projection: 'EPSG:3857' });
+      return meters > 1000 
+        ? `${(meters/1000).toFixed(2)} km` 
+        : `${meters.toFixed(1)} m`;
+    }
+
+    // 清除所有测量结果
+    function clearAll() {
+      // 移除绘制交互
+      if(draw) map.removeInteraction(draw);
+      console.log("清除交互",measureOverlays);
+      // 清除所有弹窗
+      measureOverlays.forEach(overlay => map.removeOverlay(overlay));
+      measureOverlays = [];
+      vectorLayer.getSource().clear(); // 清除矢量图层数据
+      ol.Observable.unByKey(listeners); // 移除监听器
+      console.log("清除所有数据",measureOverlays);
+    }
+  </script>
+</body>
+</html>

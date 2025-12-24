@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>打开程序</title>
+</head>
+<body>
+    <h1>点击按钮打开 hello.exe</h1>
+    <button id="startBtn">启动 hello.exe</button>
+
+    <script>
+        const startBtn = document.getElementById('startBtn');
+
+        startBtn.addEventListener('click', () => {
+            // 使用 file:// 协议来打开本地文件
+            //window.location.href = 'wechat://';
+            //window.open('F:/Project/packsofts/release/0.0.1/win-unpacked/packsofts.exe', '_self')
+            const param = 'example_param=hello_world';
+            // 启动 Electron 应用并传递参数（假设 Electron 应用支持接收此类 URL）
+            window.open(`electron-app://?${param}`, '_self');
+        });
+    </script>
+</body>
+</html>

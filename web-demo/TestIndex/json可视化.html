@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Viewer with Collapsing, Formatting, and Syntax Highlighting</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/styles/default.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 10px;
+            border-radius: 5px;
+            overflow: auto;
+        }
+        .json-container {
+            margin-top: 20px;
+        }
+        .json-key {
+            color: #008000;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .json-value {
+            color: #0000ff;
+        }
+        .json-item {
+            margin-left: 20px;
+        }
+        .collapsed > .json-value {
+            display: none;
+        }
+        .collapsed > .json-key::before {
+            content: "\f0da";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            margin-right: 5px;
+        }
+        .expanded > .json-key::before {
+            content: "\f0d7";
+            font-family: "Font Awesome 5 Free";
+            font-weight: 900;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>JSON Viewer with Collapsing, Formatting, and Syntax Highlighting</h1>
+    <input type="file" id="jsonFile" accept=".json" />
+    <div id="jsonViewer" class="json-container"></div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.7.0/highlight.min.js"></script>
+    <script>
+        document.getElementById('jsonFile').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file && file.type === "application/json") {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const jsonContent = JSON.parse(e.target.result);
+                    const formattedJson = formatJson(jsonContent);
+                    document.getElementById('jsonViewer').innerHTML = formattedJson;
+                    highlightJsonSyntax(); // Apply syntax highlighting after rendering
+                };
+                reader.readAsText(file);
+            } else {
+                alert("Please upload a valid JSON file.");
+            }
+        });
+
+        function formatJson(json) {
+            if (typeof json === 'object' && !Array.isArray(json)) {
+                return `<div class="json-object">${Object.entries(json).map(([key, value]) => {
+                    return `<div class="json-item collapsed">
+                        <span class="json-key" onclick="toggleVisibility(this)">${key}:</span>
+                        <span class="json-value">${formatJson(value)}</span>
+                    </div>`;
+                }).join('')}</div>`;
+            } else if (Array.isArray(json)) {
+                return `<div class="json-array">${json.map((item, index) => {
+                    return `<div class="json-item collapsed">
+                        <span class="json-key" onclick="toggleVisibility(this)">[${index}]:</span>
+                        <span class="json-value">${formatJson(item)}</span>
+                    </div>`;
+                }).join('')}</div>`;
+            } else {
+                return `<span class="json-value">${JSON.stringify(json)}</span>`;
+            }
+        }
+
+        function toggleVisibility(element) {
+            const valueElement = element.nextElementSibling;
+            if (valueElement.style.display === "none") {
+                valueElement.style.display = "inline";
+                element.parentElement.classList.remove('collapsed');
+                element.parentElement.classList.add('expanded');
+            } else {
+                valueElement.style.display = "none";
+                element.parentElement.classList.remove('expanded');
+                element.parentElement.classList.add('collapsed');
+            }
+        }
+
+        function highlightJsonSyntax() {
+            // Use highlight.js to apply syntax highlighting to the pre-formatted JSON
+            const jsonElements = document.querySelectorAll('.json-value');
+            jsonElements.forEach(element => {
+                const code = element.innerText;
+                const highlighted = hljs.highlight('json', code).value;
+                element.innerHTML = `<pre><code class="json">${highlighted}</code></pre>`;
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #container {
+      width: 100%;
+      height: 600px;
+      overflow: auto;
+      border: 1px solid #ddd;
+    }
+    #timeline {
+      display: block;
+    }
+    .tooltip {
+      position: fixed;
+      background: rgba(255,255,255,0.9);
+      padding: 8px 12px;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <canvas id="timeline"></canvas>
+  </div>
+  <div id="tooltip" class="tooltip"></div>
+
+  <script>
+    // 配置参数
+    const config = {
+      baseWidth: 1200,          // 基准宽度（对应24小时）
+      timeAxisHeight: 50,       // 时间轴高度
+      trackHeight: 45,          // 单轨道高度
+      padding: 3,               // 事件块间距
+      minHourWidth: 50,         // 最小小时宽度（缩放限制）
+      maxHourWidth: 200         // 最大小时宽度
+    };
+
+    // 状态管理
+    const state = {
+      scale: 1,                 // 当前缩放比例
+      offsetX: 0,               // 横向滚动偏移
+      events: generateDemoEvents(), // 事件数据
+      draggedEvent: null        // 当前拖拽的事件
+    };
+
+    // 初始化
+    const canvas = document.getElementById('timeline');
+    const ctx = canvas.getContext('2d');
+    const container = document.getElementById('container');
+    initCanvasSize();
+    bindEvents();
+    render();
+
+    // 核心方法 - 动态布局
+    function layoutEvents(events) {
+      const tracks = [];
+      const sorted = [...events].sort((a, b) => 
+        a.startTime - b.startTime || (a.endTime - a.startTime) - (b.endTime - b.startTime)
+      );
+
+      sorted.forEach(event => {
+        let placed = false;
+        // 寻找可放置轨道
+        for (const track of tracks) {
+          const lastEvent = track[track.length - 1];
+          if (event.startTime >= lastEvent.endTime) {
+            track.push(event);
+            placed = true;
+            break;
+          }
+        }
+        // 创建新轨道
+        if (!placed) tracks.push([event]);
+      });
+
+      return tracks;
+    }
+
+    // 核心方法 - 渲染流程
+    function render() {
+      const tracks = layoutEvents(state.events);
+      updateCanvasSize(tracks.length);
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawTimeAxis();
+      drawTracks(tracks);
+    }
+
+    // 时间轴绘制
+    function drawTimeAxis() {
+      ctx.save();
+      ctx.font = '14px system-ui';
+      
+      // 计算可见时间范围
+      const visibleStart = Math.max(0, -state.offsetX / getHourWidth());
+      const visibleEnd = visibleStart + container.clientWidth / getHourWidth();
+      
+      // 绘制刻度
+      for (let hour = Math.floor(visibleStart); hour <= visibleEnd; hour++) {
+        const x = hour * getHourWidth() + state.offsetX;
+        
+        // 主刻度
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, 15);
+        ctx.strokeStyle = hour % 6 === 0 ? '#666' : '#999';
+        ctx.stroke();
+
+        // 标签
+        if (hour % 2 === 0) {
+          ctx.fillStyle = '#333';
+          ctx.textAlign = 'left';
+          ctx.fillText(
+            `${String(hour % 24).padStart(2, '0')}:00`, 
+            x + 4, 
+            config.timeAxisHeight - 15
+          );
+        }
+      }
+
+      // 轴线
+      ctx.beginPath();
+      ctx.moveTo(0, config.timeAxisHeight);
+      ctx.lineTo(canvas.width, config.timeAxisHeight);
+      ctx.strokeStyle = '#444';
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // 轨道和事件绘制
+    function drawTracks(tracks) {
+      tracks.forEach((track, index) => {
+        const yBase = config.timeAxisHeight + index * config.trackHeight;
+        
+        // 轨道背景
+        ctx.fillStyle = index % 2 === 0 ? '#f8f8f8' : '#fff';
+        ctx.fillRect(0, yBase, canvas.width, config.trackHeight);
+
+        // 事件块
+        track.forEach(event => {
+          const xStart = timeToX(event.startTime);
+          console.log(xStart);
+          const width = timeToX(event.endTime) - xStart;
+          
+          ctx.fillStyle = event.color;
+          ctx.strokeStyle = event.color;
+          console.log("事件",event)
+          ctx.roundRect(xStart, yBase + config.padding, width, 
+            config.trackHeight - config.padding * 2, 6);
+          ctx.fill();
+          console.log("ddd",event.title)
+          // 文字
+          //if (width > 40) {
+            ctx.beginPath();
+            ctx.fillStyle = '#333';
+            ctx.font = '12px system-ui';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(
+              event.title,
+              xStart + 8,
+              yBase + config.trackHeight / 2
+            );
+            ctx.stroke();
+          //}
+        });
+      });
+    }
+
+    // 工具方法 - 时间转换
+    function timeToX(time) {
+      //return (time / 3600000) * getHourWidth() + state.offsetX;
+      const baseTime = new Date().setHours(0,0,0,0); // 以当日零点为基准
+  const hours = (time - baseTime) / 3600000;
+  return hours * getHourWidth() + state.offsetX;
+    }
+
+    function xToTime(x) {
+      return ((x - state.offsetX) / getHourWidth()) * 3600000;
+    }
+
+    function getHourWidth() {
+      return config.baseWidth / 24 * state.scale;
+    }
+
+    // 交互事件处理
+    function bindEvents() {
+      let isDragging = false;
+      let startX = 0;
+
+      // 画布拖拽
+      canvas.addEventListener('mousedown', e => {
+        isDragging = true;
+        startX = e.clientX;
+      });
+
+      window.addEventListener('mousemove', e => {
+        if (isDragging) {
+          state.offsetX += (e.clientX - startX) * 0.5;
+          startX = e.clientX;
+          state.offsetX = Math.min(0, Math.max(state.offsetX, canvas.width - container.clientWidth));
+          render();
+        }
+      });
+
+      window.addEventListener('mouseup', () => isDragging = false);
+
+      // 事件拖拽
+      canvas.addEventListener('mousedown', e => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        state.draggedEvent = findEventAt(x, y);
+      });
+
+      window.addEventListener('mousemove', e => {
+        if (state.draggedEvent) {
+          const rect = canvas.getBoundingClientRect();
+          const newStart = xToTime(e.clientX - rect.left);
+          const duration = state.draggedEvent.endTime - state.draggedEvent.startTime;
+          state.draggedEvent.startTime = newStart;
+          state.draggedEvent.endTime = newStart + duration;
+          throttledRender();
+        }
+      });
+
+      window.addEventListener('mouseup', () => state.draggedEvent = null);
+
+      // 缩放
+      container.addEventListener('wheel', e => {
+        const delta = e.deltaY > 0 ? 0.9 : 1.1;
+        state.scale = Math.min(config.maxHourWidth / (config.baseWidth / 24), 
+          Math.max(config.minHourWidth / (config.baseWidth / 24), state.scale * delta));
+        throttledRender();
+        e.preventDefault();
+      }, { passive: false });
+
+      // 悬浮提示
+      canvas.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        const event = findEventAt(e.clientX - rect.left, e.clientY - rect.top);
+        const tooltip = document.getElementById('tooltip');
+        
+        if (event) {
+          tooltip.style.display = 'block';
+          tooltip.style.left = `${e.pageX + 15}px`;
+          tooltip.style.top = `${e.pageY + 15}px`;
+          tooltip.innerHTML = `<strong>${event.title}</strong><br>
+            ${new Date(event.startTime).toLocaleTimeString()} - 
+            ${new Date(event.endTime).toLocaleTimeString()}`;
+        } else {
+          tooltip.style.display = 'none';
+        }
+      });
+    }
+
+    // 辅助方法
+    function findEventAt(x, y) {
+      const tracks = layoutEvents(state.events);
+      for (const [trackIndex, track] of tracks.entries()) {
+        for (const event of track) {
+          const xStart = timeToX(event.startTime);
+          const xEnd = timeToX(event.endTime);
+          const yStart = config.timeAxisHeight + trackIndex * config.trackHeight;
+          const yEnd = yStart + config.trackHeight;
+          
+          if (x > xStart && x < xEnd && y > yStart && y < yEnd) {
+            return event;
+          }
+        }
+      }
+      return null;
+    }
+
+    function initCanvasSize() {
+      canvas.width = container.clientWidth;
+      canvas.height = container.clientHeight;
+    }
+
+    function updateCanvasSize(trackCount) {
+      const totalHeight = config.timeAxisHeight + trackCount * config.trackHeight;
+      canvas.height = totalHeight;
+      canvas.width = config.baseWidth * state.scale;
+    }
+
+    function generateDemoEvents() {
+      const events = [];
+      const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4'];
+      for (let i = 0; i < 20; i++) {
+        // const start = Date.now() + (Math.random() * 6 - 3) * 3600000;
+        // const duration = 0.5 + Math.random() * 3;
+        const baseTime = new Date().setHours(0,0,0,0);
+        const start = baseTime + (3+Math.random() * (18 - 3)) * 3600000; // 当日随机时间
+        const duration = 0.1 + Math.random() * 10;
+        let endTime=start + duration * 3600000;
+        if(endTime>baseTime+86400000){
+          endTime=baseTime+86400000;
+        
+        }
+        events.push({
+          title: `会议 ${i + 1}`,
+          startTime: start,
+          endTime: endTime,
+          color: colors[i % colors.length]
+        });
+      }
+      console.log("数据",events)
+      return events;
+    }
+
+    // 性能优化
+    const throttledRender = throttle(render, 100);
+    function throttle(fn, delay) {
+      let lastCall = 0;
+      return (...args) => {
+        const now = Date.now();
+        if (now - lastCall >= delay) {
+          fn(...args);
+          lastCall = now;
+        }
+      };
+    }
+  </script>
+</body>
+</html>

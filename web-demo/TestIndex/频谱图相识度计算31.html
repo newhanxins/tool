@@ -1,0 +1,275 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>80MHz频谱分析</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+  <style>
+    .container { display: flex; flex-wrap: wrap; gap: 20px; }
+    .chart-container { width: 45%; position: relative; }
+    canvas { border: 1px solid #ddd; }
+    .control-panel { padding: 15px; background: #f5f5f5; margin: 20px 0; }
+    input[type="range"] { width: 200px; }
+  </style>
+</head>
+<body>
+  <div class="control-panel">
+    <h3>参数设置</h3>
+    <div>
+      <label>频谱1最大值: <input type="range" id="max1" min="50" max="150" value="100"></label>
+      <span id="maxValue">100</span> dB
+    </div>
+    <div>
+      <label>频谱1最小值: <input type="range" id="min1" min="0" max="50" value="10"></label>
+      <span id="minValue">10</span> dB
+    </div>
+    <div>
+      <label>相似度阈值: <input type="range" id="similarityThreshold" min="0" max="1" step="0.01" value="0.85"></label>
+      <span id="thresholdValue">0.85</span>
+    </div>
+    <button onclick="updateCharts()">更新图表</button>
+  </div>
+
+  <div class="container">
+    <div class="chart-container">
+      <canvas id="spectrum1"></canvas>
+    </div>
+    <div class="chart-container">
+      <canvas id="spectrum2"></canvas>
+    </div>
+    <div class="chart-container" style="width: 90%;">
+      <canvas id="deltaChart"></canvas>
+    </div>
+  </div>
+
+  <div class="control-panel" id="resultPanel">
+    <h3>分析结果</h3>
+    <div id="similarityResult"></div>
+    <div id="noiseResult"></div>
+  </div>
+
+  <script>
+    // 全局图表引用
+    let spectrumChart1, spectrumChart2, deltaChart;
+    const CENTER_FREQ = 40; // MHz
+    const POINT_COUNT = 1600;
+
+    // 生成带噪声的频谱数据
+    function generateSpectrum(max1, min1) {
+      const data = [];
+      for (let i = 0; i < POINT_COUNT; i++) {
+        const freq = (i / POINT_COUNT) * 80;
+        // 频谱1：基于输入参数生成
+        const peak1 = min1 + (max1 - min1) * Math.exp(-Math.pow(freq-CENTER_FREQ, 2)/50);
+        // 频谱2：带偏移的信号
+        const offset = 1.5 * Math.sin(freq/10);
+        const peak2 = (min1 + 5) + (max1 - min1 - 5) * Math.exp(-Math.pow(freq-(CENTER_FREQ+1), 2)/45) + offset;
+        // 添加随机噪声
+        const noise = Math.random() * 3;
+        data.push([peak1 + noise, peak2 + noise, freq]);
+      }
+      console.log(data)
+      return data;
+    }
+    function generateSpectrums() {
+      const centerFreq = 40; // MHz
+      const data = [];
+      for (let i = 0; i < 1600; i++) {
+        const freq = (i / 1600) * 80;
+        // 频谱1：标准信号
+        const peak1 = 100 * Math.exp(-Math.pow(freq-centerFreq, 2)/50);
+        // 频谱2：带偏移的信号
+        const offset = 1.5 * Math.sin(freq/10); // 人为制造偏移
+        const peak2 = 95 * Math.exp(-Math.pow(freq-(centerFreq+1), 2)/45) + offset;
+        // 添加随机噪声
+        const noise = Math.random() * 3;
+        data.push([peak1 + noise, peak2 + noise, freq]);
+      }
+      return data;
+    }
+    // 计算每个点与中心点的差值
+    function calculateDeltas(data) {
+      const centerIndex = Math.floor(POINT_COUNT/2);
+      const centerValue1 = data[centerIndex][0];
+      const centerValue2 = data[centerIndex][1];
+      return data.map(([val1, val2, freq]) => [
+        val1 - centerValue1,
+        val2 - centerValue2,
+        freq
+      ]);
+    }
+
+    // 初始化频谱图表（带缩放功能）
+    function initSpectrumChart(ctx, data, title) {
+      console.log("数据",ctx, data, title);
+      let labelText=data.map(([,,freq]) => freq.toFixed(1))
+      let label=[]
+      let labels = data.map(([,,freq]) => {
+        if(freq%2===0){
+          label.push(freq.toFixed(1))
+        }
+      });
+      return new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels:labelText,
+          datasets: [{
+            label: title,
+            data: data.map(d => d[0]),
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1,
+            pointRadius: 0
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            zoom: {
+              zoom: {
+                wheel: { enabled: true },
+                pinch: { enabled: true },
+                mode: 'xy'
+              },
+              pan: {
+                enabled: true,
+                mode: 'xy'
+              }
+            }
+          },
+          scales: {
+            x: { 
+              title: { display: true, text: '频率 (MHz)' }
+            },
+            y: { 
+              title: { display: true, text: '幅度 (dB)' },
+              suggestedMin: -30,
+              suggestedMax: 70
+            }
+          }
+        }
+      });
+    }
+
+    // 初始化差值图表
+    function initDeltaChart(ctx, deltas) {
+      return new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: deltas.map(([,,freq]) => freq.toFixed(1)),
+          datasets: [
+            {
+              label: '频谱1差值',
+              data: deltas.map(d => d[0]),
+              borderColor: 'blue',
+              borderWidth: 1,
+              pointRadius: 0
+            },
+            {
+              label: '频谱2差值',
+              data: deltas.map(d => d[1]),
+              borderColor: 'red',
+              borderWidth: 1,
+              pointRadius: 0
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            zoom: {
+              zoom: {
+                wheel: { enabled: true },
+                pinch: { enabled: true },
+                mode: 'xy'
+              },
+              pan: {
+                enabled: true,
+                mode: 'xy'
+              }
+            }
+          },
+          scales: {
+            x: { 
+              title: { display: true, text: '频率 (MHz)' }
+            },
+            y: { 
+              title: { display: true, text: 'Δ幅度 (dB)' },
+              suggestedMin: -40,
+              suggestedMax: 60
+            }
+          }
+        }
+      });
+    }
+
+    // 计算余弦相似度
+    function cosineSimilarity(arr1, arr2) {
+      let dot = 0, mag1 = 0, mag2 = 0;
+      for (let i = 0; i < arr1.length; i++) {
+        dot += arr1[i] * arr2[i];
+        mag1 += arr1[i] ** 2;
+        mag2 += arr2[i] ** 2;
+      }
+      return dot / (Math.sqrt(mag1) * Math.sqrt(mag2));
+    }
+
+    // 更新图表数据
+    function updateCharts() {
+      const max1 = parseInt(document.getElementById('max1').value);
+      const min1 = parseInt(document.getElementById('min1').value);
+      const threshold = parseFloat(document.getElementById('similarityThreshold').value);
+      
+      document.getElementById('maxValue').textContent = max1;
+      document.getElementById('minValue').textContent = min1;
+      document.getElementById('thresholdValue').textContent = threshold;
+
+      const spectrumData = generateSpectrum(max1, min1);
+      const deltas = calculateDeltas(spectrumData);
+      console.log
+      // 更新频谱图数据
+      spectrumChart1.data.datasets[0].data = spectrumData.map(d => d[0]);
+      spectrumChart2.data.datasets[0].data = spectrumData.map(d => d[1]);
+      spectrumChart1.update();
+      spectrumChart2.update();
+
+      // 更新差值图数据
+      deltaChart.data.datasets[0].data = deltas.map(d => d[0]);
+      deltaChart.data.datasets[1].data = deltas.map(d => d[1]);
+      deltaChart.update();
+
+      // 计算并显示相似度
+      const spec1 = spectrumData.map(d => d[0]);
+      const spec2 = spectrumData.map(d => d[1]);
+      const similarity = cosineSimilarity(spec1, spec2);
+      
+      document.getElementById('similarityResult').innerHTML = `
+        <p><b>频谱相似度</b>: ${similarity.toFixed(4)} (阈值: ${threshold}) - 
+        ${similarity >= threshold ? '<span style="color:green">相似</span>' : '<span style="color:red">不相似</span>'}</p>
+        <p>采用余弦相似度算法计算，值越接近1表示相似度越高</p>
+      `;
+    }
+
+    // 初始化页面
+    document.addEventListener('DOMContentLoaded', () => {
+      const ctx1 = document.getElementById('spectrum1').getContext('2d');
+      const ctx2 = document.getElementById('spectrum2').getContext('2d');
+      const deltaCtx = document.getElementById('deltaChart').getContext('2d');
+      
+      const initialData = generateSpectrum(80, 30);
+      const deltas = calculateDeltas(initialData);
+      
+      spectrumChart1 = initSpectrumChart(ctx1, initialData, '频谱1');
+      spectrumChart2 = initSpectrumChart(ctx2, initialData.map(d => [d[1], 0, d[2]]), '频谱2');
+      deltaChart = initDeltaChart(deltaCtx, deltas);
+      
+      // 绑定滑动条事件
+      document.getElementById('max1').addEventListener('input', updateCharts);
+      document.getElementById('min1').addEventListener('input', updateCharts);
+      document.getElementById('similarityThreshold').addEventListener('input', updateCharts);
+      
+      updateCharts();
+    });
+  </script>
+</body>
+</html>

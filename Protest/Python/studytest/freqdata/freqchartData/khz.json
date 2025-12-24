@@ -1,0 +1,5120 @@
+{
+  "table_name": "中国",
+  "format_type": 1,
+  "business_list": [
+    {
+      "business_id": 1,
+      "color": "#B0E0E6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "水上移动"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 2,
+      "color": "#F7F7C6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "水上无线电导航"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 3,
+      "color": "#C2E0C1",
+      "language": [
+        {
+          "code": 2052,
+          "name": "气象辅助"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 4,
+      "color": "#F3D5ED",
+      "language": [
+        {
+          "code": 2052,
+          "name": "水上无线电"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 5,
+      "color": "#FCE1D5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "无线电导航"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 6,
+      "color": "#C4FCE9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "固定"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 7,
+      "color": "#BCF3CD",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号（20kHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 8,
+      "color": "#DDFFD4",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[固定]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 9,
+      "color": "#FACEE0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[水上移动]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 10,
+      "color": "#E2F2B3",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[业余]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 11,
+      "color": "#C4D6CC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "航空无线电导航"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 12,
+      "color": "#CDB5F5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[航空移动]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 13,
+      "color": "#E2F4D1",
+      "language": [
+        {
+          "code": 2052,
+          "name": "水上无线电导航（无线电信标）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 14,
+      "color": "#CEF7FD",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[陆地移动]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 15,
+      "color": "#D0C3FF",
+      "language": [
+        {
+          "code": 2052,
+          "name": "广播"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 16,
+      "color": "#CBD6E0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[移动]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 17,
+      "color": "#F5F9E2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[航空无线电导航]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 18,
+      "color": "#BFCACB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "移动"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 19,
+      "color": "#B3E8F6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "无线电定位"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 20,
+      "color": "#E2F2D9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "业余"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 21,
+      "color": "#E6EDE6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "移动（航空移动除外）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 22,
+      "color": "#C3F5C1",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[无线电定位]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 23,
+      "color": "#B0C6C7",
+      "language": [
+        {
+          "code": 2052,
+          "name": "移动（遇险和呼叫）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 24,
+      "color": "#FCB7F0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号（2500kHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 25,
+      "color": "#E6FBC9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 26,
+      "color": "#B4D7EC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间研究]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 27,
+      "color": "#FDE8E3",
+      "language": [
+        {
+          "code": 2052,
+          "name": "航空移动（R）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 28,
+      "color": "#DCD3CA",
+      "language": [
+        {
+          "code": 2052,
+          "name": "航空移动（OR）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 29,
+      "color": "#FEF0B3",
+      "language": [
+        {
+          "code": 2052,
+          "name": "移动（航空移动（R）除外）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 30,
+      "color": "#B3C6F0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "航空移动"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 31,
+      "color": "#C4BBDB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "陆地移动"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 32,
+      "color": "#E1CBD0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号（5000kHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 33,
+      "color": "#EFDCDA",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[移动（航空移动除外）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 34,
+      "color": "#F9B3BA",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星业余"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 35,
+      "color": "#CBF8BC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号（10000kHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 36,
+      "color": "#DDEFF2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[移动（航空移动（R）除外）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 37,
+      "color": "#B1E6EB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "射电天文"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 38,
+      "color": "#DDF7DC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[移动(航空移动(R)除外)]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 39,
+      "color": "#DCB1ED",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号（15000kHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 40,
+      "color": "#E1BBB0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号（20000kHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 41,
+      "color": "#F2FDD5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号（25000kHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 42,
+      "color": "#C6D9E5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间操作（卫星识别）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 43,
+      "color": "#C2C7EE",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 44,
+      "color": "#C1FAF2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[射电天文]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 45,
+      "color": "#B4EFF6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间操作（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 46,
+      "color": "#DFDFCE",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星气象（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 47,
+      "color": "#F7CDE3",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星移动（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 48,
+      "color": "#C9BDFD",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 49,
+      "color": "#B2E4BD",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星移动（空对地）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 50,
+      "color": "#F2D2BE",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间研究（空对地）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 51,
+      "color": "#F8B1F5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[航空移动（OR）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 52,
+      "color": "#B1F1F5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星移动（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 53,
+      "color": "#B1DDED",
+      "language": [
+        {
+          "code": 2052,
+          "name": "水上移动（使用DSC的遇险和安全呼叫）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 54,
+      "color": "#CEF1BD",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星移动（地对空）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 55,
+      "color": "#F4EDCF",
+      "language": [
+        {
+          "code": 2052,
+          "name": "水上移动（遇险和呼叫）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 56,
+      "color": "#D2C3B5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星水上移动（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 57,
+      "color": "#FFE3E7",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星水上移动（地对空）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 58,
+      "color": "#D8C6D0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间操作（空对地）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 59,
+      "color": "#E1E0F9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星移动"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 60,
+      "color": "#C1DDDA",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星标准频率和时间信号（400.1MHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 61,
+      "color": "#E7F5B5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星地球探测（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 62,
+      "color": "#F5D6FC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星气象（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 63,
+      "color": "#FCCDD2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 64,
+      "color": "#E2B0FC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[航空移动（R）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 65,
+      "color": "#B6D4E9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星无线电导航（空对地）（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 66,
+      "color": "#B6B6C9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星地球探测（有源）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 67,
+      "color": "#E8FDBD",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（有源）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 68,
+      "color": "#E8EAF1",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星无线电导航（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 69,
+      "color": "#B4DBBB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星地球探测（无源）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 70,
+      "color": "#FDEBCB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（无源）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 71,
+      "color": "#C1DDC3",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间操作（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 72,
+      "color": "#D0D8CE",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星广播"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 73,
+      "color": "#CFF6E5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[广播]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 74,
+      "color": "#CAEDE4",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星地球探测]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 75,
+      "color": "#E2E7EB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星无线电测定（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 76,
+      "color": "#E4C3C5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间操作（地对空）（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 77,
+      "color": "#E5ECDC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星地球探测（地对空）（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 78,
+      "color": "#B9B9BD",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（地对空）（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 79,
+      "color": "#C2D7F8",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（深空）（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 80,
+      "color": "#D4BFFB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间操作（空对地）（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 81,
+      "color": "#B8DDE4",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星地球探测（空对地）（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 82,
+      "color": "#FAEAB0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（空对地）（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 83,
+      "color": "#B9C2B6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（深空）（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 84,
+      "color": "#FBDFBC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星无线电测定（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 85,
+      "color": "#B0B0C9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星固定（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 86,
+      "color": "#C3F3D8",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星固定（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 87,
+      "color": "#C5E4C2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星地球探测（无源）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 88,
+      "color": "#C5CCF0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间研究（无源）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 89,
+      "color": "#F5F5D4",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星地球探测（有源）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 90,
+      "color": "#B0CCC3",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间研究（有源）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 91,
+      "color": "#FAB7B0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星航空移动（R）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 92,
+      "color": "#DBB3F7",
+      "language": [
+        {
+          "code": 2052,
+          "name": "航空移动(R)"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 93,
+      "color": "#B6BADF",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星固定（地对空）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 94,
+      "color": "#DBF4FE",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间研究（深空）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 95,
+      "color": "#E3FDEB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星业余（空对地）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 96,
+      "color": "#B3FEB6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星固定（地对空）（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 97,
+      "color": "#CFC4D2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 98,
+      "color": "#CAB9D3",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星水上移动（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 99,
+      "color": "#C6D1EE",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星地球探测（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 100,
+      "color": "#EDB4B2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星业余]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 101,
+      "color": "#F0ECFC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间研究（深空）（空对地）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 102,
+      "color": "#C6DED2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星标准频率和时间信号（地对空）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 103,
+      "color": "#B8E8D4",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星移动（地对空）（卫星航空移动除外）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 104,
+      "color": "#E8CAC1",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星无线电导航]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 105,
+      "color": "#BFB9F0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间研究（深空）（地对空）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 106,
+      "color": "#D1B4ED",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星固定（空对地）（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 107,
+      "color": "#D7DBD4",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星标准频率和时间信号（空对地）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 108,
+      "color": "#DDC4EA",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星间"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 109,
+      "color": "#B5D9C6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星地球探测（地对空）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 110,
+      "color": "#F9D6BE",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星地球探测（空对地）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 111,
+      "color": "#FAB1F9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星无线电导航"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 112,
+      "color": "#B3FEF2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星地球探测"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 113,
+      "color": "#B6D8F2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "未划分"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    }
+  ],
+  "band_list": [
+    {
+      "start_freq": 0,
+      "end_freq": 8300,
+      "business": [
+        {
+          "business_id": 1
+        },
+        {
+          "business_id": 2
+        }
+      ],
+      "foot_notes": [
+        "5.53",
+        "5.54"
+      ]
+    },
+    {
+      "start_freq": 8300,
+      "end_freq": 9000,
+      "business": [
+        {
+          "business_id": 3,
+          "foot_note": [
+            "5.54A"
+          ]
+        },
+        {
+          "business_id": 1
+        },
+        {
+          "business_id": 4
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 9000,
+      "end_freq": 11300,
+      "business": [
+        {
+          "business_id": 1
+        },
+        {
+          "business_id": 3,
+          "foot_note": [
+            "5.54A"
+          ]
+        },
+        {
+          "business_id": 5
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 11300,
+      "end_freq": 14000,
+      "business": [
+        {
+          "business_id": 1
+        },
+        {
+          "business_id": 5
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 14000,
+      "end_freq": 19950,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 1,
+          "foot_note": [
+            "5.57"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.56"
+      ]
+    },
+    {
+      "start_freq": 19950,
+      "end_freq": 20050,
+      "business": [
+        {
+          "business_id": 7
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 20050,
+      "end_freq": 70000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 1,
+          "foot_note": [
+            "5.57"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.56",
+        "CHN2"
+      ]
+    },
+    {
+      "start_freq": 70000,
+      "end_freq": 72000,
+      "business": [
+        {
+          "business_id": 5,
+          "foot_note": [
+            "5.60"
+          ]
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 9,
+          "foot_note": [
+            "5.57"
+          ]
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 72000,
+      "end_freq": 84000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 1,
+          "foot_note": [
+            "5.57"
+          ]
+        },
+        {
+          "business_id": 5,
+          "foot_note": [
+            "5.60"
+          ]
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 84000,
+      "end_freq": 86000,
+      "business": [
+        {
+          "business_id": 5,
+          "foot_note": [
+            "5.60"
+          ]
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 9,
+          "foot_note": [
+            "5.57"
+          ]
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 86000,
+      "end_freq": 90000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 1,
+          "foot_note": [
+            "5.57"
+          ]
+        },
+        {
+          "business_id": 5,
+          "foot_note": [
+            "5.60"
+          ]
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 90000,
+      "end_freq": 95000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 1,
+          "foot_note": [
+            "CHN1"
+          ]
+        },
+        {
+          "business_id": 5,
+          "foot_note": [
+            "5.62"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.64",
+        "CHN2"
+      ]
+    },
+    {
+      "start_freq": 95000,
+      "end_freq": 110000,
+      "business": [
+        {
+          "business_id": 5,
+          "foot_note": [
+            "5.62"
+          ]
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "5.64",
+        "CHN2"
+      ]
+    },
+    {
+      "start_freq": 110000,
+      "end_freq": 112000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 1
+        },
+        {
+          "business_id": 5,
+          "foot_note": [
+            "5.60"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.64"
+      ]
+    },
+    {
+      "start_freq": 112000,
+      "end_freq": 117600,
+      "business": [
+        {
+          "business_id": 5,
+          "foot_note": [
+            "5.60"
+          ]
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 9
+        }
+      ],
+      "foot_notes": [
+        "5.64"
+      ]
+    },
+    {
+      "start_freq": 117600,
+      "end_freq": 126000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 1
+        },
+        {
+          "business_id": 5,
+          "foot_note": [
+            "5.60"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.64"
+      ]
+    },
+    {
+      "start_freq": 126000,
+      "end_freq": 129000,
+      "business": [
+        {
+          "business_id": 5,
+          "foot_note": [
+            "5.60"
+          ]
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 9
+        }
+      ],
+      "foot_notes": [
+        "5.64"
+      ]
+    },
+    {
+      "start_freq": 129000,
+      "end_freq": 130000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 1
+        },
+        {
+          "business_id": 5,
+          "foot_note": [
+            "5.60"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.64"
+      ]
+    },
+    {
+      "start_freq": 130000,
+      "end_freq": 135700,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 1
+        },
+        {
+          "business_id": 5
+        }
+      ],
+      "foot_notes": [
+        "5.64"
+      ]
+    },
+    {
+      "start_freq": 135700,
+      "end_freq": 137800,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 1
+        },
+        {
+          "business_id": 5
+        },
+        {
+          "business_id": 10,
+          "foot_note": [
+            "5.67A"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.64",
+        "5.67B"
+      ]
+    },
+    {
+      "start_freq": 137800,
+      "end_freq": 160000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 1
+        },
+        {
+          "business_id": 5
+        }
+      ],
+      "foot_notes": [
+        "5.64"
+      ]
+    },
+    {
+      "start_freq": 160000,
+      "end_freq": 190000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 11
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 190000,
+      "end_freq": 200000,
+      "business": [
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 200000,
+      "end_freq": 285000,
+      "business": [
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 12
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 285000,
+      "end_freq": 325000,
+      "business": [
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 13
+        }
+      ],
+      "foot_notes": [
+        "5.73"
+      ]
+    },
+    {
+      "start_freq": 325000,
+      "end_freq": 405000,
+      "business": [
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 12
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 405000,
+      "end_freq": 415000,
+      "business": [
+        {
+          "business_id": 5,
+          "foot_note": [
+            "5.76"
+          ]
+        },
+        {
+          "business_id": 12
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 415000,
+      "end_freq": 472000,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "5.79"
+          ]
+        },
+        {
+          "business_id": 11,
+          "foot_note": [
+            "5.77"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.82"
+      ]
+    },
+    {
+      "start_freq": 472000,
+      "end_freq": 479000,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "5.79"
+          ]
+        },
+        {
+          "business_id": 11,
+          "foot_note": [
+            "5.77"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.80B",
+        "5.82"
+      ]
+    },
+    {
+      "start_freq": 479000,
+      "end_freq": 495000,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "5.79",
+            "5.79A"
+          ]
+        },
+        {
+          "business_id": 11,
+          "foot_note": [
+            "5.77"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.82"
+      ]
+    },
+    {
+      "start_freq": 495000,
+      "end_freq": 505000,
+      "business": [
+        {
+          "business_id": 1
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 505000,
+      "end_freq": 526500,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "5.79",
+            "5.79A",
+            "5.84"
+          ]
+        },
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 12
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 526500,
+      "end_freq": 535000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 16
+        }
+      ],
+      "foot_notes": [
+        "5.88"
+      ]
+    },
+    {
+      "start_freq": 535000,
+      "end_freq": 1606500,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 17
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 1606500,
+      "end_freq": 1800000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 5,
+          "foot_note": [
+            "CHN3"
+          ]
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 1800000,
+      "end_freq": 2000000,
+      "business": [
+        {
+          "business_id": 20
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21
+        },
+        {
+          "business_id": 5
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.97"
+      ]
+    },
+    {
+      "start_freq": 2000000,
+      "end_freq": 2065000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 5
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 2065000,
+      "end_freq": 2107000,
+      "business": [
+        {
+          "business_id": 1
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": [
+        "5.106",
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 2107000,
+      "end_freq": 2170000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 5
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 2170000,
+      "end_freq": 2173500,
+      "business": [
+        {
+          "business_id": 1
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 2173500,
+      "end_freq": 2190500,
+      "business": [
+        {
+          "business_id": 23
+        }
+      ],
+      "foot_notes": [
+        "5.108",
+        "5.109",
+        "5.110",
+        "5.111"
+      ]
+    },
+    {
+      "start_freq": 2190500,
+      "end_freq": 2194000,
+      "business": [
+        {
+          "business_id": 1
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 2194000,
+      "end_freq": 2300000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 2300000,
+      "end_freq": 2495000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.113"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 2495000,
+      "end_freq": 2501000,
+      "business": [
+        {
+          "business_id": 24
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 2501000,
+      "end_freq": 2502000,
+      "business": [
+        {
+          "business_id": 25
+        },
+        {
+          "business_id": 26
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 2502000,
+      "end_freq": 2505000,
+      "business": [
+        {
+          "business_id": 25
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 2505000,
+      "end_freq": 2850000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 2850000,
+      "end_freq": 3025000,
+      "business": [
+        {
+          "business_id": 27
+        }
+      ],
+      "foot_notes": [
+        "5.111",
+        "5.115"
+      ]
+    },
+    {
+      "start_freq": 3025000,
+      "end_freq": 3155000,
+      "business": [
+        {
+          "business_id": 28
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 3155000,
+      "end_freq": 3200000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 29
+        }
+      ],
+      "foot_notes": [
+        "5.116",
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 3200000,
+      "end_freq": 3230000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 29
+        },
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.113"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.116",
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 3230000,
+      "end_freq": 3400000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21
+        },
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.113"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.116",
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 3400000,
+      "end_freq": 3500000,
+      "business": [
+        {
+          "business_id": 30
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 3500000,
+      "end_freq": 3900000,
+      "business": [
+        {
+          "business_id": 20
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 3900000,
+      "end_freq": 3950000,
+      "business": [
+        {
+          "business_id": 30
+        },
+        {
+          "business_id": 15
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 3950000,
+      "end_freq": 4000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 15
+        }
+      ],
+      "foot_notes": [
+        "5.126",
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 4000000,
+      "end_freq": 4063000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 1,
+          "foot_note": [
+            "5.127"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.126"
+      ]
+    },
+    {
+      "start_freq": 4063000,
+      "end_freq": 4438000,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "5.79A",
+            "5.109",
+            "5.110",
+            "5.130",
+            "5.132"
+          ]
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 14
+        },
+        {
+          "business_id": 12
+        }
+      ],
+      "foot_notes": [
+        "5.128",
+        "CHN5"
+      ]
+    },
+    {
+      "start_freq": 4438000,
+      "end_freq": 4488000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN30"
+      ]
+    },
+    {
+      "start_freq": 4488000,
+      "end_freq": 4650000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 4650000,
+      "end_freq": 4700000,
+      "business": [
+        {
+          "business_id": 27
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 4700000,
+      "end_freq": 4750000,
+      "business": [
+        {
+          "business_id": 28
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 4750000,
+      "end_freq": 4850000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.113"
+          ]
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 4850000,
+      "end_freq": 4995000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 31
+        },
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.113"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 4995000,
+      "end_freq": 5003000,
+      "business": [
+        {
+          "business_id": 32
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 5003000,
+      "end_freq": 5005000,
+      "business": [
+        {
+          "business_id": 25
+        },
+        {
+          "business_id": 26
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 5005000,
+      "end_freq": 5060000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.113"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 5060000,
+      "end_freq": 5250000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 33
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 5250000,
+      "end_freq": 5275000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 33
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN30"
+      ]
+    },
+    {
+      "start_freq": 5275000,
+      "end_freq": 5351500,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 33
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 5351500,
+      "end_freq": 5366500,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 33
+        },
+        {
+          "business_id": 10,
+          "foot_note": [
+            "5.133B"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 5366500,
+      "end_freq": 5450000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 33
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 5450000,
+      "end_freq": 5480000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 28
+        },
+        {
+          "business_id": 31
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 5480000,
+      "end_freq": 5680000,
+      "business": [
+        {
+          "business_id": 27
+        }
+      ],
+      "foot_notes": [
+        "5.111",
+        "5.115"
+      ]
+    },
+    {
+      "start_freq": 5680000,
+      "end_freq": 5730000,
+      "business": [
+        {
+          "business_id": 28
+        }
+      ],
+      "foot_notes": [
+        "5.111",
+        "5.115"
+      ]
+    },
+    {
+      "start_freq": 5730000,
+      "end_freq": 5900000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 29
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 5900000,
+      "end_freq": 5950000,
+      "business": [
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.134",
+            "CHN6"
+          ]
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 31
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 5950000,
+      "end_freq": 6200000,
+      "business": [
+        {
+          "business_id": 15
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 6200000,
+      "end_freq": 6525000,
+      "business": [
+        {
+          "business_id": 1
+        }
+      ],
+      "foot_notes": [
+        "5.109",
+        "5.110",
+        "5.130",
+        "5.132",
+        "5.137",
+        "CHN5"
+      ]
+    },
+    {
+      "start_freq": 6525000,
+      "end_freq": 6685000,
+      "business": [
+        {
+          "business_id": 27
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 6685000,
+      "end_freq": 6765000,
+      "business": [
+        {
+          "business_id": 28
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 6765000,
+      "end_freq": 7000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": [
+        "5.138",
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 7000000,
+      "end_freq": 7100000,
+      "business": [
+        {
+          "business_id": 20
+        },
+        {
+          "business_id": 34
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 7100000,
+      "end_freq": 7200000,
+      "business": [
+        {
+          "business_id": 20
+        }
+      ],
+      "foot_notes": [
+        "5.141B"
+      ]
+    },
+    {
+      "start_freq": 7200000,
+      "end_freq": 7300000,
+      "business": [
+        {
+          "business_id": 15
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 7300000,
+      "end_freq": 7350000,
+      "business": [
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.134",
+            "CHN6"
+          ]
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 7350000,
+      "end_freq": 7450000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": [
+        "5.143A",
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 7450000,
+      "end_freq": 8100000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 29
+        }
+      ],
+      "foot_notes": [
+        "5.144",
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 8100000,
+      "end_freq": 8195000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 1
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 8195000,
+      "end_freq": 8815000,
+      "business": [
+        {
+          "business_id": 1
+        }
+      ],
+      "foot_notes": [
+        "5.109",
+        "5.110",
+        "5.111",
+        "5.132",
+        "5.145",
+        "CHN5"
+      ]
+    },
+    {
+      "start_freq": 8815000,
+      "end_freq": 8965000,
+      "business": [
+        {
+          "business_id": 27
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 8965000,
+      "end_freq": 9040000,
+      "business": [
+        {
+          "business_id": 28
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 9040000,
+      "end_freq": 9305000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 9305000,
+      "end_freq": 9355000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN30"
+      ]
+    },
+    {
+      "start_freq": 9355000,
+      "end_freq": 9400000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 9400000,
+      "end_freq": 9500000,
+      "business": [
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.134",
+            "CHN6"
+          ]
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 9500000,
+      "end_freq": 9900000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "5.147"
+      ]
+    },
+    {
+      "start_freq": 9900000,
+      "end_freq": 9995000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 9995000,
+      "end_freq": 10003000,
+      "business": [
+        {
+          "business_id": 35
+        }
+      ],
+      "foot_notes": [
+        "5.111"
+      ]
+    },
+    {
+      "start_freq": 10003000,
+      "end_freq": 10005000,
+      "business": [
+        {
+          "business_id": 25
+        },
+        {
+          "business_id": 26
+        }
+      ],
+      "foot_notes": [
+        "5.111"
+      ]
+    },
+    {
+      "start_freq": 10005000,
+      "end_freq": 10100000,
+      "business": [
+        {
+          "business_id": 27
+        }
+      ],
+      "foot_notes": [
+        "5.111"
+      ]
+    },
+    {
+      "start_freq": 10100000,
+      "end_freq": 10150000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 10
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 10150000,
+      "end_freq": 11175000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 36
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN5"
+      ]
+    },
+    {
+      "start_freq": 11175000,
+      "end_freq": 11275000,
+      "business": [
+        {
+          "business_id": 28
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 11275000,
+      "end_freq": 11400000,
+      "business": [
+        {
+          "business_id": 27
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 11400000,
+      "end_freq": 11600000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 31
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 11600000,
+      "end_freq": 11650000,
+      "business": [
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.134",
+            "CHN6"
+          ]
+        },
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 11650000,
+      "end_freq": 12050000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "5.147"
+      ]
+    },
+    {
+      "start_freq": 12050000,
+      "end_freq": 12100000,
+      "business": [
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.134",
+            "CHN6"
+          ]
+        },
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 12100000,
+      "end_freq": 12230000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 12230000,
+      "end_freq": 13200000,
+      "business": [
+        {
+          "business_id": 1
+        }
+      ],
+      "foot_notes": [
+        "5.109",
+        "5.110",
+        "5.132",
+        "5.145",
+        "CHN5"
+      ]
+    },
+    {
+      "start_freq": 13200000,
+      "end_freq": 13260000,
+      "business": [
+        {
+          "business_id": 28
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 13260000,
+      "end_freq": 13360000,
+      "business": [
+        {
+          "business_id": 27
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 13360000,
+      "end_freq": 13410000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 37
+        }
+      ],
+      "foot_notes": [
+        "5.149"
+      ]
+    },
+    {
+      "start_freq": 13410000,
+      "end_freq": 13450000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 38
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 13450000,
+      "end_freq": 13550000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 38
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN30"
+      ]
+    },
+    {
+      "start_freq": 13550000,
+      "end_freq": 13570000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 38
+        }
+      ],
+      "foot_notes": [
+        "5.150",
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 13570000,
+      "end_freq": 13600000,
+      "business": [
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.134",
+            "CHN6"
+          ]
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 13600000,
+      "end_freq": 13800000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 13800000,
+      "end_freq": 13870000,
+      "business": [
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.134",
+            "CHN6"
+          ]
+        },
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 13870000,
+      "end_freq": 14000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 38
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 14000000,
+      "end_freq": 14250000,
+      "business": [
+        {
+          "business_id": 20
+        },
+        {
+          "business_id": 34
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 14250000,
+      "end_freq": 14350000,
+      "business": [
+        {
+          "business_id": 20
+        },
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "5.152",
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 14350000,
+      "end_freq": 14990000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 38
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN5"
+      ]
+    },
+    {
+      "start_freq": 14990000,
+      "end_freq": 15005000,
+      "business": [
+        {
+          "business_id": 39
+        }
+      ],
+      "foot_notes": [
+        "5.111"
+      ]
+    },
+    {
+      "start_freq": 15005000,
+      "end_freq": 15010000,
+      "business": [
+        {
+          "business_id": 25
+        },
+        {
+          "business_id": 26
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 15010000,
+      "end_freq": 15100000,
+      "business": [
+        {
+          "business_id": 28
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 15100000,
+      "end_freq": 15600000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 15600000,
+      "end_freq": 15800000,
+      "business": [
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.134",
+            "CHN6"
+          ]
+        },
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 15800000,
+      "end_freq": 16100000,
+      "business": [
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "5.153",
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 16100000,
+      "end_freq": 16200000,
+      "business": [
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN30"
+      ]
+    },
+    {
+      "start_freq": 16200000,
+      "end_freq": 16360000,
+      "business": [
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 16360000,
+      "end_freq": 17410000,
+      "business": [
+        {
+          "business_id": 1
+        }
+      ],
+      "foot_notes": [
+        "5.109",
+        "5.110",
+        "5.132",
+        "5.145",
+        "CHN5"
+      ]
+    },
+    {
+      "start_freq": 17410000,
+      "end_freq": 17480000,
+      "business": [
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 17480000,
+      "end_freq": 17550000,
+      "business": [
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.134",
+            "CHN6"
+          ]
+        },
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 17550000,
+      "end_freq": 17900000,
+      "business": [
+        {
+          "business_id": 15
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 17900000,
+      "end_freq": 17970000,
+      "business": [
+        {
+          "business_id": 27
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 17970000,
+      "end_freq": 18030000,
+      "business": [
+        {
+          "business_id": 28
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 18030000,
+      "end_freq": 18052000,
+      "business": [
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 18052000,
+      "end_freq": 18068000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 26
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 18068000,
+      "end_freq": 18168000,
+      "business": [
+        {
+          "business_id": 20
+        },
+        {
+          "business_id": 34
+        },
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 18168000,
+      "end_freq": 18780000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 33
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 18780000,
+      "end_freq": 18900000,
+      "business": [
+        {
+          "business_id": 1
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 18900000,
+      "end_freq": 19020000,
+      "business": [
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.134",
+            "CHN6"
+          ]
+        },
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 19020000,
+      "end_freq": 19680000,
+      "business": [
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 19680000,
+      "end_freq": 19800000,
+      "business": [
+        {
+          "business_id": 1
+        }
+      ],
+      "foot_notes": [
+        "5.132",
+        "CHN5"
+      ]
+    },
+    {
+      "start_freq": 19800000,
+      "end_freq": 19990000,
+      "business": [
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 19990000,
+      "end_freq": 19995000,
+      "business": [
+        {
+          "business_id": 25
+        },
+        {
+          "business_id": 26
+        }
+      ],
+      "foot_notes": [
+        "5.111"
+      ]
+    },
+    {
+      "start_freq": 19995000,
+      "end_freq": 20010000,
+      "business": [
+        {
+          "business_id": 40
+        }
+      ],
+      "foot_notes": [
+        "5.111"
+      ]
+    },
+    {
+      "start_freq": 20010000,
+      "end_freq": 21000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 16
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN5"
+      ]
+    },
+    {
+      "start_freq": 21000000,
+      "end_freq": 21450000,
+      "business": [
+        {
+          "business_id": 20
+        },
+        {
+          "business_id": 34
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 21450000,
+      "end_freq": 21850000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 21850000,
+      "end_freq": 21870000,
+      "business": [
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 21870000,
+      "end_freq": 21924000,
+      "business": [
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "5.155B",
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 21924000,
+      "end_freq": 22000000,
+      "business": [
+        {
+          "business_id": 30
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 22000000,
+      "end_freq": 22855000,
+      "business": [
+        {
+          "business_id": 1
+        }
+      ],
+      "foot_notes": [
+        "5.132",
+        "CHN5"
+      ]
+    },
+    {
+      "start_freq": 22855000,
+      "end_freq": 23000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 23000000,
+      "end_freq": 23200000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 36
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 23200000,
+      "end_freq": 23350000,
+      "business": [
+        {
+          "business_id": 6,
+          "foot_note": [
+            "5.156A"
+          ]
+        },
+        {
+          "business_id": 28
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 23350000,
+      "end_freq": 24000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21,
+          "foot_note": [
+            "5.157"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 24000000,
+      "end_freq": 24450000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 31
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 24450000,
+      "end_freq": 24600000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 31
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN30"
+      ]
+    },
+    {
+      "start_freq": 24600000,
+      "end_freq": 24890000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 31
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 24890000,
+      "end_freq": 24990000,
+      "business": [
+        {
+          "business_id": 20
+        },
+        {
+          "business_id": 34
+        },
+        {
+          "business_id": 6
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 24990000,
+      "end_freq": 25005000,
+      "business": [
+        {
+          "business_id": 41
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 25005000,
+      "end_freq": 25010000,
+      "business": [
+        {
+          "business_id": 25
+        },
+        {
+          "business_id": 26
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 25010000,
+      "end_freq": 25070000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 25070000,
+      "end_freq": 25210000,
+      "business": [
+        {
+          "business_id": 1
+        }
+      ],
+      "foot_notes": [
+        "CHN5"
+      ]
+    },
+    {
+      "start_freq": 25210000,
+      "end_freq": 25550000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 25550000,
+      "end_freq": 25600000,
+      "business": [
+        {
+          "business_id": 37
+        },
+        {
+          "business_id": 21
+        }
+      ],
+      "foot_notes": [
+        "5.149"
+      ]
+    },
+    {
+      "start_freq": 25600000,
+      "end_freq": 25670000,
+      "business": [
+        {
+          "business_id": 37
+        },
+        {
+          "business_id": 14
+        },
+        {
+          "business_id": 9
+        }
+      ],
+      "foot_notes": [
+        "5.149"
+      ]
+    },
+    {
+      "start_freq": 25670000,
+      "end_freq": 26100000,
+      "business": [
+        {
+          "business_id": 15
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 26100000,
+      "end_freq": 26175000,
+      "business": [
+        {
+          "business_id": 1
+        }
+      ],
+      "foot_notes": [
+        "5.132"
+      ]
+    },
+    {
+      "start_freq": 26175000,
+      "end_freq": 26200000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 26200000,
+      "end_freq": 26350000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN30"
+      ]
+    },
+    {
+      "start_freq": 26350000,
+      "end_freq": 27500000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21
+        }
+      ],
+      "foot_notes": [
+        "5.150",
+        "CHN4"
+      ]
+    }
+  ],
+  "notes_list": [
+    {
+      "note_id": "CHN18",
+      "language": [
+        {
+          "code": 2052,
+          "content": "现有无线电定位业务应尽早移出1 535-1 544 MHz、1 545-1 645.5 MHz、1 645.5-1 660 MHz、1 850-1 880 MHz、2 085-2 120 MHz、3 400-3 800 MHz、5 925-6 425 MHz、7 500-8 185 MHz、14-15.35 GHz 频段，从2005 年底起不能启用新设备，但现有设备可用至设备报废为止。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.149",
+      "language": [
+        {
+          "code": 2052,
+          "content": "敦促主管部门采用一切实际可行的措施保护射电天文业务免受有害干扰。星载电台或机载电台的发射对射电天文业务可能是特别严重的干扰源（见4.5 和4.6 款以及第29 条）。（WRC-07）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.479",
+      "language": [
+        {
+          "code": 2052,
+          "content": "9 975-10 025 MHz 频段以次要使用条件也划分给卫星气象业务，供气象雷达使用。"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.501B",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在13.4-13.75 GHz 频段中，卫星地球探测（有源）业务和空间研究（有源）业务不得对无线电定位业务造成有害干扰，或限制其使用和发展。（WRC-97）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN12",
+      "language": [
+        {
+          "code": 2052,
+          "content": "608-614 MHz 频段射电天文为主要业务，现用于北京密云区不老屯镇、新疆乌鲁木齐南山地区、贵州省黔南州、内蒙古正镶白旗；\n\n1 330-1 400 MHz 频段射电天文为主要业务，现用于北京怀柔区和密云区不老屯镇、上海佘山、云南昆明凤凰山、新疆乌鲁木齐南山地区、贵州省黔南州、内蒙古正镶白旗、新疆奇台县、云南景东县；\n\n1 718.8-1 722.2 MHz 频段射电天文为主要业务，现用于北京怀柔区和密云区不老屯镇，上海佘山、云南昆明凤凰山、新疆乌鲁木齐南山地区、贵州省黔南州、内蒙古正镶白旗、新疆奇台县、云南景东县；\n\n2 655-2 690 MHz 频段射电天文为主要业务，现用于北京怀柔区、江苏淮阴、贵州省黔南州、内蒙古正镶白旗、新疆奇台县、云南景东县；\n\n3 260-3 267 MHz、3 332-3 339 MHz、3 345.8-3 352.5 MHz 频段射电天文为主要业务，现用于贵州省黔南州、内蒙古正镶白旗、新疆奇台县、云南景东县；\n\n4 825-4 835 MHz、4 950-4 990 MHz、4 990-5 000 MHz 频段射电天文为主要业务，现用于新疆乌鲁木齐南山地区、贵州省黔南州、内蒙古正镶白旗、新疆奇台县、云南景东县；\n\n6 650-6 675.2 MHz 频段射电天文为主要业务，现用于北京怀柔区、江苏南京紫金山、新疆乌鲁木齐南山地区、贵州省黔南州、内蒙古正镶白旗、新疆奇台县、云南景东县；\n\n14.47-14.50 GHz 频段射电天文为主要业务，现用于北京密云区不老屯镇、内蒙古正镶白旗、新疆奇台县；\n\n22.01-22.21GHz、22.81-22.86 GHz、23.07-23.12 GHz  频段射电天文为主要业务，现用于青海德令哈市、上海佘山、新疆乌鲁木齐南山地区、北京密云区不老屯镇、新疆奇台县；\n\n248-250 GHz 频段射电天文为主要业务，现用于青海德令哈市、西藏拉萨市当雄市羊八井镇、新疆奇台县。其他业务台站不得对上述射电天文业务台站产生有害干扰。（2018年修订）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.53",
+      "language": [
+        {
+          "code": 2052,
+          "content": "各主管部门批准使用8.3 kHz 以下频率时，须保证不对划分在8.3 kHz 以上各频段的业务产生有害干扰。（WRC-12）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.54",
+      "language": [
+        {
+          "code": 2052,
+          "content": "敦促为从事科学研究而使用8.3 kHz以下频率的主管部门，应将其使用情况告知其他可能相关的主管部门，以便使这种研究工作获得所有实际可行的保护，免受有害干扰（WRC-12）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.54A",
+      "language": [
+        {
+          "code": 2052,
+          "content": "气象辅助业务对8.3-11.3 kHz 频段的使用仅限于无源用途。在9-11.3 kHz 频段，气象辅助业务电台不得要求2013 年1 月1 日前向无线电通信局提交以便通知的无线电导航业务电台提供保护。对于气象辅助业务电台与该日期之后提交以便通知的无线电导航业务电台之间的共用，应适用ITU-R RS.1881 建议书的最新版本。（WRC-12）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.54C",
+      "language": [
+        {
+          "code": 2052,
+          "content": "附加划分：在中国，8.3-9 kHz 频段亦作为主要业务划分给水上无线电导航和水上移动业务。（WRC-12）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.56",
+      "language": [
+        {
+          "code": 2052,
+          "content": "业务划分在14-19.95 kHz 和20.05-70 kHz 频段且在1 区亦划分在72-84 kHz 和86-90 kHz 频段的电台，可以发射标准频率和时间信号。此类电台须得到保护，免受有害干扰。在亚美尼亚、阿塞拜疆、白俄罗斯、俄罗斯联邦、格鲁吉亚、哈萨克斯坦、吉尔吉斯斯坦、塔吉克斯坦和土库曼斯坦，25 kHz 和50 kHz 频率将在同样条件下用于此用途。（WRC-12）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.57",
+      "language": [
+        {
+          "code": 2052,
+          "content": "水上移动业务使用14-19.95kHz、20.05-70kHz 和70-90kHz（1 区为72-84kHz和86-90kHz）各频段，限于海岸无线电报电台（仅限于A1A 和F1B）。如果必要带宽不超过有关频段内A1A 或F1B 类发射的正常使用带宽，例外地可准许使用J2B 或J7B类发射。"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.60",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在70-90 kHz（1 区为70-86kHz）和110-130 kHz（1 区为12-130kHz）频段内，可以使用脉冲无线电导航系统，条件是不对这些频段已划分的其他业务造成有害干扰。"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.62",
+      "language": [
+        {
+          "code": 2052,
+          "content": "促请在90-110 kHz 频段内运用无线电导航业务电台的主管部门协调其技术和操作特性，以防止这些电台提供的业务遭受有害干扰。"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.64",
+      "language": [
+        {
+          "code": 2052,
+          "content": "固定业务电台在划分给该业务的90 kHz 与160 kHz（在1 区为148.5 kHz）之间频段内和水上移动业务电台在划分给该业务的110 kHz 与160 kHz（在1 区为148.5 kHz）之间频段内，只准使用A1A 或F1B、A2C、A3C、F1C 或F3C 类发射。水上移动业务电台在110 kHz 与160 kHz（1 区为148.5 kHz）之间频段内，例外地也可准予使用J2B 或J7B 类发射。"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.67A",
+      "language": [
+        {
+          "code": 2052,
+          "content": "使用135.7-137.8 kHz 频段内频率的业余业务台站，其最大辐射功率不得超过1瓦（e.i.r.p.），且不应对在第5.67 款所列国家内运行的无线电导航业务台站造成有害干扰。（WRC-07）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.67B",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在阿尔及利亚、埃及、伊朗伊斯兰共和国、伊拉克、黎巴嫩、阿拉伯叙利亚共和国、苏丹、南苏丹和突尼斯，135.7-137.8 kHz 频段的使用限于固定和水上移动业务。在上述国家，业余业务不得使用135.7-137.8 kHz 频段，授权此类使用的国家应将此考虑在内。（WRC-12）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.73",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在285-325kHz（1 区为283.5-325kHz）频段，在不对无线电导航业务无线电信标电台造成有害干扰的条件下，水上无线电导航业务可以使用窄带技术发送补充导航信息。（WRC-97）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.74",
+      "language": [
+        {
+          "code": 2052,
+          "content": "附加划分：在1 区，285.3-285.7kHz 频段以主要使用条件也划分给水上无线电导航业务（无线电信标除外）。"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.76",
+      "language": [
+        {
+          "code": 2052,
+          "content": "410kHz 频率在水上无线电导航业务中被指定用于无线电测向。在405-415kHz频段内的其他无线电导航业务对406.5-413.5kHz 频段内的无线电测向不应造成有害干扰。"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.77",
+      "language": [
+        {
+          "code": 2052,
+          "content": "不同业务种类：在澳大利亚、中国、法国在3 区的海外属地、大韩民国、印度、伊朗伊斯兰共和国、日本、巴基斯坦、巴布亚新几内亚和斯里兰卡，415-495 kHz 频段作为主要业务划分给航空无线电导航业务。在亚美尼亚、阿塞拜疆、白俄罗斯、俄罗斯联邦、哈萨克斯坦、拉脱维亚、乌兹别克斯坦和吉尔吉斯斯坦，435-495 kHz 频段划分给作为主要业务的航空无线电导航业务。前述所有国家的主管部门须采取一切必要的切实可行措施，以保证海岸电台对于在世界范围内指定给船舶电台的频率上工作的船舶电台发射的接收，不受435-495 kHz 频段内航空无线电导航电台的干扰。（WRC-12）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.79",
+      "language": [
+        {
+          "code": 2052,
+          "content": "水上移动业务使用415-495kHz 和505-526.5kHz（2 区为505-510kHz）频段限于无线电报。"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.79A",
+      "language": [
+        {
+          "code": 2052,
+          "content": "当建立使用490kHz、518kHz 和4209.5kHz 频率的NAVTEX（警告、气象信息和紧急信息系统）业务海岸电台时，强烈建议各主管部门按照国际海事组织（IMO）的程序协调其操作特性（见第339 号决议（WRC-07，修订版））。（WRC-07）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.80B",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在阿尔及利亚、沙特阿拉伯、阿塞拜疆、巴林、白俄罗斯、中国、科摩罗、吉布提、埃及、阿拉伯联合酋长国、俄罗斯联邦、伊拉克、约旦、哈萨克斯坦、科威特、黎巴嫩、利比亚、毛里塔尼亚、阿曼、乌兹别克斯坦、卡塔尔、阿拉伯叙利亚共和国、吉尔吉斯斯坦、索马里、苏丹、突尼斯和也门，472-479 kHz 频段的使用限于水上移动业务和航空无线电导航业务。在上述国家内，业余业务不得使用此频段，并且授权这一使用的国家应对此予以考虑。（WRC-12）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.82",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在水上移动业务中，490 kHz 频率专门用于海岸电台通过窄带直接印字电报向船舶发送导航和气象告警及紧急信息。第31 和52 条对490 kHz 频率的使用条件做了规定。要求各主管部门在航空无线电导航业务使用415-495 kHz 频段时，保证不对490 kHz 频率产生有害干扰。在业余业务使用472-479 kHz 频段时，各主管部门须保证不对490 kHz 频率产生有害干扰。（WRC-12）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.84",
+      "language": [
+        {
+          "code": 2052,
+          "content": "水上移动业务使用518kHz 频率的条件在第31 和52 条中做了规定。（WRC-07）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.88",
+      "language": [
+        {
+          "code": 2052,
+          "content": "附加划分：在中国，526.5-535kHz 频段以次要使用条件也划分给航空无线电导航业务。（WRC-07）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "5.97",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在3 区，罗兰系统工作在1850kHz 或1950kHz 上，其分别占用1825-1875kHz和1925-1975kHz 频段。划分在1800-2000kHz 频段内的其他业务，在不对工作在1850kHz和1950kHz 的罗兰系统造成有害干扰的条件下，可以使用该频段内的任一频率。"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN2",
+      "language": [
+        {
+          "code": 2052,
+          "content": "68.5±1 kHz、100±10 kHz 可用于标准频率和时间信号业务。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN4",
+      "language": [
+        {
+          "code": 2052,
+          "content": "该频段可有限制地用于无线电定位业务，不得对其他业务产生有害干扰。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN7",
+      "language": [
+        {
+          "code": 2052,
+          "content": "31-35 MHz 频段可用于水上移动业务，为主要业务。其中33.0 MHz 可用于近海安全救助通信，其他业务不得对其产生有害干扰。27.5-29.7 MHz 频段内现有渔业电台可用至报废为止。29.7-39.5 MHz 频段内的其他频率可用于水上移动业务，在沿海各省、直辖市和自治区为主要业务，在其他地区为次要业务。（2010 年修订）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN30",
+      "language": [
+        {
+          "code": 2052,
+          "content": "4438-4488kHz 、5250-5275kHz 、9305-9355kHz 、13450-13550kHz 、16100-16200kHz、24450-24600kHz、26200-26350kHz 频段可以次要使用条件用于海洋雷达，39.5-40MHz 频段可以主要使用条件用于海洋雷达，并遵循《无线电规则》第612 号决议（WRC-12, 修订版）。（2014 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN8",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在不干扰广播业务条件下，48.5-72.5 MHz、76-84 MHz 可用于固定、移动业务。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN10",
+      "language": [
+        {
+          "code": 2052,
+          "content": "76-108 MHz 无线电定位业务限于现有设备，可以继续有控制地使用；100-108 MHz 航空移动业务限于现有设备，可以继续使用。76-84 MHz 和87-108 MHz频段内，遇有固定、移动、航空移动、无线电定位业务干扰广播业务时，应采取措施消除干扰。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN11",
+      "language": [
+        {
+          "code": 2052,
+          "content": "229-235MHz 在北京密云区不老屯镇、贵州省黔南州可用于射电天文业务，其他业务不得对其产生有害干扰。（2018 年修订）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN13",
+      "language": [
+        {
+          "code": 2052,
+          "content": "其他业务不得对344-351 MHz 频段内的卫星移动（空对地）业务和389-396 MHz 频段内的卫星移动（地对空）业务产生有害干扰。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN14",
+      "language": [
+        {
+          "code": 2052,
+          "content": "广播业务限用于珠海船底山电视发射台使用582-590 MHz，中山五桂山电视发射台使用590-598 MHz。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN15",
+      "language": [
+        {
+          "code": 2052,
+          "content": "无线电导航业务需与广播业务协调后方可使用606-610 MHz 频段。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN16",
+      "language": [
+        {
+          "code": 2052,
+          "content": "905-925 MHz 可用于航空无线电导航业务，为次要业务；925-930 MHz 可用于航空无线电导航业务，为主要业务，其他业务不得对其产生有害干扰。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN17",
+      "language": [
+        {
+          "code": 2052,
+          "content": "1270-1375 MHz 频段使用的无线电定位业务可用于风廓线雷达，并遵守《无线电规则》第217 号决议，优先考虑使用1295-1375MHz。（2014 年修订）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN17-1",
+      "language": [
+        {
+          "code": 2052,
+          "content": "470-494 MHz 频段以次要使用条件可用于风廓线雷达，并遵守《无线电规则》第217 号决议。（2014 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN19",
+      "language": [
+        {
+          "code": 2052,
+          "content": "1 545-1 559 MHz 频段的现有无线电导航设备可用至报废为止，从2005 年底起不能启用新设备。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN20",
+      "language": [
+        {
+          "code": 2052,
+          "content": "自本规定颁布之日起，在该频段不得研制、生产、和启用新的无线电定位业务的无线电台，现有无线电定位业务电台设备用到报废为止。在此期间，该类电台按主要业务进行干扰协调。（2010 年修订）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN21",
+      "language": [
+        {
+          "code": 2052,
+          "content": "3 600-4 200 MHz、4 500-4 800 MHz、5 925-6 425 MHz、6 425-7 110 MHz 固定业务主要用于大容量微波接力干线网路，其他微波线路建设时，对已建或已规划建设的大容量微波接力干线网路不得产生有害干扰。（2018 年修订）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN22",
+      "language": [
+        {
+          "code": 2052,
+          "content": "无线电定位业务需与水上无线电导航业务协调后方可使用5 470-5 650 MHz频段。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN23",
+      "language": [
+        {
+          "code": 2052,
+          "content": "6 425-7 250 MHz 频段在个别地区经协调后方可使用部分频段用于无线电定位业务。（2001 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN25",
+      "language": [
+        {
+          "code": 2052,
+          "content": "卫星移动（空对地）业务使用1 544-1 545 MHz 频段，限于遇险和安全通信，其他业务不得对其产生有害干扰。（2006 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN26",
+      "language": [
+        {
+          "code": 2052,
+          "content": "自本规定颁布之日起，在该频段不得研制、生产、和启用新的移动业务（航空移动除外）的无线电台，现有移动业务电台设备用到报废为止。在此期间，该类电台按主要业务进行干扰协调。（2010 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN27",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在5 091-5 150MHz 频段内的航空移动（R）业务不应对该频段的航空无线电导航业务产生有害干扰。（2010 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN28",
+      "language": [
+        {
+          "code": 2052,
+          "content": "该频段引入的有关IMT 应用的国际注脚，不改变移动业务在划分表中现有业务主次地位。同时，应尽快研究该频段已划分业务的应用模式、频率使用规划、业务间的兼容共存条件及协调程序。在此之前，IMT 应用不投入实际部署使用，但在2300-2400MHz频段，IMT 可在室内使用。（2010 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN29",
+      "language": [
+        {
+          "code": 2052,
+          "content": "水上移动业务VHF频段的使用，应符合国际电联《无线电规则》第31条、第52条和附录18中的规定。（2014年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN31",
+      "language": [
+        {
+          "code": 2052,
+          "content": "798-806MHz 频段现指配的地面电视台站设备用到报废为止。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN32",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在1668.4-1675MHz 频段，卫星移动业务在与气象辅助业务和卫星气象业务完成协调后方可投入使用。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN33",
+      "language": [
+        {
+          "code": 2052,
+          "content": "2200-2300MHz、8400-8500MHz、31.8-32.3GHz 和37-38GHz 频段的空间研究业务电台（月球与深空），现用于佳木斯地区和喀什地区，其他地面业务电台不得对上述电台产生有害干扰。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN34",
+      "language": [
+        {
+          "code": 2052,
+          "content": "3300-3400MHz 频段的移动业务确定用于国际移动通信（IMT）系统，原则上限于室内使用。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN35",
+      "language": [
+        {
+          "code": 2052,
+          "content": "4400-4500MHz 频段的移动业务可用于国际移动通信（IMT）系统。IMT 系统不得对4200-4400MHz 频段的航空无线电导航业务造成有害干扰，相关兼容共存条件确定前IMT 系统不能投入使用。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN36",
+      "language": [
+        {
+          "code": 2052,
+          "content": "4400-4500MHz 频段的移动业务在2020 年12 月底前可用于飞行试验的航空移动遥测，该应用限于西安市阎良地区为中心的300 公里区域内机载电台传输发射。该应用不被视为一种安全业务应用，其遥测台站发射的等效全向辐射功率峰值密度不得超过-2.2dB(W/MHz)，且不得对4200-4400MHz 频段航空无线电导航业务台站造成有害干扰，相关兼容共存条件确定前不能投入使用。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN37",
+      "language": [
+        {
+          "code": 2052,
+          "content": "4800-5000MHz 频段的移动业务确定用于国际移动通信（IMT）系统，具体频率分配使用应统筹考虑有关部门的使用需求。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN38",
+      "language": [
+        {
+          "code": 2052,
+          "content": "5925-6700MHz 频段的移动业务可用于飞行试验的航空移动遥测，该应用限于西安市阎良地区为中心的300km 区域内机载电台传输发射。该应用不被视为一种安全业务应用，其遥测台站发射的等效全向辐射功率峰值密度不得超过-2.2dB(W/MHz),不得对同频段的卫星固定和固定业务台站造成有害干扰。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN39",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在14.5-14.8 GHz 频段，卫星广播业务馈线链路卫星网络的申报和使用优先于轨位间隔在其正负2.5 度范围内依据国际电信联盟第164 号决议（WRC-15）卫星固定业务卫星网络的申报和使用。对于已向国际电联报送通知资料的卫星固定业务卫星网络，该脚注不适用。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN40",
+      "language": [
+        {
+          "code": 2052,
+          "content": "22-22.21GHz 频段可用于航空移动业务，应避免对CHN12 涉及的同频段射电天文台站造成有害干扰。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    },
+    {
+      "note_id": "CHN41",
+      "language": [
+        {
+          "code": 2052,
+          "content": "在25.5-27GHz 频段，设置使用卫星地球探测（空对地）业务接收地球站，需电磁环境保护以免受固定和移动业务有害干扰的，需征得国家无线电管理机构同意。（2018 年）"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenLayers 绘制扇形</title>
+  <!-- 引入 OpenLayers 的 CSS 文件 -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.css" type="text/css">
+  <style>
+    #map {
+      width: 100%;
+      height: 80vh;
+    }
+    #controls {
+      padding: 20px;
+    }
+    .tooltip {
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 5px;
+      position: absolute;
+      pointer-events: none;
+      z-index: 999;
+    }
+    .tooltip-measure {
+      background-color: rgba(255, 255, 255, 0.7);
+      border: 1px solid #ccc;
+      padding: 4px;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+  <div id="controls">
+    <label for="startAngle">开始角度（度）：</label>
+    <input type="number" id="startAngle" value="-45" step="1">
+    <br>
+    <label for="endAngle">结束角度（度）：</label>
+    <input type="number" id="endAngle" value="45" step="1">
+    <br>
+    <label for="lengthNum">扇形长度：</label>
+    <input type="number" id="lengthNum" value="20" step="1">
+    <br>
+    <button onclick="drawSector()">绘制扇形</button>
+    <button onclick="randomLine()">随机绘制扇形</button>
+    <button onclick="twoLine()">维度生成扇形</button>
+    <br>
+    <button onclick="clearSectors()">清除所有扇形</button>
+    <br>
+    <button onclick="drawLineAtAngle()">绘制30度的线段</button>
+  </div>
+  <div id="map"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/ol@latest/dist/ol.js"></script>
+  <script>
+    // 创建地图对象，设置地图目标容器、图层和视图
+    let map=""
+ 
+    map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.XYZ({
+            url: 'http://wprd0{1-4}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x={x}&y={y}&z={z}'
+          }),
+        }),
+      ],
+      view: new ol.View({
+        center: ol.proj.fromLonLat([103, 30]),  // 设置地图中心为 (103, 30)
+        zoom: 6,  // 设置地图缩放级别
+        //rotation: Math.PI / 6  // 设置旋转角度，例如45度
+      }),
+    });
+// 定义测量工具
+const source = new ol.source.Vector();
+    const vectorLayer = new ol.layer.Vector({
+      source: source,
+    });
+
+    map.addLayer(vectorLayer);
+
+    const style = new ol.style.Style({
+      stroke: new ol.style.Stroke({
+        color: 'blue',
+        width: 2,
+      }),
+      fill: new ol.style.Fill({
+        color: 'rgba(0, 0, 255, 0.1)',
+      }),
+    });
+
+    const draw = new ol.interaction.Draw({
+      source: source,
+      type: 'LineString',
+      style: style,
+    });
+
+    map.addInteraction(draw);
+
+    // 创建距离显示的工具提示框
+    const helpTooltipElement = document.createElement('div');
+    helpTooltipElement.className = 'tooltip hidden';
+    const helpTooltip = new ol.Overlay({
+      element: helpTooltipElement,
+      offset: [15, 15],
+      positioning: 'center-left',
+    });
+    map.addOverlay(helpTooltip);
+
+    const measureTooltipElement = document.createElement('div');
+    measureTooltipElement.className = 'tooltip tooltip-measure';
+    const measureTooltip = new ol.Overlay({
+      element: measureTooltipElement,
+      offset: [0, -15],
+      positioning: 'bottom-center',
+    });
+    map.addOverlay(measureTooltip);
+
+    let listener;
+    draw.on('drawstart', function (evt) {
+      // 清除旧的提示框
+      const tooltipCoord = evt.coordinate;
+      helpTooltipElement.className = 'tooltip tooltip-measure';
+      measureTooltipElement.innerHTML = '';
+      listener = draw.on('drawend', function (evt) {
+        const finalCoord = evt.coordinate;
+        const line = evt.feature.getGeometry();
+        const length = line.getLength();
+        const units = '米'; // 单位为米
+        measureTooltipElement.innerHTML = '距离: ' + length.toFixed(2) + ' ' + units;
+        measureTooltip.setPosition(finalCoord);
+        helpTooltipElement.className = 'tooltip hidden';
+      });
+    });
+
+    // 鼠标移动时，显示当前测量的距离
+    draw.on('drawmove', function (evt) {
+      const tooltipCoord = evt.coordinate;
+      const line = evt.feature.getGeometry();
+      const length = line.getLength();
+      helpTooltipElement.innerHTML = '距离: ' + length.toFixed(2) + ' 米';
+      helpTooltip.setPosition(tooltipCoord);
+    });
+  </script>
+</body>
+</html>

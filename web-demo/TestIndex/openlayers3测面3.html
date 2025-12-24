@@ -1,0 +1,274 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>OpenLayers 5.3 测量工具</title>
+  <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css"> -->
+  <!-- <script src="
+https://cdn.jsdelivr.net/npm/ol@5.3.0/ol.min.js
+"></script>
+<link href="
+https://cdn.jsdelivr.net/npm/ol@5.3.0/ol.min.css
+" rel="stylesheet"> -->
+<!-- https://openlayers.org/en/v5.3.0/css/ol.css
+https://openlayers.org/en/v5.3.0/build/ol.js -->
+  <script src="https://openlayers.org/en/v5.3.0/build/ol.js"></script>
+  <link href="https://openlayers.org/en/v5.3.0/css/ol.css" rel="stylesheet">
+  <style>
+    #map {
+      width: 100%;
+      height: 600px;
+    }
+    .tooltip {
+      position: relative;
+      background: rgba(0, 0, 0, 0.5);
+      border-radius: 4px;
+      color: white;
+      padding: 4px 8px;
+      opacity: 0.7;
+      white-space: nowrap;
+    }
+    .tooltip-measure {
+      opacity: 1;
+      font-weight: bold;
+    }
+    #controls {
+      position: absolute;
+      top: 10px;
+      left: 50px;
+      z-index: 1000;
+      background: white;
+      padding: 10px;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+    button {
+      margin: 0 5px;
+      padding: 5px 10px;
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+  <div id="controls">
+    <button id="measure-length">测距</button>
+    <button id="measure-area">测面</button>
+    <button id="measure-angle">测角</button>
+    <button id="clear-all">清除</button>
+  </div>
+
+  <!-- <script src="https://cdn.jsdelivr.net/npm/ol/ol.js"></script> -->
+  <script>
+    var map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+            source: new ol.source.XYZ({
+                url: 'http://wprd0{1-4}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x={x}&y={y}&z={z}'
+            })
+        })
+      ],
+      view: new ol.View({
+        center: ol.proj.fromLonLat([116.4, 39.9]),
+        zoom: 5
+      })
+    });
+
+    // 测量工具容器
+    var measureTool = {
+      activeTool: null,
+      sketch: null,
+      helpTooltip: null,
+      measureTooltip: null,
+      source: new ol.source.Vector(),
+      vectorLayer: new ol.layer.Vector({
+        source: this.source,
+        style: new ol.style.Style({
+          fill: new ol.style.Fill({
+            color: 'rgba(255, 255, 255, 0.6)'
+          }),
+          stroke: new ol.style.Stroke({
+            color: 'rgba(0, 0, 255, 0.7)',
+            width: 2
+          }),
+          image: new ol.style.Circle({
+            radius: 7,
+            fill: new ol.style.Fill({
+              color: '#ffcc33'
+            })
+          })
+        })
+      }),
+      
+      init: function(type) {
+        this.cleanup();
+        map.addLayer(this.vectorLayer);
+
+        var draw = new ol.interaction.Draw({
+          source: this.source,
+          type: type === 'angle' ? 'LineString' : type,
+          style: new ol.style.Style({
+            fill: new ol.style.Fill({
+              color: 'rgba(255, 255, 255, 0.2)'
+            }),
+            stroke: new ol.style.Stroke({
+              color: 'rgba(0, 0, 0, 0.5)',
+              lineDash: [10, 10],
+              width: 2
+            }),
+            image: new ol.style.Circle({
+              radius: 5,
+              stroke: new ol.style.Stroke({
+                color: 'rgba(0, 0, 0, 0.7)'
+              }),
+              fill: new ol.style.Fill({
+                color: 'rgba(255, 255, 255, 0.5)'
+              })
+            })
+          })
+        });
+        map.addInteraction(draw);
+
+        this.createHelpTooltip();
+        this.createMeasureTooltip();
+
+        draw.on('drawstart', function(evt) {
+          this.sketch = evt.feature;
+          this.helpTooltip.setPosition(evt.coordinate);
+        }, this);
+
+        draw.on('drawend', function() {
+          this.measureTooltip.setPosition(undefined);
+        }, this);
+
+        this.activeTool = draw;
+      },
+
+      createHelpTooltip: function() {
+        if (this.helpTooltip) {
+          map.removeOverlay(this.helpTooltip);
+        }
+        this.helpTooltip = new ol.Overlay({
+          element: document.createElement('div'),
+          offset: [15, 0],
+          positioning: 'center-left'
+        });
+        this.helpTooltip.getElement().className = 'tooltip';
+        this.helpTooltip.getElement().innerHTML = '点击开始绘制';
+        map.addOverlay(this.helpTooltip);
+      },
+
+      createMeasureTooltip: function() {
+        if (this.measureTooltip) {
+          map.removeOverlay(this.measureTooltip);
+        }
+        this.measureTooltip = new ol.Overlay({
+          element: document.createElement('div'),
+          offset: [15, 0],
+          positioning: 'center-left'
+        });
+        this.measureTooltip.getElement().className = 'tooltip tooltip-measure';
+        map.addOverlay(this.measureTooltip);
+      },
+
+      cleanup: function() {
+        if (this.activeTool) {
+          map.removeInteraction(this.activeTool);
+        }
+        if (this.helpTooltip) {
+          map.removeOverlay(this.helpTooltip);
+        }
+        if (this.measureTooltip) {
+          map.removeOverlay(this.measureTooltip);
+        }
+      },
+      
+      clearAll: function() {
+        this.source.clear();
+        this.cleanup();
+      }
+    };
+
+    // 测量函数
+    function formatLength(line) {
+      var length = ol.sphere.getLength(
+        line.clone().transform('EPSG:3857', 'EPSG:4326'),
+        { radius: 6378137 }
+      );
+      return length > 1000 ? 
+        (length / 1000).toFixed(2) + ' km' : 
+        Math.round(length) + ' m';
+    }
+
+    function formatArea(polygon) {
+      var area = ol.sphere.getArea(
+        polygon.clone().transform('EPSG:3857', 'EPSG:4326'),
+        { radius: 6378137 }
+      );
+      return area > 10000 ? 
+        (area / 1000000).toFixed(2) + ' km²' : 
+        Math.round(area) + ' m²';
+    }
+
+    function calculateAngle(coords) {
+      if (coords.length < 3) return '0°';
+      var p1 = coords[0];
+      var p2 = coords[1];
+      var p3 = coords[2];
+      
+      var v1 = [p1[0] - p2[0], p1[1] - p2[1]];
+      var v2 = [p3[0] - p2[0], p3[1] - p2[1]];
+      
+      var dot = v1[0]*v2[0] + v1[1]*v2[1];
+      var det = v1[0]*v2[1] - v1[1]*v2[0];
+      var angle = Math.abs(Math.atan2(det, dot) * 180 / Math.PI);
+      
+      return (angle > 180 ? 360 - angle : angle).toFixed(2) + '°';
+    }
+
+    // 事件绑定
+    document.getElementById('measure-length').onclick = function() {
+      measureTool.init('LineString');
+      map.on('pointermove', function(evt) {
+        if (!measureTool.sketch) return;
+        var geom = measureTool.sketch.getGeometry();
+        if (geom instanceof ol.geom.LineString) {
+          var output = '距离: ' + formatLength(geom);
+          measureTool.measureTooltip.getElement().innerHTML = output;
+          measureTool.measureTooltip.setPosition(geom.getLastCoordinate());
+        }
+      });
+    };
+
+    document.getElementById('measure-area').onclick = function() {
+      measureTool.init('Polygon');
+      map.on('pointermove', function(evt) {
+        if (!measureTool.sketch) return;
+        var geom = measureTool.sketch.getGeometry();
+        if (geom instanceof ol.geom.Polygon) {
+          var output = '面积: ' + formatArea(geom);
+          measureTool.measureTooltip.getElement().innerHTML = output;
+          measureTool.measureTooltip.setPosition(geom.getInteriorPoint().getCoordinates());
+        }
+      });
+    };
+
+    document.getElementById('measure-angle').onclick = function() {
+      measureTool.init('angle');
+      map.on('pointermove', function(evt) {
+        if (!measureTool.sketch) return;
+        var geom = measureTool.sketch.getGeometry();
+        if (geom instanceof ol.geom.LineString && geom.getCoordinates().length >= 3) {
+          var output = '角度: ' + calculateAngle(geom.getCoordinates());
+          measureTool.measureTooltip.getElement().innerHTML = output;
+          measureTool.measureTooltip.setPosition(geom.getLastCoordinate());
+        }
+      });
+    };
+
+    document.getElementById('clear-all').onclick = function() {
+      measureTool.clearAll();
+    };
+  </script>
+</body>
+</html>

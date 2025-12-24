@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #container {
+      width: 100%;
+      height: 600px;
+      overflow: auto;
+      border: 1px solid #ddd;
+    }
+    #timeline {
+      display: block;
+    }
+    .tooltip {
+      position: fixed;
+      background: rgba(255,255,255,0.9);
+      padding: 8px 12px;
+      border-radius: 4px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <div id="container">
+    <canvas id="timeline"></canvas>
+  </div>
+  <div id="tooltip" class="tooltip"></div>
+
+  <script>
+    // 配置参数
+    const config = {
+      baseWidth: 1200,         // 基础参考宽度
+      axisRange: [0, 300],     // 数值范围 [min, max]
+      axisHeight: 50,          // 轴区域高度
+      trackHeight: 45,         // 单轨道高度
+      padding: 3,              // 事件块间距
+      minUnitWidth: 4,         // 最小单位宽度（像素/单位）
+      maxUnitWidth: 20         // 最大单位宽度
+    };
+
+    // 状态管理
+    const state = {
+      scale: 1,
+      offsetX: 0,
+      events: generateDemoEvents(),
+      draggedEvent: null
+    };
+
+    // 初始化
+    const canvas = document.getElementById('timeline');
+    const ctx = canvas.getContext('2d');
+    const container = document.getElementById('container');
+    initCanvasSize();
+    bindEvents();
+    render();
+
+    // 核心布局方法
+    function layoutEvents(events) {
+      const tracks = [];
+      const sorted = [...events].sort((a, b) => 
+        a.startValue - b.startValue || (a.endValue - a.startValue) - (b.endValue - b.startValue)
+      );
+
+      sorted.forEach(event => {
+        let placed = false;
+        for (const track of tracks) {
+          const lastEvent = track[track.length - 1];
+          if (event.startValue >= lastEvent.endValue) {
+            track.push(event);
+            placed = true;
+            break;
+          }
+        }
+        if (!placed) tracks.push([event]);
+      });
+
+      return tracks;
+    }
+
+    // 主渲染流程
+    function render() {
+      const tracks = layoutEvents(state.events);
+      updateCanvasSize(tracks.length);
+      
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawValueAxis();
+      drawTracks(tracks);
+    }
+
+    // 数值轴绘制
+    function drawValueAxis() {
+      ctx.save();
+      ctx.font = '14px system-ui';
+      const [minVal, maxVal] = config.axisRange;
+      const visibleStart = xToValue(-state.offsetX);
+      const visibleEnd = xToValue(-state.offsetX + container.clientWidth);
+
+      // 主要刻度（每50单位）
+      for (let value = Math.ceil(visibleStart / 50) * 50; value <= visibleEnd; value += 50) {
+        const x = valueToX(value);
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, 15);
+        ctx.strokeStyle = '#666';
+        ctx.stroke();
+        ctx.fillStyle = '#333';
+        ctx.fillText(value, x + 4, 30);
+      }
+
+      // 次要刻度（每10单位）
+      for (let value = Math.ceil(visibleStart / 10) * 10; value <= visibleEnd; value += 10) {
+        const x = valueToX(value);
+        ctx.beginPath();
+        ctx.moveTo(x, 0);
+        ctx.lineTo(x, 8);
+        ctx.strokeStyle = '#999';
+        ctx.stroke();
+      }
+
+      ctx.beginPath();
+      ctx.moveTo(0, config.axisHeight);
+      ctx.lineTo(canvas.width, config.axisHeight);
+      ctx.strokeStyle = '#444';
+      ctx.stroke();
+      ctx.restore();
+    }
+
+    // 轨道和事件绘制
+    function drawTracks(tracks) {
+      const visibleStartX = -state.offsetX;
+      const visibleEndX = visibleStartX + container.clientWidth;
+
+      tracks.forEach((track, index) => {
+        const yBase = config.axisHeight + index * config.trackHeight;
+        
+        // 轨道背景
+        ctx.fillStyle = index % 2 === 0 ? '#f8f8f8' : '#fff';
+        ctx.fillRect(0, yBase, canvas.width, config.trackHeight);
+
+        track.forEach(event => {
+          const xStart = valueToX(event.startValue);
+          const xEnd = valueToX(event.endValue);
+          
+          if (xEnd < visibleStartX || xStart > visibleEndX) return;
+
+          const width = xEnd - xStart;
+          ctx.fillStyle = event.color;
+          ctx.roundRect(xStart, yBase + config.padding, width, 
+                       config.trackHeight - config.padding * 2, 6);
+          ctx.fill();
+
+          //if (width > 40) {
+            ctx.beginPath();
+            ctx.fillStyle = '#fff';
+            ctx.font = '12px system-ui';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(
+              `${event.startValue.toFixed(1)}-${event.endValue.toFixed(1)}`,
+              xStart + 8,
+              yBase + config.trackHeight / 2
+            );
+            ctx.stroke();
+          //}
+        });
+      });
+    }
+
+    // 修复后的坐标转换方法
+    function valueToX(value) {
+      const [minVal, maxVal] = config.axisRange;
+      const range = maxVal - minVal;
+      const ratio = (value - minVal) / range;
+      return ratio * config.baseWidth * state.scale + state.offsetX;
+    }
+
+    function xToValue(x) {
+      const [minVal, maxVal] = config.axisRange;
+      const range = maxVal - minVal;
+      const denominator = config.baseWidth * state.scale;
+      
+      if (denominator <= 0) return minVal; // 防止除零错误
+      
+      const ratio = (x - state.offsetX) / denominator;
+      return minVal + ratio * range;
+    }
+
+    // 交互处理
+    function bindEvents() {
+      let isDragging = false;
+      let startX = 0;
+
+      // 画布拖拽
+      canvas.addEventListener('mousedown', e => {
+        isDragging = true;
+        startX = e.clientX;
+      });
+
+      window.addEventListener('mousemove', e => {
+        if (isDragging) {
+          state.offsetX += (e.clientX - startX) * 0.5;
+          startX = e.clientX;
+          state.offsetX = Math.min(0, Math.max(state.offsetX, canvas.width - container.clientWidth));
+          throttledRender();
+        }
+      });
+
+      window.addEventListener('mouseup', () => isDragging = false);
+
+      // 事件拖拽
+      canvas.addEventListener('mousedown', e => {
+        const rect = canvas.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        
+        state.draggedEvent = findEventAt(x, y);
+        if (state.draggedEvent) {
+          const duration = state.draggedEvent.endValue - state.draggedEvent.startValue;
+          state.draggedEvent.minValue = config.axisRange;
+          state.draggedEvent.maxValue = config.axisRange - duration;
+        }
+      });
+
+      window.addEventListener('mousemove', e => {
+        if (state.draggedEvent) {
+          const rect = canvas.getBoundingClientRect();
+          const rawX = e.clientX - rect.left;
+          const newStart = Math.max(state.draggedEvent.minValue, 
+            Math.min(xToValue(rawX), state.draggedEvent.maxValue));
+          
+          const duration = state.draggedEvent.endValue - state.draggedEvent.startValue;
+          state.draggedEvent.startValue = newStart;
+          state.draggedEvent.endValue = newStart + duration;
+          throttledRender();
+        }
+      });
+
+      window.addEventListener('mouseup', () => state.draggedEvent = null);
+
+      // 缩放控制
+      container.addEventListener('wheel', e => {
+        const rect = canvas.getBoundingClientRect();
+        const centerX = e.clientX - rect.left;
+        const centerValue = xToValue(centerX);
+        
+        const delta = e.deltaY > 0 ? 0.9 : 1.1;
+        state.scale = Math.min(config.maxUnitWidth / (config.baseWidth / 300), 
+          Math.max(config.minUnitWidth / (config.baseWidth / 300), state.scale * delta));
+        
+        // 保持缩放中心
+        const newCenterX = valueToX(centerValue);
+        state.offsetX += (centerX - newCenterX);
+        
+        throttledRender();
+        e.preventDefault();
+      }, { passive: false });
+
+      // 悬浮提示
+      canvas.addEventListener('mousemove', e => {
+        const rect = canvas.getBoundingClientRect();
+        const event = findEventAt(e.clientX - rect.left, e.clientY - rect.top);
+        const tooltip = document.getElementById('tooltip');
+        
+        if (event) {
+          tooltip.style.display = 'block';
+          tooltip.style.left = `${e.pageX + 15}px`;
+          tooltip.style.top = `${e.pageY + 15}px`;
+          tooltip.innerHTML = `<strong>${event.title}</strong><br>
+            Value: ${event.startValue.toFixed(1)} - ${event.endValue.toFixed(1)}`;
+        } else {
+          tooltip.style.display = 'none';
+        }
+      });
+    }
+
+    // 辅助方法
+    function findEventAt(x, y) {
+      const value = xToValue(x);
+      const tracks = layoutEvents(state.events);
+      
+      for (const [trackIndex, track] of tracks.entries()) {
+        const yStart = config.axisHeight + trackIndex * config.trackHeight;
+        const yEnd = yStart + config.trackHeight;
+        
+        if (y >= yStart && y <= yEnd) {
+          for (const event of track) {
+            if (value >= event.startValue && value <= event.endValue) {
+              return event;
+            }
+          }
+        }
+      }
+      return null;
+    }
+
+    function initCanvasSize() {
+      canvas.width = container.clientWidth;
+      canvas.height = container.clientHeight;
+    }
+
+    function updateCanvasSize(trackCount) {
+      const totalHeight = config.axisHeight + trackCount * config.trackHeight;
+      canvas.height = totalHeight;
+      canvas.width = config.baseWidth * state.scale;
+    }
+
+    // 数据生成
+    function generateDemoEvents() {
+      const events = [];
+      const colors = ['#FF6B6B', '#4ECDC4', '#45B7D1', '#96CEB4'];
+      for (let i = 0; i < 12; i++) {
+        const start = Math.random() * 250;
+        const duration = 10 + Math.random() * 40;
+        events.push({
+          title: `Event ${i + 1}`,
+          startValue: start,
+          endValue: Math.min(start + duration, 300),
+          color: colors[i % colors.length]
+        });
+      }
+      return events;
+    }
+
+    // 性能优化
+    const throttledRender = throttle(render, 100);
+    function throttle(fn, delay) {
+      let lastCall = 0;
+      return (...args) => {
+        const now = Date.now();
+        if (now - lastCall >= delay) {
+          fn(...args);
+          lastCall = now;
+        }
+      };
+    }
+  </script>
+</body>
+</html>

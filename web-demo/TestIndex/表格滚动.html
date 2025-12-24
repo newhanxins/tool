@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixed Table Header with Scrollable Body</title>
+    <style>
+        /* 表格容器样式，给它设置一个固定高度并开启滚动 */
+        .table-container {
+            max-height: 400px; /* 控制表格的最大高度 */
+            overflow-y: auto; /* 开启竖向滚动 */
+            border: 1px solid #ccc; /* 给表格容器添加边框 */
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            padding: 10px;
+            text-align: left;
+            border: 1px solid #ddd;
+        }
+
+        th {
+            position: sticky;
+            top: 0; /* 使表头固定在顶部 */
+            background-color: #f1f1f1; /* 为表头添加背景色 */
+            z-index: 1; /* 确保表头在滚动时不会被数据遮挡 */
+            border-bottom: 2px solid #ccc; /* 在表头底部添加分隔线 */
+        }
+
+        tbody {
+            background-color: #fff; /* 给表格主体添加背景色 */
+        }
+    </style>
+</head>
+<body>
+
+<div class="table-container">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Country</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- 假设有很多数据行，这里仅提供一些示例行 -->
+            <tr>
+                <td>1</td>
+                <td>Alice</td>
+                <td>24</td>
+                <td>USA</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Bob</td>
+                <td>30</td>
+                <td>Canada</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Charlie</td>
+                <td>28</td>
+                <td>UK</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>David</td>
+                <td>35</td>
+                <td>Australia</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Eva</td>
+                <td>22</td>
+                <td>India</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Frank</td>
+                <td>29</td>
+                <td>Germany</td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Eva</td>
+                <td>22</td>
+                <td>India</td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Frank</td>
+                <td>29</td>
+                <td>Germany</td>
+            </tr>
+            
+            <!-- 你可以继续添加更多的行 -->
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

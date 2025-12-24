@@ -1,0 +1,917 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>无人机电磁环境探测系统</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0a0a23 0%, #1a1a2e 50%, #16213e 100%);
+            color: #fff;
+            overflow: hidden;
+            height: 100vh;
+        }
+        
+        #container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        #info-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            min-width: 300px;
+            backdrop-filter: blur(10px);
+            transition: transform 0.3s ease;
+        }
+        
+        #info-panel:hover {
+            transform: translateY(-5px);
+        }
+        
+        .panel-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+        
+        .panel-header h1 {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1f2937;
+        }
+        
+        .section {
+            margin-bottom: 20px;
+        }
+        
+        .section h2 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #4b5563;
+            margin-bottom: 10px;
+        }
+        
+        .drone-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 12px;
+            background-color: #f9fafb;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: all 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .drone-item:hover {
+            background-color: #f3f4f6;
+            transform: translateX(5px);
+        }
+        
+        .drone-item.selected {
+            background-color: #dbeafe;
+            border: 1px solid #3b82f6;
+        }
+        
+        .signal-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+        
+        .signal-weak { background-color: #10b981; }
+        .signal-medium { background-color: #f59e0b; }
+        .signal-strong { background-color: #ef4444; }
+        
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        
+        .control-btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            transition: all 0.2s ease;
+        }
+        
+        .control-btn:hover {
+            background: #2563eb;
+            transform: translateY(-2px);
+        }
+        
+        .control-btn.active {
+            background: #1d4ed8;
+        }
+        
+        #status-bar {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            border-radius: 8px;
+            padding: 10px 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            font-size: 14px;
+            backdrop-filter: blur(5px);
+        }
+        
+        #detail-panel {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            z-index: 100;
+            min-width: 300px;
+            backdrop-filter: blur(10px);
+            display: none;
+        }
+        
+        .distance-display {
+            font-size: 14px;
+            font-weight: 600;
+            color: #3b82f6;
+            margin-top: 10px;
+        }
+        
+        .db-info {
+            background: #f3f4f6;
+            padding: 8px 12px;
+            border-radius: 6px;
+            margin-top: 8px;
+            font-weight: 500;
+        }
+        
+        .hint {
+            font-size: 12px;
+            color: #6b7280;
+            text-align: center;
+            padding-top: 10px;
+            border-top: 1px solid #e5e7eb;
+        }
+        
+        .toggle-switch {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .switch {
+            position: relative;
+            display: inline-block;
+            width: 50px;
+            height: 24px;
+        }
+        
+        .switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 24px;
+        }
+        
+        .slider:before {
+            position: absolute;
+            content: "";
+            height: 16px;
+            width: 16px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+        
+        input:checked + .slider {
+            background-color: #3b82f6;
+        }
+        
+        input:checked + .slider:before {
+            transform: translateX(26px);
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    
+    <div id="info-panel">
+        <div class="panel-header">
+            <h1>电磁环境探测系统</h1>
+        </div>
+        
+        <div class="section">
+            <h2>探测范围</h2>
+            <div class="drone-item">
+                <div class="signal-dot" style="background-color: #3b82f6;"></div>
+                <span>3km球形探测区域</span>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h2>非法无人机状态</h2>
+            <div id="drone-list"></div>
+        </div>
+        
+        <div class="section">
+            <h2>切面显示控制</h2>
+            <div class="toggle-switch">
+                <span>球形切开:</span>
+                <label class="switch">
+                    <input type="checkbox" id="sphere-cut-toggle">
+                    <span class="slider"></span>
+                </label>
+            </div>
+        </div>
+        
+        <div class="controls">
+            <button id="toggle-sphere" class="control-btn active">球体</button>
+            <button id="toggle-grid" class="control-btn active">网格</button>
+            <button id="reset-view" class="control-btn">重置</button>
+        </div>
+        
+        <div class="hint">
+            使用鼠标拖拽旋转，滚轮缩放
+        </div>
+    </div>
+    
+    <div id="detail-panel">
+        <div class="panel-header">
+            <h2>非法无人机详情</h2>
+        </div>
+        <div id="drone-details"></div>
+        <div class="distance-display" id="distance-display"></div>
+        <div class="db-info" id="db-info"></div>
+    </div>
+    
+    <div id="status-bar">
+        系统运行中 | 最后更新: <span id="last-update">--:--:--</span>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    
+    <script>
+        // 无人机电磁环境探测系统主应用类
+        // 功能：3D可视化无人机探测环境，实现球形切面显示和距离强度信息展示
+        class App {
+            constructor() {
+                this.scene = null;
+                this.camera = null;
+                this.renderer = null;
+                this.controls = null;
+                this.detectionSphere = null;
+                this.gridHelper = null;
+                this.drones = []; // 存储非法无人机对象的数组
+                this.detectionDrone = null; // 探测无人机对象
+                this.selectedDrone = null; // 当前选中的非法无人机
+                this.sectionPlane = null; // 切面平面对象
+                this.raycaster = new THREE.Raycaster(); // 射线检测器
+                this.sphereCutMode = false; // 球形切开模式开关
+                
+                this.init(); // 初始化应用
+            }
+
+            // 初始化方法 - 创建3D场景、相机、渲染器和基本元素
+            init() {
+                // 创建Three.js场景
+                this.scene = new THREE.Scene();
+                this.scene.background = new THREE.Color(0x0a0a23);
+
+                // 创建透视相机
+                const container = document.getElementById('container');
+                const width = window.innerWidth;
+                const height = window.innerHeight;
+                
+                this.camera = new THREE.PerspectiveCamera(60, width / height, 0.1, 10000);
+                this.camera.position.set(2000, 2000, 2000);
+
+                // 创建WebGL渲染器
+                this.renderer = new THREE.WebGLRenderer({ antialias: true });
+                this.renderer.setSize(width, height);
+                this.renderer.shadowMap.enabled = true;
+                this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+                container.appendChild(this.renderer.domElement);
+
+                // 初始化轨道控制器
+                this.controls = new OrbitControls(this.camera, this.renderer.domElement);
+
+                // 创建探测球体
+                this.createDetectionSphere();
+                
+                // 创建坐标网格
+                this.createGrid();
+                
+                // 添加环境光
+                const ambientLight = new THREE.AmbientLight(0x404040, 0.6);
+                this.scene.add(ambientLight);
+
+                // 添加平行光
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                directionalLight.position.set(1000, 1000, 1000);
+                directionalLight.castShadow = true;
+                this.scene.add(directionalLight);
+
+                // 创建探测无人机
+                this.createDetectionDrone();
+                
+                // 创建非法无人机
+                this.createIllegalDrones();
+
+                // 绑定事件监听器
+                this.bindEvents();
+
+                // 开始动画循环
+                this.animate();
+                
+                // 更新状态栏时间
+                this.updateStatusBar();
+            }
+
+            // 创建探测球体方法
+            createDetectionSphere() {
+                const sphereRadius = 1500; // 3km探测范围，按比例缩放
+                const geometry = new THREE.SphereGeometry(sphereRadius, 32, 32);
+                
+                // 创建半透明材质
+                const material = new THREE.MeshPhongMaterial({
+                    color: 0x1e90ff,
+                    transparent: true,
+                    opacity: 0.1,
+                    side: THREE.DoubleSide
+                });
+
+                this.detectionSphere = new THREE.Mesh(geometry, material);
+                this.scene.add(this.detectionSphere);
+
+                // 创建球体边框
+                const edges = new THREE.EdgesGeometry(geometry);
+                const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x1e90ff }));
+                this.scene.add(line);
+            }
+
+            // 创建坐标网格方法
+            createGrid() {
+                this.gridHelper = new THREE.GridHelper(4000, 40, 0x444444, 0x222222);
+                this.scene.add(this.gridHelper);
+            }
+
+            // 创建探测无人机方法
+            createDetectionDrone() {
+                // 创建圆锥体几何体表示探测无人机
+                const geometry = new THREE.ConeGeometry(40, 80, 8);
+                const material = new THREE.MeshBasicMaterial({ color: 0xffffff });
+                
+                this.detectionDrone = new THREE.Mesh(geometry, material);
+                this.detectionDrone.position.set(0, 500, 0); // 探测无人机位于中心位置，高度500单位
+                
+                // 添加探测无人机标签
+                this.createDroneLabel(this.detectionDrone, '探测无人机', 0xffffff);
+                
+                this.scene.add(this.detectionDrone);
+                
+                this.updateDetectionDroneHeight();
+            }
+
+            // 创建非法无人机方法
+            createIllegalDrones() {
+                // 定义五个不同位置和信号强度的非法无人机配置
+                const droneConfigs = [
+                    { id: 1, position: { x: 800, y: 600, z: 400 }, signalStrength: 'strong', db: -45 },
+                    { id: 2, position: { x: -600, y: 800, z: 500 }, signalStrength: 'medium', db: -65 },
+                    { id: 3, position: { x: 400, y: -700, z: 600 }, signalStrength: 'weak', db: -85 },
+                    { id: 4, position: { x: -800, y: -400, z: 700 }, signalStrength: 'medium', db: -65 },
+                    { id: 5, position: { x: 300, y: 500, z: -900 }, signalStrength: 'strong', db: -45 }
+                ];
+
+                // 循环创建每个非法无人机
+                droneConfigs.forEach(config => {
+                    this.createIllegalDrone(config);
+                });
+                
+                this.updateIllegalDroneList();
+            }
+
+            // 创建单个非法无人机方法
+            createIllegalDrone(config) {
+                // 创建八面体几何体表示非法无人机
+                const geometry = new THREE.OctahedronGeometry(30, 0);
+                
+                // 根据信号强度设置颜色：弱-绿色，中-黄色，强-红色
+                const colors = {
+                    weak: 0x10B981,
+                    medium: 0xF59E0B,
+                    strong: 0xEF4444
+                };
+                
+                const material = new THREE.MeshBasicMaterial({ color: colors[config.signalStrength] });
+                const drone = new THREE.Mesh(geometry, material);
+                drone.position.set(config.position.x, config.position.y, config.position.z);
+                
+                // 存储无人机数据到userData中
+                drone.userData = {
+                    id: config.id,
+                    signalStrength: config.signalStrength,
+                    db: config.db,
+                    originalPosition: { ...config.position }
+                };
+                
+                // 创建非法无人机标签
+                this.createDroneLabel(drone, `非法无人机 ${config.id}`, colors[config.signalStrength]);
+                
+                this.scene.add(drone);
+                this.drones.push(drone);
+            }
+
+            // 创建无人机标签方法
+            createDroneLabel(drone, text, color) {
+                // 创建canvas绘制标签
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.width = 256;
+                canvas.height = 64;
+
+                // 将颜色转换为16进制字符串
+                const hexColor = '#' + color.toString(16).padStart(6, '0');
+                
+                // 绘制标签背景
+                context.fillStyle = hexColor;
+                context.fillRect(0, 0, 256, 64);
+
+                // 绘制文字
+                context.fillStyle = '#FFFFFF';
+                context.font = 'bold 24px Arial';
+                context.textAlign = 'center';
+                context.fillText(text, 128, 38);
+
+                // 创建纹理
+                const texture = new THREE.CanvasTexture(canvas);
+                const spriteMaterial = new THREE.SpriteMaterial({ 
+                    map: texture,
+                    transparent: true
+                });
+                const sprite = new THREE.Sprite(spriteMaterial);
+                sprite.scale.set(100, 25, 1);
+                sprite.position.copy(drone.position);
+                sprite.position.y += 80; // 标签位于无人机上方
+
+                // 存储标签引用
+                drone.userData.label = sprite;
+                this.scene.add(sprite);
+            }
+
+            // 射线检测方法 - 用于鼠标点击选择无人机
+            raycast(event) {
+                const mouse = new THREE.Vector2();
+                const rect = this.renderer.domElement.getBoundingClientRect();
+                
+                // 将鼠标坐标转换为Three.js标准化设备坐标
+                mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+                mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+                
+                // 设置射线检测器
+                this.raycaster.setFromCamera(mouse, this.camera);
+                const intersects = this.raycaster.intersectObjects(this.drones);
+                
+                if (intersects.length > 0) {
+                    const selectedDrone = intersects[0].object;
+                    this.selectDrone(selectedDrone);
+                } else {
+                    this.deselectDrone();
+                }
+            }
+
+            // 选择无人机方法
+            selectDrone(drone) {
+                // 取消之前的选择
+                if (this.selectedDrone) {
+                    this.deselectDrone();
+                }
+                
+                this.selectedDrone = drone;
+                
+                // 高亮显示选中的无人机 - 设置为黑色
+                drone.material.color.setHex(0x000000);
+                
+                // 显示详情面板
+                this.showDroneDetails(drone);
+                
+                // 创建切面效果
+                this.createSectionPlane(drone);
+            }
+
+            // 取消选择无人机方法
+            deselectDrone() {
+                if (this.selectedDrone) {
+                    // 恢复原始颜色
+                    const colors = {
+                        weak: 0x10B981,
+                        medium: 0xF59E0B,
+                        strong: 0xEF4444
+                    };
+                    
+                    this.selectedDrone.material.color.setHex(colors[this.selectedDrone.userData.signalStrength]);
+                    this.selectedDrone = null;
+                }
+                
+                this.hideDroneDetails();
+                this.removeSectionPlane();
+            }
+
+            // 显示无人机详情方法
+            showDroneDetails(drone) {
+                const detailPanel = document.getElementById('detail-panel');
+                const droneDetails = document.getElementById('drone-details');
+                const distanceDisplay = document.getElementById('distance-display');
+                const dbInfo = document.getElementById('db-info');
+                
+                // 计算探测无人机和非法无人机之间的距离
+                const distance = this.calculateDistance(this.detectionDrone.position, drone.position);
+                
+                droneDetails.innerHTML = `
+                    <div class="drone-item selected">
+                        <div class="signal-dot signal-${drone.userData.signalStrength}"></div>
+                        <span>非法无人机 ${drone.userData.id}</span>
+                    </div>
+                    <div style="margin-top: 10px;">
+                        <strong>信号强度:</strong> ${drone.userData.signalStrength.toUpperCase()}
+                    </div>
+                `;
+                
+                distanceDisplay.innerHTML = `
+                    <strong>距离:</strong> ${distance.toFixed(2)} 单位
+                `;
+                
+                dbInfo.innerHTML = `
+                    <strong>信号强度:</strong> ${drone.userData.db} dB
+                `;
+                
+                detailPanel.style.display = 'block';
+            }
+
+            // 隐藏无人机详情方法
+            hideDroneDetails() {
+                const detailPanel = document.getElementById('detail-panel');
+                detailPanel.style.display = 'none';
+            }
+
+            // 计算两点之间距离的方法
+            calculateDistance(point1, point2) {
+                return point1.distanceTo(point2);
+            }
+
+            // 创建切面平面方法 - 关键修复：确保切面正确显示
+            createSectionPlane(drone) {
+                this.removeSectionPlane();
+                
+                // 计算探测无人机和非法无人机之间的向量
+                const direction = new THREE.Vector3().subVectors(drone.position, this.detectionDrone.position);
+                
+                // 创建平面几何体
+                const planeGeometry = new THREE.PlaneGeometry(3000, 3000);
+                
+                const planeMaterial = new THREE.MeshBasicMaterial({
+                    color: 0x3b82f6,
+                    side: THREE.DoubleSide,
+                    transparent: true,
+                    opacity: 0.3
+                });
+                
+                this.sectionPlane = new THREE.Mesh(planeGeometry, planeMaterial);
+                
+                // 关键修复：设置平面的位置和方向
+                // 平面应该通过探测无人机，并且垂直于连接线
+                this.sectionPlane.position.copy(this.detectionDrone.position);
+                
+                // 计算平面的法向量 - 平面的法向量应该与连接线方向一致
+                const normal = direction.clone().normalize();
+                
+                // 设置平面的方向 - 使用lookAt方法确保平面正确朝向
+                this.sectionPlane.lookAt(this.sectionPlane.position.clone().add(normal));
+                
+                this.scene.add(this.sectionPlane);
+                
+                // 如果球形切开模式开启，则应用切面效果
+                if (this.sphereCutMode) {
+                    this.applySphereCut(drone, normal);
+                }
+            }
+
+            // 应用球形切开效果方法
+            applySphereCut(drone, normal) {
+                // 创建剪切平面
+                const clipPlane = new THREE.Plane(normal, 0);
+                
+                // 应用剪切平面到球体
+                if (this.detectionSphere) {
+                    this.detectionSphere.material.clippingPlanes = [clipPlane];
+                    this.renderer.localClippingEnabled = true;
+                }
+            }
+
+            // 移除切面平面方法
+            removeSectionPlane() {
+                if (this.sectionPlane) {
+                    this.scene.remove(this.sectionPlane);
+                    this.sectionPlane = null;
+                }
+                
+                // 重置球体的剪切平面
+                if (this.detectionSphere) {
+                    this.detectionSphere.material.clippingPlanes = [];
+                }
+            }
+
+            // 切换球形切开模式方法
+            toggleSphereCutMode() {
+                this.sphereCutMode = !this.sphereCutMode;
+                
+                // 如果当前有选中的无人机，重新应用切面效果
+                if (this.selectedDrone) {
+                    this.createSectionPlane(this.selectedDrone);
+                }
+            }
+
+            // 更新探测无人机高度显示方法
+            updateDetectionDroneHeight() {
+                console.log(`探测无人机高度: ${this.detectionDrone.position.y} 单位`);
+            }
+
+            // 更新非法无人机列表方法
+            updateIllegalDroneList() {
+                const droneList = document.getElementById('drone-list');
+                droneList.innerHTML = '';
+                
+                this.drones.forEach(drone => {
+                    const droneElement = document.createElement('div');
+                    droneElement.className = 'drone-item';
+                    droneElement.innerHTML = `
+                        <div class="signal-dot signal-${drone.userData.signalStrength}"></div>
+                        <span>非法无人机 ${drone.userData.id}</span>
+                        <span>${drone.userData.db} dB</span>
+                    `;
+                    
+                    droneElement.addEventListener('click', () => {
+                        this.selectDrone(drone);
+                    });
+                    
+                    droneList.appendChild(droneElement);
+                });
+            }
+
+            // 更新状态栏方法
+            updateStatusBar() {
+                const now = new Date();
+                const timeString = now.toLocaleTimeString();
+                document.getElementById('last-update').textContent = timeString;
+            }
+
+            // 绑定事件监听器方法
+            bindEvents() {
+                // 绑定球体显示/隐藏按钮
+                document.getElementById('toggle-sphere').addEventListener('click', () => {
+                    if (this.detectionSphere) {
+                        this.detectionSphere.visible = !this.detectionSphere.visible;
+                    }
+                });
+
+                // 绑定网格显示/隐藏按钮
+                document.getElementById('toggle-grid').addEventListener('click', () => {
+                    if (this.gridHelper) {
+                        this.gridHelper.visible = !this.gridHelper.visible;
+                    }
+                });
+
+                // 绑定重置视角按钮
+                document.getElementById('reset-view').addEventListener('click', () => {
+                    this.controls.reset();
+                });
+
+                // 绑定球形切开模式切换
+                document.getElementById('sphere-cut-toggle').addEventListener('change', (event) => {
+                    this.toggleSphereCutMode();
+                });
+
+                // 绑定鼠标点击事件进行射线检测
+                this.renderer.domElement.addEventListener('click', (event) => {
+                    this.raycast(event);
+                });
+            }
+
+            // 动画循环方法
+            animate() {
+                requestAnimationFrame(() => this.animate());
+                this.controls.update();
+                this.renderer.render(this.scene, this.camera);
+            }
+        }
+
+        // 自定义OrbitControls类 - 实现3D场景的旋转、缩放和平移控制
+        class OrbitControls {
+            constructor(object, domElement) {
+                this.object = object;
+                this.domElement = domElement;
+                
+                // 初始化控制参数
+                this.enabled = true;
+                this.target = new THREE.Vector3();
+                this.minDistance = 0;
+                this.maxDistance = Infinity;
+                this.minPolarAngle = 0;
+                this.maxPolarAngle = Math.PI;
+                this.rotateSpeed = 1.0;
+                this.zoomSpeed = 1.0;
+                this.panSpeed = 1.0;
+                this.autoRotate = false;
+                this.autoRotateSpeed = 2.0;
+                this.enableRotate = true;
+                this.enableZoom = true;
+                this.enablePan = true;
+                
+                // 状态变量
+                this.spherical = new THREE.Spherical();
+                this.sphericalDelta = new THREE.Spherical();
+                this.scale = 1;
+                this.panOffset = new THREE.Vector3();
+                
+                // 事件监听器绑定
+                this.onMouseDown = this.onMouseDown.bind(this);
+                this.onMouseWheel = this.onMouseWheel.bind(this);
+                this.onMouseMove = this.onMouseMove.bind(this);
+                this.onMouseUp = this.onMouseUp.bind(this);
+                this.onContextMenu = this.onContextMenu.bind(this);
+                
+                // 连接事件
+                this.connect();
+            }
+            
+            connect() {
+                this.domElement.addEventListener('mousedown', this.onMouseDown);
+                this.domElement.addEventListener('wheel', this.onMouseWheel);
+                this.domElement.addEventListener('contextmenu', this.onContextMenu);
+            }
+            
+            onMouseDown(event) {
+                if (this.enabled === false) return;
+                
+                // 记录鼠标起始位置
+                this.rotateStart = new THREE.Vector2(event.clientX, event.clientY);
+                
+                // 添加移动和释放事件
+                this.domElement.addEventListener('mousemove', this.onMouseMove);
+                this.domElement.addEventListener('mouseup', this.onMouseUp);
+            }
+            
+            onMouseMove(event) {
+                if (this.enabled === false) return;
+                
+                this.rotateEnd = new THREE.Vector2(event.clientX, event.clientY);
+                this.rotateDelta = new THREE.Vector2().subVectors(this.rotateEnd, this.rotateStart);
+                
+                // 计算旋转角度
+                const rotateLeft = 2 * Math.PI * this.rotateSpeed / this.domElement.clientHeight;
+                
+                // 更新旋转
+                this.rotateLeft(2 * Math.PI * this.rotateDelta.x * rotateLeft);
+                this.rotateUp(2 * Math.PI * this.rotateDelta.y * rotateLeft);
+                
+                // 更新起始位置
+                this.rotateStart.copy(this.rotateEnd);
+                
+                this.update();
+            }
+            
+            onMouseUp(event) {
+                // 移除事件监听
+                this.domElement.removeEventListener('mousemove', this.onMouseMove);
+                this.domElement.removeEventListener('mouseup', this.onMouseUp);
+            }
+            
+            onMouseWheel(event) {
+                if (this.enabled === false || this.enableZoom === false) return;
+                
+                // 根据滚轮方向缩放
+                if (event.deltaY < 0) {
+                    this.zoomIn();
+                } else {
+                    this.zoomOut();
+                }
+                
+                this.update();
+            }
+            
+            onContextMenu(event) {
+                event.preventDefault();
+            }
+            
+            rotateLeft(angle) {
+                this.sphericalDelta.theta -= angle;
+            }
+            
+            rotateUp(angle) {
+                this.sphericalDelta.phi -= angle;
+            }
+            
+            zoomIn() {
+                this.scale /= 1.1;
+            }
+            
+            zoomOut() {
+                this.scale *= 1.1;
+            }
+            
+            update() {
+                // 更新相机位置
+                const position = this.object.position;
+                
+                // 从目标位置偏移
+                position.sub(this.target);
+                
+                // 转换为球坐标
+                this.spherical.setFromVector3(position);
+                
+                // 应用旋转变化
+                this.spherical.theta += this.sphericalDelta.theta;
+                this.spherical.phi += this.sphericalDelta.phi;
+                
+                // 限制极角范围
+                this.spherical.theta = Math.max(this.minPolarAngle, Math.min(this.maxPolarAngle, this.spherical.theta));
+                
+                // 确保球坐标安全
+                this.spherical.makeSafe();
+                
+                // 更新相机位置
+                position.setFromSpherical(this.spherical);
+                position.multiplyScalar(this.scale);
+                position.add(this.target);
+                
+                // 相机朝向目标
+                this.object.lookAt(this.target);
+                
+                // 重置变化量
+                this.sphericalDelta.set(0, 0, 0);
+                this.panOffset.set(0, 0, 0);
+                this.scale = 1;
+            }
+            
+            reset() {
+                this.target.set(0, 0, 0);
+                this.object.position.set(2000, 2000, 2000);
+                this.update();
+            }
+        }
+
+        // 页面加载完成后初始化应用
+        document.addEventListener('DOMContentLoaded', () => {
+            new App();
+        });
+    </script>
+</body>
+</html>

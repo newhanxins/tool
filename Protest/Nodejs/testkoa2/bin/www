@@ -1,0 +1,257 @@
+#!/usr/bin/env node
+
+/**
+ * Module dependencies.
+ */
+
+var app = require('../app');
+var debug = require('debug')('demo:server');
+var http = require('http');
+const WebSocket = require('ws');
+const uuid = require('uuid');
+const url = require('url');
+
+
+
+
+
+
+
+// 存储连接
+const clients = {};
+let adminSocket = null;
+let adminConnected = false;
+// 创建 WebSocket 服务器
+const wss = new WebSocket.Server({ noServer: true });
+// 监听 WebSocket 连接
+wss.on('connection', (ws,req) => {
+  const clientId = uuid.v4();
+  clients[clientId] = ws;
+  // 获取请求的 URL
+  const pathname = url.parse(req.url).pathname;
+  
+  // 提取路径中的参数
+  const pathParts = pathname.split('/').filter(Boolean);
+  if (pathParts.length === 2) {
+    const param1 = pathParts[0]; // '001'
+    const param2 = pathParts[1]; // '456'
+    console.log(`连接路径参数: param1 = ${param1}, param2 = ${param2}`);
+  }
+
+  console.log(`Client connected: ${clientId}`);
+  ws.on('message', async (message) => {
+    let  request = null;
+    console.log(`Received message from ${clientId}: ${message}`);
+    try {
+      request=JSON.parse(message)
+      console.log("method",request.method)
+      if (request === 'ping') {
+        console.log('Received heartbeat');
+        ws.send('pong');  // 响应心跳包
+      }
+      // else if (action === 'delete') {
+      //   ws.send(JSON.stringify({ message: '订单删除成功！' }));
+      // } else if (adminConnected) {
+      //   adminSocket.send(JSON.stringify({ message: request, clientId }));
+      // } 
+      else if(request.method == 'message'){
+        console.log('客服不在线',request.method);
+        let result = {
+          jsonrpc: '2.0',
+          id: request.id,
+          result: {
+            data: {
+              content: '客服当前不在线，请稍后再试11111。'+clientId
+            },
+            status: 200,
+            message: 'success'
+          }
+        }
+        sendToClient(clientId,result);
+      }else if(request.method == 'SyncTaskEvaluate'){
+        console.log('成绩信息',request);
+        let result = {
+          jsonrpc: '2.0',
+          id: request.id,
+          result:true
+        }
+        sendToClient(clientId,result)
+      }else if(request.method == 'Intervene'){
+        console.log('成绩信息',request);
+        let result = {
+          jsonrpc: '2.0',
+          id: request.id,
+          method: 'Intervene',
+          params:[{
+              code:"",
+              name:request.params,
+            } 
+          ]
+        }
+        sendToClient(clientId,result)
+      }else{
+        let result = {
+          jsonrpc: '2.0',
+          id: request.id,
+          result: {
+            data: {
+              content: '没有查询处理'+clientId
+            },
+            status: 200,
+            message: 'success'
+          }
+        }
+        sendToClient(clientId,result)
+      }
+    } catch (err) {
+      
+      // if (message == 'ping') {
+      //   console.log('Received heartbeat');
+      //   ws.send('pong');  // 响应心跳包
+      // }else{
+      //   console.error('Message parsing error:', err);
+      //   ws.send(JSON.stringify({ message: '消息处理出错，请稍后重试。' }));
+      // }
+      // 错误处理
+      const errorResponse = {
+        jsonrpc: '2.0',
+        id: request ? request.id : null,
+        error: {
+          code: -32603,
+          message: err.message
+        }
+      };
+      sendToClient(clientId,errorResponse)
+    }
+  });
+
+  ws.on('close', () => {
+    delete clients[clientId];
+  });
+
+  ws.on('error', (err) => {
+    console.error('WebSocket error:', err);
+  });
+});
+// WebSocket 群发消息函数
+function broadcast(message) {
+  for (const clientId in clients) {
+    if (clients[clientId].readyState === WebSocket.OPEN) {
+      clients[clientId].send(message);
+    }
+  }
+}
+
+// WebSocket 单端发送消息函数
+function sendToClient(clientId, message) {
+  if (clients[clientId] && clients[clientId].readyState === WebSocket.OPEN) {
+    clients[clientId].send(JSON.stringify(message));
+    console.log('sendToClient',clientId,message);
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/**
+ * Get port from environment and store in Express.
+ */
+
+var port = normalizePort(process.env.PORT || '3000');
+// app.set('port', port);
+
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app.callback());
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port, function () {
+  console.log(`Server is running on port ${port}`)
+});
+server.on('error', onError);
+server.on('listening', onListening);
+
+server.on('upgrade', (ctx, socket, head) => {
+  console.log('upgrade', ctx.path)
+  wss.handleUpgrade(ctx, socket, head, (ws) => {
+      wss.emit('connection', ws, ctx);
+  });
+})
+
+
+
+/**
+ * Normalize a port into a number, string, or false.
+ */
+
+function normalizePort(val) {
+  var port = parseInt(val, 10);
+
+  if (isNaN(port)) {
+    // named pipe
+    return val;
+  }
+
+  if (port >= 0) {
+    // port number
+    return port;
+  }
+
+  return false;
+}
+
+/**
+ * Event listener for HTTP server "error" event.
+ */
+
+function onError(error) {
+  if (error.syscall !== 'listen') {
+    throw error;
+  }
+
+  var bind = typeof port === 'string'
+    ? 'Pipe ' + port
+    : 'Port ' + port;
+
+  // handle specific listen errors with friendly messages
+  switch (error.code) {
+    case 'EACCES':
+      console.error(bind + ' requires elevated privileges');
+      process.exit(1);
+      break;
+    case 'EADDRINUSE':
+      console.error(bind + ' is already in use');
+      process.exit(1);
+      break;
+    default:
+      throw error;
+  }
+}
+
+/**
+ * Event listener for HTTP server "listening" event.
+ */
+
+function onListening() {
+  var addr = server.address();
+  var bind = typeof addr === 'string'
+    ? 'pipe ' + addr
+    : 'port ' + addr.port;
+  debug('Listening on ' + bind);
+}

@@ -1,0 +1,2101 @@
+[
+{
+	"startFreq": "0",
+	"endFreq": "8.3",
+	"footnoteS": ["5.53", "5.54"],
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}, {
+		"business": "水上无线电导航",
+		"footnote": null
+	}]
+}, {
+	"startFreq": "8.3",
+	"endFreq": "9",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "气象辅助",
+		"footnote": ["5.54A"]
+	}, {
+		"business": "水上移动",
+		"footnote": null
+	}, {
+		"business": "水上无线电",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"9",
+	"endFreq": "11.3",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}, {
+		"business": "气象辅助",
+		"footnote": ["5.54A"]
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"11.3",
+	"endFreq": "14",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"14",
+	"endFreq": "19.95",
+	"footnoteS": ["5.56"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "水上移动",
+		"footnote": ["5.57"]
+	}]
+}
+, {
+	"startFreq":"19.95",
+	"endFreq": "20.05",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "标准频率和时间信号（20kHz）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"20.05",
+	"endFreq": "70",
+	"footnoteS": ["5.56","CHN2"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "水上移动",
+		"footnote": ["5.57"]
+	}]
+}
+, {
+	"startFreq":"70",
+	"endFreq": "72",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "无线电导航",
+		"footnote": ["5.60"]
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}, {
+		"business": "[水上移动]",
+		"footnote": ["5.57"]
+	}]
+}
+, {
+	"startFreq":"72",
+	"endFreq": "84",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "水上移动",
+		"footnote": ["5.57"]
+	}, {
+		"business": "无线电导航",
+		"footnote": ["5.60"]
+	}]
+}
+, {
+	"startFreq":"84",
+	"endFreq": "86",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "无线电导航",
+		"footnote": ["5.60"]
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}, {
+		"business": "[水上移动]",
+		"footnote": ["5.57"]
+	}]
+}
+, {
+	"startFreq":"86",
+	"endFreq": "90",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "水上移动",
+		"footnote": ["5.57"]
+	}, {
+		"business": "无线电导航",
+		"footnote": ["5.60"]
+	}]
+}
+, {
+	"startFreq":"90",
+	"endFreq": "95",
+	"footnoteS": ["5.64","CHN2"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "水上移动",
+		"footnote": ["CHN1"]
+	}, {
+		"business": "无线电导航",
+		"footnote": ["5.62"]
+	}]
+}
+, {
+	"startFreq":"95",
+	"endFreq": "110",
+	"footnoteS": ["5.64","CHN2"],
+	"radioBusinessS": [{
+		"business": "无线电导航",
+		"footnote": ["5.62"]
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"110",
+	"endFreq": "112",
+	"footnoteS": ["5.64"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "水上移动",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": ["5.60"]
+	}]
+}
+, {
+	"startFreq":"112",
+	"endFreq": "117.6",
+	"footnoteS": ["5.64"],
+	"radioBusinessS": [{
+		"business": "无线电导航",
+		"footnote": ["5.60"]
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}, {
+		"business": "[水上移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"117.6",
+	"endFreq": "126",
+	"footnoteS": ["5.64"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "水上移动",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": ["5.60"]
+	}]
+}
+, {
+	"startFreq":"126",
+	"endFreq": "129",
+	"footnoteS": ["5.64"],
+	"radioBusinessS": [{
+		"business": "无线电导航",
+		"footnote": ["5.60"]
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}, {
+		"business": "[水上移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"129",
+	"endFreq": "130",
+	"footnoteS": ["5.64"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "水上移动",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": ["5.60"]
+	}]
+}
+, {
+	"startFreq":"130",
+	"endFreq": "135.7",
+	"footnoteS": ["5.64"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "水上移动",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"135.7",
+	"endFreq": "137.8",
+	"footnoteS": ["5.64","5.67B"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "水上移动",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "[业余]",
+		"footnote": ["5.67A"]
+	}]
+}
+, {
+	"startFreq":"137.8",
+	"endFreq": "160",
+	"footnoteS": ["5.64"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "水上移动",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"160",
+	"endFreq": "190",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "航空无线电导航",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"190",
+	"endFreq": "200",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空无线电导航",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"200",
+	"endFreq": "285",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空无线电导航",
+		"footnote": null
+	}, {
+		"business": "[航空移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"285",
+	"endFreq": "325",
+	"footnoteS": ["5.73"],
+	"radioBusinessS": [{
+		"business": "航空无线电导航",
+		"footnote": null
+	}, {
+		"business": "水上无线电导航（无线电信标）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"325",
+	"endFreq": "405",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空无线电导航",
+		"footnote": null
+	}, {
+		"business": "[航空移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"405",
+	"endFreq": "415",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "无线电导航",
+		"footnote": ["5.76"]
+	}, {
+		"business": "[航空移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"415",
+	"endFreq": "472",
+	"footnoteS": ["5.82"],
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": ["5.79"]
+	}, {
+		"business": "航空无线电导航",
+		"footnote": ["5.77"]
+	}]
+}
+, {
+	"startFreq":"472",
+	"endFreq": "479",
+	"footnoteS": ["5.80B","5.82"],
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": ["5.79"]
+	}, {
+		"business": "航空无线电导航",
+		"footnote": ["5.77"]
+	}]
+}
+, {
+	"startFreq":"479",
+	"endFreq": "495",
+	"footnoteS": ["5.82"],
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": ["5.79","5.79A"]
+	}, {
+		"business": "航空无线电导航",
+		"footnote": ["5.77"]
+	}]
+}
+, {
+	"startFreq":"495",
+	"endFreq": "505",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"505",
+	"endFreq": "526.5",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": ["5.79","5.79A","5.84"]
+	}, {
+		"business": "航空无线电导航",
+		"footnote": null
+	}, {
+		"business": "[航空移动]",
+		"footnote": null
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"526.5",
+	"endFreq": "535",
+	"footnoteS": ["5.88"],
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": null
+	}, {
+		"business": "航空无线电导航",
+		"footnote": null
+	}, {
+		"business": "[移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"535",
+	"endFreq": "1606.5",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": null
+	}, {
+		"business": "[航空无线电导航]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"1606.5",
+	"endFreq": "1800",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": ["CHN3"]
+	}]
+}
+, {
+	"startFreq":"1800",
+	"endFreq": "2000",
+	"footnoteS": ["5.97"],
+	"radioBusinessS": [{
+		"business": "业余",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "[无线电定位]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"2000",
+	"endFreq": "2065",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"2065",
+	"endFreq": "2107",
+	"footnoteS": ["5.106","CHN4"],
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"2107",
+	"endFreq": "2170",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"2170",
+	"endFreq": "2173.5",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"2173.5",
+	"endFreq": "2190.5",
+	"footnoteS": ["5.108","5.109","5.110","5.111"],
+	"radioBusinessS": [{
+		"business": "移动（遇险和呼叫）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"2190.5",
+	"endFreq": "2194",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"2194",
+	"endFreq": "2300",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"2300",
+	"endFreq": "2495",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "广播",
+		"footnote": ["5.113"]
+	}]
+}
+, {
+	"startFreq":"2495",
+	"endFreq": "2501",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "标准频率和时间信号（2500kHz）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"2501",
+	"endFreq": "2502",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "标准频率和时间信号",
+		"footnote": null
+	}, {
+		"business": "[空间研究]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"2502",
+	"endFreq": "2505",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "标准频率和时间信号",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"2505",
+	"endFreq": "2850",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"2850",
+	"endFreq": "3025",
+	"footnoteS": ["5.111","5.115"],
+	"radioBusinessS": [{
+		"business": "航空移动（R）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"3025",
+	"endFreq": "3155",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动（OR）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"3155",
+	"endFreq": "3200",
+	"footnoteS": ["5.116","CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动（R）除外）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"3200",
+	"endFreq": "3230",
+	"footnoteS": ["5.116","CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动（R）除外）",
+		"footnote": null
+	}, {
+		"business": "广播",
+		"footnote": ["5.113"]
+	}]
+}
+, {
+	"startFreq":"3230",
+	"endFreq": "3400",
+	"footnoteS": ["5.116","CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "广播",
+		"footnote": ["5.113"]
+	}]
+}
+, {
+	"startFreq":"3400",
+	"endFreq": "3500",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"3500",
+	"endFreq": "3900",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "业余",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"3900",
+	"endFreq": "3950",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "航空移动",
+		"footnote": null
+	}, {
+		"business": "广播",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"3950",
+	"endFreq": "4000",
+	"footnoteS": ["5.126","CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "广播",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"4000",
+	"endFreq": "4063",
+	"footnoteS": ["5.126"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "水上移动",
+		"footnote": ["5.127"]
+	}]
+}
+, {
+	"startFreq":"4063",
+	"endFreq": "4438",
+	"footnoteS": ["5.128","CHN5"],
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": ["5.79A","5.109","5.110","5.130","5.132"]
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}, {
+		"business": "[航空移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"4438",
+	"endFreq": "4488",
+	"footnoteS": ["CHN4","CHN30"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"4488",
+	"endFreq": "4650",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"4650",
+	"endFreq": "4700",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动（R）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"4700",
+	"endFreq": "4750",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动（OR）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"4750",
+	"endFreq": "4850",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "广播",
+		"footnote": ["5.113"]
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"4850",
+	"endFreq": "4995",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "陆地移动",
+		"footnote": null
+	}, {
+		"business": "广播",
+		"footnote": ["5.113"]
+	}]
+}
+, {
+	"startFreq":"4995",
+	"endFreq": "5003",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "标准频率和时间信号（5000kHz）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"5003",
+	"endFreq": "5005",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "标准频率和时间信号",
+		"footnote": null
+	}, {
+		"business": "[空间研究]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"5005",
+	"endFreq": "5060",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "广播",
+		"footnote": ["5.113"]
+	}]
+}
+, {
+	"startFreq":"5060",
+	"endFreq": "5250",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[移动（航空移动除外）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"5250",
+	"endFreq": "5275",
+	"footnoteS": ["CHN4","CHN30"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[移动（航空移动除外）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"5275",
+	"endFreq": "5351.5",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[移动（航空移动除外）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"5351.5",
+	"endFreq": "5366.5",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[移动（航空移动除外）]",
+		"footnote": null
+	}, {
+		"business": "[业余]",
+		"footnote": ["5.133B"]
+	}]
+}
+, {
+	"startFreq":"5366.5",
+	"endFreq": "5450",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[移动（航空移动除外）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"5450",
+	"endFreq": "5480",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "航空移动（OR）",
+		"footnote": null
+	}, {
+		"business": "陆地移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"5480",
+	"endFreq": "5680",
+	"footnoteS": ["5.111","5.115"],
+	"radioBusinessS": [{
+		"business": "航空移动（R）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"5680",
+	"endFreq": "5730",
+	"footnoteS": ["5.111","5.115"],
+	"radioBusinessS": [{
+		"business": "航空移动（OR）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"5730",
+	"endFreq": "5900",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动（R）除外）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"5900",
+	"endFreq": "5950",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": ["5.134","CHN6"]
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "陆地移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"5950",
+	"endFreq": "6200",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"6200",
+	"endFreq": "6525",
+	"footnoteS": ["5.109","5.110","5.130","5.132","5.137","CHN5"],
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"6525",
+	"endFreq": "6685",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动（R）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"6685",
+	"endFreq": "6765",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动（OR）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"6765",
+	"endFreq": "7000",
+	"footnoteS": ["5.138","CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"7000",
+	"endFreq": "7100",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "业余",
+		"footnote": null
+	}, {
+		"business": "卫星业余",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"7100",
+	"endFreq": "7200",
+	"footnoteS": ["5.141B"],
+	"radioBusinessS": [{
+		"business": "业余",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"7200",
+	"endFreq": "7300",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"7300",
+	"endFreq": "7350",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": ["5.134","CHN6"]
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"7350",
+	"endFreq": "7450",
+	"footnoteS": ["5.143A","CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"7450",
+	"endFreq": "8100",
+	"footnoteS": ["5.144","CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动（R）除外）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"8100",
+	"endFreq": "8195",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "水上移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"8195",
+	"endFreq": "8815",
+	"footnoteS": ["5.109","5.110","5.111","5.132","5.145","CHN5"],
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"8815",
+	"endFreq": "8965",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动（R）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"8965",
+	"endFreq": "9040",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动（OR）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"9040",
+	"endFreq": "9305",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"9305",
+	"endFreq": "9355",
+	"footnoteS": ["CHN4","CHN30"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"9355",
+	"endFreq": "9400",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"9400",
+	"endFreq": "9500",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": ["5.134","CHN6"]
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"9500",
+	"endFreq": "9900",
+	"footnoteS": ["5.147"],
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": null
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"9900",
+	"endFreq": "9995",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"9995",
+	"endFreq": "10003",
+	"footnoteS": ["5.111"],
+	"radioBusinessS": [{
+		"business": "标准频率和时间信号（10000kHz）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"10003",
+	"endFreq": "10005",
+	"footnoteS": ["5.111"],
+	"radioBusinessS": [{
+		"business": "标准频率和时间信号",
+		"footnote": null
+	}, {
+		"business": "[空间研究]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"10005",
+	"endFreq": "10100",
+	"footnoteS": ["5.111"],
+	"radioBusinessS": [{
+		"business": "航空移动（R）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"10100",
+	"endFreq": "10150",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[业余]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"10150",
+	"endFreq": "11175",
+	"footnoteS": ["CHN4","CHN5"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[移动（航空移动（R）除外）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"11175",
+	"endFreq": "11275",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动（OR）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"11275",
+	"endFreq": "11400",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动（R）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"11400",
+	"endFreq": "11600",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "陆地移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"11600",
+	"endFreq": "11650",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": ["5.134","CHN6"]
+	}, {
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"11650",
+	"endFreq": "12050",
+	"footnoteS": ["5.147"],
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": null
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"12050",
+	"endFreq": "12100",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": ["5.134","CHN6"]
+	}, {
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"12100",
+	"endFreq": "12230",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"12230",
+	"endFreq": "13200",
+	"footnoteS": ["5.109","5.110","5.132","5.145","CHN5"],
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"13200",
+	"endFreq": "13260",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动（OR）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"13260",
+	"endFreq": "13360",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动（R）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"13360",
+	"endFreq": "13410",
+	"footnoteS": ["5.149"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"13410",
+	"endFreq": "13450",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[移动(航空移动(R)除外)]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"13450",
+	"endFreq": "13550",
+	"footnoteS": ["CHN4","CHN30"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[移动(航空移动(R)除外)]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"13550",
+	"endFreq": "13570",
+	"footnoteS": ["5.150","CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[移动(航空移动(R)除外)]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"13570",
+	"endFreq": "13600",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": ["5.134","CHN6"]
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"13600",
+	"endFreq": "13800",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": null
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"13800",
+	"endFreq": "13870",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": ["5.134","CHN6"]
+	}, {
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"13870",
+	"endFreq": "14000",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[移动(航空移动(R)除外)]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"14000",
+	"endFreq": "14250",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "业余",
+		"footnote": null
+	}, {
+		"business": "卫星业余",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"14250",
+	"endFreq": "14350",
+	"footnoteS": ["5.152","CHN4"],
+	"radioBusinessS": [{
+		"business": "业余",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"14350",
+	"endFreq": "14990",
+	"footnoteS": ["CHN4","CHN5"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[移动(航空移动(R)除外)]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"14990",
+	"endFreq": "15005",
+	"footnoteS": ["5.111"],
+	"radioBusinessS": [{
+		"business": "标准频率和时间信号（15000kHz）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"15005",
+	"endFreq": "15010",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "标准频率和时间信号",
+		"footnote": null
+	}, {
+		"business": "[空间研究]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"15010",
+	"endFreq": "15100",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动（OR）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"15100",
+	"endFreq": "15600",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": null
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"15600",
+	"endFreq": "15800",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": ["5.134","CHN6"]
+	}, {
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"15800",
+	"endFreq": "16100",
+	"footnoteS": ["5.153","CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"16100",
+	"endFreq": "16200",
+	"footnoteS": ["CHN4","CHN30"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"16200",
+	"endFreq": "16360",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"16360",
+	"endFreq": "17410",
+	"footnoteS": ["5.109","5.110","5.132","5.145","CHN5"],
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"17410",
+	"endFreq": "17480",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"17480",
+	"endFreq": "17550",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": ["5.134","CHN6"]
+	}, {
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"17550",
+	"endFreq": "17900",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"17900",
+	"endFreq": "17970",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动（R）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"17970",
+	"endFreq": "18030",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动（OR）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"18030",
+	"endFreq": "18052",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"18052",
+	"endFreq": "18068",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[空间研究]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"18068",
+	"endFreq": "18168",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "业余",
+		"footnote": null
+	}, {
+		"business": "卫星业余",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"18168",
+	"endFreq": "18780",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[移动（航空移动除外）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"18780",
+	"endFreq": "18900",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"18900",
+	"endFreq": "19020",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": ["5.134","CHN6"]
+	}, {
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"19020",
+	"endFreq": "19680",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"19680",
+	"endFreq": "19800",
+	"footnoteS": ["5.132","CHN5"],
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"19800",
+	"endFreq": "19990",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"19990",
+	"endFreq": "19995",
+	"footnoteS": ["5.111"],
+	"radioBusinessS": [{
+		"business": "标准频率和时间信号",
+		"footnote": null
+	}, {
+		"business": "[空间研究]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"19995",
+	"endFreq": "20010",
+	"footnoteS": ["5.111"],
+	"radioBusinessS": [{
+		"business": "标准频率和时间信号（20000kHz）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"20010",
+	"endFreq": "21000",
+	"footnoteS": ["CHN4","CHN5"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"21000",
+	"endFreq": "21450",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "业余",
+		"footnote": null
+	}, {
+		"business": "卫星业余",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"21450",
+	"endFreq": "21850",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": null
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"21850",
+	"endFreq": "21870",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"21870",
+	"endFreq": "21924",
+	"footnoteS": ["5.155B","CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"21924",
+	"endFreq": "22000",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "航空移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"22000",
+	"endFreq": "22855",
+	"footnoteS": ["5.132","CHN5"],
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"22855",
+	"endFreq": "23000",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"23000",
+	"endFreq": "23200",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[移动（航空移动（R）除外）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"23200",
+	"endFreq": "23350",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": ["5.156A"]
+	}, {
+		"business": "航空移动（OR）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"23350",
+	"endFreq": "24000",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": ["5.157"]
+	}]
+}
+, {
+	"startFreq":"24000",
+	"endFreq": "24450",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "陆地移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"24450",
+	"endFreq": "24600",
+	"footnoteS": ["CHN4","CHN30"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "陆地移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"24600",
+	"endFreq": "24890",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "陆地移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"24890",
+	"endFreq": "24990",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "业余",
+		"footnote": null
+	}, {
+		"business": "卫星业余",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"24990",
+	"endFreq": "25005",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "标准频率和时间信号（25000kHz）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"25005",
+	"endFreq": "25010",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "标准频率和时间信号",
+		"footnote": null
+	}, {
+		"business": "[空间研究]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"25010",
+	"endFreq": "25070",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"25070",
+	"endFreq": "25210",
+	"footnoteS": ["CHN5"],
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"25210",
+	"endFreq": "25550",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"25550",
+	"endFreq": "25600",
+	"footnoteS": ["5.149"],
+	"radioBusinessS": [{
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"25600",
+	"endFreq": "25670",
+	"footnoteS": ["5.149"],
+	"radioBusinessS": [{
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "[陆地移动]",
+		"footnote": null
+	}, {
+		"business": "[水上移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"25670",
+	"endFreq": "26100",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "广播",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"26100",
+	"endFreq": "26175",
+	"footnoteS": ["5.132"],
+	"radioBusinessS": [{
+		"business": "水上移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"26175",
+	"endFreq": "26200",
+	"footnoteS": ["CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"26200",
+	"endFreq": "26350",
+	"footnoteS": ["CHN4","CHN30"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"26350",
+	"endFreq": "27500",
+	"footnoteS": ["5.150","CHN4"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}]
+}
+]

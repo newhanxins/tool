@@ -1,0 +1,98 @@
+<!--
+ * @Author: You
+ * @Date: 2023-03-14 11:10:59
+ * @LastEditors: Do not edit
+ * @LastEditTime: 2023-03-14 11:25:37
+ * @FilePath: \mini-vuef:\Protest\测试请求\login.html
+-->
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta HTTP-EQUIV="pragma" CONTENT="no-cache">
+    <meta HTTP-EQUIV="Cache-Control" CONTENT="no-cache, must-revalidate">
+    <meta HTTP-EQUIV="expires" CONTENT="0">
+    <title>后台管理</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+</head>
+
+<body id="logobg">
+    <div id="bodybg"><img src="resources/images/login/loginbg.png" /></div>
+  <span class="version" onclick="herf()">软件版本更新日志</span>
+    <div id="main" class="clearfix">
+        <div id="content">
+            <div id="logintit">
+                <p>欢迎登录</p>
+            </div>
+            <div id="rightlogin">
+                <form>
+                    <div id="logname" class="clearfix">
+                    <span class="logico" id="usericon"></span>
+                    <input type="text" name="username" class="input nameword inputcss" placeholder="请输入账号" autocomplete="off">
+                </div>
+                <div id="logpass" class="clearfix">
+                    <span class="logico" id="passicon"></span>
+                    <input type="password" name="passname" class="input password inputcss" placeholder="请输入密码" autocomplete="new-password">
+                </div>
+                <div id="loginbu">
+                    <input type="button" class="loginbut" onclick="loginload()" value="登录" />
+                </div>
+                <div id="tips"></div>
+                </form>
+            </div>
+            <button onclick="loginload()">登录</button>
+            <button onclick="addload()">添加add</button>
+        </div>
+    </div>
+    
+    <script type="text/javascript" src="./jquery-1.11.1.min.js"></script>
+    <script type="text/javascript">
+    //设置password框js
+    function loginload() {
+        
+        $.ajax({
+            type: "get",
+            url: "http://192.168.24.5:8888/back/group/group",
+            data: null,
+            dataType: "json",
+            success: function(data) {
+                if (data.success == true) {
+                    
+                } else {
+                }
+            },
+            error: function(res) {
+            }
+        });
+    }
+    function addload(){
+        let resdd={"group_info":{
+              "group_name":"groupName",
+              "group_pwd":"groupPass",
+              "group_level": 1,
+              "group_identify":2,
+              "group_unit":2
+            }}
+            let ress=JSON.stringify(resdd)
+        $.ajax({
+            type: "post",
+            url: "http://192.168.24.5:8888/back/group/add",
+            data: ress,
+            dataType: "json",
+            success: function(data) {
+                if (data.success == true) {
+                    
+                } else {
+                }
+            },
+            error: function(res) {
+            }
+        });
+    }
+    </script>
+</body>
+
+</html>

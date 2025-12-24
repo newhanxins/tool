@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    #timeline { border: 1px solid #ddd; }
+    .tooltip { position: absolute; background: #fff; padding: 5px; border: 1px solid #ccc; }
+  </style>
+</head>
+<body>
+  <canvas id="timeline"></canvas>
+  <div id="tooltip" class="tooltip"></div>
+
+  <script>
+    // 事件数据结构 ‌:ml-citation{ref="3" data="citationList"}
+    const events = [
+      { id: 1, name: "晨会", start: "2025-04-01T09:00", end: "2025-04-01T09:30", color: "#FF6B6B" },
+      { id: 2, name: "项目评审", start: "2025-04-01T09:15", end: "2025-04-01T10:45", color: "#4ECDC4" },
+      { id: 3, name: "客户拜访", start: "2025-04-01T10:00", end: "2025-04-01T11:30", color: "#45B7D1" },
+      { id: 4, name: "1", start: "2025-04-01T9:00", end: "2025-04-01T12:30", color: "#45B7D1" },
+      { id: 5, name: "2", start: "2025-04-01T14:00", end: "2025-04-01T15:30", color: "#45B6D1" },
+      { id: 6, name: "3", start: "2025-04-01T10:00", end: "2025-04-01T11:30", color: "#45B7D1" },
+    ];
+
+    // 画布配置 ‌:ml-citation{ref="6" data="citationList"}
+    const config = {
+      canvasWidth: 800,
+      canvasHeight: 300,
+      timeAxisHeight: 40,
+      hourWidth: 100,
+      rowHeight: 40,
+      padding: 5
+    };
+
+    // 初始化画布
+    const canvas = document.getElementById('timeline');
+    const ctx = canvas.getContext('2d');
+    canvas.width = config.canvasWidth;
+    canvas.height = config.canvasHeight;
+
+    // 时间转换函数 ‌:ml-citation{ref="6" data="citationList"}
+    function timeToX(dateStr) {
+      const date = new Date(dateStr);
+      return (date.getHours() + date.getMinutes()/60 - 9) * config.hourWidth;
+    }
+
+    // 智能轨道布局算法 ‌:ml-citation{ref="3" data="citationList"}
+    function layoutEvents(events) {
+      const sorted = [...events].sort((a,b) => new Date(a.start) - new Date(b.start));
+      const tracks = [];
+      
+      sorted.forEach(event => {
+        let placed = false;
+        for (const track of tracks) {
+          const last = track[track.length - 1];
+          if (new Date(event.start) >= new Date(last.end)) {
+            track.push(event);
+            placed = true;
+            break;
+          }
+        }
+        if (!placed) tracks.push([event]);
+      });
+      return tracks;
+    }
+
+    // 绘制时间轴 ‌:ml-citation{ref="6" data="citationList"}
+    function drawTimeAxis() {
+      ctx.fillStyle = '#333';
+      ctx.font = '12px Arial';
+      for (let hour = 9; hour <= 18; hour++) {
+        const x = (hour - 9) * config.hourWidth;
+        ctx.fillText(`${hour}:00`, x, 20);
+      }
+    }
+
+    // 绘制事件块 ‌:ml-citation{ref="3" data="citationList"}
+    function drawEvents() {
+      const tracks = layoutEvents(events);
+      tracks.forEach((track, row) => {
+        track.forEach(event => {
+          const x = timeToX(event.start);
+          const width = timeToX(event.end) - x;
+          const y = config.timeAxisHeight + row * config.rowHeight;
+          
+          ctx.fillStyle = event.color;
+          ctx.fillRect(x, y, width, config.rowHeight - config.padding);
+          
+          ctx.fillStyle = '#fff';
+          ctx.font = '12px Arial';
+          ctx.fillText(event.name, x + 5, y + 20);
+        });
+      });
+    }
+
+    // 交互处理 ‌:ml-citation{ref="2" data="citationList"}
+    canvas.addEventListener('mousemove', (e) => {
+      const rect = canvas.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      
+      const tooltip = document.getElementById('tooltip');
+      events.forEach(event => {
+        const eventX = timeToX(event.start);
+        const eventWidth = timeToX(event.end) - eventX;
+        const track = layoutEvents(events).findIndex(t => t.includes(event));
+        const eventY = config.timeAxisHeight + track * config.rowHeight;
+        
+        if (x > eventX && x < eventX + eventWidth && y > eventY && y < eventY + config.rowHeight) {
+          tooltip.style.display = 'block';
+          tooltip.style.left = `${e.pageX}px`;
+          tooltip.style.top = `${e.pageY}px`;
+          tooltip.innerHTML = `${event.name}<br>${event.start} ~ ${event.end}`;
+        }
+      });
+    });
+
+    // 主绘制函数
+    function draw() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawTimeAxis();
+      drawEvents();
+    }
+    
+    draw();
+  </script>
+</body>
+</html>

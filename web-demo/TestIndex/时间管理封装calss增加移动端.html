@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <style>
+    /* 原有样式保持不变 */
+    #container {
+      width: 100%;
+      height: 600px;
+      overflow: auto;
+      border: 1px solid #ddd;
+      -webkit-overflow-scrolling: touch;
+    }
+    /* 其他样式同前 */
+  </style>
+</head>
+<body>
+  <!-- 保持原有DOM结构 -->
+  <div id="container">
+    <canvas id="timeline"></canvas>
+  </div>
+  <div id="tooltip" class="tooltip"></div>
+
+  <script>
+class TimelineVisualizer {
+  constructor(containerId, canvasId) {
+    // 原有配置和状态保持不变
+    // 新增触摸状态
+    this.touchState = {
+      startX: 0,
+      startY: 0,
+      lastDistance: 0,
+      isDragging: false,
+      isPinching: false,
+      lastTouchTime: 0
+    };
+    
+    // 原有初始化代码保持不变
+  }
+
+  // 修改事件绑定方法
+  bindEvents() {
+    // 原有鼠标事件保持不变
+    
+    // 新增触摸事件处理
+    this.addTouchEvents();
+  }
+
+  addTouchEvents() {
+    this.canvas.addEventListener('touchstart', e => this.handleTouchStart(e));
+    this.canvas.addEventListener('touchmove', e => this.handleTouchMove(e));
+    this.canvas.addEventListener('touchend', e => this.handleTouchEnd(e));
+    this.canvas.addEventListener('touchcancel', e => this.handleTouchEnd(e));
+  }
+
+  handleTouchStart(e) {
+    e.preventDefault();
+    const touches = e.touches;
+    
+    // 单指触摸
+    if (touches.length === 1) {
+      const touch = touches;
+      this.touchState = {
+        startX: touch.clientX,
+        startY: touch.clientY,
+        startOffsetX: this.state.offsetX,
+        isDragging: true,
+        isPinching: false,
+        lastTouchTime: Date.now()
+      };
+    }
+    // 双指缩放
+    else if (touches.length === 2) {
+      const [t1, t2] = Array.from(touches);
+      this.touchState = {
+        startX: (t1.clientX + t2.clientX) / 2,
+        startY: (t1.clientY + t2.clientY) / 2,
+        lastDistance: this.getTouchDistance(t1, t2),
+        startScale: this.state.scale,
+        startOffsetX: this.state.offsetX,
+        isDragging: false,
+        isPinching: true
+      };
+    }
+  }
+
+  handleTouchMove(e) {
+    e.preventDefault();
+    const touches = e.touches;
+    
+    if (this.touchState.isDragging && touches.length === 1) {
+      const touch = touches;
+      const deltaX = touch.clientX - this.touchState.startX;
+      this.state.offsetX = this.touchState.startOffsetX + deltaX * 0.5;
+      this.state.offsetX = Math.min(0, Math.max(
+        this.state.offsetX,
+        this.canvas.width - this.container.clientWidth
+      ));
+      this.throttledRender();
+    }
+    else if (this.touchState.isPinching && touches.length === 2) {
+      const [t1, t2] = Array.from(touches);
+      const currentDistance = this.getTouchDistance(t1, t2);
+      const scaleFactor = currentDistance / this.touchState.lastDistance;
+      
+      // 计算缩放中心
+      const centerX = (t1.clientX + t2.clientX) / 2;
+      const centerValue = this.xToValue(
+        centerX - this.container.getBoundingClientRect().left
+      );
+      
+      // 应用缩放
+      this.state.scale = Math.min(
+        this.config.maxUnitWidth / (this.config.baseWidth / 300),
+        Math.max(
+          this.config.minUnitWidth / (this.config.baseWidth / 300),
+          this.state.scale * scaleFactor
+        )
+      );
+      
+      // 调整偏移量保持中心
+      const newCenterX = this.valueToX(centerValue);
+      this.state.offsetX += (centerX - newCenterX);
+      
+      this.touchState.lastDistance = currentDistance;
+      this.throttledRender();
+    }
+  }
+
+  handleTouchEnd(e) {
+    // 处理点击事件（快速轻触）
+    if (e.touches.length === 0 && !this.touchState.isDragging && 
+        Date.now() - this.touchState.lastTouchTime < 200) {
+      const rect = this.canvas.getBoundingClientRect();
+      const touch = e.changedTouches;
+      const x = touch.clientX - rect.left;
+      const y = touch.clientY - rect.top;
+      
+      // 选中事件逻辑
+      const event = this.findEventAt(x, y);
+      if (event) {
+        this.tooltip.style.display = 'block';
+        this.tooltip.style.left = `${touch.pageX + 15}px`;
+        this.tooltip.style.top = `${touch.pageY + 15}px`;
+        this.tooltip.innerHTML = `<strong>${event.title}</strong><br>
+          Value: ${event.startValue.toFixed(1)} - ${event.endValue.toFixed(1)}`;
+        
+        // 添加选中效果（示例）
+        this.ctx.strokeStyle = '#ff0000';
+        this.ctx.lineWidth = 2;
+        const tracks = this.layoutEvents(this.state.events);
+        tracks.forEach((track, index) => {
+          track.forEach(evt => {
+            if (evt === event) {
+              const yBase = this.config.axisHeight + index * this.config.trackHeight;
+              const xStart = this.valueToX(event.startValue);
+              const xEnd = this.valueToX(event.endValue);
+              this.ctx.strokeRect(xStart, yBase, xEnd - xStart, this.config.trackHeight);
+            }
+          });
+        });
+        setTimeout(() => this.throttledRender(), 500);
+      }
+    }
+    
+    this.touchState.isDragging = false;
+    this.touchState.isPinching = false;
+  }
+
+  getTouchDistance(t1, t2) {
+    return Math.hypot(
+      t2.clientX - t1.clientX,
+      t2.clientY - t1.clientY
+    );
+  }
+
+  // 原有其他方法保持不变
+  // ...
+}
+
+// 初始化
+new TimelineVisualizer('container', 'timeline');
+  </script>
+</body>
+</html>

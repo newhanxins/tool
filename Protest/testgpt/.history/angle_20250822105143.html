@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenLayers角度测量</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css">
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        #map {
+            width: 100%;
+            height: 100%;
+        }
+        #info {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        }
+        button {
+            padding: 8px 15px;
+            margin: 5px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div id="info">
+        <button id="measure">开始测量</button>
+        <button id="clear">清除</button>
+        <div id="result"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/ol/ol.js"></script>
+    <script>
+        const map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([116.404, 39.915]),
+                zoom: 10
+            })
+        });
+
+        let drawInteraction;
+        let points = [];
+        let vectorLayer = new ol.layer.Vector({
+            source: new ol.source.Vector()
+        });
+        map.addLayer(vectorLayer);
+
+        document.getElementById('measure').addEventListener('click', function() {
+            clearMeasurements();
+            drawInteraction = new ol.interaction.Draw({
+                type: 'Point',
+                source: vectorLayer.getSource()
+            });
+
+            drawInteraction.on('drawend', function(evt) {
+                points.push(evt.feature.getGeometry().getCoordinates());
+                
+                if (points.length === 3) {
+                    calculateAngle(points);
+                    map.removeInteraction(drawInteraction);
+                }
+            });
+
+            map.addInteraction(drawInteraction);
+        });
+
+        document.getElementById('clear').addEventListener('click', clearMeasurements);
+
+        function clearMeasurements() {
+            vectorLayer.getSource().clear();
+            points = [];
+            document.getElementById('result').innerHTML = '';
+            if (drawInteraction) {
+                map.removeInteraction(drawInteraction);
+            }
+        }
+
+        function calculateAngle(points) {
+            const [A, B, C] = points;
+            
+            // 计算向量BA和BC
+            const BA = [A[0] - B[0], A[1] - B[1]];
+            const BC = [C[0] - B[0], C[1] - B[1]];
+            
+            // 计算点积
+            const dotProduct = BA[0] * BC[0] + BA[1] * BC[1];
+            
+            // 计算模
+            const magnitudeBA = Math.sqrt(BA[0] * BA[0] + BA[1] * BA[1]);
+            const magnitudeBC = Math.sqrt(BC[0] * BC[0] + BC[1] * BC[1]);
+            
+            // 计算夹角(弧度)
+            let angleRad = Math.acos(dotProduct / (magnitudeBA * magnitudeBC));
+            
+            // 转换为角度
+            let angleDeg = angleRad * (180 / Math.PI);
+            
+            // 计算叉积确定方向(顺时针/逆时针)
+            const crossProduct = BA[0] * BC[1] - BA[1] * BC[0];
+            
+            // 转换为0-360度范围
+            if (crossProduct < 0) {
+                angleDeg = 360 - angleDeg;
+            }
+            
+            // 绘制线和标记
+            drawLinesAndMarkers(points, angleDeg);
+            
+            // 显示结果
+            document.getElementById('result').innerHTML = `测量角度: ${angleDeg.toFixed(2)}°`;
+        }
+
+        function drawLinesAndMarkers(points, angle) {
+            const [A, B, C] = points;
+            const source = vectorLayer.getSource();
+            
+            // 绘制线段AB
+            const lineAB = new ol.geom.LineString([A, B]);
+            const featureAB = new ol.Feature({
+                geometry: lineAB,
+                name: 'Line AB'
+            });
+            featureAB.setStyle(new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'red',
+                    width: 2
+                })
+            }));
+            source.addFeature(featureAB);
+            
+            // 绘制线段BC
+            const lineBC = new ol.geom.LineString([B, C]);
+            const featureBC = new ol.Feature({
+                geometry: lineBC,
+                name: 'Line BC'
+            });
+            featureBC.setStyle(new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'blue',
+                    width: 2
+                })
+            }));
+            source.addFeature(featureBC);
+            
+            // 绘制点标记
+            points.forEach((point, index) => {
+                const marker = new ol.Feature({
+                    geometry: new ol.geom.Point(point),
+                    name: `Point ${String.fromCharCode(65 + index)}`
+                });
+                marker.setStyle(new ol.style.Style({
+                    image: new ol.style.Circle({
+                        radius: 6,
+                        fill: new ol.style.Fill({
+                            color: '#ffcc33'
+                        }),
+                        stroke: new ol.style.Stroke({
+                            color: '#333',
+                            width: 2
+                        })
+                    }),
+                    text: new ol.style.Text({
+                        text: String.fromCharCode(65 + index),
+                        fill: new ol.style.Fill({ color: '#000' }),
+                        stroke: new ol.style.Stroke({ color: '#fff', width: 2 }),
+                        offsetY: -15
+                    })
+                }));
+                source.addFeature(marker);
+            });
+            
+            // 绘制角度弧线
+            drawAngleArc(A, B, C, angle);
+        }
+
+        function drawAngleArc(A, B, C, angle) {
+            const source = vectorLayer.getSource();
+            const radius = Math.min(
+                ol.sphere.getDistance(ol.proj.toLonLat(A), ol.proj.toLonLat(B)) * 0.3,
+                ol.sphere.getDistance(ol.proj.toLonLat(C), ol.proj.toLonLat(B)) * 0.3
+            );
+            
+            // 计算向量BA和BC的角度
+            const BA = [A[0] - B[0], A[1] - B[1]];
+            const BC = [C[0] - B[0], C[1] - B[1]];
+            
+            let startAngle = Math.atan2(BA[1], BA[0]);
+            let endAngle = Math.atan2(BC[1], BC[0]);
+            
+            // 确保角度在0-2π范围内
+            if (startAngle < 0) startAngle += 2 * Math.PI;
+            if (endAngle < 0) endAngle += 2 * Math.PI;
+            
+            // 创建弧线点集
+            const arcPoints = [];
+            const steps = 20;
+            for (let i = 0; i <= steps; i++) {
+                const t = i / steps;
+                const angle = startAngle + t * (endAngle - startAngle);
+                const x = B[0] + radius * Math.cos(angle);
+                const y = B[1] + radius * Math.sin(angle);
+                arcPoints.push([x, y]);
+            }
+            
+            // 添加弧线特征
+            const arc = new ol.geom.LineString(arcPoints);
+            const arcFeature = new ol.Feature({
+                geometry: arc,
+                name: 'Angle Arc'
+            });
+            arcFeature.setStyle(new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'green',
+                    width: 2,
+                    lineDash: [5, 5]
+                })
+            }));
+            source.addFeature(arcFeature);
+        }
+    </script>
+</body>
+</html>

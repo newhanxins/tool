@@ -1,0 +1,60 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  html,
+  body {
+    height: 100%;
+  }
+  .container {
+    display: flex;
+    flex-direction: row;
+    font-family: menlo, "monospace", Tahoma, 微软雅黑, 幼圆 !important;
+    height: 100%;
+    padding: 20px;
+    position: relative;
+  }
+  .source {
+    flex: 45% 0 0;
+    margin-right: 10px;
+    padding: 10px 10px 10px 30px;
+    border: 0;
+    border-radius: 0;
+    resize: none;
+    outline: none;
+    border: 1px solid #d8d8d8;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+  .target {
+    flex: 1;
+  }
+  
+  /* JSON编辑器菜单 */
+  div.jsoneditor,
+  div.jsoneditor-menu {
+    border-color: #35cca2;
+  }
+  div.jsoneditor-menu {
+    background-color: #35cca2;
+  }
+  /* JSON编辑器代码颜色 */
+  .ace-jsoneditor .ace_variable {
+    color: #92278f;
+    font-weight: bold;
+  }
+  .ace-jsoneditor .ace_string {
+    color: #3ab54a;
+    font-weight: bold;
+  }
+  .ace-jsoneditor .ace_constant.ace_numeric {
+    color: #25aae2;
+    font-weight: bold;
+  }
+  /* 输入不合法JSON的情况下 */
+  .error-status .ace_constant, .error-status .ace_string {
+    color: #f1592a;
+    font-weight: bold;
+  }
+  

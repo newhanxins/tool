@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>动态网格布局</title>
+    <style>
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #f4f4f4;
+}
+.sptm-boxs{
+    width: 800px;
+    overflow: hidden;
+    overflow-x:auto;
+}
+
+.grid-container {
+    display: flex;
+    box-sizing: border-box;
+    /* transition: transform 0.5s; */
+}
+
+.grid-item-box{
+    flex-shrink:0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-right: 1px solid #333; /* 每个单元格右边框 */
+    box-sizing: border-box;
+}
+.grid-item-box:first-child {
+    border-left: 1px solid #333;
+}
+/* 最后一个单元格没有右边框 */
+/* .grid-item-box:last-child {
+    border-right: none; 
+} */
+.grid-item {
+    display: flex;
+    width:100%;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-color: #f0f0f0;
+    box-sizing: border-box;
+    border-bottom: 1px solid #333;
+}
+
+.grid-item:first-child {
+    border-top: 1px solid #333;
+}
+
+
+
+    </style>
+</head>
+<body>
+    <div class="sptm-boxs">
+        <div class="grid-container" id="grid-container"></div>
+        
+    </div>
+    
+
+    <div id="zoomable">内容</div>
+<button onclick="zoomIn()">放大</button>
+<button onclick="zoomOut()">缩小</button>
+ 
+
+
+    <script>
+        function zoomIn() {
+  var elem = document.getElementById("grid-container");
+  elem.style.transform = "scale(1.5)";
+}
+ 
+function zoomOut() {
+  var elem = document.getElementById("grid-container");
+  elem.style.transform = "scale(1)";
+}
+        // 获取容器
+const gridContainer = document.getElementById('grid-container');
+const widthContainer = 1000;
+// 容器总高度为200px
+const containerHeight = 200;
+
+// 创建十列，每列的行数在1到5之间
+for (let i = 0; i < 10; i++) {
+    const columnWidth = widthContainer / 10; // 每列的宽度
+    const columnDiv = document.createElement('div');
+    columnDiv.classList.add('grid-item-box');
+    columnDiv.style.height = `${containerHeight}px`; // 设置每列的高度为容器总高度
+    columnDiv.style.width = `${columnWidth}px`; // 设置每列的宽度
+    const rowCount = Math.floor(Math.random() * 5) + 1; // 随机生成1到5之间的行数
+    const rowHeight = containerHeight / rowCount; // 每行的高度（容器总高度 / 行数）
+
+    // 创建每列的单元格
+    for (let j = 0; j < rowCount; j++) {
+        const gridItem = document.createElement('div');
+        gridItem.classList.add('grid-item');
+        //gridItem.style.width = `50px`; // 设置每个单元格的宽度
+        gridItem.style.height = `${rowHeight}px`; // 设置每个单元格的高度
+        gridItem.textContent = `列111111111 ${i + 1} 行 ${j + 1}`; // 显示列和行的编号
+        columnDiv.appendChild(gridItem);
+    }
+    gridContainer.appendChild(columnDiv);
+}
+
+ 
+// gridContainer.addEventListener('wheel', (event) => {
+//   event.preventDefault(); // 阻止默认的滚动行为
+//   const delta = event.deltaY * -0.01; // 根据滚轮方向和速度调整缩放速度
+//   scale += delta; // 更新缩放比例
+//   scale = Math.min(Math.max(1, scale), 4); // 限制缩放范围，例如从0.125到4倍
+
+//   gridContainer.style.transform = `scale(${scale})`; // 应用缩放变换
+// });
+
+
+
+
+
+
+
+
+
+
+
+// script.js
+
+    const zoomableArea = document.getElementById('zoomable-area');
+    let scale = 1; // 初始缩放比例
+    let isDragging = false; // 是否正在拖动状态
+    let lastX = 0, lastY = 0; // 上次鼠标位置
+    let translateX = 0, translateY = 0; // 平移距离
+ 
+    // 缩放函数
+    function zoom(event) {
+        event.preventDefault(); // 阻止默认行为（例如页面滚动）
+        const delta = event.deltaY * -0.01; // 根据滚轮方向和速度计算缩放比例变化量
+        scale += delta; // 更新缩放比例
+        scale = Math.min(Math.max(1, scale), 6); // 限制缩放比例范围，例如从0.125到4倍之间
+        updateTransform(); // 应用变换
+    }
+ 
+    // 平移函数（拖动）
+    function drag(event) {
+        if (!isDragging) return; // 如果不在拖动状态，则不执行任何操作
+        const dx = event.clientX - lastX; // 计算水平移动距离
+        const dy = event.clientY - lastY; // 计算垂直移动距离
+        translateX += dx; // 更新水平平移距离
+        translateY += dy; // 更新垂直平移距离
+        lastX = event.clientX; // 更新上次鼠标位置为当前位置
+        lastY = event.clientY; // 更新上次鼠标位置为当前位置
+        updateTransform(); // 应用变换
+    }
+ 
+    // 应用变换函数（缩放和平移）
+    function updateTransform() {
+        if(translateY>containerHeight*scale/2){
+            translateY=containerHeight*scale/2-1;
+        }else if(translateY<-containerHeight*scale/2){
+            translateY=-containerHeight*scale/2+1;
+        }
+        if(scale==1){
+            translateX=0;
+            translateY=0;
+        }
+        gridContainer.style.transform = `translate(${translateX}px, ${translateY}px) scale(${scale})`; // 应用平移和缩放变换
+    }
+ 
+    // 添加事件监听器以处理滚轮事件和鼠标按下事件（开始拖动）和鼠标移动事件（拖动中）和鼠标释放事件（结束拖动）
+    gridContainer.addEventListener('wheel', zoom); // 监听滚轮事件以缩放图片
+    gridContainer.addEventListener('mousedown', (event) => { // 开始拖动时记录初始位置并设置拖动状态为true
+        lastX = event.clientX; // 记录初始鼠标X位置
+        lastY = event.clientY; // 记录初始鼠标Y位置
+        isDragging = true; // 设置拖动状态为true，开始拖动图片
+        gridContainer.style.cursor = 'grabbing'; // 
+    });
+    gridContainer.addEventListener('mousemove', drag); // 拖动过程中更新图片位置
+    gridContainer.addEventListener('mouseup', () => { // 结束拖动时设置拖动状态为false
+        isDragging = false; // 设置拖动状态为false，结束拖动图片
+        gridContainer.style.cursor = 'grab'; //
+    });
+    document.addEventListener('click', (event) => { 
+        console.log(event,event.clientX, event.clientY); // 点击图片区域时输出鼠标位置
+    })// 鼠标点击图片区域时设置光标样式移出图片区域时恢复光标样式
+
+
+
+let treeData={
+    "min_text_size": 14,//最小文字大小
+    "min_item_width":20,//最小项宽度
+    "box_width": 600,//容器宽度
+    "freq_band_width":1000,//频段宽度
+    "box_height": 120,//容器高度
+    "text_color":"#000000",//文字颜色
+    "background_color":[//背景颜色
+        {
+            type:"0001",
+            color:"#FF0000"
+        },
+        {
+            type:"0002",
+            color:"#00FF00"
+        }
+    ],
+    "freq_data":[
+        {
+            "start_freq": 9,
+            "end_freq": 300,
+            "unit":"KHz",
+            "children":[
+                {
+                    "start_freq": 9.5,
+                    "end_freq": 10,
+                    "children":[
+                        {
+                            "name":"广播",
+                            "type":"0001",
+                            "start_freq": 9.5,
+                            "end_freq": 10,
+                            "background_color":"#FF0000",
+                            "id": 1,
+                        },
+                        {
+                            "name":"固定",
+                            "type":"0002",
+                            "start_freq": 9.5,
+                            "end_freq": 10,
+                            "background_color":"#FF0d00",
+                            "id": 2,
+                        }
+                    ]
+                },
+                {
+                    "start_freq": 10,
+                    "end_freq": 100,
+                    "children":[
+                        {
+                            "name":"水上移动",
+                            "type":"0003",
+                            "start_freq": 10,
+                            "end_freq": 100,
+                            "background_color":"#FFFF00",
+                            "id": 3,
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}
+    </script>
+</body>
+</html>

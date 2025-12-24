@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input type="text" id="box1" placeholder="x起点">
+    <input type="text" id="box2" placeholder="x终点">
+    <input type="text" id="box3" placeholder="y起点">
+    <input type="text" id="box4" placeholder="y终点">
+    <input type="text" id="layers" placeholder="层级" value="9">
+    <button onclick="countxy()">获取结果</button>
+    <div id="outvalue">
+        <ruby><span>你</span><rt>ni</rt></ruby>
+    </div>
+    <script>
+        // function countxy(numbers){
+        //     numbers=document.getElementById("box").value ||numbers
+        //     var elebox=document.getElementById("outvalue")
+        //     var x1=11*2**(numbers-4)
+        //     var x2=14*2**(numbers-4)
+        //     var y1=6*2**(numbers-4)
+        //     var y2=8*2**(numbers-4)
+        //     var p = document.createElement("p");
+		//         p.innerHTML=numbers+"x    "+x1+","+x2;
+        //     elebox.appendChild(p)
+        //     var p1 = document.createElement("span");
+        //     p1.innerHTML=numbers+"y    "+y1+","+y2;
+        //     elebox.appendChild(p1)
+        // }
+        // for(let i=5;i<20;i++){
+        //     countxy(i)
+        // }
+        function getxy(numbers){
+            var numbers1=document.getElementById("box1").value
+            var numbers2=document.getElementById("box2").value
+            var numbers3=document.getElementById("box3").value
+            var numbers4=document.getElementById("box4").value
+            var layers=document.getElementById("layers").value
+            var elebox=document.getElementById("outvalue")
+            var x1=numbers1*2**(numbers-layers)
+            var x2=numbers2*2**(numbers-layers)
+            var y1=numbers3*2**(numbers-layers)
+            var y2=numbers4*2**(numbers-layers)
+            var p = document.createElement("p");
+		        p.innerHTML=numbers+"x    "+x1+","+x2;
+            elebox.appendChild(p)
+            var p1 = document.createElement("span");
+            p1.innerHTML=numbers+"y    "+y1+","+y2;
+            elebox.appendChild(p1)
+        }
+        function countxy(){
+            var layers=document.getElementById("layers").value
+            for(let i=layers;i<20;i++){
+                getxy(i)
+        }
+        }
+        
+    </script>
+</body>
+</html>

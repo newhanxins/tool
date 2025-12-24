@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenLayers Wrapper Example</title>
+  <!-- <link rel="stylesheet" href="../dist/my-openlayers-wrapper.css"> 引入提取的 CSS -->
+  <link rel="stylesheet" href="../dist/olMaps.css"> <!-- 引入自定义的 CSS -->
+  <link rel="stylesheet" href="../dist/olMaps.esm.css">
+  <style>
+    #map {
+      width: 100%;
+      height: 100vh;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+  <div id="map" class="custom-map-container"></div>
+
+  <!-- 引入你的编译库 -->
+  <!-- <script src="../dist/my-openlayers-wrapper.js"></script> -->
+  <script src="../dist/olMaps.js"></script>
+   <!-- <script src="../dist/olMaps.esm.js"></script> -->
+  <!-- <script src="../lib/index.js"></script> -->
+  <script>
+    // 使用你的库
+    document.addEventListener('DOMContentLoaded', function() {
+      // 确保库加载完毕后执行
+      // 创建地图实例
+      // var map = new ol.Map({ 
+      //     view: new ol.View({
+      //         center: [113.095939, 22.548943], // 中心坐标
+      //         projection: 'EPSG:4326', // 地图投影坐标系
+      //         zoom: 14 // 缩放登记
+      //     }),
+      //     target: 'map' // dom 的缩放等级
+      // });
+          
+      // var gaodeMapLayer = new ol.layer.Tile({ // 图层
+      //     source: new ol.source.XYZ({ // 提供图层源 
+      //         url: 'http://wprd0{1-4}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x={x}&y={y}&z={z}'
+      //     })
+      // });
+      // map.addLayer(gaodeMapLayer);
+        
+        var olMap = new olMaps();
+        //地图加载瓦片图层资源
+        var mapLayerSource = olMap.XYZ({
+          url: 'http://wprd0{1-4}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x={x}&y={y}&z={z}'
+        })
+        // 初始化地图
+        olMap.initMap(
+          'map',
+          "gaode",
+          false,
+          false,
+          {
+            mapCenter:[103, 30], // 初始中心坐标
+            mapZoom:3,// 加载地图层级
+            mapUrl:"./gaodeoff"
+          }
+        )
+        console.log(olMap.map)
+        console.log(olMap.ols)
+        // 添加点击事件监听
+        olMap.addClickListener((coordinate) => {
+        // 转换坐标到经纬度
+        var coordinates= olMap.transform(coordinate, "EPSG:3857", "EPSG:4326");
+        
+        // 弹窗显示信息
+        olMap.showPopup(coordinate, `经度: ${coordinates[0].toFixed(6)}, 纬度: ${coordinates[1].toFixed(6)}`);
+        });
+    });
+  </script>
+</body>
+</html>

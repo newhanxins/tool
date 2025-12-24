@@ -1,0 +1,6293 @@
+{
+  "table_name": "中国",
+  "format_type": 1,
+  "business_list": [
+    {
+      "business_id": 1,
+      "color": "#B0E0E6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "水上移动"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 2,
+      "color": "#F7F7C6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "水上无线电导航"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 3,
+      "color": "#C2E0C1",
+      "language": [
+        {
+          "code": 2052,
+          "name": "气象辅助"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 4,
+      "color": "#F3D5ED",
+      "language": [
+        {
+          "code": 2052,
+          "name": "水上无线电"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 5,
+      "color": "#FCE1D5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "无线电导航"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 6,
+      "color": "#C4FCE9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "固定"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 7,
+      "color": "#BCF3CD",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号（20kHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 8,
+      "color": "#DDFFD4",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[固定]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 9,
+      "color": "#FACEE0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[水上移动]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 10,
+      "color": "#E2F2B3",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[业余]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 11,
+      "color": "#C4D6CC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "航空无线电导航"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 12,
+      "color": "#CDB5F5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[航空移动]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 13,
+      "color": "#E2F4D1",
+      "language": [
+        {
+          "code": 2052,
+          "name": "水上无线电导航（无线电信标）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 14,
+      "color": "#CEF7FD",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[陆地移动]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 15,
+      "color": "#D0C3FF",
+      "language": [
+        {
+          "code": 2052,
+          "name": "广播"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 16,
+      "color": "#CBD6E0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[移动]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 17,
+      "color": "#F5F9E2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[航空无线电导航]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 18,
+      "color": "#BFCACB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "移动"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 19,
+      "color": "#B3E8F6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "无线电定位"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 20,
+      "color": "#E2F2D9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "业余"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 21,
+      "color": "#E6EDE6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "移动（航空移动除外）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 22,
+      "color": "#C3F5C1",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[无线电定位]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 23,
+      "color": "#B0C6C7",
+      "language": [
+        {
+          "code": 2052,
+          "name": "移动（遇险和呼叫）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 24,
+      "color": "#FCB7F0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号（2500kHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 25,
+      "color": "#E6FBC9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 26,
+      "color": "#B4D7EC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间研究]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 27,
+      "color": "#FDE8E3",
+      "language": [
+        {
+          "code": 2052,
+          "name": "航空移动（R）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 28,
+      "color": "#DCD3CA",
+      "language": [
+        {
+          "code": 2052,
+          "name": "航空移动（OR）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 29,
+      "color": "#FEF0B3",
+      "language": [
+        {
+          "code": 2052,
+          "name": "移动（航空移动（R）除外）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 30,
+      "color": "#B3C6F0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "航空移动"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 31,
+      "color": "#C4BBDB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "陆地移动"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 32,
+      "color": "#E1CBD0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号（5000kHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 33,
+      "color": "#EFDCDA",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[移动（航空移动除外）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 34,
+      "color": "#F9B3BA",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星业余"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 35,
+      "color": "#CBF8BC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号（10000kHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 36,
+      "color": "#DDEFF2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[移动（航空移动（R）除外）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 37,
+      "color": "#B1E6EB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "射电天文"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 38,
+      "color": "#DDF7DC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[移动(航空移动(R)除外)]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 39,
+      "color": "#DCB1ED",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号（15000kHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 40,
+      "color": "#E1BBB0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号（20000kHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 41,
+      "color": "#F2FDD5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "标准频率和时间信号（25000kHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 42,
+      "color": "#C6D9E5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间操作（卫星识别）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 43,
+      "color": "#C2C7EE",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 44,
+      "color": "#C1FAF2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[射电天文]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 45,
+      "color": "#B4EFF6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间操作（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 46,
+      "color": "#DFDFCE",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星气象（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 47,
+      "color": "#F7CDE3",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星移动（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 48,
+      "color": "#C9BDFD",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 49,
+      "color": "#B2E4BD",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星移动（空对地）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 50,
+      "color": "#F2D2BE",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间研究（空对地）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 51,
+      "color": "#F8B1F5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[航空移动（OR）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 52,
+      "color": "#B1F1F5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星移动（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 53,
+      "color": "#B1DDED",
+      "language": [
+        {
+          "code": 2052,
+          "name": "水上移动（使用DSC的遇险和安全呼叫）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 54,
+      "color": "#CEF1BD",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星移动（地对空）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 55,
+      "color": "#F4EDCF",
+      "language": [
+        {
+          "code": 2052,
+          "name": "水上移动（遇险和呼叫）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 56,
+      "color": "#D2C3B5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星水上移动（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 57,
+      "color": "#FFE3E7",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星水上移动（地对空）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 58,
+      "color": "#D8C6D0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间操作（空对地）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 59,
+      "color": "#E1E0F9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星移动"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 60,
+      "color": "#C1DDDA",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星标准频率和时间信号（400.1MHz）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 61,
+      "color": "#E7F5B5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星地球探测（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 62,
+      "color": "#F5D6FC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星气象（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 63,
+      "color": "#FCCDD2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 64,
+      "color": "#E2B0FC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[航空移动（R）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 65,
+      "color": "#B6D4E9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星无线电导航（空对地）（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 66,
+      "color": "#B6B6C9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星地球探测（有源）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 67,
+      "color": "#E8FDBD",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（有源）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 68,
+      "color": "#E8EAF1",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星无线电导航（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 69,
+      "color": "#B4DBBB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星地球探测（无源）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 70,
+      "color": "#FDEBCB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（无源）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 71,
+      "color": "#C1DDC3",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间操作（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 72,
+      "color": "#D0D8CE",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星广播"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 73,
+      "color": "#CFF6E5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[广播]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 74,
+      "color": "#CAEDE4",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星地球探测]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 75,
+      "color": "#E2E7EB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星无线电测定（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 76,
+      "color": "#E4C3C5",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间操作（地对空）（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 77,
+      "color": "#E5ECDC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星地球探测（地对空）（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 78,
+      "color": "#B9B9BD",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（地对空）（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 79,
+      "color": "#C2D7F8",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（深空）（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 80,
+      "color": "#D4BFFB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间操作（空对地）（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 81,
+      "color": "#B8DDE4",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星地球探测（空对地）（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 82,
+      "color": "#FAEAB0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（空对地）（空对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 83,
+      "color": "#B9C2B6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（深空）（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 84,
+      "color": "#FBDFBC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星无线电测定（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 85,
+      "color": "#B0B0C9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星固定（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 86,
+      "color": "#C3F3D8",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星固定（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 87,
+      "color": "#C5E4C2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星地球探测（无源）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 88,
+      "color": "#C5CCF0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间研究（无源）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 89,
+      "color": "#F5F5D4",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星地球探测（有源）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 90,
+      "color": "#B0CCC3",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间研究（有源）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 91,
+      "color": "#FAB7B0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星航空移动（R）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 92,
+      "color": "#DBB3F7",
+      "language": [
+        {
+          "code": 2052,
+          "name": "航空移动(R)"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 93,
+      "color": "#B6BADF",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星固定（地对空）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 94,
+      "color": "#DBF4FE",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间研究（深空）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 95,
+      "color": "#E3FDEB",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星业余（空对地）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 96,
+      "color": "#B3FEB6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星固定（地对空）（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 97,
+      "color": "#CFC4D2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "空间研究（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 98,
+      "color": "#CAB9D3",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星水上移动（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 99,
+      "color": "#C6D1EE",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星地球探测（空对地）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 100,
+      "color": "#EDB4B2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星业余]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 101,
+      "color": "#F0ECFC",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间研究（深空）（空对地）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 102,
+      "color": "#C6DED2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星标准频率和时间信号（地对空）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 103,
+      "color": "#B8E8D4",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星移动（地对空）（卫星航空移动除外）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 104,
+      "color": "#E8CAC1",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星无线电导航]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 105,
+      "color": "#BFB9F0",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[空间研究（深空）（地对空）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 106,
+      "color": "#D1B4ED",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星固定（空对地）（地对空）"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 107,
+      "color": "#D7DBD4",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星标准频率和时间信号（空对地）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 108,
+      "color": "#DDC4EA",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星间"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 109,
+      "color": "#B5D9C6",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星地球探测（地对空）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 110,
+      "color": "#F9D6BE",
+      "language": [
+        {
+          "code": 2052,
+          "name": "[卫星地球探测（空对地）]"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 111,
+      "color": "#FAB1F9",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星无线电导航"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 112,
+      "color": "#B3FEF2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "卫星地球探测"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    },
+    {
+      "business_id": 113,
+      "color": "#B6D8F2",
+      "language": [
+        {
+          "code": 2052,
+          "name": "未划分"
+        },
+        {
+          "code": 1033,
+          "name": ""
+        }
+      ]
+    }
+  ],
+  "band_list": [
+    {
+      "start_freq": 27500000,
+      "end_freq": 28000000,
+      "business": [
+        {
+          "business_id": 3
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN7"
+      ]
+    },
+    {
+      "start_freq": 28000000,
+      "end_freq": 29700000,
+      "business": [
+        {
+          "business_id": 20
+        },
+        {
+          "business_id": 34
+        }
+      ],
+      "foot_notes": [
+        "CHN7"
+      ]
+    },
+    {
+      "start_freq": 29700000,
+      "end_freq": 30005000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN7"
+      ]
+    },
+    {
+      "start_freq": 30005000,
+      "end_freq": 30010000,
+      "business": [
+        {
+          "business_id": 42
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 43
+        }
+      ],
+      "foot_notes": [
+        "CHN7"
+      ]
+    },
+    {
+      "start_freq": 30010000,
+      "end_freq": 37500000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN7"
+      ]
+    },
+    {
+      "start_freq": 37500000,
+      "end_freq": 38250000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 44
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "CHN4",
+        "CHN7"
+      ]
+    },
+    {
+      "start_freq": 38250000,
+      "end_freq": 39500000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN7"
+      ]
+    },
+    {
+      "start_freq": 39500000,
+      "end_freq": 39986000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN30"
+      ]
+    },
+    {
+      "start_freq": 39986000,
+      "end_freq": 40000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 26
+        }
+      ],
+      "foot_notes": [
+        "CHN4",
+        "CHN30"
+      ]
+    },
+    {
+      "start_freq": 40000000,
+      "end_freq": 40020000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 26
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 40020000,
+      "end_freq": 40980000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "5.150",
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 40980000,
+      "end_freq": 41015000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 26
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 41015000,
+      "end_freq": 44000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 44000000,
+      "end_freq": 48500000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "5.162A",
+        "CHN4"
+      ]
+    },
+    {
+      "start_freq": 48500000,
+      "end_freq": 50000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 15
+        }
+      ],
+      "foot_notes": [
+        "5.162A",
+        "CHN4",
+        "CHN8"
+      ]
+    },
+    {
+      "start_freq": 50000000,
+      "end_freq": 54000000,
+      "business": [
+        {
+          "business_id": 20
+        },
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "5.162A",
+        "CHN4",
+        "CHN8"
+      ]
+    },
+    {
+      "start_freq": 54000000,
+      "end_freq": 64500000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 15
+        }
+      ],
+      "foot_notes": [
+        "5.162A",
+        "CHN4",
+        "CHN8"
+      ]
+    },
+    {
+      "start_freq": 64500000,
+      "end_freq": 68000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": [
+        "5.162A",
+        "CHN8"
+      ]
+    },
+    {
+      "start_freq": 68000000,
+      "end_freq": 72500000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": [
+        "CHN8"
+      ]
+    },
+    {
+      "start_freq": 72500000,
+      "end_freq": 74600000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": [
+        "5.149"
+      ]
+    },
+    {
+      "start_freq": 74600000,
+      "end_freq": 74800000,
+      "business": [
+        {
+          "business_id": 11
+        }
+      ],
+      "foot_notes": [
+        "5.179"
+      ]
+    },
+    {
+      "start_freq": 74800000,
+      "end_freq": 75200000,
+      "business": [
+        {
+          "business_id": 11
+        }
+      ],
+      "foot_notes": [
+        "5.180"
+      ]
+    },
+    {
+      "start_freq": 75200000,
+      "end_freq": 75400000,
+      "business": [
+        {
+          "business_id": 11
+        }
+      ],
+      "foot_notes": [
+        "5.179"
+      ]
+    },
+    {
+      "start_freq": 75400000,
+      "end_freq": 76000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 76000000,
+      "end_freq": 84000000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": [
+        "CHN8",
+        "CHN10"
+      ]
+    },
+    {
+      "start_freq": 84000000,
+      "end_freq": 87000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": [
+        "CHN10"
+      ]
+    },
+    {
+      "start_freq": 87000000,
+      "end_freq": 108000000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 16
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "CHN10"
+      ]
+    },
+    {
+      "start_freq": 108000000,
+      "end_freq": 117975000,
+      "business": [
+        {
+          "business_id": 11
+        }
+      ],
+      "foot_notes": [
+        "5.197A"
+      ]
+    },
+    {
+      "start_freq": 117975000,
+      "end_freq": 137000000,
+      "business": [
+        {
+          "business_id": 30
+        }
+      ],
+      "foot_notes": [
+        "5.111",
+        "5.200"
+      ]
+    },
+    {
+      "start_freq": 137000000,
+      "end_freq": 137025000,
+      "business": [
+        {
+          "business_id": 45
+        },
+        {
+          "business_id": 46
+        },
+        {
+          "business_id": 47,
+          "foot_note": [
+            "5.208A",
+            "5.208B",
+            "5.209"
+          ]
+        },
+        {
+          "business_id": 48
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 29
+        }
+      ],
+      "foot_notes": [
+        "5.208"
+      ]
+    },
+    {
+      "start_freq": 137025000,
+      "end_freq": 137175000,
+      "business": [
+        {
+          "business_id": 45
+        },
+        {
+          "business_id": 46
+        },
+        {
+          "business_id": 48
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 29
+        },
+        {
+          "business_id": 49,
+          "foot_note": [
+            "5.208A",
+            "5.208B",
+            "5.209"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.208"
+      ]
+    },
+    {
+      "start_freq": 137175000,
+      "end_freq": 137825000,
+      "business": [
+        {
+          "business_id": 45
+        },
+        {
+          "business_id": 46
+        },
+        {
+          "business_id": 47,
+          "foot_note": [
+            "5.208A",
+            "5.208B",
+            "5.209"
+          ]
+        },
+        {
+          "business_id": 48
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 29
+        }
+      ],
+      "foot_notes": [
+        "5.208"
+      ]
+    },
+    {
+      "start_freq": 137825000,
+      "end_freq": 138000000,
+      "business": [
+        {
+          "business_id": 45
+        },
+        {
+          "business_id": 46
+        },
+        {
+          "business_id": 48
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 29
+        },
+        {
+          "business_id": 49,
+          "foot_note": [
+            "5.208A",
+            "5.208B",
+            "5.209"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.208"
+      ]
+    },
+    {
+      "start_freq": 138000000,
+      "end_freq": 143600000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 50
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 143600000,
+      "end_freq": 143650000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 48
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 143650000,
+      "end_freq": 144000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 50
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 144000000,
+      "end_freq": 146000000,
+      "business": [
+        {
+          "business_id": 20
+        },
+        {
+          "business_id": 34
+        },
+        {
+          "business_id": 22
+        },
+        {
+          "business_id": 51
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 146000000,
+      "end_freq": 148000000,
+      "business": [
+        {
+          "business_id": 20
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 148000000,
+      "end_freq": 149900000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 52,
+          "foot_note": [
+            "5.209"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.218",
+        "5.219",
+        "5.221"
+      ]
+    },
+    {
+      "start_freq": 149900000,
+      "end_freq": 150050000,
+      "business": [
+        {
+          "business_id": 52,
+          "foot_note": [
+            "5.209"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.220"
+      ]
+    },
+    {
+      "start_freq": 150050000,
+      "end_freq": 156487500,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": [
+        "5.226"
+      ]
+    },
+    {
+      "start_freq": 156487500,
+      "end_freq": 156562500,
+      "business": [
+        {
+          "business_id": 53
+        }
+      ],
+      "foot_notes": [
+        "5.111",
+        "5.226",
+        "5.227"
+      ]
+    },
+    {
+      "start_freq": 156562500,
+      "end_freq": 156762500,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "5.226"
+      ]
+    },
+    {
+      "start_freq": 156762500,
+      "end_freq": 156787500,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "CHN29"
+          ]
+        },
+        {
+          "business_id": 54
+        }
+      ],
+      "foot_notes": [
+        "5.111",
+        "5.226",
+        "5.228"
+      ]
+    },
+    {
+      "start_freq": 156787500,
+      "end_freq": 156812500,
+      "business": [
+        {
+          "business_id": 55,
+          "foot_note": [
+            "CHN29"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.111",
+        "5.226"
+      ]
+    },
+    {
+      "start_freq": 156812500,
+      "end_freq": 156837500,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "CHN29"
+          ]
+        },
+        {
+          "business_id": 54
+        }
+      ],
+      "foot_notes": [
+        "5.111",
+        "5.226",
+        "5.228"
+      ]
+    },
+    {
+      "start_freq": 156837500,
+      "end_freq": 157450000,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "CHN29",
+            "5.226"
+          ]
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 157450000,
+      "end_freq": 160600000,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "CHN29"
+          ]
+        },
+        {
+          "business_id": 31
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 160600000,
+      "end_freq": 160975000,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "CHN29"
+          ]
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": [
+        "5.226"
+      ]
+    },
+    {
+      "start_freq": 160975000,
+      "end_freq": 161475000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 161475000,
+      "end_freq": 161937500,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "CHN29"
+          ]
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": [
+        "5.226"
+      ]
+    },
+    {
+      "start_freq": 161937500,
+      "end_freq": 161962500,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "CHN29"
+          ]
+        },
+        {
+          "business_id": 14
+        },
+        {
+          "business_id": 56,
+          "foot_note": [
+            "5.228AA"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.226"
+      ]
+    },
+    {
+      "start_freq": 161962500,
+      "end_freq": 161987500,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "CHN29"
+          ]
+        },
+        {
+          "business_id": 14
+        },
+        {
+          "business_id": 51,
+          "foot_note": [
+            "5.228E"
+          ]
+        },
+        {
+          "business_id": 54,
+          "foot_note": [
+            "5.228F"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.226"
+      ]
+    },
+    {
+      "start_freq": 161987500,
+      "end_freq": 162012500,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "CHN29"
+          ]
+        },
+        {
+          "business_id": 14
+        },
+        {
+          "business_id": 57,
+          "foot_note": [
+            "5.228AA",
+            "5.226"
+          ]
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 162012500,
+      "end_freq": 162037500,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "CHN29"
+          ]
+        },
+        {
+          "business_id": 14
+        },
+        {
+          "business_id": 51,
+          "foot_note": [
+            "5.228E"
+          ]
+        },
+        {
+          "business_id": 54,
+          "foot_note": [
+            "5.228F"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.226"
+      ]
+    },
+    {
+      "start_freq": 162037500,
+      "end_freq": 162050000,
+      "business": [
+        {
+          "business_id": 1,
+          "foot_note": [
+            "CHN29"
+          ]
+        },
+        {
+          "business_id": 14
+        }
+      ],
+      "foot_notes": [
+        "5.226"
+      ]
+    },
+    {
+      "start_freq": 162050000,
+      "end_freq": 167000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 45,
+          "foot_note": [
+            "5.230"
+          ]
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 167000000,
+      "end_freq": 174000000,
+      "business": [
+        {
+          "business_id": 15,
+          "foot_note": [
+            "5.231"
+          ]
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 16
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 174000000,
+      "end_freq": 184000000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 45
+        },
+        {
+          "business_id": 48
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 16
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.223"
+      ]
+    },
+    {
+      "start_freq": 184000000,
+      "end_freq": 216000000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 16
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 216000000,
+      "end_freq": 223000000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 16
+        }
+      ],
+      "foot_notes": [
+        "5.240"
+      ]
+    },
+    {
+      "start_freq": 223000000,
+      "end_freq": 225000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 225000000,
+      "end_freq": 230000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": [
+        "5.250",
+        "CHN11"
+      ]
+    },
+    {
+      "start_freq": 230000000,
+      "end_freq": 235000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": [
+        "CHN11"
+      ]
+    },
+    {
+      "start_freq": 235000000,
+      "end_freq": 267000000,
+      "business": [
+        {
+          "business_id": 30
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.111",
+        "5.254",
+        "5.256",
+        "5.256A"
+      ]
+    },
+    {
+      "start_freq": 267000000,
+      "end_freq": 272000000,
+      "business": [
+        {
+          "business_id": 30
+        },
+        {
+          "business_id": 58
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.254",
+        "5.257"
+      ]
+    },
+    {
+      "start_freq": 272000000,
+      "end_freq": 273000000,
+      "business": [
+        {
+          "business_id": 45
+        },
+        {
+          "business_id": 30
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.254"
+      ]
+    },
+    {
+      "start_freq": 273000000,
+      "end_freq": 279000000,
+      "business": [
+        {
+          "business_id": 30
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.254"
+      ]
+    },
+    {
+      "start_freq": 279000000,
+      "end_freq": 281000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 30
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.254",
+        "CHN26"
+      ]
+    },
+    {
+      "start_freq": 281000000,
+      "end_freq": 312000000,
+      "business": [
+        {
+          "business_id": 30
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.254"
+      ]
+    },
+    {
+      "start_freq": 312000000,
+      "end_freq": 315000000,
+      "business": [
+        {
+          "business_id": 30
+        },
+        {
+          "business_id": 54,
+          "foot_note": [
+            "5.254",
+            "5.255"
+          ]
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 315000000,
+      "end_freq": 322000000,
+      "business": [
+        {
+          "business_id": 30
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.254"
+      ]
+    },
+    {
+      "start_freq": 322000000,
+      "end_freq": 328600000,
+      "business": [
+        {
+          "business_id": 37
+        },
+        {
+          "business_id": 30
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.149"
+      ]
+    },
+    {
+      "start_freq": 328600000,
+      "end_freq": 335400000,
+      "business": [
+        {
+          "business_id": 11
+        }
+      ],
+      "foot_notes": [
+        "5.258"
+      ]
+    },
+    {
+      "start_freq": 335400000,
+      "end_freq": 387000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 59,
+          "foot_note": [
+            "5.254",
+            "CHN13"
+          ]
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 387000000,
+      "end_freq": 390000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 59,
+          "foot_note": [
+            "5.208A",
+            "5.208B",
+            "5.254",
+            "5.255"
+          ]
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "CHN13"
+      ]
+    },
+    {
+      "start_freq": 390000000,
+      "end_freq": 399900000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 59,
+          "foot_note": [
+            "5.254",
+            "CHN13"
+          ]
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 399900000,
+      "end_freq": 400050000,
+      "business": [
+        {
+          "business_id": 52,
+          "foot_note": [
+            "5.209"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.220"
+      ]
+    },
+    {
+      "start_freq": 400050000,
+      "end_freq": 400150000,
+      "business": [
+        {
+          "business_id": 60
+        }
+      ],
+      "foot_notes": [
+        "5.261"
+      ]
+    },
+    {
+      "start_freq": 400150000,
+      "end_freq": 401000000,
+      "business": [
+        {
+          "business_id": 3
+        },
+        {
+          "business_id": 46
+        },
+        {
+          "business_id": 47,
+          "foot_note": [
+            "5.208A",
+            "5.208B",
+            "5.209"
+          ]
+        },
+        {
+          "business_id": 48,
+          "foot_note": [
+            "5.263"
+          ]
+        },
+        {
+          "business_id": 58
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.264"
+      ]
+    },
+    {
+      "start_freq": 401000000,
+      "end_freq": 402000000,
+      "business": [
+        {
+          "business_id": 3
+        },
+        {
+          "business_id": 45
+        },
+        {
+          "business_id": 61
+        },
+        {
+          "business_id": 62
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 33
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 402000000,
+      "end_freq": 403000000,
+      "business": [
+        {
+          "business_id": 3
+        },
+        {
+          "business_id": 61
+        },
+        {
+          "business_id": 62
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 33
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 403000000,
+      "end_freq": 406000000,
+      "business": [
+        {
+          "business_id": 3
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 33
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.265"
+      ]
+    },
+    {
+      "start_freq": 406000000,
+      "end_freq": 406100000,
+      "business": [
+        {
+          "business_id": 52
+        }
+      ],
+      "foot_notes": [
+        "5.265",
+        "5.266",
+        "5.267"
+      ]
+    },
+    {
+      "start_freq": 406100000,
+      "end_freq": 410000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21
+        },
+        {
+          "business_id": 37
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "5.265"
+      ]
+    },
+    {
+      "start_freq": 410000000,
+      "end_freq": 420000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21
+        },
+        {
+          "business_id": 63,
+          "foot_note": [
+            "5.268"
+          ]
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 420000000,
+      "end_freq": 425000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21
+        },
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 425000000,
+      "end_freq": 430000000,
+      "business": [
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 430000000,
+      "end_freq": 440000000,
+      "business": [
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 10
+        }
+      ],
+      "foot_notes": [
+        "5.282"
+      ]
+    },
+    {
+      "start_freq": 440000000,
+      "end_freq": 450000000,
+      "business": [
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 11
+        }
+      ],
+      "foot_notes": [
+        "5.286"
+      ]
+    },
+    {
+      "start_freq": 450000000,
+      "end_freq": 455000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.286AA"
+          ]
+        },
+        {
+          "business_id": 17,
+          "foot_note": [
+            "5.271"
+          ]
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.286",
+        "CHN28"
+      ]
+    },
+    {
+      "start_freq": 455000000,
+      "end_freq": 456000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.286AA"
+          ]
+        },
+        {
+          "business_id": 17,
+          "foot_note": [
+            "5.271"
+          ]
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "CHN28"
+      ]
+    },
+    {
+      "start_freq": 456000000,
+      "end_freq": 459000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.286AA"
+          ]
+        },
+        {
+          "business_id": 17,
+          "foot_note": [
+            "5.271"
+          ]
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.287",
+        "CHN28"
+      ]
+    },
+    {
+      "start_freq": 459000000,
+      "end_freq": 460000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.286AA"
+          ]
+        },
+        {
+          "business_id": 17,
+          "foot_note": [
+            "5.271"
+          ]
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "CHN28"
+      ]
+    },
+    {
+      "start_freq": 460000000,
+      "end_freq": 470000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.286AA"
+          ]
+        },
+        {
+          "business_id": 46,
+          "foot_note": [
+            "5.290"
+          ]
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.287",
+        "5.289",
+        "CHN28"
+      ]
+    },
+    {
+      "start_freq": 470000000,
+      "end_freq": 485000000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 45
+        },
+        {
+          "business_id": 48
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 16
+        },
+        {
+          "business_id": 22,
+          "foot_note": [
+            "CHN17-1"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.291"
+      ]
+    },
+    {
+      "start_freq": 485000000,
+      "end_freq": 566000000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 16
+        },
+        {
+          "business_id": 22,
+          "foot_note": [
+            "CHN17-1"
+          ]
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 566000000,
+      "end_freq": 606000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 5
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": [
+        "CHN14"
+      ]
+    },
+    {
+      "start_freq": 606000000,
+      "end_freq": 610000000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 5,
+          "foot_note": [
+            "CHN15"
+          ]
+        },
+        {
+          "business_id": 37
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 16
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "CHN12"
+      ]
+    },
+    {
+      "start_freq": 610000000,
+      "end_freq": 614000000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 37
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 16
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "CHN12"
+      ]
+    },
+    {
+      "start_freq": 614000000,
+      "end_freq": 798000000,
+      "business": [
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 16,
+          "foot_note": [
+            "5.313A",
+            "5.317A"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "CHN28"
+      ]
+    },
+    {
+      "start_freq": 798000000,
+      "end_freq": 806000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.317A"
+          ]
+        },
+        {
+          "business_id": 17
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "CHN31"
+      ]
+    },
+    {
+      "start_freq": 806000000,
+      "end_freq": 960000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.317A"
+          ]
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "CHN16"
+      ]
+    },
+    {
+      "start_freq": 960000000,
+      "end_freq": 1164000000,
+      "business": [
+        {
+          "business_id": 11,
+          "foot_note": [
+            "5.328"
+          ]
+        },
+        {
+          "business_id": 64,
+          "foot_note": [
+            "5.327A"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.328AA"
+      ]
+    },
+    {
+      "start_freq": 1164000000,
+      "end_freq": 1215000000,
+      "business": [
+        {
+          "business_id": 11,
+          "foot_note": [
+            "5.328"
+          ]
+        },
+        {
+          "business_id": 65,
+          "foot_note": [
+            "5.328B"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.328A"
+      ]
+    },
+    {
+      "start_freq": 1215000000,
+      "end_freq": 1240000000,
+      "business": [
+        {
+          "business_id": 66
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 67
+        },
+        {
+          "business_id": 65,
+          "foot_note": [
+            "5.328B",
+            "5.329",
+            "5.329A"
+          ]
+        },
+        {
+          "business_id": 5
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "5.332"
+      ]
+    },
+    {
+      "start_freq": 1240000000,
+      "end_freq": 1260000000,
+      "business": [
+        {
+          "business_id": 65,
+          "foot_note": [
+            "5.328B",
+            "5.329",
+            "5.329A"
+          ]
+        },
+        {
+          "business_id": 66
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 67
+        },
+        {
+          "business_id": 5
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 10
+        }
+      ],
+      "foot_notes": [
+        "5.332"
+      ]
+    },
+    {
+      "start_freq": 1260000000,
+      "end_freq": 1300000000,
+      "business": [
+        {
+          "business_id": 65,
+          "foot_note": [
+            "5.328B",
+            "5.329",
+            "5.329A"
+          ]
+        },
+        {
+          "business_id": 66
+        },
+        {
+          "business_id": 19,
+          "foot_note": [
+            "CHN17"
+          ]
+        },
+        {
+          "business_id": 67
+        },
+        {
+          "business_id": 5
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 10
+        }
+      ],
+      "foot_notes": [
+        "5.282",
+        "5.335A"
+      ]
+    },
+    {
+      "start_freq": 1300000000,
+      "end_freq": 1350000000,
+      "business": [
+        {
+          "business_id": 11,
+          "foot_note": [
+            "5.337"
+          ]
+        },
+        {
+          "business_id": 19,
+          "foot_note": [
+            "CHN17"
+          ]
+        },
+        {
+          "business_id": 68
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "5.337A",
+        "CHN12"
+      ]
+    },
+    {
+      "start_freq": 1350000000,
+      "end_freq": 1400000000,
+      "business": [
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "5.339",
+        "CHN12",
+        "CHN17"
+      ]
+    },
+    {
+      "start_freq": 1400000000,
+      "end_freq": 1427000000,
+      "business": [
+        {
+          "business_id": 69
+        },
+        {
+          "business_id": 37
+        },
+        {
+          "business_id": 70
+        }
+      ],
+      "foot_notes": [
+        "5.340",
+        "5.341"
+      ]
+    },
+    {
+      "start_freq": 1427000000,
+      "end_freq": 1429000000,
+      "business": [
+        {
+          "business_id": 71
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.338A",
+        "5.341"
+      ]
+    },
+    {
+      "start_freq": 1429000000,
+      "end_freq": 1452000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.338A",
+        "5.341"
+      ]
+    },
+    {
+      "start_freq": 1452000000,
+      "end_freq": 1467000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 15
+        },
+        {
+          "business_id": 72,
+          "foot_note": [
+            "5.208B"
+          ]
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.341",
+        "5.345"
+      ]
+    },
+    {
+      "start_freq": 1467000000,
+      "end_freq": 1492000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 72,
+          "foot_note": [
+            "5.208B"
+          ]
+        },
+        {
+          "business_id": 73
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.341",
+        "5.345"
+      ]
+    },
+    {
+      "start_freq": 1492000000,
+      "end_freq": 1518000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.341"
+      ]
+    },
+    {
+      "start_freq": 1518000000,
+      "end_freq": 1525000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 47,
+          "foot_note": [
+            "5.348",
+            "5.351A"
+          ]
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.341"
+      ]
+    },
+    {
+      "start_freq": 1525000000,
+      "end_freq": 1530000000,
+      "business": [
+        {
+          "business_id": 45
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 47,
+          "foot_note": [
+            "5.208B",
+            "5.351A"
+          ]
+        },
+        {
+          "business_id": 74
+        },
+        {
+          "business_id": 16
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.341",
+        "5.351",
+        "5.354"
+      ]
+    },
+    {
+      "start_freq": 1530000000,
+      "end_freq": 1533000000,
+      "business": [
+        {
+          "business_id": 45
+        },
+        {
+          "business_id": 47,
+          "foot_note": [
+            "5.208B",
+            "5.351A",
+            "5.353A"
+          ]
+        },
+        {
+          "business_id": 74
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 16
+        },
+        {
+          "business_id": 22
+        }
+      ],
+      "foot_notes": [
+        "5.341",
+        "5.351",
+        "5.354"
+      ]
+    },
+    {
+      "start_freq": 1533000000,
+      "end_freq": 1535000000,
+      "business": [
+        {
+          "business_id": 45
+        },
+        {
+          "business_id": 47,
+          "foot_note": [
+            "5.208B",
+            "5.351A",
+            "5.353A"
+          ]
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 74
+        }
+      ],
+      "foot_notes": [
+        "5.341",
+        "5.351",
+        "5.354"
+      ]
+    },
+    {
+      "start_freq": 1535000000,
+      "end_freq": 1544000000,
+      "business": [
+        {
+          "business_id": 47,
+          "foot_note": [
+            "5.341",
+            "5.208B",
+            "5.351",
+            "5.351A",
+            "5.353A",
+            "5.354"
+          ]
+        },
+        {
+          "business_id": 11
+        }
+      ],
+      "foot_notes": [
+        "CHN18"
+      ]
+    },
+    {
+      "start_freq": 1544000000,
+      "end_freq": 1559000000,
+      "business": [
+        {
+          "business_id": 47
+        }
+      ],
+      "foot_notes": [
+        "5.208B",
+        "",
+        "5.341",
+        "5.351",
+        "5.351A",
+        "5.353A",
+        "5.354",
+        "5.356",
+        "5.357",
+        "5.357A",
+        "CHN18",
+        "CHN19",
+        "CHN25"
+      ]
+    },
+    {
+      "start_freq": 1559000000,
+      "end_freq": 1610000000,
+      "business": [
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 65,
+          "foot_note": [
+            "5.208B",
+            "5.328B",
+            "5.329A"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.341",
+        "CHN18"
+      ]
+    },
+    {
+      "start_freq": 1610000000,
+      "end_freq": 1610600000,
+      "business": [
+        {
+          "business_id": 52,
+          "foot_note": [
+            "5.351A"
+          ]
+        },
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 75
+        }
+      ],
+      "foot_notes": [
+        "5.341",
+        "5.364",
+        "5.366",
+        "5.367",
+        "5.368",
+        "5.369",
+        "5.372",
+        "CHN18"
+      ]
+    },
+    {
+      "start_freq": 1610600000,
+      "end_freq": 1613800000,
+      "business": [
+        {
+          "business_id": 52,
+          "foot_note": [
+            "5.351A"
+          ]
+        },
+        {
+          "business_id": 37
+        },
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 75
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "5.341",
+        "5.364",
+        "5.366",
+        "5.367",
+        "5.368",
+        "5.369",
+        "5.372",
+        "CHN18"
+      ]
+    },
+    {
+      "start_freq": 1613800000,
+      "end_freq": 1626500000,
+      "business": [
+        {
+          "business_id": 52,
+          "foot_note": [
+            "5.351A"
+          ]
+        },
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 75
+        },
+        {
+          "business_id": 49,
+          "foot_note": [
+            "5.208B"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.341",
+        "5.364",
+        "5.365",
+        "5.366",
+        "5.367",
+        "5.368",
+        "5.369",
+        "5.372",
+        "CHN18"
+      ]
+    },
+    {
+      "start_freq": 1626500000,
+      "end_freq": 1660000000,
+      "business": [
+        {
+          "business_id": 52
+        }
+      ],
+      "foot_notes": [
+        "5.341",
+        "5.351",
+        "5.351A",
+        "5.353A",
+        "5.354",
+        "5.357A",
+        "5.374",
+        "5.375",
+        "5.376",
+        "CHN18"
+      ]
+    },
+    {
+      "start_freq": 1660000000,
+      "end_freq": 1660500000,
+      "business": [
+        {
+          "business_id": 52,
+          "foot_note": [
+            "5.351A"
+          ]
+        },
+        {
+          "business_id": 37
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "5.341",
+        "5.351",
+        "5.354",
+        "5.376A"
+      ]
+    },
+    {
+      "start_freq": 1660500000,
+      "end_freq": 1668000000,
+      "business": [
+        {
+          "business_id": 37
+        },
+        {
+          "business_id": 70
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 33
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "5.341",
+        "5.379A"
+      ]
+    },
+    {
+      "start_freq": 1668000000,
+      "end_freq": 1668400000,
+      "business": [
+        {
+          "business_id": 37
+        },
+        {
+          "business_id": 70
+        },
+        {
+          "business_id": 52,
+          "foot_note": [
+            "5.351A",
+            "5.379B",
+            "5.379C"
+          ]
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 33
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "5.341",
+        "5.379A"
+      ]
+    },
+    {
+      "start_freq": 1668400000,
+      "end_freq": 1670000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 37
+        },
+        {
+          "business_id": 3
+        },
+        {
+          "business_id": 21
+        },
+        {
+          "business_id": 52,
+          "foot_note": [
+            "5.351A",
+            "5.379B",
+            "5.379C",
+            "CHN32"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "5.341",
+        "5.379D",
+        "5.379E"
+      ]
+    },
+    {
+      "start_freq": 1670000000,
+      "end_freq": 1675000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 46
+        },
+        {
+          "business_id": 3
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 52,
+          "foot_note": [
+            "5.351A",
+            "5.379B",
+            "CHN32"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.341",
+        "5.379D",
+        "5.379E"
+      ]
+    },
+    {
+      "start_freq": 1675000000,
+      "end_freq": 1690000000,
+      "business": [
+        {
+          "business_id": 3
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 46
+        },
+        {
+          "business_id": 21
+        }
+      ],
+      "foot_notes": [
+        "5.341"
+      ]
+    },
+    {
+      "start_freq": 1690000000,
+      "end_freq": 1700000000,
+      "business": [
+        {
+          "business_id": 3
+        },
+        {
+          "business_id": 46
+        }
+      ],
+      "foot_notes": [
+        "5.289",
+        "5.341"
+      ]
+    },
+    {
+      "start_freq": 1700000000,
+      "end_freq": 1710000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 46
+        },
+        {
+          "business_id": 21
+        }
+      ],
+      "foot_notes": [
+        "5.289",
+        "5.341"
+      ]
+    },
+    {
+      "start_freq": 1710000000,
+      "end_freq": 1930000000,
+      "business": [
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.384A",
+            "5.388A 5.388B"
+          ]
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "5.341",
+        "5.385",
+        "5.388",
+        "CHN12",
+        "CHN18"
+      ]
+    },
+    {
+      "start_freq": 1930000000,
+      "end_freq": 1980000000,
+      "business": [
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.388A",
+            "5.388B"
+          ]
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "5.388"
+      ]
+    },
+    {
+      "start_freq": 1980000000,
+      "end_freq": 2010000000,
+      "business": [
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 52,
+          "foot_note": [
+            "5.351A"
+          ]
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "5.388",
+        "5.389A",
+        "5.389B"
+      ]
+    },
+    {
+      "start_freq": 2010000000,
+      "end_freq": 2025000000,
+      "business": [
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.388A",
+            "5.388B"
+          ]
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "5.388"
+      ]
+    },
+    {
+      "start_freq": 2025000000,
+      "end_freq": 2110000000,
+      "business": [
+        {
+          "business_id": 76
+        },
+        {
+          "business_id": 77
+        },
+        {
+          "business_id": 78
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 16,
+          "foot_note": [
+            "5.391"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.392",
+        "CHN18"
+      ]
+    },
+    {
+      "start_freq": 2110000000,
+      "end_freq": 2120000000,
+      "business": [
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.388A",
+            "5.388B"
+          ]
+        },
+        {
+          "business_id": 79
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "5.388",
+        "CHN18"
+      ]
+    },
+    {
+      "start_freq": 2120000000,
+      "end_freq": 2170000000,
+      "business": [
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.388A",
+            "5.388B"
+          ]
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "5.388"
+      ]
+    },
+    {
+      "start_freq": 2170000000,
+      "end_freq": 2200000000,
+      "business": [
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 47,
+          "foot_note": [
+            "5.351A"
+          ]
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "5.388",
+        "5.389A"
+      ]
+    },
+    {
+      "start_freq": 2200000000,
+      "end_freq": 2290000000,
+      "business": [
+        {
+          "business_id": 80
+        },
+        {
+          "business_id": 81
+        },
+        {
+          "business_id": 82
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 16,
+          "foot_note": [
+            "5.391"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.392",
+        "CHN33"
+      ]
+    },
+    {
+      "start_freq": 2290000000,
+      "end_freq": 2300000000,
+      "business": [
+        {
+          "business_id": 83
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 33
+        }
+      ],
+      "foot_notes": [
+        "CHN33"
+      ]
+    },
+    {
+      "start_freq": 2300000000,
+      "end_freq": 2450000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.384A"
+          ]
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 10
+        }
+      ],
+      "foot_notes": [
+        "5.150",
+        "5.282",
+        "CHN28"
+      ]
+    },
+    {
+      "start_freq": 2450000000,
+      "end_freq": 2483500000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": [
+        "5.150"
+      ]
+    },
+    {
+      "start_freq": 2483500000,
+      "end_freq": 2500000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 47,
+          "foot_note": [
+            "5.351A"
+          ]
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 84,
+          "foot_note": [
+            "5.398"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.150",
+        "5.401",
+        "5.402"
+      ]
+    },
+    {
+      "start_freq": 2500000000,
+      "end_freq": 2520000000,
+      "business": [
+        {
+          "business_id": 85,
+          "foot_note": [
+            "5.415"
+          ]
+        },
+        {
+          "business_id": 21,
+          "foot_note": [
+            "5.384A"
+          ]
+        },
+        {
+          "business_id": 47,
+          "foot_note": [
+            "5.351A",
+            "5.414"
+          ]
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "CHN20"
+      ]
+    },
+    {
+      "start_freq": 2520000000,
+      "end_freq": 2535000000,
+      "business": [
+        {
+          "business_id": 85,
+          "foot_note": [
+            "5.415"
+          ]
+        },
+        {
+          "business_id": 21,
+          "foot_note": [
+            "5.384A"
+          ]
+        },
+        {
+          "business_id": 72,
+          "foot_note": [
+            "5.413",
+            "5.416"
+          ]
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "5.403",
+        "CHN20"
+      ]
+    },
+    {
+      "start_freq": 2535000000,
+      "end_freq": 2635000000,
+      "business": [
+        {
+          "business_id": 21,
+          "foot_note": [
+            "5.384A"
+          ]
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "5.339",
+        "CHN20"
+      ]
+    },
+    {
+      "start_freq": 2635000000,
+      "end_freq": 2655000000,
+      "business": [
+        {
+          "business_id": 21,
+          "foot_note": [
+            "5.384A"
+          ]
+        },
+        {
+          "business_id": 72,
+          "foot_note": [
+            "5.413",
+            "5.416"
+          ]
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "CHN20"
+      ]
+    },
+    {
+      "start_freq": 2655000000,
+      "end_freq": 2670000000,
+      "business": [
+        {
+          "business_id": 86,
+          "foot_note": [
+            "5.415"
+          ]
+        },
+        {
+          "business_id": 21,
+          "foot_note": [
+            "5.384A"
+          ]
+        },
+        {
+          "business_id": 72,
+          "foot_note": [
+            "5.208B",
+            "5.413",
+            "5.416"
+          ]
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 87
+        },
+        {
+          "business_id": 44
+        },
+        {
+          "business_id": 88
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "5.420",
+        "CHN12",
+        "CHN20"
+      ]
+    },
+    {
+      "start_freq": 2670000000,
+      "end_freq": 2690000000,
+      "business": [
+        {
+          "business_id": 86,
+          "foot_note": [
+            "5.415"
+          ]
+        },
+        {
+          "business_id": 21,
+          "foot_note": [
+            "5.384A"
+          ]
+        },
+        {
+          "business_id": 52,
+          "foot_note": [
+            "5.351A",
+            "5.419"
+          ]
+        },
+        {
+          "business_id": 8
+        },
+        {
+          "business_id": 87
+        },
+        {
+          "business_id": 44
+        },
+        {
+          "business_id": 88
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "CHN12",
+        "CHN20"
+      ]
+    },
+    {
+      "start_freq": 2690000000,
+      "end_freq": 2700000000,
+      "business": [
+        {
+          "business_id": 69
+        },
+        {
+          "business_id": 37
+        },
+        {
+          "business_id": 70
+        }
+      ],
+      "foot_notes": [
+        "5.340"
+      ]
+    },
+    {
+      "start_freq": 2700000000,
+      "end_freq": 2900000000,
+      "business": [
+        {
+          "business_id": 11,
+          "foot_note": [
+            "5.337"
+          ]
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": [
+        "5.423"
+      ]
+    },
+    {
+      "start_freq": 2900000000,
+      "end_freq": 3100000000,
+      "business": [
+        {
+          "business_id": 5,
+          "foot_note": [
+            "5.426"
+          ]
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": [
+        "5.425",
+        "5.427"
+      ]
+    },
+    {
+      "start_freq": 3100000000,
+      "end_freq": 3300000000,
+      "business": [
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 89
+        },
+        {
+          "business_id": 90
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "CHN12"
+      ]
+    },
+    {
+      "start_freq": 3300000000,
+      "end_freq": 3400000000,
+      "business": [
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "CHN34"
+          ]
+        },
+        {
+          "business_id": 10
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "CHN12"
+      ]
+    },
+    {
+      "start_freq": 3400000000,
+      "end_freq": 3500000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 85
+        },
+        {
+          "business_id": 10
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.432",
+            "5.432B"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.282",
+        "CHN18"
+      ]
+    },
+    {
+      "start_freq": 3500000000,
+      "end_freq": 3700000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 85
+        },
+        {
+          "business_id": 21,
+          "foot_note": [
+            "5.433A"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.433",
+        "CHN18",
+        "CHN21"
+      ]
+    },
+    {
+      "start_freq": 3700000000,
+      "end_freq": 4200000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 85
+        },
+        {
+          "business_id": 33
+        }
+      ],
+      "foot_notes": [
+        "CHN18",
+        "CHN21"
+      ]
+    },
+    {
+      "start_freq": 4200000000,
+      "end_freq": 4400000000,
+      "business": [
+        {
+          "business_id": 27,
+          "foot_note": [
+            "5.436"
+          ]
+        },
+        {
+          "business_id": 11,
+          "foot_note": [
+            "5.438"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.437",
+        "5.440"
+      ]
+    },
+    {
+      "start_freq": 4400000000,
+      "end_freq": 4500000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "CHN35",
+            "CHN36"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "CHN21"
+      ]
+    },
+    {
+      "start_freq": 4500000000,
+      "end_freq": 4800000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 85,
+          "foot_note": [
+            "5.441"
+          ]
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "CHN21"
+      ]
+    },
+    {
+      "start_freq": 4800000000,
+      "end_freq": 4990000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.442",
+            "CHN37"
+          ]
+        },
+        {
+          "business_id": 44
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "5.339",
+        "CHN12",
+        "CHN21"
+      ]
+    },
+    {
+      "start_freq": 4990000000,
+      "end_freq": 5000000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21,
+          "foot_note": [
+            "CHN37"
+          ]
+        },
+        {
+          "business_id": 37
+        },
+        {
+          "business_id": 88
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "CHN12"
+      ]
+    },
+    {
+      "start_freq": 5000000000,
+      "end_freq": 5010000000,
+      "business": [
+        {
+          "business_id": 91,
+          "foot_note": [
+            "5.443AA"
+          ]
+        },
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 68
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 5010000000,
+      "end_freq": 5030000000,
+      "business": [
+        {
+          "business_id": 91,
+          "foot_note": [
+            "5.443AA"
+          ]
+        },
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 65
+        }
+      ],
+      "foot_notes": [
+        "5.328B",
+        "5.443B"
+      ]
+    },
+    {
+      "start_freq": 5030000000,
+      "end_freq": 5091000000,
+      "business": [
+        {
+          "business_id": 91,
+          "foot_note": [
+            "5.443D"
+          ]
+        },
+        {
+          "business_id": 11
+        }
+      ],
+      "foot_notes": [
+        "5.444"
+      ]
+    },
+    {
+      "start_freq": 5091000000,
+      "end_freq": 5150000000,
+      "business": [
+        {
+          "business_id": 92,
+          "foot_note": [
+            "5.444B"
+          ]
+        },
+        {
+          "business_id": 91,
+          "foot_note": [
+            "5.443AA"
+          ]
+        },
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 93,
+          "foot_note": [
+            "5.444A"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.444",
+        "CHN27"
+      ]
+    },
+    {
+      "start_freq": 5150000000,
+      "end_freq": 5250000000,
+      "business": [
+        {
+          "business_id": 11
+        },
+        {
+          "business_id": 86,
+          "foot_note": [
+            "5.447A"
+          ]
+        },
+        {
+          "business_id": 21,
+          "foot_note": [
+            "5.446A",
+            "5.446B"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.446",
+        "5.447B",
+        "5.447C"
+      ]
+    },
+    {
+      "start_freq": 5250000000,
+      "end_freq": 5255000000,
+      "business": [
+        {
+          "business_id": 66
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 43,
+          "foot_note": [
+            "5.447D"
+          ]
+        },
+        {
+          "business_id": 21,
+          "foot_note": [
+            "5.446A",
+            "5.447F"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.448A"
+      ]
+    },
+    {
+      "start_freq": 5255000000,
+      "end_freq": 5350000000,
+      "business": [
+        {
+          "business_id": 66
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 67
+        },
+        {
+          "business_id": 21,
+          "foot_note": [
+            "5.446A",
+            "5.447F"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.448A"
+      ]
+    },
+    {
+      "start_freq": 5350000000,
+      "end_freq": 5460000000,
+      "business": [
+        {
+          "business_id": 66,
+          "foot_note": [
+            "5.448B"
+          ]
+        },
+        {
+          "business_id": 67,
+          "foot_note": [
+            "5.448C"
+          ]
+        },
+        {
+          "business_id": 11,
+          "foot_note": [
+            "5.449"
+          ]
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 5460000000,
+      "end_freq": 5470000000,
+      "business": [
+        {
+          "business_id": 5,
+          "foot_note": [
+            "5.449"
+          ]
+        },
+        {
+          "business_id": 66
+        },
+        {
+          "business_id": 67
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": [
+        "5.448B"
+      ]
+    },
+    {
+      "start_freq": 5470000000,
+      "end_freq": 5570000000,
+      "business": [
+        {
+          "business_id": 2
+        },
+        {
+          "business_id": 66
+        },
+        {
+          "business_id": 67
+        },
+        {
+          "business_id": 21,
+          "foot_note": [
+            "5.446A",
+            "5.450A"
+          ]
+        },
+        {
+          "business_id": 19,
+          "foot_note": [
+            "CHN22"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.448B"
+      ]
+    },
+    {
+      "start_freq": 5570000000,
+      "end_freq": 5650000000,
+      "business": [
+        {
+          "business_id": 2
+        },
+        {
+          "business_id": 21,
+          "foot_note": [
+            "5.446A",
+            "5.450A"
+          ]
+        },
+        {
+          "business_id": 19,
+          "foot_note": [
+            "CHN22"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.452"
+      ]
+    },
+    {
+      "start_freq": 5650000000,
+      "end_freq": 5725000000,
+      "business": [
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 21,
+          "foot_note": [
+            "5.446A",
+            "5.450A"
+          ]
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 10
+        },
+        {
+          "business_id": 94
+        }
+      ],
+      "foot_notes": [
+        "5.282"
+      ]
+    },
+    {
+      "start_freq": 5725000000,
+      "end_freq": 5830000000,
+      "business": [
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 10
+        }
+      ],
+      "foot_notes": [
+        "5.150"
+      ]
+    },
+    {
+      "start_freq": 5830000000,
+      "end_freq": 5850000000,
+      "business": [
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 10
+        },
+        {
+          "business_id": 95
+        }
+      ],
+      "foot_notes": [
+        "5.150"
+      ]
+    },
+    {
+      "start_freq": 5850000000,
+      "end_freq": 5925000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 86
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 19
+        }
+      ],
+      "foot_notes": [
+        "5.150"
+      ]
+    },
+    {
+      "start_freq": 5925000000,
+      "end_freq": 6700000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 86,
+          "foot_note": [
+            "5.457A"
+          ]
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "CHN38"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.149",
+        "5.440",
+        "5.458",
+        "CHN12",
+        "CHN18",
+        "CHN21",
+        "CHN23"
+      ]
+    },
+    {
+      "start_freq": 6700000000,
+      "end_freq": 7075000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 96,
+          "foot_note": [
+            "5.441"
+          ]
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "5.458",
+        "5.458A",
+        "5.458B",
+        "CHN21",
+        "CHN23"
+      ]
+    },
+    {
+      "start_freq": 7075000000,
+      "end_freq": 7145000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "5.458",
+        "CHN21",
+        "CHN23"
+      ]
+    },
+    {
+      "start_freq": 7145000000,
+      "end_freq": 7190000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 97,
+          "foot_note": [
+            "5.460"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.458",
+        "CHN23"
+      ]
+    },
+    {
+      "start_freq": 7190000000,
+      "end_freq": 7235000000,
+      "business": [
+        {
+          "business_id": 61,
+          "foot_note": [
+            "5.460A",
+            "5.460B"
+          ]
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        },
+        {
+          "business_id": 97,
+          "foot_note": [
+            "5.460"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.458",
+        "CHN23"
+      ]
+    },
+    {
+      "start_freq": 7235000000,
+      "end_freq": 7250000000,
+      "business": [
+        {
+          "business_id": 61,
+          "foot_note": [
+            "5.460A"
+          ]
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "5.458",
+        "CHN23"
+      ]
+    },
+    {
+      "start_freq": 7250000000,
+      "end_freq": 7300000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 85
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "5.461"
+      ]
+    },
+    {
+      "start_freq": 7300000000,
+      "end_freq": 7375000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 85
+        },
+        {
+          "business_id": 21
+        }
+      ],
+      "foot_notes": [
+        "5.461"
+      ]
+    },
+    {
+      "start_freq": 7375000000,
+      "end_freq": 7450000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 85
+        },
+        {
+          "business_id": 21
+        },
+        {
+          "business_id": 98,
+          "foot_note": [
+            "5.461AA",
+            "5.461AB"
+          ]
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 7450000000,
+      "end_freq": 7550000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 85
+        },
+        {
+          "business_id": 46
+        },
+        {
+          "business_id": 21
+        },
+        {
+          "business_id": 98,
+          "foot_note": [
+            "5.461AA",
+            "5.461AB"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.461A",
+        "CHN18"
+      ]
+    },
+    {
+      "start_freq": 7550000000,
+      "end_freq": 7750000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 85
+        },
+        {
+          "business_id": 21
+        },
+        {
+          "business_id": 98,
+          "foot_note": [
+            "5.461AA",
+            "5.461AB"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "CHN18"
+      ]
+    },
+    {
+      "start_freq": 7750000000,
+      "end_freq": 7900000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 46,
+          "foot_note": [
+            "5.461B"
+          ]
+        },
+        {
+          "business_id": 21
+        }
+      ],
+      "foot_notes": [
+        "CHN18"
+      ]
+    },
+    {
+      "start_freq": 7900000000,
+      "end_freq": 8025000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 86
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "5.461",
+        "CHN18"
+      ]
+    },
+    {
+      "start_freq": 8025000000,
+      "end_freq": 8175000000,
+      "business": [
+        {
+          "business_id": 99
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 86
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.463"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.462A",
+        "CHN18"
+      ]
+    },
+    {
+      "start_freq": 8175000000,
+      "end_freq": 8215000000,
+      "business": [
+        {
+          "business_id": 99
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 86
+        },
+        {
+          "business_id": 62
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.463"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.462A"
+      ]
+    },
+    {
+      "start_freq": 8215000000,
+      "end_freq": 8400000000,
+      "business": [
+        {
+          "business_id": 99
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 86
+        },
+        {
+          "business_id": 18,
+          "foot_note": [
+            "5.463"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.462A"
+      ]
+    },
+    {
+      "start_freq": 8400000000,
+      "end_freq": 8500000000,
+      "business": [
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 21
+        },
+        {
+          "business_id": 48,
+          "foot_note": [
+            "5.465"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "CHN33"
+      ]
+    },
+    {
+      "start_freq": 8500000000,
+      "end_freq": 8550000000,
+      "business": [
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 8550000000,
+      "end_freq": 8650000000,
+      "business": [
+        {
+          "business_id": 66
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 67
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": [
+        "5.469A"
+      ]
+    },
+    {
+      "start_freq": 8650000000,
+      "end_freq": 8750000000,
+      "business": [
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 6
+        },
+        {
+          "business_id": 18
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 8750000000,
+      "end_freq": 8825000000,
+      "business": [
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 11,
+          "foot_note": [
+            "5.470"
+          ]
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 8825000000,
+      "end_freq": 8850000000,
+      "business": [
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 11,
+          "foot_note": [
+            "5.470"
+          ]
+        },
+        {
+          "business_id": 2,
+          "foot_note": [
+            "5.471"
+          ]
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 8850000000,
+      "end_freq": 9000000000,
+      "business": [
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 2,
+          "foot_note": [
+            "5.472"
+          ]
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 9000000000,
+      "end_freq": 9200000000,
+      "business": [
+        {
+          "business_id": 11,
+          "foot_note": [
+            "5.337"
+          ]
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 2,
+          "foot_note": [
+            "5.471",
+            "5.473A"
+          ]
+        }
+      ],
+      "foot_notes": []
+    },
+    {
+      "start_freq": 9200000000,
+      "end_freq": 9300000000,
+      "business": [
+        {
+          "business_id": 66,
+          "foot_note": [
+            "5.474A",
+            "5.474B",
+            "5.474C"
+          ]
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 2,
+          "foot_note": [
+            "5.472"
+          ]
+        }
+      ],
+      "foot_notes": [
+        "5.474",
+        "5.474D"
+      ]
+    },
+    {
+      "start_freq": 9300000000,
+      "end_freq": 9500000000,
+      "business": [
+        {
+          "business_id": 5
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 66
+        },
+        {
+          "business_id": 67
+        }
+      ],
+      "foot_notes": [
+        "5.427",
+        "5.474",
+        "5.475",
+        "5.475A",
+        "5.475B",
+        "5.476A"
+      ]
+    },
+    {
+      "start_freq": 9500000000,
+      "end_freq": 9800000000,
+      "business": [
+        {
+          "business_id": 66
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 5
+        },
+        {
+          "business_id": 90
+        }
+      ],
+      "foot_notes": [
+        "5.476A"
+      ]
+    },
+    {
+      "start_freq": 9800000000,
+      "end_freq": 9900000000,
+      "business": [
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 89
+        },
+        {
+          "business_id": 90
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "5.477",
+        "5.478",
+        "5.478A",
+        "5.478B",
+        "5.479"
+      ]
+    },
+    {
+      "start_freq": 9900000000,
+      "end_freq": 10000000000,
+      "business": [
+        {
+          "business_id": 66,
+          "foot_note": [
+            "5.474A",
+            "5.474B",
+            "5.474C"
+          ]
+        },
+        {
+          "business_id": 19
+        },
+        {
+          "business_id": 90
+        },
+        {
+          "business_id": 8
+        }
+      ],
+      "foot_notes": [
+        "5.474D",
+        "5.477",
+        "5.478",
+        "5.479"
+      ]
+    }
+  ],
+  "notes_list": []
+}

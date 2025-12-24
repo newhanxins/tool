@@ -1,0 +1,469 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D模型展示器</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .fade-in {
+            animation: fadeIn 0.5s ease-in;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .loading-spinner {
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- 导航栏 -->
+    <nav class="bg-white/80 backdrop-blur-md shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-cube text-2xl text-blue-600"></i>
+                <h1 class="text-xl font-bold text-gray-800">3D模型展示器</h1>
+            </div>
+            <div class="flex space-x-4">
+                <button id="settingsBtn" class="p-2 rounded-full hover:bg-gray-200 transition-colors">
+                    <i class="fas fa-cog text-gray-600"></i>
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-4 py-8">
+        <!-- 标题区域 -->
+        <div class="text-center mb-8 fade-in">
+            <h2 class="text-4xl font-bold text-gray-800 mb-2">探索3D世界</h2>
+            <p class="text-gray-600">加载并展示3D模型，支持交互操作</p>
+        </div>
+
+        <!-- 主内容区域 -->
+        <div class="grid grid-cols-1 lg:grid-cols-4 gap-6">
+            <!-- 控制面板 -->
+            <div class="lg:col-span-1 bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6 fade-in">
+                <h3 class="text-xl font-semibold text-gray-800 mb-4">模型控制</h3>
+                
+                <!-- 模型选择 -->
+                <div class="mb-6">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">选择模型</label>
+                    <select id="modelSelector" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <option value="cube">立方体</option>
+                        <option value="sphere">球体</option>
+                        <option value="torus">圆环</option>
+                        <option value="custom">自定义模型</option>
+                        <option value="base">基础模型</option>
+                    </select>
+                </div>
+
+                <!-- 模型信息 -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-medium text-gray-800 mb-2">模型信息</h4>
+                    <div id="modelInfo" class="text-sm text-gray-600 space-y-1">
+                        <p><strong>名称:</strong> 立方体</p>
+                        <p><strong>顶点数:</strong> 8</p>
+                        <p><strong>面数:</strong> 6</p>
+                    </div>
+                </div>
+
+                <!-- 控制按钮 -->
+                <div class="space-y-3">
+                    <button id="loadModelBtn" class="w-full bg-blue-600 text-white py-3 rounded-lg font-medium hover:bg-blue-700 transition-colors">
+                        <i class="fas fa-download mr-2"></i>加载模型
+                    </button>
+                    <button id="resetViewBtn" class="w-full bg-gray-600 text-white py-3 rounded-lg font-medium hover:bg-gray-700 transition-colors">
+                        <i class="fas fa-sync mr-2"></i>重置视角
+                    </button>
+                </div>
+
+                <!-- 设置选项 -->
+                <div class="mt-6 space-y-4">
+                    <div>
+                        <label class="flex items-center">
+                            <input type="checkbox" id="autoRotate" class="mr-2">自动旋转
+                    </label>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">背景颜色</label>
+                        <input type="color" id="bgColor" value="#eeeeee" class="w-full h-10 rounded-lg cursor-pointer">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">模型颜色</label>
+                        <input type="color" id="modelColor" value="#4a90e2" class="w-full h-10 rounded-lg cursor-pointer">
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3D展示区域 -->
+            <div class="lg:col-span-3 fade-in">
+                <div class="bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-6">
+                    <div id="canvasContainer" class="relative">
+                        <canvas id="threeCanvas" class="w-full h-96 rounded-lg border-2 border-gray-200"></canvas>
+                        <div id="loadingIndicator" class="absolute inset-0 flex items-center justify-center bg-black/50 rounded-lg hidden">
+                            <div class="text-white text-center">
+                                <i class="fas fa-spinner fa-spin text-2xl mb-2 loading-spinner"></i>
+                                <p>正在加载模型...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 状态栏 -->
+        <div class="mt-6 bg-white/80 backdrop-blur-md rounded-2xl shadow-lg p-4 fade-in">
+            <div id="statusMessage" class="text-center text-gray-600">
+                请点击"加载模型"按钮开始体验3D模型展示
+            </div>
+        </div>
+    </div>
+
+    <!-- 模态框 -->
+    <div id="settingsModal" class="fixed inset-0 bg-black/50 flex items-center justify-center hidden z-50">
+        <div class="bg-white rounded-2xl p-6 max-w-md w-full mx-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="text-xl font-semibold">高级设置</h3>
+                <button id="closeSettings" class="text-gray-500 hover:text-gray-700">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">渲染质量</label>
+                    <select class="w-full p-3 border border-gray-300 rounded-lg">
+                        <option>高质量</option>
+                        <option>平衡</option>
+                        <option>性能优先</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-sm font-medium text-gray-700 mb-2">相机灵敏度</label>
+                    <input type="range" min="1" max="10" value="5" class="w-full">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Three.js 库 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <!-- 注意：这里使用examples/js/而不是examples/jsm/ -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+    <!-- 使用UMD格式的加载器 -->
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/OBJLoader.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/loaders/MTLLoader.js"></script>
+    
+<script>
+        // 3D模型展示器类
+        class ModelViewer {
+            constructor() {
+                this.scene = null;
+                this.camera = null;
+                this.renderer = null;
+                this.controls = null;
+                this.currentModel = null;
+                this.isRotating = false;
+                
+                this.init();
+                this.setupEventListeners();
+            }
+
+            init() {
+                // 创建场景
+                this.scene = new THREE.Scene();
+                this.scene.background = new THREE.Color('#eeeeee');
+
+                // 创建相机
+                const canvasContainer = document.getElementById('canvasContainer');
+                this.camera = new THREE.PerspectiveCamera(
+                    75,
+                    canvasContainer.clientWidth / canvasContainer.clientHeight,
+                    0.1,
+                    1000
+                );
+                this.camera.position.set(5, 5, 5);
+
+                // 创建渲染器
+                const canvas = document.getElementById('threeCanvas');
+                this.renderer = new THREE.WebGLRenderer({ 
+                    canvas: canvas,
+                    antialias: true 
+                });
+                this.renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
+                this.renderer.shadowMap.enabled = true;
+
+                // 添加轨道控制
+                this.controls = new THREE.OrbitControls(this.camera, this.renderer.domElement);
+                this.controls.enableDamping = true;
+                this.controls.dampingFactor = 0.05;
+
+                // 添加灯光
+                const ambientLight = new THREE.AmbientLight(0xffffff, 0.6);
+                this.scene.add(ambientLight);
+
+                const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+                directionalLight.position.set(10, 10, 5);
+                directionalLight.castShadow = true;
+                this.scene.add(directionalLight);
+
+                // 添加坐标轴和网格辅助
+                const axesHelper = new THREE.AxesHelper(5);
+                this.scene.add(axesHelper);
+
+                const gridHelper = new THREE.GridHelper(10, 10);
+                this.scene.add(gridHelper);
+
+                this.animate();
+            }
+
+            setupEventListeners() {
+                // 加载模型按钮
+                document.getElementById('loadModelBtn').addEventListener('click', () => {
+                    this.loadModel();
+                });
+
+                // 重置视角按钮
+                document.getElementById('resetViewBtn').addEventListener('click', () => {
+                    this.resetCamera();
+                });
+
+                // 自动旋转开关
+                document.getElementById('autoRotate').addEventListener('change', (e) => {
+                    this.isRotating = e.target.checked;
+                    this.updateStatus(this.isRotating ? '自动旋转已开启' : '自动旋转已关闭');
+                });
+
+                // 背景颜色选择
+                document.getElementById('bgColor').addEventListener('input', (e) => {
+                    this.scene.background = new THREE.Color(e.target.value);
+                });
+
+                // 模型颜色选择
+                document.getElementById('modelColor').addEventListener('input', (e) => {
+                    if (this.currentModel) {
+                        this.currentModel.material.color = new THREE.Color(e.target.value);
+                    }
+                });
+
+                // 模型选择器
+                document.getElementById('modelSelector').addEventListener('change', (e) => {
+                    this.updateModelInfo(e.target.value);
+                });
+
+                // 设置按钮
+                document.getElementById('settingsBtn').addEventListener('click', () => {
+                    document.getElementById('settingsModal').classList.remove('hidden');
+                });
+
+                // 关闭设置
+                document.getElementById('closeSettings').addEventListener('click', () => {
+                    document.getElementById('settingsModal').classList.add('hidden');
+                });
+
+                // 窗口大小调整
+                window.addEventListener('resize', () => {
+                    this.onWindowResize();
+                });
+            }
+
+            loadModel() {
+                const loadingIndicator = document.getElementById('loadingIndicator');
+                const statusMessage = document.getElementById('statusMessage');
+                const modelType = document.getElementById('modelSelector').value;
+
+                try {
+                    loadingIndicator.classList.remove('hidden');
+                    statusMessage.textContent = '正在创建3D模型...';
+
+                    // 模拟加载延迟
+                    setTimeout(() => {
+                        this.createModel(modelType);
+                        loadingIndicator.classList.add('hidden');
+                        statusMessage.textContent = `模型加载成功！当前模型: ${this.getModelName(modelType)}。使用鼠标拖拽旋转视角，滚轮缩放。`;
+                    }, 1500);
+
+                } catch (error) {
+                    console.error('加载模型失败:', error);
+                    statusMessage.textContent = '模型加载失败，请重试';
+                    loadingIndicator.classList.add('hidden');
+                }
+            }
+
+            createModel(modelType) {
+                console.log(`创建模型: ${modelType}`);
+                // 清除现有模型
+                if (this.currentModel) {
+                    this.scene.remove(this.currentModel);
+                }
+
+                const modelColor = document.getElementById('modelColor').value;
+                let geometry, material;
+
+                switch (modelType) {
+                    case 'cube':
+                        geometry = new THREE.BoxGeometry(2, 2, 2);
+                        material = new THREE.MeshPhongMaterial({ 
+                            color: modelColor,
+                            shininess: 100 
+                        });
+                        break;
+                    case 'sphere':
+                        geometry = new THREE.SphereGeometry(1, 32, 32);
+                        material = new THREE.MeshPhongMaterial({ 
+                            color: modelColor,
+                            shininess: 80 
+                        });
+                        break;
+                    case 'torus':
+                        geometry = new THREE.TorusGeometry(1.5, 0.4, 16, 100);
+                        material = new THREE.MeshPhongMaterial({ 
+                            color: modelColor,
+                            shininess: 60 
+                        });
+                        break;
+                    case 'custom':
+                        // 创建自定义组合模型
+                        const group = new THREE.Group();
+                        
+                        const baseGeometry = new THREE.CylinderGeometry(0.5, 0.8, 1, 32);
+                        const baseMaterial = new THREE.MeshPhongMaterial({ color: modelColor });
+                        const base = new THREE.Mesh(baseGeometry, baseMaterial);
+                        
+                        const topGeometry = new THREE.ConeGeometry(0.6, 1.5, 32);
+                        const topMaterial = new THREE.MeshPhongMaterial({ color: 0xe74c3c });
+                        const top = new THREE.Mesh(topGeometry, topMaterial);
+                        top.position.y = 1.25;
+                        
+                        group.add(base);
+                        group.add(top);
+                        this.scene.add(group);
+                        this.currentModel = group;
+                        return;
+                    case 'base':
+                        const mtlLoader = new THREE.MTLLoader();
+                        const objLoader = new THREE.OBJLoader();
+                        const basePath = 'models/';
+                        const mtlFile = 'trees9.mtl';
+                        const objFile = 'trees9.obj';
+                        console.log('开始加载自定义模型...');
+                        mtlLoader.setPath(basePath);
+                        objLoader.setPath(basePath);
+                        // 设置跨域访问
+                        mtlLoader.setCrossOrigin("Anonymous");
+                        // 加载MTL材质文件
+                        mtlLoader.load(mtlFile, (materials) => {
+                            // 成功回调
+                            materials.preload();
+                            objLoader.setMaterials(materials);
+                            // 加载OBJ模型文件
+                            objLoader.load(objFile, (object) => {
+                                object.traverse((child) => {
+                                    if (child.isMesh) {
+                                        child.material.color = new THREE.Color(0x00ff00);
+                                    }
+                                });
+                                this.scene.add(object);
+                                this.currentModel = object;
+                            }, (xhr)=>{
+                                console.log('加载模型中...');
+                                if (xhr.lengthComputable) {
+                                    const percentComplete = xhr.loaded / xhr.total * 100;
+                                    console.log('模型加载进度: ' + percentComplete + '%');
+                                }
+                            }, (error) => {
+                                console.error('加载模型出错:', error);
+                            });
+                        });
+
+                }
+
+                const mesh = new THREE.Mesh(geometry, material);
+                mesh.castShadow = true;
+                this.scene.add(mesh);
+                this.currentModel = mesh;
+            }
+
+            getModelName(modelType) {
+                const names = {
+                    'cube': '立方体',
+                    'sphere': '球体', 
+                    'torus': '圆环',
+                    'custom': '自定义模型',
+                    'base': '基础模型'
+                };
+                return names[modelType];
+            }
+
+            updateModelInfo(modelType) {
+                const info = document.getElementById('modelInfo');
+                const infoMap = {
+                    'cube': { vertices: 8, faces: 6, edges: 12 },
+                    'sphere': { vertices: 482, faces: 960, edges: 1440 },
+                    'torus': { vertices: 272, faces: 544, edges: 816 },
+                    'custom': { vertices: 130, faces: 192, edges: 320 },
+                    'base': { vertices: 0, faces: 0, edges: 0 }
+                };
+
+                const data = infoMap[modelType];
+                info.innerHTML = `
+                    <p><strong>名称:</strong> ${this.getModelName(modelType)}</p>
+                    <p><strong>顶点数:</strong> ${data.vertices}</p>
+                    <p><strong>面数:</strong> ${data.faces}</p>
+                    <p><strong>边数:</strong> ${data.edges}</p>
+                `;
+            }
+
+            resetCamera() {
+                this.camera.position.set(5, 5, 5);
+                this.controls.target.set(0, 0, 0);
+                this.updateStatus('视角已重置');
+            }
+
+            onWindowResize() {
+                const canvasContainer = document.getElementById('canvasContainer');
+                this.camera.aspect = canvasContainer.clientWidth / canvasContainer.clientHeight;
+                this.camera.updateProjectionMatrix();
+                this.renderer.setSize(canvasContainer.clientWidth, canvasContainer.clientHeight);
+            }
+
+            animate() {
+                requestAnimationFrame(() => this.animate());
+
+                if (this.isRotating && this.currentModel) {
+                    this.currentModel.rotation.y += 0.01;
+                }
+
+                this.controls.update();
+                this.renderer.render(this.scene, this.camera);
+            }
+
+            updateStatus(message) {
+                document.getElementById('statusMessage').textContent = message;
+            }
+        }
+
+        // 页面加载完成后初始化
+        document.addEventListener('DOMContentLoaded', () => {
+            new ModelViewer();
+            
+            // 初始显示立方体信息
+            const modelViewer = new ModelViewer();
+            modelViewer.updateModelInfo('cube');
+        });
+
+        // 错误处理
+        window.addEventListener('error', (e) => {
+            console.error('发生错误:', e.error);
+            document.getElementById('statusMessage').textContent = '发生错误，请刷新页面重试';
+        });
+    </script>
+</body>
+</html>

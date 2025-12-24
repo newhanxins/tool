@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HTML 加载高德地图示例</title>
+  <!-- 引入高德地图 CSS（可选，用于控件样式） -->
+  <link rel="stylesheet" href="https://a.amap.com/jsapi_demos/static/demo-center/css/demo-center.css" />
+  <style>
+    /* 地图容器必须设置宽高 */
+    #mapContainer {
+      width: 100%;
+      height: 80vh;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .control-panel {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      z-index: 100;
+      background: white;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+    .btn {
+      padding: 8px 16px;
+      margin-right: 10px;
+      margin-bottom: 10px;
+      background: #1890ff;
+      color: white;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: #096dd9;
+    }
+    .info {
+      margin-top: 10px;
+      font-size: 14px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <!-- 地图容器 -->
+  <div id="mapContainer"></div>
+
+  <!-- 控制面板 -->
+  <div class="control-panel">
+    <button class="btn" onclick="getCurrentLocation()">定位当前位置</button>
+    <button class="btn" onclick="addMarker()">添加标记点</button>
+    <button class="btn" onclick="clearMarkers()">清除标记点</button>
+    <div class="info" id="locationInfo"></div>
+  </div>
+
+  <!-- 1. 引入高德地图 JS API（替换为你的 Key） -->
+  <script type="text/javascript" src="https://webapi.amap.com/maps?v=2.0&key=0c7c70xxxxxxx07aeb9f2f221c49180"></script>
+
+  <script>
+    let map = null; // 地图实例
+    let markers = []; // 标记点数组
+
+    // 2. 初始化地图
+    function initMap() {
+      // 创建地图实例（中心点默认设为北京）
+      map = new AMap.Map('mapContainer', {
+        zoom: 13, // 初始缩放级别（1-20，数字越大越详细）
+        center: [116.39748, 39.90882], // 初始中心点经纬度（北京）
+        resizeEnable: true, // 允许地图自适应容器大小变化
+        // 可选：设置地图样式（默认/卫星/自定义）
+        mapStyle: 'amap://styles/normal' // normal(默认)、satellite(卫星)、dark(深色)等
+      });
+
+      // 添加地图控件（缩放、定位等）
+      map.addControl(new AMap.Scale()); // 比例尺
+      map.addControl(new AMap.ToolBar({
+        position: 'RB' // 右下角
+      })); // 工具栏（缩放、旋转等）
+    }
+
+    // 3. 获取当前位置并定位
+    function getCurrentLocation() {
+      // 检查浏览器是否支持地理定位
+      if (!navigator.geolocation) {
+        alert('你的浏览器不支持地理定位功能');
+        return;
+      }
+
+      // 显示加载提示
+      document.getElementById('locationInfo').textContent = '正在获取当前位置...';
+
+      // 调用浏览器定位 API
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          // 定位成功：获取经纬度（WGS84 坐标系）
+          const lng = position.coords.longitude;
+          const lat = position.coords.latitude;
+
+          // 转换坐标系（高德地图使用 GCJ02 坐标系）
+          AMap.convertFrom([lng, lat], 'gps', (status, result) => {
+            if (status === 'complete') {
+              const gcj02LngLat = result.locations[0]; // 转换后的坐标
+              
+              // 移动地图中心点到当前位置
+              map.setCenter(gcj02LngLat);
+              
+              // 添加当前位置标记点
+              addMarker(gcj02LngLat, '当前位置', '#1890ff');
+
+              // 反向解析地址（经纬度 → 具体地址）
+              AMap.plugin('AMap.Geocoder', () => {
+                const geocoder = new AMap.Geocoder({
+                  radius: 1000,
+                  extensions: 'all'
+                });
+
+                geocoder.getAddress(gcj02LngLat, (status, result) => {
+                  if (status === 'complete' && result.info === 'OK') {
+                    const address = result.regeocode.formattedAddress;
+                    document.getElementById('locationInfo').textContent = `当前位置：${address}`;
+                  }
+                });
+              });
+            }
+          });
+        },
+        (error) => {
+          // 定位失败处理
+          let errMsg = '';
+          switch (error.code) {
+            case error.PERMISSION_DENIED:
+              errMsg = '用户拒绝了定位请求';
+              break;
+            case error.POSITION_UNAVAILABLE:
+              errMsg = '位置信息不可用';
+              break;
+            case error.TIMEOUT:
+              errMsg = '定位请求超时';
+              break;
+            default:
+              errMsg = '定位失败，请重试';
+          }
+          document.getElementById('locationInfo').textContent = errMsg;
+        },
+        {
+          enableHighAccuracy: true, // 高精度定位
+          timeout: 10000, // 超时时间（10秒）
+          maximumAge: 0 // 不使用缓存位置
+        }
+      );
+    }
+
+    // 4. 添加标记点（支持自定义位置、标题、颜色）
+    function addMarker(lngLat = null, title = '标记点', color = '#ff4d4f') {
+      // 若未指定位置，默认使用当前地图中心点
+      if (!lngLat) {
+        lngLat = map.getCenter();
+      }
+
+      // 创建标记点
+      const marker = new AMap.Marker({
+        position: lngLat, // 经纬度
+        title: title, // 鼠标悬浮提示
+        icon: new AMap.Icon({
+          size: new AMap.Size(30, 30), // 图标大小
+          image: `https://a.amap.com/jsapi_demos/static/demo-center/icons/poi-marker-default.png`,
+          imageSize: new AMap.Size(30, 30),
+          imageOffset: new AMap.Pixel(0, -60) // 图标偏移
+        }),
+        anchor: 'bottom-center', // 锚点位置
+        draggable: true // 是否可拖动
+      });
+
+      // 添加到地图
+      marker.setMap(map);
+      markers.push(marker); // 存入数组，方便后续操作
+
+      // 给标记点添加点击事件（显示信息窗口）
+      const infoWindow = new AMap.InfoWindow({
+        content: `<h3 style="margin:0;">${title}</h3><p style="margin:5px 0 0;">经纬度：${lngLat[0].toFixed(6)}, ${lngLat[1].toFixed(6)}</p>`,
+        offset: new AMap.Pixel(0, -30)
+      });
+
+      marker.on('click', () => {
+        infoWindow.open(map, marker.getPosition());
+      });
+    }
+
+    // 5. 清除所有标记点
+    function clearMarkers() {
+      markers.forEach(marker => {
+        marker.remove(); // 从地图移除
+      });
+      markers = []; // 清空数组
+      document.getElementById('locationInfo').textContent = '已清除所有标记点';
+    }
+
+    // 页面加载完成后初始化地图
+    window.onload = initMap;
+  </script>
+</body>
+</html>

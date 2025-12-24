@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenLayers完整测量工具</title>
+   <script src="https://openlayers.org/en/v5.3.0/build/ol.js"></script>
+  <link href="https://openlayers.org/en/v5.3.0/css/ol.css" rel="stylesheet">
+  <style>
+        #map {
+            width: 100%;
+            height: 600px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+        }
+        .control-panel {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 10px;
+            margin-bottom: 15px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+        button {
+            padding: 12px 15px;
+            background: #4285f4;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #3367d6;
+        }
+        button.active {
+            background: #0d47a1;
+            box-shadow: 0 0 0 2px rgba(66, 133, 244, 0.5);
+        }
+        .measure-result {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            min-width: 250px;
+            max-width: 300px;
+            text-align: left;
+            z-index: 1000;
+        }
+        .tooltip {
+            position: relative;
+            background: white;
+            padding: 5px 10px;
+            border-radius: 4px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            font-size: 14px;
+            white-space: nowrap;
+        }
+        .result-title {
+            font-weight: bold;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 5px;
+        }
+        .result-item {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <div style="max-width: 1200px; margin: 20px auto; padding: 0 20px;">
+        <h1>OpenLayers 5.3.0 完整测量工具</h1>
+        <div class="control-panel">
+            <button id="distance-btn">测距模式</button>
+            <button id="area-btn">测面模式</button>
+            <button id="angle-btn">测角模式</button>
+            <button id="clear-btn">清除测量</button>
+        </div>
+        <div id="map"></div>
+        <div class="measure-result" id="result">
+            <div class="result-title">测量结果</div>
+            <div id="distance-result" class="result-item">距离: --</div>
+            <div id="area-result" class="result-item">面积: --</div>
+            <div id="angle-result" class="result-item">角度: --</div>
+        </div>
+    </div>
+
+  
+    <script>
+        // 初始化地图
+        const map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({
+            source: new ol.source.XYZ({
+                url: 'http://wprd0{1-4}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x={x}&y={y}&z={z}'
+            })
+        })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([116.404, 39.915]),
+                zoom: 10
+            })
+        });
+
+        // 测量图层
+        const vectorSource = new ol.source.Vector();
+        const vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+            style: new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: 'rgba(255, 51, 102, 0.8)',
+                    width: 3
+                }),
+                image: new ol.style.Circle({
+                    radius: 6,
+                    fill: new ol.style.Fill({
+                        color: '#ff3366'
+                    }),
+                    stroke: new ol.style.Stroke({
+                        color: '#fff',
+                        width: 2
+                    })
+                }),
+                fill: new ol.style.Fill({
+                    color: 'rgba(255, 51, 102, 0.2)'
+                })
+            })
+        });
+        map.addLayer(vectorLayer);
+
+        // 测量工具变量
+        let drawInteraction, sketch;
+        let measureTooltip, measureTooltipElement;
+        let activeMode = null;
+
+        // 创建测量提示框
+        function createMeasureTooltip() {
+            if (measureTooltipElement) {
+                map.removeOverlay(measureTooltip);
+            }
+            
+            measureTooltipElement = document.createElement('div');
+            measureTooltipElement.className = 'tooltip';
+            measureTooltip = new ol.Overlay({
+                element: measureTooltipElement,
+                offset: [0, -20],
+                positioning: 'bottom-center'
+            });
+            map.addOverlay(measureTooltip);
+        }
+
+        // 格式化测量结果
+        function formatLength(line) {
+            const length = ol.sphere.getLength(line);
+            return length > 1000 ? 
+                (length / 1000).toFixed(2) + ' km' : 
+                Math.round(length) + ' m';
+        }
+
+        function formatArea(polygon) {
+            const area = ol.sphere.getArea(polygon);
+            return area > 10000 ? 
+                (area / 1000000).toFixed(2) + ' km²' : 
+                Math.round(area) + ' m²';
+        }
+
+        // 角度计算函数（修复NaN问题）
+        function calculateAngle1(p1, p2, p3) {
+            // 向量AB和BC:ml-citation{ref="2" data="citationList"}
+            const v1 = [p1[0] - p2[0], p1[1] - p2[1]];
+            const v2 = [p3[0] - p2[0], p3[1] - p2[1]];
+            
+            // 向量点积:ml-citation{ref="2" data="citationList"}
+            const dot = v1[0] * v2[0] + v1[1] * v2[1];
+            
+            // 向量模长（防止除零错误）:ml-citation{ref="3" data="citationList"}
+            const mag1 = Math.sqrt(v1[0] * v1[0] + v1[1] * v1[1]);
+            const mag2 = Math.sqrt(v2[0] * v2[0] + v2[1] * v2[1]);
+            
+            if (mag1 * mag2 === 0) return 0; // 防止除零错误:ml-citation{ref="3" data="citationList"}
+            
+            // 计算夹角弧度并转为角度:ml-citation{ref="2" data="citationList"}
+            const angleRad = Math.acos(dot / (mag1 * mag2));
+            return (angleRad * 180 / Math.PI).toFixed(2);
+        }
+
+        // 角度计算函数（支持0-360度）
+        function calculateAngle(p1, p2, p3) {
+            const v1 = [p1[0] - p2[0], p1[1] - p2[1]];
+            const v2 = [p3[0] - p2[0], p3[1] - p2[1]];
+            
+            const dot = v1[0] * v2[0] + v1[1] * v2[1];
+            const cross = v1[0] * v2[1] - v1[1] * v2[0];
+            const mag1 = Math.sqrt(v1[0] * v1[0] + v1[1] * v1[1]);
+            const mag2 = Math.sqrt(v2[0] * v2[0] + v2[1] * v2[1]);
+            
+            if (mag1 * mag2 === 0) return 0;
+            
+            let angleRad = Math.acos(Math.min(1, Math.max(-1, dot / (mag1 * mag2))));
+            let angleDeg = angleRad * 180 / Math.PI;
+            
+            // 通过叉积判断角度是否大于180度
+            if (cross < 0) {
+                angleDeg = 360 - angleDeg;
+            }
+            
+            return angleDeg.toFixed(2);
+        }
+        // 设置测量交互
+        function setMeasureInteraction(type) {
+            // 清除现有交互
+            if (drawInteraction) {
+                map.removeInteraction(drawInteraction);
+            }
+            vectorSource.clear();
+            createMeasureTooltip();
+            activeMode = type;
+            
+            // 重置结果显示
+            document.getElementById('distance-result').textContent = '距离: --';
+            document.getElementById('area-result').textContent = '面积: --';
+            document.getElementById('angle-result').textContent = '角度: --';
+            
+            // 设置绘制类型
+            let drawType, maxPoints;
+            switch (type) {
+                case 'distance':
+                    drawType = 'LineString';
+                    maxPoints = Infinity;
+                    break;
+                case 'area':
+                    drawType = 'Polygon';
+                    maxPoints = Infinity;
+                    break;
+                case 'angle':
+                    drawType = 'LineString';
+                    maxPoints = 3; // 角度测量只需要三个点:ml-citation{ref="2" data="citationList"}
+                    break;
+            }
+
+            // 创建新的绘制交互
+            drawInteraction = new ol.interaction.Draw({
+                source: vectorSource,
+                type: drawType,
+                maxPoints: maxPoints,
+                style: new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: 'rgba(66, 133, 244, 0.7)',
+                        width: 3,
+                        lineDash: type === 'angle' ? [] : [5, 5]
+                    }),
+                    image: new ol.style.Circle({
+                        radius: 6,
+                        fill: new ol.style.Fill({
+                            color: '#4285f4'
+                        }),
+                        stroke: new ol.style.Stroke({
+                            color: '#fff',
+                            width: 2
+                        })
+                    }),
+                    fill: new ol.style.Fill({
+                        color: 'rgba(66, 133, 244, 0.1)'
+                    })
+                })
+            });
+
+            map.addInteraction(drawInteraction);
+            
+            // 绘制开始事件
+            drawInteraction.on('drawstart', function(evt) {
+                sketch = evt.feature;
+                let tooltipCoord = evt.coordinate;
+                
+                sketch.getGeometry().on('change', function(evt) {
+                    const geom = evt.target;
+                    let output = '';
+                    
+                    if (type === 'distance') {
+                        output = formatLength(geom);
+                        tooltipCoord = geom.getLastCoordinate();
+                        document.getElementById('distance-result').textContent = `距离: ${output}`;
+                    } else if (type === 'area') {
+                        output = formatArea(geom);
+                        tooltipCoord = geom.getInteriorPoint().getCoordinates();
+                        document.getElementById('area-result').textContent = `面积: ${output}`;
+                    } else if (type === 'angle') {
+                        const coords = geom.getCoordinates();
+                        console.log("角度测量",coords.length,coords)
+                        if (coords.length >= 3) {
+                            const p1 = ol.proj.toLonLat(coords[0]);
+                            const p2 = ol.proj.toLonLat(coords[1]);
+                            const p3 = ol.proj.toLonLat(coords[2]);
+                            
+                            const angle = calculateAngle(p1, p2, p3);
+                            output = `${angle}°`;
+                            tooltipCoord = geom.getLastCoordinate();
+                            document.getElementById('angle-result').textContent = `角度: ${output}`;
+                        }
+                    }
+                    
+                    measureTooltipElement.innerHTML = output;
+                    measureTooltip.setPosition(tooltipCoord);
+                });
+            });
+
+            // 绘制结束事件
+            drawInteraction.on('drawend', function() {
+                measureTooltipElement.className = 'tooltip static';
+                measureTooltip.setOffset([0, -10]);
+                
+                measureTooltipElement = null;
+                createMeasureTooltip();
+            });
+        }
+
+        // 测距按钮
+        document.getElementById('distance-btn').addEventListener('click', function() {
+            setMeasureInteraction('distance');
+            updateActiveButton(this);
+        });
+
+        // 测面按钮
+        document.getElementById('area-btn').addEventListener('click', function() {
+            setMeasureInteraction('area');
+            updateActiveButton(this);
+        });
+
+        // 测角按钮
+        document.getElementById('angle-btn').addEventListener('click', function() {
+            setMeasureInteraction('angle');
+            updateActiveButton(this);
+        });
+
+        // 更新激活按钮状态
+        function updateActiveButton(activeBtn) {
+            document.querySelectorAll('.control-panel button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            activeBtn.classList.add('active');
+        }
+
+        // 清除功能
+        document.getElementById('clear-btn').addEventListener('click', function() {
+            vectorSource.clear();
+            if (measureTooltip) {
+                map.removeOverlay(measureTooltip);
+            }
+            document.querySelectorAll('.control-panel button').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            document.getElementById('distance-result').textContent = '距离: --';
+            document.getElementById('area-result').textContent = '面积: --';
+            document.getElementById('angle-result').textContent = '角度: --';
+            activeMode = null;
+            
+            if (drawInteraction) {
+                map.removeInteraction(drawInteraction);
+            }
+        });
+        
+        // 初始清除结果
+        document.getElementById('clear-btn').click();
+    </script>
+</body>
+</html>

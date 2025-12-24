@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenLayers测量工具</title>
+    <script src="https://openlayers.org/en/v5.3.0/build/ol.js"></script>
+    <link href="https://openlayers.org/en/v5.3.0/css/ol.css" rel="stylesheet">
+<style>
+        #map {
+            width: 100%;
+            height: 100vh;
+        }
+        .control-panel {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .control-btn {
+            padding: 10px 15px;
+            border: none;
+            border-radius: 6px;
+            background: linear-gradient(135deg, #4285f4, #34a853);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .control-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        .control-btn.active {
+            background: linear-gradient(135deg, #ea4335, #fbbc05);
+        }
+        .info-display {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.9);
+            padding: 15px 25px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            display: flex;
+            gap: 20px;
+        }
+        .info-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .angle-display {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            transform: translateY(-50%);
+            background: rgba(255,255,255,0.9);
+            padding: 15px;
+            border-radius: 50%;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="control-panel">
+        <button id="distanceBtn" class="control-btn">
+            <i class="fas fa-ruler"></i> 测距
+        </button>
+        <button id="areaBtn" class="control-btn">
+            <i class="fas fa-vector-square"></i> 测面
+        </button>
+        <button id="angleBtn" class="control-btn">
+            <i class="fas fa-compass"></i> 测角
+        </button>
+        <button id="clearBtn" class="control-btn">
+            <i class="fas fa-trash"></i> 清除
+        </button>
+    </div>
+    <div class="info-display">
+        <div class="info-item" id="distanceInfo">
+            <i class="fas fa-ruler"></i>
+            <span>0 米</span>
+        </div>
+        <div class="info-item" id="areaInfo">
+            <i class="fas fa-vector-square"></i>
+            <span>0 平方米</span>
+        </div>
+    </div>
+    <div class="angle-display" id="angleDisplay">
+        <span>0°</span>
+    </div>
+
+    <script>
+        // 初始化地图
+        const map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'http://wprd0{1-4}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x={x}&y={y}&z={z}'
+                    })
+                })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([116.404, 39.915]),
+                zoom: 12
+            })
+        });
+
+        // 创建矢量图层
+        const vectorLayer = new ol.layer.Vector({
+            source: new ol.source.Vector()
+        });
+        map.addLayer(vectorLayer);
+
+        // 测量状态管理
+        let currentMode = null;
+        let drawInteraction = null;
+        let currentFeatures = [];
+        let currentPoints = [];
+
+        // 工具按钮事件
+        document.getElementById('distanceBtn').addEventListener('click', () => startMeasurement('distance'));
+        document.getElementById('areaBtn').addEventListener('click', () => startMeasurement('area'));
+        document.getElementById('angleBtn').addEventListener('click', () => startMeasurement('angle'));
+        document.getElementById('clearBtn').addEventListener('click', clearAll);
+
+        // 开始测量
+        function startMeasurement(mode) {
+            // 清除现有状态
+            clearAll();
+            currentMode = mode;
+            
+            // 高亮当前按钮
+            document.querySelectorAll('.control-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`${mode}Btn`).classList.add('active');
+            
+            // 根据模式设置绘图类型
+            let drawType;
+            switch(mode) {
+                case 'distance':
+                    drawType = 'LineString';
+                    break;
+                case 'area':
+                    drawType = 'Polygon';
+                    break;
+                case 'angle':
+                    drawType = 'Point';
+                    break;
+            }
+
+            // 创建绘图交互
+            drawInteraction = new ol.interaction.Draw({
+                source: vectorLayer.getSource(),
+                type: drawType,
+                maxPoints: mode === 'angle' ? 3 : Infinity
+            });
+
+            // 绘图事件处理
+            drawInteraction.on('drawstart', function(e) {
+                currentFeatures = [];
+                currentPoints = [];
+            });
+
+            drawInteraction.on('drawend', function(e) {
+                currentFeatures.push(e.feature);
+                
+                if (mode === 'angle') {
+                    currentPoints.push(e.feature.getGeometry().getCoordinates());
+                    if (currentPoints.length === 3) {
+                        calculateAngle();
+                        map.removeInteraction(drawInteraction);
+                    }
+                } else {
+                    updateMeasurement();
+                }
+            });
+
+            map.addInteraction(drawInteraction);
+        }
+
+        // 计算角度
+        function calculateAngle() {
+            const [A, B, C] = currentPoints;
+            
+            // 计算向量BA和BC
+            const vecBA = [A[0] - B[0], A[1] - B[1]];
+            const vecBC = [C[0] - B[0], C[1] - B[1]];
+            
+            // 计算夹角（弧度）
+            const angleRad = Math.atan2(vecBC[1], vecBC[0]) - Math.atan2(vecBA[1], vecBA[0]);
+            
+            // 转换为顺时针角度（0-360°）
+            let angleDeg = (angleRad * 180 / Math.PI) % 360;
+            angleDeg = angleDeg < 0 ? angleDeg + 360 : angleDeg;
+            
+            // 显示角度
+            document.getElementById('angleDisplay').innerHTML = `<span>${angleDeg.toFixed(2)}°</span>`;
+            
+            // 绘制连接线和标注
+            drawAngleLinesAndLabels(A, B, C, angleDeg);
+        }
+
+        // 绘制角度线和标注
+        function drawAngleLinesAndLabels(A, B, C, angle) {
+            // 绘制AB线
+            const lineAB = new ol.geom.LineString([A, B]);
+            const lineABFeature = new ol.Feature({
+                geometry: lineAB,
+                type: 'angle-line'
+            });
+            lineABFeature.setStyle(new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: '#4285f4',
+                    width: 3
+                })
+            }));
+            vectorLayer.getSource().addFeature(lineABFeature);
+            
+            // 绘制BC线
+            const lineBC = new ol.geom.LineString([B, C]);
+            const lineBCFeature = new ol.Feature({
+                geometry: lineBC,
+                type: 'angle-line'
+            });
+            lineBCFeature.setStyle(new ol.style.Style({
+                stroke: new ol.style.Stroke({
+                    color: '#4285f4',
+                    width: 3
+                })
+            }));
+            vectorLayer.getSource().addFeature(lineBCFeature);
+            
+            // 标注ABC三点
+            labelPoint(A, 'A');
+            labelPoint(B, 'B');
+            labelPoint(C, 'C');
+            
+            // 添加角度标注
+            const angleFeature = new ol.Feature({
+                geometry: new ol.geom.Point(B),
+                text: angle.toFixed(2) + '°'
+            });
+            
+            // 计算标注偏移方向（角平分线反向）
+            const vecBA = [A[0] - B[0], A[1] - B[1]];
+            const vecBC = [C[0] - B[0], C[1] - B[1]];
+            const bisectorAngle = Math.atan2(vecBA[1] + vecBC[1], vecBA[0] + vecBC[0]) + Math.PI;
+            const offsetX = Math.cos(bisectorAngle) * 30;
+            const offsetY = Math.sin(bisectorAngle) * 30;
+            
+            angleFeature.setStyle(new ol.style.Style({
+                text: new ol.style.Text({
+                    text: angleFeature.get('text'),
+                    font: 'bold 16px Arial',
+                    fill: new ol.style.Fill({ color: '#d23c3c' }),
+                    stroke: new ol.style.Stroke({
+                        color: '#ffffff',
+                        width: 3
+                    }),
+                    offsetX: offsetX,
+                    offsetY: offsetY,
+                    backgroundFill: new ol.style.Fill({
+                        color: 'rgba(255,255,255,0.7)'
+                    })
+                })
+            }));
+            vectorLayer.getSource().addFeature(angleFeature);
+        }
+
+        // 标注点
+        function labelPoint(coord, text) {
+            const label = new ol.Feature({
+                geometry: new ol.geom.Point(coord),
+                text: text
+            });
+            
+            label.setStyle(new ol.style.Style({
+                text: new ol.style.Text({
+                    text: label.get('text'),
+                    font: 'bold 16px Arial',
+                    fill: new ol.style.Fill({ color: '#2c3e50' }),
+                    stroke: new ol.style.Stroke({
+                        color: '#ffffff',
+                        width: 3
+                    }),
+                    offsetY: -20,
+                    backgroundFill: new ol.style.Fill({
+                        color: 'rgba(255,255,255,0.7)'
+                    })
+                })
+            }));
+            vectorLayer.getSource().addFeature(label);
+        }
+
+        // 更新测量结果
+        function updateMeasurement() {
+            if (currentMode === 'distance') {
+                const line = currentFeatures[0].getGeometry();
+                const length = line.getLength();
+                document.getElementById('distanceInfo').querySelector('span').textContent = `${length.toFixed(2)} 米`;
+            } else if (currentMode === 'area') {
+                const polygon = currentFeatures[0].getGeometry();
+                const area = polygon.getArea();
+                document.getElementById('areaInfo').querySelector('span').textContent = `${area.toFixed(2)} 平方米`;
+            }
+        }
+
+        // 清除所有
+        function clearAll() {
+            vectorLayer.getSource().clear();
+            currentFeatures = [];
+            currentPoints = [];
+            currentMode = null;
+            
+            if (drawInteraction) {
+                map.removeInteraction(drawInteraction);
+                drawInteraction = null;
+            }
+            
+            // 重置显示
+            document.getElementById('distanceInfo').querySelector('span').textContent = '0 米';
+            document.getElementById('areaInfo').querySelector('span').textContent = '0 平方米';
+            document.getElementById('angleDisplay').innerHTML = '<span>0°</span>';
+            document.querySelectorAll('.control-btn').forEach(btn => btn.classList.remove('active'));
+        }
+    </script>
+</body>
+</html>

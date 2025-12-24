@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        html,body{
+            margin:0;
+            padding:0;
+            height: 100%;
+            width: 100%;
+        }
+        #conterbox{
+            display: flex;
+            width: 100%;
+            height:100%;
+            padding:10px;
+            box-sizing: border-box;
+        }
+        ul{
+            padding:0;
+        }
+        ul li{
+            list-style-type: none;
+        }
+        #leftbox{
+            width: 30%;
+            border:1px solid #ddd;
+        }
+        #rightbox{
+            width: 70%;
+        }
+        .headertitle{
+            height: 60px;
+            line-height: 60px;
+            width: 100%;
+            font-size: 18px;
+            text-align: center;
+            font-weight: bold;
+            border-bottom: 1px solid #ddd;
+        }
+        .title{
+            height: 30px;
+            line-height: 30px;
+            width: 100%;
+            font-size: 16px;
+            text-indent: 2px;
+            font-weight: bold;
+        }
+        .inforul li{
+            height: 30px;
+            line-height: 30px;
+            padding-left: 20px;
+        }
+        .inforul li input{
+            width: 200px;
+            height: 26px;
+            outline: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="conterbox">
+        <div id="leftbox">
+            <div class="headertitle">系统关联相关信息</div>
+            <p class="title">基本信息</p>
+            <ul class="inforul">
+                <li>
+                    <label for="">区（市）县</label>
+                    <input type="text">
+                </li>
+            </ul>
+        </div>
+        <div id="rightbox">
+
+        </div>
+        
+    </div>
+</body>
+</html>

@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>Canvas文本自动换行演示</title>
+    <style>
+        #myCanvas {
+            border: 1px solid #ddd;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="myCanvas" width="800" height="600"></canvas>
+
+    <script>
+
+// 使用示例
+const canvas = document.getElementById('myCanvas');
+const ctx = canvas.getContext('2d');
+
+class TextRectDrawer {
+  /**
+   * 绘制自适应文本矩形
+   * @param {CanvasRenderingContext2D} ctx - 画布上下文
+   * @param {string[]} textArray - 文本数组
+   * @param {number} x - 矩形X坐标
+   * @param {number} y - 矩形Y坐标
+   * @param {number} width - 初始宽度
+   * @param {number} height - 初始高度
+   * @returns {{finalWidth: number, finalHeight: number}} 最终尺寸
+   */
+  static draw(ctx, textArray, x, y, width, height) {
+    // 样式配置
+    const padding = 15;
+    const lineHeight = 24;
+    const maxLineWidth = width - padding * 2;
+
+    // 文本预处理
+    const allLines = this.wrapText(ctx, textArray, maxLineWidth);
+    console.log(allLines);
+    // 计算最终尺寸
+    const finalHeight = allLines.length * lineHeight + padding * 2;
+    const finalWidth = Math.min(
+      this.calcMaxWidth(ctx, allLines) + padding * 2,
+      width
+    );
+
+    // 绘制矩形
+    ctx.save();
+    ctx.fillStyle = '#ddd';
+    ctx.fillRect(x, y, finalWidth, finalHeight);
+    
+    // 绘制文字
+    ctx.fillStyle = '#333333';
+    ctx.textBaseline = 'top';
+    allLines.forEach((line, i) => {
+      ctx.fillText(line, x + padding, y + padding + i * lineHeight);
+    });
+    
+    ctx.restore();
+    return { finalWidth, finalHeight };
+  }
+
+  /**
+   * 智能换行算法
+   * @private
+   */
+  static wrapText(ctx, textArray, maxWidth) {
+    const lines = [];
+    
+    textArray.forEach(text => {
+      let currentLine = '';
+      const words = text.split(/(\s+)/); // 保留空白字符
+      
+      words.forEach(word => {
+        const testLine = currentLine + word;
+        const metrics = ctx.measureText(testLine);
+        
+        if (metrics.width > maxWidth) {
+          if (currentLine === '') {
+            // 处理超长单词
+            this.splitLongWord(ctx, word, maxWidth).forEach(part => {
+              lines.push(part);
+            });
+          } else {
+            lines.push(currentLine.trim());
+            currentLine = word;
+          }
+        } else {
+          currentLine = testLine;
+        }
+      });
+      
+      if (currentLine.trim() !== '') {
+        lines.push(currentLine.trim());
+      }
+    });
+    
+    return lines;
+  }
+
+  /**
+   * 分割超长单词
+   * @private
+   */
+  static splitLongWord(ctx, word, maxWidth) {
+    const parts = [];
+    let currentPart = '';
+    
+    for (const char of word) {
+      const testPart = currentPart + char;
+      if (ctx.measureText(testPart).width > maxWidth) {
+        if (currentPart !== '') parts.push(currentPart);
+        currentPart = char;
+      } else {
+        currentPart = testPart;
+      }
+    }
+    
+    if (currentPart !== '') parts.push(currentPart);
+    return parts;
+  }
+
+  /**
+   * 计算最大行宽
+   * @private
+   */
+  static calcMaxWidth(ctx, lines) {
+    return Math.max(...lines.map(line => 
+      ctx.measureText(line).width
+    ));
+  }
+  /**
+ * 带省略号的多行文本绘制
+ * @param {CanvasRenderingContext2D} ctx - 画布上下文
+ * @param {string} content - 原始文本
+ * @param {number} drawX - 起始X坐标
+ * @param {number} drawY - 起始Y坐标
+ * @param {number} lineHeight - 行高
+ * @param {number} maxWidth - 单行最大宽度
+ * @param {number} maxLines - 最大显示行数
+ */
+ drawTextWithEllipsis(ctx, content, drawX, drawY, lineHeight, maxWidth, maxLines) {
+  let currentLine = 0; // 当前行号
+  let textBuffer = ''; // 当前行文本缓存
+  const ellipsis = '...';
+  const ellipsisWidth = ctx.measureText(ellipsis).width;
+
+  for (let char of content) {
+    const testText = textBuffer + char;
+    const metrics = ctx.measureText(testText);
+    
+    // 超出宽度时处理换行
+    if (metrics.width > maxWidth) {
+      // 最后一行添加省略号
+      if (currentLine === maxLines - 1) {
+        let truncated = textBuffer;
+        while (ctx.measureText(truncated + ellipsis).width > maxWidth && truncated.length > 0) {
+          truncated = truncated.slice(0, -1);
+        }
+        ctx.fillText(truncated + ellipsis, drawX, drawY);
+        return;
+      }
+      
+      // 正常换行
+      ctx.fillText(textBuffer, drawX, drawY);
+      textBuffer = '';
+      drawY += lineHeight;
+      currentLine++;
+      
+      // 超过最大行数停止处理
+      if (currentLine >= maxLines) return;
+    }
+    
+    textBuffer += char;
+  }
+  
+  // 绘制剩余文本
+  if (textBuffer.length > 0 && currentLine < maxLines) {
+    ctx.fillText(textBuffer, drawX, drawY);
+  }
+}
+
+}
+
+
+
+// 设置字体样式
+ctx.font = '16px "Microsoft YaHei"';
+
+// 示例文本
+const text = [
+  "This is a long text that needs automatic line wrapping.",
+  "第二行文本，包含中文和English混合内容中文和English混合内容中文和English混合内容中文和English混合内容中文和English混合内容中文和English混合内容"
+];
+
+// 绘制动态矩形
+const { finalWidth, finalHeight } = TextRectDrawer.draw(
+  ctx, 
+  text,
+  50, 
+  50,
+  300,
+  300
+);
+
+console.log(`最终尺寸：${finalWidth}x   ${finalHeight}`);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class TextLayoutCalculator {
+  /**
+   * 计算文本布局
+   * @param {string[]} textArray - 文本数组（多段落）
+   * @param {number} x - 矩形X坐标
+   * @param {number} y - 矩形Y坐标
+   * @param {number} width - 矩形宽度
+   * @param {number} height - 矩形高度
+   * @returns {{lines: string[], positions: Array<{x: number, y: number}>, truncated: boolean}}
+   */
+  calculateLayout(textArray, x, y, width, height) {
+    // 样式配置（可根据需要参数化）
+    const style = {
+      fontSize: 14,
+      fontFamily: 'Arial',
+      lineHeight: 20,
+      padding: 10,
+      ellipsis: '...',
+      maxShrinkCount: 2 // 最大缩减字符数
+    };
+
+    const ctx = document.createElement('canvas').getContext('2d');
+    ctx.font = `${style.fontSize}px ${style.fontFamily}`;
+    
+    // 可用空间计算
+    const maxWidth = width - style.padding * 2;
+    const maxLines = Math.floor((height - style.padding * 2) / style.lineHeight);
+    const ellipsisWidth = ctx.measureText(style.ellipsis).width;
+
+    let currentLine = 0;
+    const result = {
+      lines: [],
+      positions: [],
+      truncated: false
+    };
+
+    // 处理每个段落
+    textArrayLoop: for (let para of textArray) {
+      let originalText = para;
+      
+      // 段落缩减尝试循环
+      for (let shrink = 0; shrink <= style.maxShrinkCount; shrink++) {
+        let text = originalText.slice(0, originalText.length - shrink);
+        if (shrink > 0) text += style.ellipsis;
+        
+        let startPos = 0;
+        
+        // 文本分割循环
+        while (startPos < text.length) {
+          if (currentLine >= maxLines) {
+            result.truncated = true;
+            break textArrayLoop;
+          }
+
+          // 二分查找最优分割点
+          let low = startPos + 1;
+          let high = text.length;
+          let fit = startPos;
+
+          while (low <= high) {
+            const mid = Math.floor((low + high) / 2);
+            const testText = text.slice(startPos, mid);
+            const testWidth = ctx.measureText(testText).width;
+
+            if (testWidth <= maxWidth) {
+              fit = mid;
+              low = mid + 1;
+            } else {
+              high = mid - 1;
+            }
+          }
+
+          // 处理换行结果
+          const lineText = text.slice(startPos, fit);
+          result.lines.push(lineText);
+          result.positions.push({
+            x: x + style.padding,
+            y: y + style.padding + currentLine * style.lineHeight
+          });
+          
+          currentLine++;
+          startPos = fit;
+
+          // 强制截断保护
+          if (currentLine >= maxLines) {
+            result.truncated = true;
+            break textArrayLoop;
+          }
+        }
+        
+        // 当前缩减级别成功
+        if (shrink > 0) result.truncated = true;
+        break;
+      }
+    }
+
+    return result;
+  }
+}
+
+// 使用示例
+const calculator = new TextLayoutCalculator();
+const layouts = calculator.calculateLayout(
+  [
+    '这是一段非常长的测试文本，用来测试自动换行和省用来测试自动换行和省用来测试自动换行和省用来测试自动换行和省略号功能',
+    '第二段文本内容稍短些',
+    '第三段内容'
+  ],
+  100, 300, 200, 100
+);
+
+
+ctx.strokeRect(100, 300, 200, 100); // 绘制容器
+
+layouts.positions.forEach((pos, i) => {
+  ctx.fillText(layouts.lines[i], pos.x, pos.y);
+});
+
+console.log('是否发生截断:', layouts.truncated);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+class TextLayoutCalculators {
+  /**
+   * 计算文字布局
+   * @param {string[]} texts - 文本数组（每个元素为一个段落）
+   * @param {number} x - 矩形X坐标
+   * @param {number} y - 矩形Y坐标
+   * @param {number} width - 容器宽度
+   * @param {number} height - 容器高度
+   * @param {number} lineHeight - 行高
+   * @returns {Object} 包含绘制方法和布局数据的对象
+   */
+  static calculateLayout(texts, x, y, width, height, lineHeight) {
+    const config = {
+      fontSize: 14,
+      indentWidth: this.getTextWidth('中', 14) * 2, // 两个中文字符宽度
+      font: '14px sans-serif',
+      ellipsis: '...',
+      padding:10
+    };
+    
+
+    const ctx = document.createElement('canvas').getContext('2d');
+    ctx.font = config.font;
+
+    // 计算单行文本宽度
+    const getLineWidth = text => ctx.measureText(text).width;
+
+    // 生成最终行数组
+    const lines = [];
+    let totalHeight = 0;
+
+    texts.forEach(paragraph => {
+      const words = paragraph.split('');
+      let currentLine = '';
+      let isFirstLine = true;
+
+      while (words.length > 0) {
+        // 添加缩进
+        if (isFirstLine) {
+          currentLine = '  '; // 两个空格占位
+          isFirstLine = false;
+        }
+
+        const nextWord = words.shift();
+        const testLine = currentLine + nextWord;
+        const testWidth = getLineWidth(testLine);
+
+        if (testWidth <= width) {
+          currentLine = testLine;
+        } else {
+          lines.push(currentLine);
+          totalHeight += lineHeight;
+          currentLine = nextWord;
+          
+          // 高度检查
+          if (totalHeight + lineHeight > height) break;
+        }
+      }
+
+      if (currentLine) lines.push(currentLine);
+      totalHeight += lineHeight;
+    });
+
+    // 处理省略号
+    if (totalHeight > height) {
+      const maxLines = Math.floor(height / lineHeight);
+      lines.splice(maxLines); 
+
+      if (lines.length >= maxLines) {
+        const lastLine = lines[maxLines - 1];
+        const ellipsisWidth = getLineWidth(config.ellipsis);
+        
+        let trimmedLine = lastLine;
+        while (getLineWidth(trimmedLine) + ellipsisWidth > width) {
+          trimmedLine = trimmedLine.slice(0, -1);
+        }
+        lines[maxLines - 1] = trimmedLine + config.ellipsis;
+      }
+    }
+
+    return {
+      lines,
+      draw(ctx) {
+        ctx.save();
+        ctx.font = config.font;
+        ctx.textBaseline = 'top';
+        ctx.fillStyle = '#ddd';
+        ctx.fillRect(x, y, width, height); // 绘制背景矩形
+        ctx.fillStyle = '#000000'; // 设置文本颜色
+        lines.forEach((line, index) => {
+          ctx.fillText(line, x, y + index * lineHeight);
+        });
+        
+        ctx.restore();
+      },
+      layoutInfo: {
+        renderedLines: lines.length,
+        requiredHeight: lines.length * lineHeight,
+        isOverflow: totalHeight > height
+      }
+    };
+  }
+
+  static getTextWidth(text, fontSize) {
+    const ctx = document.createElement('canvas').getContext('2d');
+    ctx.font = `${fontSize}px sans-serif`;
+    return ctx.measureText(text).width;
+  }
+}
+
+
+// 测试数据
+const longText = [
+  "这是一个测试段落，用于演示文字自动换行功能。当容器宽度不足时会自动换行，当高度不足时显示省略号。",
+  "第二段内容，继续测试多段落情况。如果容器高度不足以显示所有行，最后一行会显示省略号表示内容截断。"
+];
+
+// 计算布局
+const layoutss = TextLayoutCalculators.calculateLayout(
+  longText,
+  400, 
+  30,  // x,y
+  20,     // width
+  150,     // height
+  30       //lineHeight
+);
+console.log(layoutss);
+// 执行绘制
+layoutss.draw(ctx);
+
+
+
+
+
+
+
+
+
+
+class TextWrapper {
+  /**
+   * 带 padding 的自动换行绘制
+   * @param {CanvasRenderingContext2D} ctx 
+   * @param {string[]} textArray 
+   * @param {Object} options 
+   * @param {number|Object} [options.padding=0] - 支持统一值或分方向设置 {top:10, right:20, bottom:10, left:20}
+   */
+  drawWithPadding(ctx, textArray, options = {}) {
+    const { padding = 0 } = options;
+    
+    // 解析 padding 配置
+    const resolvedPadding = typeof padding === 'number' 
+      ? { top: padding, right: padding, bottom: padding, left: padding }
+      : { top:0, right:0, bottom:0, left:0, ...padding };
+
+    // 计算可用区域
+    const contentWidth = ctx.canvas.width - resolvedPadding.left - resolvedPadding.right;
+    const contentHeight = ctx.canvas.height - resolvedPadding.top - resolvedPadding.bottom;
+
+    // 调整绘制起始点
+    const baseX = resolvedPadding.left;
+    let currentY = resolvedPadding.top;
+
+    // 逐行绘制
+    textArray.forEach(text => {
+      const lines = this._wrapText(ctx, text, contentWidth);
+      lines.forEach(line => {
+        ctx.fillText(line, baseX, currentY);
+        currentY += options.lineHeight || 30; // 行高优先使用配置值
+      });
+    });
+  }
+
+  // 自动换行算法（优化版）
+  _wrapText(ctx, text, maxWidth) {
+    const words = text.split(' ');
+    const lines = [];
+    let currentLine = '';
+
+    words.forEach(word => {
+      const testLine = currentLine + word + ' ';
+      if (ctx.measureText(testLine).width > maxWidth) {
+        lines.push(currentLine.trim());
+        currentLine = word + ' ';
+      } else {
+        currentLine = testLine;
+      }
+    });
+    lines.push(currentLine.trim());
+    return lines;
+  }
+}
+const wrapper = new TextWrapper();
+wrapper.drawWithPadding(ctx, ["长文本示例1111111111111",'ddddddddddddddddddddddddddddd'], {
+  padding: 20,
+  lineHeight: 35,
+  align: 'center'
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frequency Treemap</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      text-align: center;
+      margin: 20px;
+    }
+    #treemap {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: flex-start;
+      align-items: flex-start;
+      margin: 20px;
+      width: 100%;
+      height: 600px;
+      border: 1px solid #ddd;
+      background-color: #f9f9f9;
+    }
+    .node {
+      position: relative;
+      margin: 2px;
+      background-color: #4CAF50;
+      color: white;
+      font-size: 12px;
+      font-weight: bold;
+      text-align: center;
+      overflow: hidden;
+    }
+    .node-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Frequency Treemap: 0KHz to 100KHz</h1>
+  <div id="treemap"></div>
+
+  <script>
+    // 数据结构示例：频段包含了类型号、开始频率和结束频率
+    const data = [
+      {
+        name: "0KHz-10KHz",
+        children: [
+          { name: "0-1KHz", value: 1000 },
+          { name: "1-2KHz", value: 1000 },
+          { name: "2-5KHz", value: 2000 },
+          { name: "5-10KHz", value: 3000 }
+        ]
+      },
+      {
+        name: "10KHz-50KHz",
+        children: [
+          { name: "10-20KHz", value: 4000 },
+          { name: "20-30KHz", value: 5000 },
+          { name: "30-40KHz", value: 2000 },
+          { name: "40-50KHz", value: 2000 }
+        ]
+      },
+      {
+        name: "50KHz-100KHz",
+        children: [
+          { name: "50-60KHz", value: 3000 },
+          { name: "60-70KHz", value: 4000 },
+          { name: "70-80KHz", value: 2000 },
+          { name: "80-100KHz", value: 5000 }
+        ]
+      }
+    ];
+
+    // 获取频率数据
+    const treemapContainer = document.getElementById("treemap");
+
+    // 用于计算总值，确保布局按照大小进行排序
+    const totalValue = data.reduce((total, section) => {
+      return total + section.children.reduce((sum, child) => sum + child.value, 0);
+    }, 0);
+
+    // 根据数据动态生成布局
+    data.forEach(section => {
+      const sectionDiv = document.createElement("div");
+      sectionDiv.className = "node";
+      sectionDiv.style.width = `${(section.children.reduce((sum, child) => sum + child.value, 0) / totalValue) * 100}%`;
+
+      // 在 section 中创建每个频段的子项
+      section.children.forEach(child => {
+        const childDiv = document.createElement("div");
+        childDiv.className = "node";
+        childDiv.style.height = `${(child.value / totalValue) * 100}%`; // 计算高度比例
+        childDiv.innerHTML = `<div class="node-text">${child.name}</div>`;
+        
+        sectionDiv.appendChild(childDiv);
+      });
+
+      treemapContainer.appendChild(sectionDiv);
+    });
+
+  </script>
+
+</body>
+</html>

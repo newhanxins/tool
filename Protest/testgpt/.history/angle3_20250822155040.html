@@ -1,0 +1,425 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>多角度测量工具</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol/ol.css">
+    <style>
+        #map {
+            width: 100%;
+            height: 100vh;
+        }
+        .control-panel {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.2);
+            z-index: 1;
+        }
+        .angle-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin-top: 10px;
+        }
+        .angle-item {
+            padding: 8px;
+            margin: 5px 0;
+            background: #f5f5f5;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .angle-item.active {
+            background: #e3f2fd;
+            border-left: 3px solid #2196f3;
+        }
+    </style>
+</head>
+<body>
+    <div id="map"></div>
+    <div class="control-panel">
+        <button id="start">新建测量</button>
+        <button id="clear">清除全部</button>
+        <div class="angle-list" id="angle-list"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/ol/ol.js"></script>
+    <script>
+        const map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.XYZ({
+                        url: 'http://wprd0{1-4}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x={x}&y={y}&z={z}',
+                        crossOrigin: 'anonymous'
+                    })
+                })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([116.404, 39.915]),
+                zoom: 12
+            })
+        });
+
+        const vectorSource = new ol.source.Vector();
+        const vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+            style: createStyleFunction()
+        });
+        map.addLayer(vectorLayer);
+
+        let drawInteraction, modifyInteraction;
+        let currentMeasurement = null;
+        const measurements = [];
+        
+        document.getElementById('start').addEventListener('click', startNewMeasurement);
+        document.getElementById('clear').addEventListener('click', clearAllMeasurements);
+
+        function startNewMeasurement() {
+            if (currentMeasurement) {
+                finalizeCurrentMeasurement();
+            }
+            
+            currentMeasurement = {
+                id: Date.now(),
+                points: [],
+                features: {
+                    points: [],
+                    lines: [],
+                    arc: null
+                },
+                angle: null
+            };
+            
+            setupDrawInteraction();
+        }
+
+        function setupDrawInteraction() {
+            if (drawInteraction) {
+                map.removeInteraction(drawInteraction);
+            }
+            
+            drawInteraction = new ol.interaction.Draw({
+                type: 'Point',
+                source: vectorSource
+            });
+
+            drawInteraction.on('drawend', function(evt) {
+                const feature = evt.feature;
+                const coord = feature.getGeometry().getCoordinates();
+                
+                if (currentMeasurement.points.length === 0) {
+                    feature.set('name', 'A');
+                    feature.set('measurementId', currentMeasurement.id);
+                    currentMeasurement.points[0] = coord;
+                    currentMeasurement.features.points[0] = feature;
+                } 
+                else if (currentMeasurement.points.length === 1) {
+                    feature.set('name', 'B');
+                    feature.set('measurementId', currentMeasurement.id);
+                    currentMeasurement.points[1] = coord;
+                    currentMeasurement.features.points[1] = feature;
+                    
+                    // 绘制第一条线
+                    const lineAB = new ol.geom.LineString([
+                        currentMeasurement.points[0], 
+                        currentMeasurement.points[1]
+                    ]);
+                    const lineFeature = new ol.Feature({
+                        geometry: lineAB,
+                        name: 'Line AB',
+                        measurementId: currentMeasurement.id
+                    });
+                    vectorSource.addFeature(lineFeature);
+                    currentMeasurement.features.lines[0] = lineFeature;
+                } 
+                else if (currentMeasurement.points.length === 2) {
+                    feature.set('name', 'C');
+                    feature.set('measurementId', currentMeasurement.id);
+                    currentMeasurement.points[2] = coord;
+                    currentMeasurement.features.points[2] = feature;
+                    
+                    // 绘制第二条线
+                    const lineBC = new ol.geom.LineString([
+                        currentMeasurement.points[1], 
+                        currentMeasurement.points[2]
+                    ]);
+                    const lineFeature = new ol.Feature({
+                        geometry: lineBC,
+                        name: 'Line BC',
+                        measurementId: currentMeasurement.id
+                    });
+                    vectorSource.addFeature(lineFeature);
+                    currentMeasurement.features.lines[1] = lineFeature;
+                    
+                    // 计算角度
+                    updateCurrentMeasurementAngle();
+                    
+                    // 完成当前测量
+                    finalizeCurrentMeasurement();
+                }
+            });
+
+            map.addInteraction(drawInteraction);
+        }
+
+        function updateCurrentMeasurementAngle() {
+            const angle = calculateClockwiseAngle(currentMeasurement.points);
+            currentMeasurement.angle = angle;
+            
+            // 绘制弧线
+            if (currentMeasurement.features.arc) {
+                vectorSource.removeFeature(currentMeasurement.features.arc);
+            }
+            drawAngleArc(
+                currentMeasurement.points[1], 
+                currentMeasurement.points[0], 
+                currentMeasurement.points[2], 
+                angle,
+                currentMeasurement.id
+            );
+            
+            return angle;
+        }
+
+        function finalizeCurrentMeasurement() {
+            if (!currentMeasurement) return;
+            
+            // 添加测量结果到列表
+            addMeasurementToList(currentMeasurement);
+            
+            // 设置修改交互
+            setupModifyInteraction();
+            
+            currentMeasurement = null;
+            map.removeInteraction(drawInteraction);
+        }
+
+        function addMeasurementToList(measurement) {
+            measurements.push(measurement);
+            
+            const angleList = document.getElementById('angle-list');
+            const item = document.createElement('div');
+            item.className = 'angle-item';
+            item.dataset.id = measurement.id;
+            item.innerHTML = `角度 ${measurements.length}: <strong>${measurement.angle.toFixed(2)}°</strong>`;
+            
+            item.addEventListener('click', function() {
+                highlightMeasurement(measurement.id);
+            });
+            
+            angleList.appendChild(item);
+        }
+
+        function highlightMeasurement(id) {
+            // 更新列表样式
+            document.querySelectorAll('.angle-item').forEach(item => {
+                item.classList.toggle('active', item.dataset.id === String(id));
+            });
+            
+            // 高亮地图要素
+            vectorSource.getFeatures().forEach(feature => {
+                const featureId = feature.get('measurementId');
+                feature.set('highlighted', featureId === id);
+            });
+            vectorLayer.changed();
+        }
+
+        function setupModifyInteraction() {
+            if (modifyInteraction) {
+                map.removeInteraction(modifyInteraction);
+            }
+            
+            modifyInteraction = new ol.interaction.Modify({
+                source: vectorSource,
+                condition: function(event) {
+                    const feature = map.getFeaturesAtPixel(event.pixel)[0];
+                    return feature && feature.get('name');
+                }
+            });
+            
+            modifyInteraction.on('modifyend', function(evt) {
+                const modifiedFeature = evt.features.getArray()[0];
+                const measurementId = modifiedFeature.get('measurementId');
+                const measurement = measurements.find(m => m.id === measurementId);
+                
+                if (!measurement) return;
+                
+                // 更新点坐标
+                const featureName = modifiedFeature.get('name');
+                if (featureName === 'A') {
+                    measurement.points[0] = modifiedFeature.getGeometry().getCoordinates();
+                    measurement.features.lines[0].getGeometry().setCoordinates([
+                        measurement.points[0], measurement.points[1]
+                    ]);
+                } 
+                else if (featureName === 'B') {
+                    measurement.points[1] = modifiedFeature.getGeometry().getCoordinates();
+                    measurement.features.lines[0].getGeometry().setCoordinates([
+                        measurement.points[0], measurement.points[1]
+                    ]);
+                    measurement.features.lines[1].getGeometry().setCoordinates([
+                        measurement.points[1], measurement.points[2]
+                    ]);
+                } 
+                else if (featureName === 'C') {
+                    measurement.points[2] = modifiedFeature.getGeometry().getCoordinates();
+                    measurement.features.lines[1].getGeometry().setCoordinates([
+                        measurement.points[1], measurement.points[2]
+                    ]);
+                }
+                
+                // 更新角度
+                const newAngle = calculateClockwiseAngle(measurement.points);
+                measurement.angle = newAngle;
+                
+                // 更新角度显示
+                const angleItem = document.querySelector(`.angle-item[data-id="${measurement.id}"]`);
+                if (angleItem) {
+                    angleItem.innerHTML = angleItem.innerHTML.replace(
+                        /<strong>[\d.]+°<\/strong>/, 
+                        `<strong>${newAngle.toFixed(2)}°</strong>`
+                    );
+                }
+                
+                // 重新绘制弧线
+                if (measurement.features.arc) {
+                    vectorSource.removeFeature(measurement.features.arc);
+                }
+                drawAngleArc(
+                    measurement.points[1], 
+                    measurement.points[0], 
+                    measurement.points[2], 
+                    newAngle,
+                    measurement.id
+                );
+            });
+            
+            map.addInteraction(modifyInteraction);
+        }
+
+        function clearAllMeasurements() {
+            vectorSource.clear();
+            measurements.length = 0;
+            document.getElementById('angle-list').innerHTML = '';
+            
+            if (drawInteraction) {
+                map.removeInteraction(drawInteraction);
+            }
+            if (modifyInteraction) {
+                map.removeInteraction(modifyInteraction);
+            }
+            
+            currentMeasurement = null;
+        }
+
+        function calculateClockwiseAngle(points) {
+            const [A, B, C] = points;
+            const BA = [A[0] - B[0], A[1] - B[1]];
+            const BC = [C[0] - B[0], C[1] - B[1]];
+            
+            const angleBA = (Math.atan2(BA[0], BA[1]) + 2 * Math.PI) % (2 * Math.PI);
+            const angleBC = (Math.atan2(BC[0], BC[1]) + 2 * Math.PI) % (2 * Math.PI);
+            
+            let angle = (angleBC - angleBA) * (180 / Math.PI);
+            if (angle < 0) angle += 360;
+            
+            return angle;
+        }
+
+        function drawAngleArc(center, start, end, angle, measurementId) {
+            const radius = Math.min(
+                Math.sqrt(Math.pow(start[0] - center[0], 2) + Math.pow(start[1] - center[1], 2)) * 0.3,
+                Math.sqrt(Math.pow(end[0] - center[0], 2) + Math.pow(end[1] - center[1], 2)) * 0.3
+            );
+            
+            let startAngle = (Math.atan2(start[0] - center[0], start[1] - center[1]) + 2 * Math.PI) % (2 * Math.PI);
+            let endAngle = (Math.atan2(end[0] - center[0], end[1] - center[1]) + 2 * Math.PI) % (2 * Math.PI);
+            
+            if (endAngle < startAngle) {
+                endAngle += 2 * Math.PI;
+            }
+            
+            const arcPoints = [];
+            const steps = 20;
+            for (let i = 0; i <= steps; i++) {
+                const t = i / steps;
+                const currentAngle = startAngle + t * (endAngle - startAngle);
+                const x = center[0] + radius * Math.sin(currentAngle);
+                const y = center[1] + radius * Math.cos(currentAngle);
+                arcPoints.push([x, y]);
+            }
+            
+            const arcFeature = new ol.Feature({
+                geometry: new ol.geom.LineString(arcPoints),
+                name: 'Angle Arc',
+                measurementId: measurementId
+            });
+            vectorSource.addFeature(arcFeature);
+            
+            // 保存弧线引用
+            if (currentMeasurement && currentMeasurement.id === measurementId) {
+                currentMeasurement.features.arc = arcFeature;
+            } else {
+                const measurement = measurements.find(m => m.id === measurementId);
+                if (measurement) {
+                    measurement.features.arc = arcFeature;
+                }
+            }
+        }
+
+        function createStyleFunction() {
+            return function(feature) {
+                const type = feature.getGeometry().getType();
+                const highlighted = feature.get('highlighted');
+                const name = feature.get('name');
+                
+                const baseStyle = new ol.style.Style();
+                
+                if (type === 'Point') {
+                    const color = highlighted ? '#ff5722' : '#f44336';
+                    baseStyle.setImage(new ol.style.Circle({
+                        radius: 6,
+                        fill: new ol.style.Fill({ color: color }),
+                        stroke: new ol.style.Stroke({ 
+                            color: 'white', 
+                            width: highlighted ? 3 : 2 
+                        })
+                    }));
+                    
+                    if (name) {
+                        baseStyle.setText(new ol.style.Text({
+                            text: name,
+                            fill: new ol.style.Fill({ color: '#000' }),
+                            stroke: new ol.style.Stroke({ 
+                                color: '#fff', 
+                                width: 2 
+                            }),
+                            offsetY: -15,
+                            font: 'bold 14px Arial'
+                        }));
+                    }
+                } 
+                else if (type === 'LineString') {
+                    const lineName = feature.get('name');
+                    const color = highlighted ? 
+                        '#ff9800' : 
+                        (lineName === 'Line AB' ? '#2196f3' : '#4caf50');
+                    
+                    baseStyle.setStroke(new ol.style.Stroke({
+                        color: color,
+                        width: highlighted ? 4 : 3,
+                        lineDash: lineName === 'Angle Arc' ? [5, 5] : undefined
+                    }));
+                }
+                
+                return [baseStyle];
+            };
+        }
+    </script>
+</body>
+</html>

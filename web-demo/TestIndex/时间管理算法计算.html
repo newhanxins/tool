@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<style>
+  body,html{
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+  }
+#container {
+  width: 100%;
+  height: 600px;
+  overflow: hidden;
+  border: 1px solid #ddd;
+  position: relative;
+  touch-action: none;
+}
+#timeline {
+  display: block;
+}
+.tooltip {
+  position: fixed;
+  background: rgba(255,255,255,0.95);
+  padding: 8px 12px;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  pointer-events: none;
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+  transition: opacity 0.2s;
+  border: 1px solid #eee;
+}
+.event {
+  cursor: move;
+  transition: box-shadow 0.2s;
+}
+.event:hover {
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+</style>
+</head>
+<body>
+
+<div id="tooltip" class="tooltip"></div>
+
+<script>
+
+let datas1=[{
+  "id": 1,
+  "name": "事件A",
+  "startValue": 10,
+  "endValue": 15,
+  "color": "#ff0000"
+},{
+  "id": 2,
+  "name": "事件B",
+  "startValue": 12,
+  "endValue": 18,
+  "color": "#ff0000"
+},{
+  "id": 3,
+  "name": "事件C",
+  "startValue": 14,
+  "endValue": 16,
+  "color": "#ff0000"
+},{
+  "id": 4,
+  "name": "事件D",
+  "startValue": 17,
+  "endValue": 20,
+  "color": "#ff0000"
+},{
+  "id": 5,
+  "name": "事件E",
+  "startValue": 12,
+  "endValue": 13,
+  "color": "#ff0000"
+},{
+  "id": 6,
+  "name": "事件F",
+  "startValue": 15,
+  "endValue": 16,
+  "color": "#ff0000"
+}
+]
+
+
+
+var datas=[
+    {
+      "name": "Channel 1",
+      "startValue": 2401,
+      "endValue": 2421
+    },
+    {
+      "name": "Channel 2",
+      "startValue": 2406,
+      "endValue": 2426
+    },
+    {
+      "name": "Channel 3",
+      "startValue": 2411,
+      "endValue": 2431
+    },
+    {
+      "name": "Channel 4",
+      "startValue": 2416,
+      "endValue": 2436
+    },
+    {
+      "name": "Channel 5",
+      "startValue": 2421,
+      "endValue": 2441
+    },
+    {
+      "name": "Channel 6",
+      "startValue": 2426,
+      "endValue": 2446
+    },
+    {
+      "name": "Channel 7",
+      "startValue": 2431,
+      "endValue": 2451
+    },
+    {
+      "name": "Channel 8",
+      "startValue": 2436,
+      "endValue": 2456
+    },
+    {
+      "name": "Channel 9",
+      "startValue": 2441,
+      "endValue": 2461
+    },
+    {
+      "name": "Channel 10",
+      "startValue": 2446,
+      "endValue": 2466
+    },
+    {
+      "name": "Channel 11",
+      "startValue": 2451,
+      "endValue": 2471
+    },
+    {
+      "name": "Channel 12",
+      "startValue": 2456,
+      "endValue": 2476
+    },
+    {
+      "name": "Channel 13",
+      "startValue": 2461,
+      "endValue": 2481
+    },
+    {
+      "name": "Channel 14",
+      "startValue": 2466,
+      "endValue": 2486
+    }
+  ]
+
+  var data2=[
+  {
+    "name": 1,
+    "center_frequency": 2412,
+    "startValue": 2401,
+    "endValue": 2423,
+    "typical_countries": "全球"
+  },
+  {
+    "name": 2,
+    "center_frequency": 2417,
+    "startValue": 2406,
+    "endValue": 2428,
+    "typical_countries": "全球"
+  },
+  {
+    "name": 3,
+    "center_frequency": 2422,
+    "startValue": 2411,
+    "endValue": 2433,
+    "typical_countries": "全球"
+  },
+  {
+    "name": 4,
+    "center_frequency": 2427,
+    "startValue": 2416,
+    "endValue": 2438,
+    "typical_countries": "全球"
+  },
+  {
+    "name": 5,
+    "center_frequency": 2432,
+    "startValue": 2421,
+    "endValue": 2443,
+    "typical_countries": "全球"
+  },
+  {
+    "name": 6,
+    "center_frequency": 2437,
+    "startValue": 2426,
+    "endValue": 2448,
+    "typical_countries": "全球"
+  },
+  {
+    "name": 7,
+    "center_frequency": 2442,
+    "startValue": 2431,
+    "endValue": 2453,
+    "typical_countries": "全球"
+  },
+  {
+    "name": 8,
+    "center_frequency": 2447,
+    "startValue": 2436,
+    "endValue": 2458,
+    "typical_countries": "全球"
+  },
+  {
+    "name": 9,
+    "center_frequency": 2452,
+    "startValue": 2441,
+    "endValue": 2463,
+    "typical_countries": "全球"
+  },
+  {
+    "name": 10,
+    "center_frequency": 2457,
+    "startValue": 2446,
+    "endValue": 2468,
+    "typical_countries": "全球"
+  },
+  {
+    "name": 11,
+    "center_frequency": 2462,
+    "startValue": 2451,
+    "endValue": 2473,
+    "typical_countries": "全球"
+  },
+  {
+    "name": 12,
+    "center_frequency": 2467,
+    "startValue": 2456,
+    "endValue": 2478,
+    "typical_countries": "欧盟、日本等"
+  },
+  {
+    "name": 13,
+    "center_frequency": 2472,
+    "startValue": 2461,
+    "endValue": 2483,
+    "typical_countries": "欧盟、日本等"
+  },
+  {
+    "name": 14,
+    "center_frequency": 2484,
+    "startValue": 2473,
+    "endValue": 2495,
+    "typical_countries": "仅日本（特殊用途）"
+  }
+]
+
+
+var data3=[
+    {
+      "name": 1,
+      "center_frequency": 2412,
+      "startValue": 2402,  // 有效带宽起始（中心频率-10MHz）
+      "endValue": 2422      // 有效带宽结束（中心频率+10MHz）
+    },
+    {
+      "name": 2,
+      "center_frequency": 2417,
+      "startValue": 2407,
+      "endValue": 2427
+    },
+    {
+      "name": 3,
+      "center_frequency": 2422,
+      "startValue": 2412,
+      "endValue": 2432
+    },
+    {
+      "name": 4,
+      "center_frequency": 2427,
+      "startValue": 2417,
+      "endValue": 2437
+    },
+    {
+      "name": 5,
+      "center_frequency": 2432,
+      "startValue": 2422,
+      "endValue": 2442
+    },
+    {
+      "name": 6,
+      "center_frequency": 2437,
+      "startValue": 2427,
+      "endValue": 2447
+    },
+    {
+      "name": 7,
+      "center_frequency": 2442,
+      "startValue": 2432,
+      "endValue": 2452
+    },
+    {
+      "name": 8,
+      "center_frequency": 2447,
+      "startValue": 2437,
+      "endValue": 2457
+    },
+    {
+      "name": 9,
+      "center_frequency": 2452,
+      "startValue": 2442,
+      "endValue": 2462
+    },
+    {
+      "name": 10,
+      "center_frequency": 2457,
+      "startValue": 2447,
+      "endValue": 2467
+    },
+    {
+      "name": 11,
+      "center_frequency": 2462,
+      "startValue": 2452,
+      "endValue": 2472
+    },
+    {
+      "name": 12,
+      "center_frequency": 2467,
+      "startValue": 2457,
+      "endValue": 2477
+    },
+    {
+      "name": 13,
+      "center_frequency": 2472,
+      "startValue": 2462,
+      "endValue": 2482
+    }
+  ]
+
+
+//算法原始1
+function layoutEvents1(events) {
+  const tracks = [];
+  // 1. 预处理排序
+  const sorted = [...events].sort((a, b) => 
+    a.startValue - b.startValue || (a.endValue - a.startValue) - (b.endValue - b.startValue)
+  );
+
+  // 2. 轨道分配
+  sorted.forEach(event => {
+    let placed = false;
+    // 尝试放入现有轨道
+    for (const track of tracks) {
+      const lastEvent = track[track.length - 1];
+      if (event.startValue >= lastEvent.endValue) {
+        track.push(event);
+        placed = true;
+        break;
+      }
+    }
+    // 创建新轨道
+    if (!placed) tracks.push([event]);
+  });
+
+  return tracks;
+}
+//算法2 间隙扫描算法
+function layoutEvents2(events) {
+  const tracks = [];
+  const sorted = [...events].sort((a, b) => 
+    a.startValue - b.startValue || 
+    (a.endValue - a.startValue) - (b.endValue - b.startValue)
+  );
+
+  sorted.forEach(event => {
+    let bestTrack = -1;
+    let bestInsertIndex = -1;
+    let bestGap = Infinity;
+
+    // 遍历所有轨道，寻找最小合适间隙
+    for (let i = 0; i < tracks.length; i++) {
+      const track = tracks[i];
+      let lastEnd = 0;
+      let currentGapStart = 0;
+      // 扫描轨道中的每个间隙
+      for (let eventIdx = 0; eventIdx <track.length; eventIdx++) {
+        const nextEvent = track[eventIdx];
+        const gapEnd = nextEvent ? nextEvent.startValue : Infinity;
+        // 计算当前间隙可用空间
+        if (event.startValue >= lastEnd && 
+            event.endValue <= nextEvent.startValue) {
+          const gapSize = nextEvent.startValue - lastEnd;
+          // 选择最小合适间隙
+          if (gapSize >= (event.endValue - event.startValue) && gapSize < bestGap) {
+            bestTrack = i;
+            bestInsertIndex = eventIdx; // 记录插入位置
+            console.log("插入位置",bestInsertIndex)
+            bestGap = gapSize;
+          }
+        }
+        lastEnd = nextEvent.endValue;
+        currentGapStart = nextEvent ? nextEvent.endValue : currentGapStart; // 记录当前间隙的起始位置
+      }
+      // 检查轨道末尾
+      if (event.startValue >= lastEnd) {
+        bestTrack = i;
+        break; // 优先放入末尾
+      }
+    }
+
+    if (bestTrack !== -1) {
+      // 插入到最佳间隙
+      tracks[bestTrack].splice(bestInsertIndex, 0, event);
+    } else {
+      tracks.push([event]);
+    }
+  });
+
+  return tracks;
+}
+
+//二分法 + 最小堆
+class TimelineVisualizer {
+  constructor() {
+    this.trackEnds = []; // 记录每个轨道的最后结束时间
+  }
+
+  layoutEvents(events) {
+    const sorted = [...events].sort((a, b) => 
+      a.startValue - b.startValue || 
+      (a.endValue - a.startValue) - (b.endValue - b.startValue)
+    );
+
+    sorted.forEach(event => {
+      // 使用二分查找找到第一个可插入轨道
+      let low = 0, high = this.trackEnds.length;
+      while (low < high) {
+        const mid = (low + high) >>> 1;
+        if (this.trackEnds[mid] <= event.startValue) {
+          high = mid;
+        } else {
+          low = mid + 1;
+        }
+      }
+
+      if (low < this.trackEnds.length) {
+        this.trackEnds[low] = event;
+      } else {
+        this.trackEnds.push(event);
+      }
+    });
+
+    return this.trackEnds;
+  }
+}
+
+function layoutEvents4(events) {
+  const tracks = [];
+  const sorted = [...events].sort((a, b) => 
+    a.startValue - b.startValue || 
+    (a.endValue - a.startValue) - (b.endValue - b.startValue)
+  );
+
+  sorted.forEach(event => {
+    // 使用二分查找找到可插入位置
+    let low = 0, high = tracks.length;
+    while (low < high) {
+      const mid = (low + high) >>> 1;
+      const lastEnd = tracks[mid][tracks[mid].length-1].endValue;
+      if (event.startValue >= lastEnd) {
+        high = mid;
+      } else {
+        low = mid + 1;
+      }
+    }
+
+    if (low < tracks.length) {
+      tracks[low].push(event);
+    } else {
+      tracks.push([event]);
+    }
+  });
+
+  return tracks;
+}
+
+//动态间隙检测 + 带宽优化
+function layoutEvents5(events) {
+  const tracks = [];
+  const sorted = [...events].sort((a, b) => a.startValue - b.startValue);
+
+  sorted.forEach(event => {
+    let bestTrack = -1;
+    let minOverlap = Infinity;
+
+    // 检测所有轨道的重叠情况
+    for (let i = 0; i < tracks.length; i++) {
+      let overlap = 0;
+      for (const existing of tracks[i]) {
+        // 计算重叠量（负值表示无重叠）
+        overlap += Math.min(existing.endValue, event.endValue) - 
+                  Math.max(existing.startValue, event.startValue);
+      }
+      // 选择重叠最小的轨道
+      if (overlap <= 0 && overlap < minOverlap) {
+        bestTrack = i;
+        minOverlap = overlap;
+      }
+    }
+
+    if (bestTrack !== -1) tracks[bestTrack].push(event);
+    else tracks.push([event]);
+  });
+
+  return tracks;
+}
+function layoutEvents6(events) {
+    const tracks = [];
+    // 按开始时间排序，相同开始时间则短事件优先
+    const sorted = [...events].sort((a, b) => 
+        a.startValue - b.startValue || (a.endValue - a.startValue) - (b.endValue - b.startValue)
+    );
+
+    sorted.forEach(event => {
+        let placed = false;
+        
+        // 尝试放入现有轨道
+        for (const track of tracks) {
+            const lastEvent = track[track.length - 1];
+            // 检查是否与轨道最后一个事件不重叠
+            if (event.startValue >= lastEvent.endValue) {
+                track.push(event);
+                placed = true;
+                break;
+            }
+        }
+        
+        // 无法放入则创建新轨道
+        if (!placed) {
+            tracks.push([event]);
+        }
+    });
+
+    return tracks;
+}
+
+function layoutEvents7(events) {
+  const tracks = [];
+  const SAFE_MARGIN = 1; // 安全边距
+  
+  const sorted = [...events].sort((a, b) =>
+    a.startValue - b.startValue ||
+    (b.endValue - b.startValue) - (a.endValue - a.startValue) ||
+    a.endValue - b.endValue
+  );
+
+  sorted.forEach(event => {
+    let merged = false;
+    
+    // 尝试垂直合并
+    for (const track of tracks) {
+      if (canMergeVertically(track, event)) {
+        track.push(event);
+        merged = true;
+        break;
+      }
+    }
+    
+    if (!merged) {
+      // 水平轨道优化
+      let bestTrack = -1;
+      let bestEnd = Infinity;
+      
+      for (let i = 0; i < tracks.length; i++) {
+        const last = tracks[i][tracks[i].length - 1];
+        if (event.startValue >= last.endValue - SAFE_MARGIN) {
+          if (last.endValue < bestEnd) {
+            bestTrack = i;
+            bestEnd = last.endValue;
+          }
+        }
+      }
+      
+      if (bestTrack !== -1) {
+        // 自动时间补偿
+        const prevEvent = tracks[bestTrack][tracks[bestTrack].length - 1];
+        if (prevEvent.endValue > event.startValue) {
+          prevEvent.endValue = event.startValue - SAFE_MARGIN;
+        }
+        tracks[bestTrack].push(event);
+      } else {
+        tracks.push([event]);
+      }
+    }
+  });
+
+  return tracks;
+}
+
+
+
+function layoutEvents8(events) {
+  var tracks = [];
+  var SAFE_MARGIN = 1; // 安全边距
+
+  // 使用 slice() 替代扩展运算符实现数组拷贝
+  var sorted = events.slice().sort(function(a, b) {
+    return a.startValue - b.startValue ||
+      (b.endValue - b.startValue) - (a.endValue - a.startValue) ||
+      a.endValue - b.endValue;
+  });
+
+  sorted.forEach(function(event) {
+    var merged = false;
+
+    // 替换 for...of 为常规 for 循环
+    for (var t = 0; t < tracks.length; t++) {
+      var track = tracks[t];
+      if (canMergeVerticallys(track, event)) {
+        track.push(event);
+        merged = true;
+        break;
+      }
+    }
+
+    if (!merged) {
+      // 水平轨道优化
+      var bestTrack = -1;
+      var bestEnd = Infinity;
+
+      // 循环变量改用 var 声明
+      for (var i = 0; i < tracks.length; i++) {
+        var last = tracks[i][tracks[i].length - 1];
+        if (event.startValue >= last.endValue - SAFE_MARGIN) {
+          if (last.endValue < bestEnd) {
+            bestTrack = i;
+            bestEnd = last.endValue;
+          }
+        }
+      }
+
+      if (bestTrack !== -1) {
+        // 自动时间补偿
+        var prevEvent = tracks[bestTrack][tracks[bestTrack].length - 1];
+        if (prevEvent.endValue > event.startValue) {
+          prevEvent.endValue = event.startValue - SAFE_MARGIN;
+        }
+        tracks[bestTrack].push(event);
+      } else {
+        tracks.push([event]);
+      }
+    }
+  });
+
+  return tracks;
+}
+function canMergeVerticallys(track, event) {
+  return track.every(function(e) {
+    return e.endValue <= event.startValue || e.startValue >= event.endValue;
+  });
+}
+
+
+
+function canMergeVertically(track, event) {
+  return track.every(e => 
+    e.endValue <= event.startValue || 
+    e.startValue >= event.endValue
+  );
+}
+
+
+//严格验证逻辑
+function validateTracks(tracks) {
+    for (const track of tracks) {
+        for (let i = 1; i < track.length; i++) {
+            if (track[i].startValue < track[i-1].endValue) {
+                throw new Error(`轨道重叠：${track[i-1].name} 和 ${track[i].name}`);
+            }
+        }
+    }
+    console.log("验证通过：无重叠事件");
+}
+var layoutEvents3=new TimelineVisualizer()
+console.log("算法1",layoutEvents1(datas))
+console.log("算法2",layoutEvents2(datas))
+// console.log("算法3",layoutEvents3.layoutEvents(datas))
+console.log("算法4",layoutEvents4(datas))
+console.log("算法5",layoutEvents5(datas))
+drawChart(layoutEvents1(datas),"算法1")
+drawChart(layoutEvents2(datas),"算法2")
+// drawChart(layoutEvents3.layoutEvents(datas),"算法3")
+drawChart(layoutEvents4(datas),"算法4")
+drawChart(layoutEvents5(datas),"算法5")
+drawChart(layoutEvents6(datas),"算法6")
+drawChart(layoutEvents7(datas1),"算法7")
+drawChart(layoutEvents1(datas1),"算法1")
+drawChart(layoutEvents7(data2),"算法1")
+drawChart(layoutEvents7(data3),"算法1")
+drawChart(layoutEvents8(data3),"算法1es5")
+
+function drawChart(tracks,title){
+
+  var canvas=document.createElement("canvas");
+  const tooltip = document.getElementById('tooltip');
+  var width=1200;
+  var height=240;
+  canvas.width=width;
+  canvas.height=height;
+  document.body.appendChild(canvas);
+  
+    const ctx = canvas.getContext('2d');
+    
+    // 清空画布
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    
+    // 坐标参数
+    const margin = 50;
+    // 动态计算频率范围
+    const { min, max } = calculateFrequencyRange(tracks);
+    const startFreq = min; // 留边距
+    const endFreq = max
+    console.log(endFreq)
+    // const startFreq = 2400;
+    // const endFreq = 2500;
+    const freqToX = (freq) => margin + (freq - startFreq) * (canvas.width - 2 * margin) / (endFreq - startFreq);
+    const trackHeight = 30;
+    const trackGap = 0;
+    
+    // 绘制频率轴（X轴）
+    ctx.strokeStyle = '#000';
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.moveTo(margin, canvas.height - margin);
+    ctx.lineTo(canvas.width - margin, canvas.height - margin);
+    ctx.stroke();
+    
+    // 标注频率刻度
+    ctx.font = '12px Arial';
+    ctx.fillStyle = '#333';
+    for (let freq = startFreq; freq <= endFreq; freq += 10) {
+        const x = freqToX(freq);
+        ctx.fillText(freq + ' MHz', x - 20, canvas.height - margin + 20);
+        ctx.beginPath();
+        ctx.moveTo(x, canvas.height - margin);
+        ctx.lineTo(x, canvas.height - margin + 5);
+        ctx.stroke();
+    }
+    
+    // 颜色生成器（哈希信道名生成颜色）
+    const getColor = (name, isCore) => {
+      let h = Math.floor(Math.random() * 360); // 色相（Hue）从0到360
+      let s = Math.floor(Math.random() * 101); // 饱和度（Saturation）从0到100
+      let l = Math.floor(Math.random() * 101); // 亮度（Lightness）从0到100
+      //return `hsl(${h}, ${s}%, ${l}%)`; // 返回hsl颜色值
+      return `hsl(${Math.random() * 360}, 70%, 65%)`;
+    };
+    
+    // 存储所有绘制的事件用于交互检测
+    const drawnEvents = [];
+
+    // 绘制轨道和信道
+    tracks.forEach((track, trackIdx) => {
+        const y = margin + trackIdx * (trackHeight + trackGap);
+        
+        // 绘制轨道线（Y轴）
+        // ctx.strokeStyle = '#ddd';
+        // ctx.beginPath();
+        // ctx.moveTo(margin, y + trackHeight / 2);
+        // ctx.lineTo(canvas.width - margin, y + trackHeight / 2);
+        // ctx.stroke();
+        
+        // 绘制信道矩形
+        track.forEach(event => {
+            const x1 = freqToX(event.startValue);
+            const x2 = freqToX(event.endValue);
+            const width = x2 - x1;
+            
+            const bandwidth = event.endValue - event.startValue;
+            
+            // 设置颜色
+            const color = getColor(event); // 获取填充色
+            ctx.fillStyle = color;
+            ctx.fillRect(x1, y, width, trackHeight);
+            // 保存事件位置信息用于Tooltip
+            drawnEvents.push({
+                event,
+                x: x1,
+                y: y,
+                width: width,
+                height: trackHeight,
+                color:color
+            });
+            // 绘制边框
+            ctx.strokeStyle = '#555';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(x1, y, width, trackHeight);
+
+            // 标注信道名和带宽
+            // 根据亮度决定文字颜色（YIQ亮度公式）
+
+            // const r = parseInt(color.substr(1, 2), 16);
+            // const g = parseInt(color.substr(3, 2), 16);
+            // const b = parseInt(color.substr(5, 2), 16);
+            // const brightness = (r * 299 + g * 587 + b * 114) / 1000;
+            // console.log(brightness)
+            // const textColor = brightness > 128 ? '#000000' : '#FFFFFF'; // 阈值128
+            ctx.fillStyle = getTextColor(color);
+            ctx.font = '10px Arial';
+            ctx.fillText(
+                `信道${event.name}`, 
+                x1 + 5, 
+                y + trackHeight / 2 + 3
+            );
+        });
+    });
+    
+    // 标题自动时间补偿
+    ctx.font = '16px Arial';
+    ctx.fillStyle = '#000';
+    ctx.fillText(title+'  Wi-Fi信道动态轨道分配', margin, 30);
+
+    // Tooltip交互
+    canvas.addEventListener('mousemove', (e) => {
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+        
+        let hoveredEvent = null;
+        for (const de of drawnEvents) {
+            if (mouseX >= de.x && mouseX <= de.x + de.width &&
+                mouseY >= de.y && mouseY <= de.y + de.height) {
+                hoveredEvent = de.event;
+                break;
+            }
+        }
+        
+        if (hoveredEvent) {
+            tooltip.style.display = 'block';
+            tooltip.style.left = (e.clientX + 10) + 'px';
+            tooltip.style.top = (e.clientY + 10) + 'px';
+            tooltip.innerHTML = `
+                <div><strong>${hoveredEvent.name}</strong></div>
+                <div>起始: ${hoveredEvent.startValue} MHz</div>
+                <div>结束: ${hoveredEvent.endValue} MHz</div>
+                <div>颜色: ${hoveredEvent.color}</div>
+                <div>带宽: ${hoveredEvent.endValue - hoveredEvent.startValue} MHz</div>
+            `;
+        } else {
+            tooltip.style.display = 'none';
+        }
+    });
+
+    canvas.addEventListener('mouseout', () => {
+        tooltip.style.display = 'none';
+    });
+}
+function getTextColor(bgColor) {
+    // 解析HSL颜色（示例：hsl(300, 52%, 13%)）
+    const hslRegex = /hsl\((\d+),\s*(\d+)%,\s*(\d+)%\)/;
+    const match = bgColor.match(hslRegex);
+    if (!match) return '#000000'; // 默认黑色
+    
+    const [_, h, s, l] = match.map(Number);
+    
+    // 方法1：直接使用亮度判断（适用于HSL）
+    if (l > 50) return '#000000'; // 浅背景用黑字
+    else return '#FFFFFF';        // 深背景用白字
+
+    // 方法2：转换为RGB后使用YIQ公式（更精确）
+    // const rgb = hslToRgb(h / 360, s / 100, l / 100);
+    // const yiq = (rgb[0] * 299 + rgb[1] * 587 + rgb[2] * 114) / 1000;
+    // return yiq > 128 ? '#000000' : '#FFFFFF';
+}
+function calculateFrequencyRange(tracks) {
+    let minFreq = Infinity;
+    let maxFreq = -Infinity;
+
+    // 遍历所有轨道中的事件
+    tracks.forEach(track => {
+        track.forEach(event => {
+            minFreq = Math.min(minFreq, event.startValue);
+            maxFreq = Math.max(maxFreq, event.endValue);
+        });
+    });
+
+    // 扩展边距（5MHz或10%的带宽）
+    const margin = Math.max(5, (maxFreq - minFreq) * 0.1);
+    return {
+        min: Math.floor(minFreq - margin),
+        max: Math.ceil(maxFreq + margin)
+    };
+}
+
+
+
+
+
+
+
+
+
+
+var tree_data = {
+      "table_name": "中国",
+      "format_type": 2,//Wi-Fi
+      "business_list": 
+      [
+        {
+          "business_id": 1,
+          "color": "#00FFFF",
+          "language": 
+          [
+            {
+              "code": 2052,
+              "name": "2.4GHz Wi-Fi"
+            },
+            {
+              "code": 1033,
+              "name": "2.4GHz Wi-Fi"
+            }
+          ]
+        },
+        {
+          "business_id": 5,
+          "color": "#00FFFF",
+          "language": 
+          [
+            {
+              "code": 2052,
+              "name": "5GHz Wi-Fi"
+            },
+            {
+              "code": 1033,
+              "name": "5GHz Wi-Fi"
+            }
+          ]
+        }
+      ],
+      "band_list": 
+      [
+        {
+          "start_freq": 2401000,
+          "end_freq": 2495000,
+          "foot_notes": ["2.4G"],
+          "business_id": 1,
+          "child_band":
+          [
+            {
+              "color":"#00FFFF",
+              "child_band_range":[
+                    {
+                      "start_freq": 2401000000,
+                      "end_freq": 2423000000,
+                      "business_name": "1",
+                      "foot_note": ["2.4G1"]
+                    },
+                    {
+                      "start_freq": 2422000000,
+                      "end_freq": 2442000000,
+                      "business_name":"5",
+                      "foot_note": ["2.4G5"]
+                    },
+                    {
+                      "start_freq": 2442000000,
+                      "end_freq": 2462000000,
+                      "business_name":"9",
+                      "foot_note": ["2.4G9"]
+                    },
+                    {
+                      "start_freq": 2462000000,
+                      "end_freq": 2482000000,
+                      "business_name":"13",
+                      "foot_note": ["2.4G13"]
+                    }
+              ]
+            },
+            {
+              "color":"#00FFFF",
+              "child_band_range":[
+                    {
+                      "start_freq": 2407000000,
+                      "end_freq": 2427000000,
+                      "business_name": "2",
+                      "foot_note": ["2.4G2"]
+                    },
+                    {
+                      "start_freq": 2427000000,
+                      "end_freq": 2447000000,
+                      "business_name":"6",
+                      "foot_note": ["2.4G6"]
+                    },
+                    {
+                      "start_freq": 2447000000,
+                      "end_freq": 2467000000,
+                      "business_name":"10",
+                      "foot_note": ["2.4G10"]
+                    }
+              ]
+            },
+            {
+              "color":"#00FF00",
+              "child_band_range":[
+                    {
+                      "start_freq": 2402000000,
+                      "end_freq": 2442000000,
+                      "business_name": "1+5",
+                      "foot_note": ["2.4G1+5"]
+                    },
+                    {
+                      "start_freq": 2442000000,
+                      "end_freq": 2482000000,
+                      "business_name":"2+6",
+                      "foot_note": ["2.4G62+6"]
+                    }
+              ]
+            },
+          ]
+          
+        }
+      ],
+      "notes_list": [{
+          "note_id": "2.4G",
+          "language": [{
+              "code": 2052,
+              "content": "2.4GHz Wi-Fi频段"
+            },
+            {
+              "code": 1033,
+              "content": "xxxxxxxxxxxx"
+            }
+          ]
+        },
+        {
+          "note_id": "2.4G1",
+          "language": [{
+              "code": 2052,
+              "content": "2.4GHz Wi-Fi信道1，2.401GHz - 2.423GHz"
+            },
+            {
+              "code": 1033,
+              "content": "xxxxxxxxxxxx"
+            }
+          ]
+        },
+        {
+          "note_id": "2.4G1+5",
+          "language": [{
+              "code": 2052,
+              "content": "2.4G Wi-Fi 40MHz带宽1+5"
+            },
+            {
+              "code": 1033,
+              "content": "xxxxxxxxxxxx"
+            }
+          ]
+        }
+      ]
+    }
+
+
+
+
+
+var tree_data2 = {
+      "table_name": "中国",
+      "format_type": 3,
+      "business_list": [
+        {
+          "business_id": 4,
+          "color": "#FFE4C4",
+          "language": [{
+              "code": 2052,
+              "name": "P-GSM上行"
+            },
+            {
+              "code": 1033,
+              "name": "P-GSM uplink"
+            }
+          ]
+        },
+        {
+          "business_id": 5,
+          "color": "#FFE4C4",
+          "language": [{
+              "code": 2052,
+              "name": "P-GSM下行"
+            },
+            {
+              "code": 1033,
+              "name": "P-GSM downlink"
+            }
+          ]
+        },
+      ],
+      "band_list": [
+        {
+          "start_freq": 890000000,
+          "end_freq": 915000000,
+          "foot_notes": ["P-GSMul"],
+          "business_id": 4
+        },{
+          "start_freq": 935000000,
+          "end_freq": 960000000,
+          "foot_notes": ["P-GSMdl"],
+          "business_id": 5
+        },{
+          "start_freq": 880000000,
+          "end_freq": 915000000,
+          "foot_notes": ["E-GSMul"],
+          "business_id": 6
+        },
+        {
+          "start_freq": 925000000,
+          "end_freq": 960000000,
+          "foot_notes": ["E-GSMdl"],
+          "business_id": 7
+        },
+        {
+          "start_freq": 824000000,
+          "end_freq": 849000000,
+          "foot_notes": ["dx3Gul"],
+          "business_id": 8
+        },
+        {
+          "start_freq": 869000000,
+          "end_freq": 894000000,
+          "foot_notes": ["dx3Gdl"],
+          "business_id": 9
+        },
+        
+      ],
+      "notes_list": [
+        {
+          "note_id": "E-GSMul",
+          "language": [{
+              "code": 2052,
+              "content": "在 GSM 网络中，880-915 MHz 是一个常见的上行频段，通常用于从手机到基站（上行）的信号传输。这个频段通常对应的是 GSM 900 系列。"
+            },
+            {
+              "code": 1033,
+              "content": "xxxxxxxxxxxx"
+            }
+          ]
+        },
+        {
+          "note_id": "E-GSMdl",
+          "language": [{
+              "code": 2052,
+              "content": "在 GSM 网络中，925-960 MHz是一个常见的下行频段，通常用于从基站到手机"
+            },
+            {
+              "code": 1033,
+              "content": "xxxxxxxxxxxx"
+            }
+          ]
+        },
+        {
+          "note_id": "dx3Gul",
+          "language": [{
+              "code": 2052,
+              "content": "中国电信3G (CDMA2000)800 MHz: 824 MHz - 849 MHz (上行)"
+            },
+            {
+              "code": 1033,
+              "content": "xxxxxxxxxxxx"
+            }
+          ]
+        }
+      ]
+    }
+
+
+
+var tree_data3 = {
+  "table_name": "运营商",
+  "format_type": 3,
+  "business_list": [
+    {
+      "business_id": 8,
+      "color": "#FFE4C3",
+      "language": [{
+          "code": 2052,
+          "name": "中国电信3G上行"
+        },
+        {
+          "code": 1033,
+          "name": "China Telecom 3G uplink"
+        }
+      ]
+    },
+    {
+      "business_id": 9,
+      "color": "#FFE4C3",
+      "language": [{
+          "code": 2052,
+          "name": "中国电信3G下行"
+        },
+        {
+          "code": 1033,
+          "name": "China Telecom 3G downlink"
+        }
+      ]
+    }
+  ],
+  "band_list": 
+  [
+    {
+      "start_freq": 824000000,
+      "end_freq": 849000000,
+      "foot_notes": ["dx3Gul"],
+      "business_id": 8
+    },
+    {
+      "start_freq": 869000000,
+      "end_freq": 894000000,
+      "foot_notes": ["dx3Gdl"],
+      "business_id": 9
+    }
+  ],
+  "notes_list": [
+    {
+      "note_id": "dx3Gul",
+      "language": [{
+          "code": 2052,
+          "content": "中国电信3G (CDMA2000)800 MHz: 824 MHz - 849 MHz (上行)"
+        },
+        {
+          "code": 1033,
+          "content": "xxxxxxxxxxxx"
+        }
+      ]
+    }
+  ]
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

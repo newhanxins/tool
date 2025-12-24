@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas Layer Element Z-Index Control</title>
+  <style>
+    canvas {
+      border: 1px solid black;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="canvas" width="600" height="400"></canvas>
+<button id="bringMarkerToFront">Bring Marker Layer to Front</button>
+<button id="bringVectorToFront">Bring Vector Layer to Front</button>
+
+<script>
+  const canvas = document.getElementById('canvas');
+  const ctx = canvas.getContext('2d');
+
+  // 图层数据，按顺序管理图层
+  let layers = [
+    { id: 'baseLayer', elements: [], zIndex: 0 },
+    { id: 'vectorLayer', elements: [], zIndex: 1 },
+    { id: 'markerLayer', elements: [], zIndex: 2 }
+  ];
+
+  // 初始化：绘制基础图层、向量图层和标记图层
+  function initializeLayers() {
+    // 基础图层：天蓝色背景
+    layers[0].elements.push(() => {
+      ctx.fillStyle = 'skyblue';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+    });
+
+    // 向量图层：绘制多边形和线
+    layers[1].elements.push(() => {
+      ctx.fillStyle = 'rgba(0, 255, 0, 0.5)';
+      ctx.beginPath();
+      ctx.moveTo(100, 100);
+      ctx.lineTo(500, 100);
+      ctx.lineTo(300, 300);
+      ctx.closePath();
+      ctx.fill();
+
+      ctx.strokeStyle = 'red';
+      ctx.beginPath();
+      ctx.moveTo(100, 100);
+      ctx.lineTo(100, 300);
+      ctx.stroke();
+    });
+
+    // 标记图层：绘制点
+    layers[2].elements.push(() => {
+      ctx.fillStyle = 'yellow';
+      ctx.beginPath();
+      ctx.arc(400, 200, 10, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.fillStyle = 'purple';
+      ctx.beginPath();
+      ctx.arc(200, 200, 10, 0, Math.PI * 2);
+      ctx.fill();
+    });
+  }
+
+  // 绘制所有图层
+  function drawLayers() {
+    // 先按 zIndex 排序图层
+    layers.sort((a, b) => a.zIndex - b.zIndex);
+
+    // 清空画布并重新绘制图层
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    layers.forEach(layer => {
+      layer.elements.forEach(drawElement => drawElement());
+    });
+  }
+
+  // 按钮点击事件：将标记图层置顶
+  document.getElementById('bringMarkerToFront').addEventListener('click', function() {
+    layers[2].zIndex = 10;  // 将标记图层置于最前面
+    layers[1].zIndex = 5;   // 向量图层在它后面
+    layers[0].zIndex = 0;   // 基础图层在最后
+    drawLayers();  // 重新绘制所有图层
+  });
+
+  // 按钮点击事件：将向量图层置顶
+  document.getElementById('bringVectorToFront').addEventListener('click', function() {
+    layers[1].zIndex = 10;  // 将向量图层置于最前面
+    layers[2].zIndex = 5;   // 标记图层在它后面
+    layers[0].zIndex = 0;   // 基础图层在最后
+    drawLayers();  // 重新绘制所有图层
+  });
+
+  // 初始化图层并绘制
+  initializeLayers();
+  drawLayers();
+</script>
+
+</body>
+</html>

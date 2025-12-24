@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta charset="UTF-8">
+    <title>JSON工具</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h2>JSON 格式化与修复</h2>
+        <textarea id="json-input" placeholder="粘贴或输入 JSON..." rows="10"></textarea>
+        <div class="btn-group">
+            <button id="format-btn">格式化</button>
+            <button id="copy-btn">复制</button>
+            <button id="fix-btn">修复错误</button>
+        </div>
+        <div id="error-msg" class="error"></div>
+        <pre id="json-output"></pre>
+    </div>
+    <script src="popup.js"></script>
+</body>
+</html>

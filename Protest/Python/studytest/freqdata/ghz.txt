@@ -1,0 +1,2887 @@
+[
+{
+	"startFreq": "10",
+	"endFreq": "10.4",
+	"footnoteS": ["5.479","5.474D"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（有源）",
+		"footnote": ["5.474A","5.474B","5.474C"]
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "[业余]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"10.4",
+	"endFreq": "10.45",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "[业余]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"10.45",
+	"endFreq": "10.5",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "[业余]",
+		"footnote": null
+	}, {
+		"business": "[卫星业余]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"10.5",
+	"endFreq": "10.55",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"10.55",
+	"endFreq": "10.6",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+,{
+	"startFreq": "10.6",
+	"endFreq": "10.68",
+	"footnoteS": ["5.149","5.482","5.482A"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}, {
+		"business": "[无线电定位]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"10.68",
+	"endFreq": "10.7",
+	"footnoteS": ["5.340","5.483"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"10.7",
+	"endFreq": "10.95",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": ["5.441"]
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "[无线电定位]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"10.95",
+	"endFreq": "11.2",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": ["5.484A","5.484B"]
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "[无线电定位]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"11.2",
+	"endFreq": "11.45",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": ["5.441"]
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "[无线电定位]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"11.45",
+	"endFreq": "11.7",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": ["5.484A","5.484B"]
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "[无线电定位]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"11.7",
+	"endFreq": "12.2",
+	"footnoteS": ["5.487","5.487A"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "广播",
+		"footnote": null
+	}, {
+		"business": "卫星广播",
+		"footnote": ["5.492"]
+	}]
+}
+, {
+	"startFreq":"12.2",
+	"endFreq": "12.5",
+	"footnoteS": ["5.484A","5.487"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": ["5.484B"]
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "广播",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"12.5",
+	"endFreq": "12.75",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": ["5.484A","5.484B"]
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "卫星广播",
+		"footnote": ["5.493"]
+	}]
+}
+, {
+	"startFreq":"12.75",
+	"endFreq": "13.25",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.441"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "[空间研究（深空）（空对地）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"13.25",
+	"endFreq": "13.4",
+	"footnoteS": ["5.498A"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（有源）",
+		"footnote": null
+	}, {
+		"business": "航空无线电导航",
+		"footnote": ["5.497"]
+	}, {
+		"business": "空间研究（有源）",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"13.4",
+	"endFreq": "13.65",
+	"footnoteS": ["5.501B"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（有源）",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "空间研究",
+		"footnote": ["5.499C","5.499D"]
+	}, {
+		"business": "[卫星标准频率和时间信号（地对空）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"13.65",
+	"endFreq": "13.75",
+	"footnoteS": ["5.501B"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（有源）",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "空间研究",
+		"footnote": ["5.501A"]
+	}, {
+		"business": "[卫星标准频率和时间信号（地对空）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"13.75",
+	"endFreq": "14",
+	"footnoteS": ["5.502","5.503"],
+	"radioBusinessS": [{
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.484A"]
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "[卫星标准频率和时间信号（地对空）]",
+		"footnote": null
+	}, {
+		"business": "[空间研究]",
+		"footnote": null
+	}, {
+		"business": "[卫星地球探测]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"14",
+	"endFreq": "14.25",
+	"footnoteS": ["5.504A","CHN18"],
+	"radioBusinessS": [{
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.457A","5.484A","5.506","5.484B"]
+	}, {
+		"business": "无线电导航",
+		"footnote": ["5.504"]
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[卫星移动（地对空）]",
+		"footnote": ["5.504B","5.506A"]
+	}, {
+		"business": "[空间研究]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"14.25",
+	"endFreq": "14.3",
+	"footnoteS": ["CHN18"],
+	"radioBusinessS": [{
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.457A","5.484A","5.506","5.484B"]
+	}, {
+		"business": "无线电导航",
+		"footnote": ["5.504"]
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "[卫星移动（地对空）（卫星航空移动除外）]",
+		"footnote": ["5.504B","5.506A","5.508A"]
+	}, {
+		"business": "[空间研究]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"14.3",
+	"endFreq": "14.4",
+	"footnoteS": ["CHN18"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	},{
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.457A","5.484A","5.506","5.484B"]
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "[卫星移动（地对空）（卫星航空移动除外）]",
+		"footnote": ["5.504B","5.506A","5.509A"]
+	}, {
+		"business": "[卫星无线电导航]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"14.4",
+	"endFreq": "14.47",
+	"footnoteS": ["CHN18"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	},{
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.457A","5.484A","5.506","5.484B"]
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "[卫星移动（地对空）（卫星航空移动除外）]",
+		"footnote": ["5.504B","5.506A","5.509A"]
+	}, {
+		"business": "[空间研究（空对地）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"14.47",
+	"endFreq": "14.5",
+	"footnoteS": ["5.149","CHN12","CHN18"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	},{
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.457A","5.484A","5.506"]
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "[卫星移动（地对空）（卫星航空移动除外）]",
+		"footnote": ["5.504B","5.506A","5.509A"]
+	}, {
+		"business": "[射电天文]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"14.5",
+	"endFreq": "14.8",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	},{
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.510","5.509B","5.509C","5.509D","5.509E","5.509F","CHN39"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "[空间研究]",
+		"footnote": ["5.509G","CHN18"]
+	}]
+}
+, {
+	"startFreq":"14.8",
+	"endFreq": "15.35",
+	"footnoteS": ["5.339","CHN18"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "[空间研究]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"15.35",
+	"endFreq": "15.4",
+	"footnoteS": ["5.340"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"15.4",
+	"endFreq": "15.43",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "无线电定位",
+		"footnote": ["5.511E","5.511F"]
+	}, {
+		"business": "航空无线电导航",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"15.43",
+	"endFreq": "15.63",
+	"footnoteS": ["5.511C"],
+	"radioBusinessS": [{
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.511A"]
+	}, {
+		"business": "无线电定位",
+		"footnote": ["5.511E","5.511F"]
+	}, {
+		"business": "航空无线电导航",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"15.63",
+	"endFreq": "15.7",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "无线电定位",
+		"footnote": ["5.511E","5.511F"]
+	}, {
+		"business": "航空无线电导航",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"15.7",
+	"endFreq": "16.6",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"16.6",
+	"endFreq": "17.1",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "[空间研究（深空）（地对空）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"17.1",
+	"endFreq": "17.2",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"17.2",
+	"endFreq": "17.3",
+	"footnoteS": ["5.513A"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（有源）",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "空间研究（有源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"17.3",
+	"endFreq": "17.7",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.516"]
+	}, {
+		"business": "[无线电定位]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"17.7",
+	"endFreq": "18.1",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": ["5.484A"]
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.516"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"18.1",
+	"endFreq": "18.4",
+	"footnoteS": ["5.519"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.520"]
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": ["5.484A"]
+	}, {
+		"business": "卫星气象（空对地）",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"18.4",
+	"endFreq": "18.6",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": ["5.484A"]
+	}]
+}
+, {
+	"startFreq":"18.6",
+	"endFreq": "18.8",
+	"footnoteS": ["5.522A"],
+	"radioBusinessS": [{
+		"business": "卫星固定（空对地）",
+		"footnote": ["5.522B"]
+	}, {
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"18.8",
+	"endFreq": "19.3",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": ["5.523A"]
+	}]
+}
+, {
+	"startFreq":"19.3",
+	"endFreq": "19.7",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）（地对空）",
+		"footnote": ["5.523B","5.523C","5.523D","5.523E"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"19.7",
+	"endFreq": "20.1",
+	"footnoteS": ["5.524"],
+	"radioBusinessS": [{
+		"business": "卫星固定（空对地）",
+		"footnote": ["5.484A","5.516B","5.527A","5.484B"]
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "[卫星移动（空对地）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"20.1",
+	"endFreq": "20.2",
+	"footnoteS": ["5.524","5.525","5.526","5.527","5.528"],
+	"radioBusinessS": [{
+		"business": "卫星固定（空对地）",
+		"footnote": ["5.484A","5.516B","5.527A","5.484B"]
+	}, {
+		"business": "卫星移动（空对地）",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"20.2",
+	"endFreq": "21.2",
+	"footnoteS": ["5.524"],
+	"radioBusinessS": [{
+		"business": "卫星固定（空对地）",
+		"footnote": null
+	}, {
+		"business": "卫星移动（空对地）",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "[卫星标准频率和时间信号（空对地）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"21.2",
+	"endFreq": "21.4",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"21.4",
+	"endFreq": "22",
+	"footnoteS": ["5.530A","5.530B","5.530D"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "卫星广播",
+		"footnote": ["5.208B"]
+	}]
+}
+, {
+	"startFreq":"22",
+	"endFreq": "22.21",
+	"footnoteS": ["5.149","CHN12"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": ["CHN40"]
+	}]
+}
+, {
+	"startFreq": "22.21",
+	"endFreq": "22.5",
+	"footnoteS": ["5.149","5.532"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"22.5",
+	"endFreq": "22.55",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "22.55",
+	"endFreq": "23",
+	"footnoteS": ["5.149","CHN12"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": ["5.338A"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "空间研究（地对空）",
+		"footnote": ["5.532A"]
+	}]
+}
+, {
+	"startFreq": "23",
+	"endFreq": "23.15",
+	"footnoteS": ["5.149","CHN12"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": ["5.338A"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "空间研究（地对空）",
+		"footnote": ["5.532A"]
+	}]
+}
+, {
+	"startFreq": "23.15",
+	"endFreq": "23.55",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": ["5.338A"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "23.55",
+	"endFreq": "23.6",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "23.6",
+	"endFreq": "24",
+	"footnoteS": ["5.340"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "24",
+	"endFreq": "24.05",
+	"footnoteS": ["5.150"],
+	"radioBusinessS": [{
+		"business": "业余",
+		"footnote": null
+	}, {
+		"business": "卫星业余",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "24.05",
+	"endFreq": "24.25",
+	"footnoteS": ["5.150"],
+	"radioBusinessS": [{
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "[业余]",
+		"footnote": null
+	}, {
+		"business": "[卫星地球探测（有源）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "24.25",
+	"endFreq": "24.45",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "24.45",
+	"endFreq": "24.65",
+	"footnoteS": ["5.533"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "[无线电定位]",
+		"footnote": ["CHN24"]
+	}]
+}
+, {
+	"startFreq": "24.65",
+	"endFreq": "24.75",
+	"footnoteS": ["5.533"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.532B"]
+	}, {
+		"business": "卫星间",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "24.75",
+	"endFreq": "25.25",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.535"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "25.25",
+	"endFreq": "25.5",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": ["5.536"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "[卫星标准频率和时间信号（地对空）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "25.5",
+	"endFreq": "27",
+	"footnoteS": ["5.536A"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（空对地）",
+		"footnote": ["CHN41"]
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": ["5.536"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "空间研究（空对地）",
+		"footnote": null
+	}, {
+		"business": "[卫星标准频率和时间信号（地对空）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "27",
+	"endFreq": "27.5",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": ["5.536","5.537"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "27.5",
+	"endFreq": "28.5",
+	"footnoteS": ["5.538","5.540"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.484A","5.516B","5.539"]
+	}]
+}
+, {
+	"startFreq": "28.5",
+	"endFreq": "29.1",
+	"footnoteS": ["5.540"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.484A","5.516B","5.523A","5.539"]
+	}, {
+		"business": "[卫星地球探测（地对空）]",
+		"footnote": ["5.541"]
+	}]
+}
+, {
+	"startFreq": "29.1",
+	"endFreq": "29.5",
+	"footnoteS": ["5.540"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.516B","5.523C","5.523E","5.535A","5.539","5.541A"]
+	}, {
+		"business": "[卫星地球探测（地对空）]",
+		"footnote": ["5.541"]
+	}]
+}
+, {
+	"startFreq": "29.5",
+	"endFreq": "29.9",
+	"footnoteS": ["5.540","5.542"],
+	"radioBusinessS": [{
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.484A","5.516B","5.539","5.527A","5.484B"]
+	}, {
+		"business": "[卫星地球探测（地对空）]",
+		"footnote": ["5.541"]
+	}, {
+		"business": "[卫星移动（地对空）]",
+		"footnote": null
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}, {
+		"business": "[移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "29.9",
+	"endFreq": "30",
+	"footnoteS": ["5.525","5.526","5.527","5.538","5.540","5.542"],
+	"radioBusinessS": [{
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.484A","5.516B","5.539","5.527A","5.484B"]
+	}, {
+		"business": "卫星移动（地对空）",
+		"footnote": null
+	}, {
+		"business": "卫星地球探测（地对空）",
+		"footnote": ["5.541","5.543"]
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}, {
+		"business": "[移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "30",
+	"endFreq": "31",
+	"footnoteS": ["5.542"],
+	"radioBusinessS": [{
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.338A"]
+	}, {
+		"business": "卫星移动（地对空）",
+		"footnote": null
+	}, {
+		"business": "[卫星标准频率和时间信号（空对地）]",
+		"footnote": null
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}, {
+		"business": "[移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "31",
+	"endFreq": "31.3",
+	"footnoteS": ["5.149"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": ["5.338A"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "[卫星标准频率和时间信号（空对地）]",
+		"footnote": null
+	}, {
+		"business": "[空间研究]",
+		"footnote": ["5.544"]
+	}]
+}
+, {
+	"startFreq": "31.3",
+	"endFreq": "31.5",
+	"footnoteS": ["5.340"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "31.5",
+	"endFreq": "31.8",
+	"footnoteS": ["5.149"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}, {
+		"business": "[移动（航空移动除外）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "31.8",
+	"endFreq": "32",
+	"footnoteS": ["5.547","5.548","CHN33"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": ["5.547A"]
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "空间研究（深空）（空对地）",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "32",
+	"endFreq": "32.3",
+	"footnoteS": ["5.547","5.548","CHN33"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": ["5.547A"]
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "空间研究（深空）（空对地）",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "32.3",
+	"endFreq": "33",
+	"footnoteS": ["5.547","5.548"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": ["5.547A"]
+	}, {
+		"business": "卫星间",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "33",
+	"endFreq": "33.4",
+	"footnoteS": ["5.547"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": ["5.547A"]
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "33.4",
+	"endFreq": "34.2",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "34.2",
+	"endFreq": "34.7",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "空间研究（深空）（地对空）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "34.7",
+	"endFreq": "35.2",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "[空间研究]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "35.2",
+	"endFreq": "35.5",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "气象辅助",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "35.5",
+	"endFreq": "36",
+	"footnoteS": ["5.549A"],
+	"radioBusinessS": [{
+		"business": "气象辅助",
+		"footnote": null
+	}, {
+		"business": "卫星地球探测（有源）",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "空间研究（有源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "36",
+	"endFreq": "37",
+	"footnoteS": ["5.149","5.550A"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "37",
+	"endFreq": "37.5",
+	"footnoteS": ["5.547","CHN33"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "空间研究（空对地）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "37.5",
+	"endFreq": "38",
+	"footnoteS": ["5.547","CHN33"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "空间研究（空对地）",
+		"footnote": null
+	}, {
+		"business": "[卫星地球探测（空对地）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "38",
+	"endFreq": "39.5",
+	"footnoteS": ["5.547"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "[卫星地球探测（空对地）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "39.5",
+	"endFreq": "40",
+	"footnoteS": ["5.547"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "卫星移动（空对地）",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": ["5.516B"]
+	}, {
+		"business": "[卫星地球探测（空对地）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "40",
+	"endFreq": "40.5",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "卫星地球探测（地对空）",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "卫星移动（空对地）",
+		"footnote": null
+	}, {
+		"business": "空间研究（地对空）",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": ["5.516B"]
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "[卫星地球探测（空对地）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "40.5",
+	"endFreq": "41",
+	"footnoteS": ["5.547"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": null
+	}, {
+		"business": "广播",
+		"footnote": null
+	}, {
+		"business": "卫星广播",
+		"footnote": null
+	}, {
+		"business": "[移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "41",
+	"endFreq": "42.5",
+	"footnoteS": ["5.547","5.551H","5.551I"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": null
+	}, {
+		"business": "广播",
+		"footnote": null
+	}, {
+		"business": "卫星广播",
+		"footnote": null
+	}, {
+		"business": "[移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "42.5",
+	"endFreq": "43.5",
+	"footnoteS": ["5.149","5.547"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.552"]
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "43.5",
+	"endFreq": "47",
+	"footnoteS": ["5.554"],
+	"radioBusinessS": [{
+		"business": "移动",
+		"footnote": ["5.553"]
+	}, {
+		"business": "卫星移动",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "卫星无线电导航",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "47",
+	"endFreq": "47.2",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "业余",
+		"footnote": null
+	}, {
+		"business": "卫星业余",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "47.2",
+	"endFreq": "47.5",
+	"footnoteS": ["5.552A"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.552"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "47.5",
+	"endFreq": "47.9",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.552"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "47.9",
+	"endFreq": "48.2",
+	"footnoteS": ["5.552A"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.552"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "48.2",
+	"endFreq": "50.2",
+	"footnoteS": ["5.149","5.340","5.555"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.338A","5.552"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "50.2",
+	"endFreq": "50.4",
+	"footnoteS": ["5.340"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "50.4",
+	"endFreq": "51.4",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": ["5.338A"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "[卫星移动（地对空）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "51.4",
+	"endFreq": "52.6",
+	"footnoteS": ["5.547","5.556"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": ["5.338A"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "52.6",
+	"endFreq": "54.25",
+	"footnoteS": ["5.340","5.556"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "54.25",
+	"endFreq": "55.78",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": ["5.556A"]
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "55.78",
+	"endFreq": "56.9",
+	"footnoteS": ["5.547"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": ["5.556A"]
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}, {
+		"business": "[固定]",
+		"footnote": ["5.557A"]
+	}, {
+		"business": "[移动]",
+		"footnote": ["5.558"]
+	}]
+}
+, {
+	"startFreq": "56.9",
+	"endFreq": "57",
+	"footnoteS": ["5.547"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": ["5.558A"]
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}, {
+		"business": "[移动]",
+		"footnote": ["5.558"]
+	}]
+}
+, {
+	"startFreq": "57",
+	"endFreq": "58.2",
+	"footnoteS": ["5.547"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": ["5.556A"]
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}, {
+		"business": "[移动]",
+		"footnote": ["5.558"]
+	}]
+}
+, {
+	"startFreq": "58.2",
+	"endFreq": "59",
+	"footnoteS": ["5.547","5.556"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}, {
+		"business": "[移动]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq": "59",
+	"endFreq": "59.3",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": ["5.556A"]
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}, {
+		"business": "[固定]",
+		"footnote": null
+	}, {
+		"business": "[移动]",
+		"footnote": ["5.558"]
+	}]
+}
+, {
+	"startFreq": "59.3",
+	"endFreq": "64",
+	"footnoteS": ["5.138"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": ["5.558"]
+	}, {
+		"business": "无线电定位",
+		"footnote": ["5.559"]
+	}]
+}, {
+	"startFreq": "64",
+	"endFreq": "65",
+	"footnoteS": ["5.547","5.556"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"65",
+	"endFreq": "66",
+	"footnoteS": ["5.547"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测",
+		"footnote": null
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": null
+	}, {
+		"business": "移动（航空移动除外）",
+		"footnote": null
+	}, {
+		"business": "空间研究",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"66",
+	"endFreq": "71",
+	"footnoteS": ["5.554"],
+	"radioBusinessS": [{
+		"business": "卫星间",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": ["5.553","5.558"]
+	}, {
+		"business": "卫星移动",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "卫星无线电导航",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"71",
+	"endFreq": "74",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "卫星移动（空对地）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"74",
+	"endFreq": "76",
+	"footnoteS": ["5.561"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "广播",
+		"footnote": null
+	}, {
+		"business": "卫星广播",
+		"footnote": null
+	}, {
+		"business": "[空间研究（空对地）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"76",
+	"endFreq": "77.5",
+	"footnoteS": ["5.149"],
+	"radioBusinessS": [{
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "[业余]",
+		"footnote": null
+	}, {
+		"business": "[卫星业余]",
+		"footnote": null
+	}, {
+		"business": "[空间研究（空对地）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"77.5",
+	"endFreq": "78",
+	"footnoteS": ["5.149"],
+	"radioBusinessS": [{
+		"business": "业余",
+		"footnote": null
+	}, {
+		"business": "卫星业余",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": ["5.559B"]
+	}, {
+		"business": "[射电天文]",
+		"footnote": null
+	}, {
+		"business": "[空间研究（空对地）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"78",
+	"endFreq": "79",
+	"footnoteS": ["5.149","5.560"],
+	"radioBusinessS": [{
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "[业余]",
+		"footnote": null
+	}, {
+		"business": "[卫星业余]",
+		"footnote": null
+	}, {
+		"business": "[空间研究（空对地）]",
+		"footnote": null
+	}, {
+		"business": "[射电天文]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"79",
+	"endFreq": "81",
+	"footnoteS": ["5.149"],
+	"radioBusinessS": [{
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "[业余]",
+		"footnote": null
+	}, {
+		"business": "[卫星业余]",
+		"footnote": null
+	}, {
+		"business": "[空间研究（空对地）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"81",
+	"endFreq": "84",
+	"footnoteS": ["5.149","5.561A"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": ["5.338A"]
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "卫星移动（地对空）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "[空间研究（空对地）]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"84",
+	"endFreq": "86",
+	"footnoteS": ["5.149"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": ["5.338A"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"86",
+	"endFreq": "92",
+	"footnoteS": ["5.340"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"92",
+	"endFreq": "94",
+	"footnoteS": ["5.149"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": ["5.338A"]
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"94",
+	"endFreq": "94.1",
+	"footnoteS": ["5.562","5.562A"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（有源）",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "空间研究（有源）",
+		"footnote": null
+	}, {
+		"business": "[射电天文]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"94.1",
+	"endFreq": "95",
+	"footnoteS": ["5.149"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"95",
+	"endFreq": "100",
+	"footnoteS": ["5.149","5.554"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "卫星无线电导航",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"100",
+	"endFreq": "102",
+	"footnoteS": ["5.340","5.341"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"102",
+	"endFreq": "105",
+	"footnoteS": ["5.149","5.341"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"105",
+	"endFreq": "109.5",
+	"footnoteS": ["5.149","5.341"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": ["5.562B"]
+	}]
+}
+, {
+	"startFreq":"109.5",
+	"endFreq": "111.8",
+	"footnoteS": ["5.340","5.341"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"111.8",
+	"endFreq": "114.25",
+	"footnoteS": ["5.149","5.341"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": ["5.562B"]
+	}]
+}
+, {
+	"startFreq":"114.25",
+	"endFreq": "116",
+	"footnoteS": ["5.340","5.341"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"116",
+	"endFreq": "119.98",
+	"footnoteS": ["5.341"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": ["5.562C"]
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"119.98",
+	"endFreq": "122.25",
+	"footnoteS": ["5.138","5.341"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": ["5.562C"]
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"122.25",
+	"endFreq": "123",
+	"footnoteS": ["5.138"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": ["5.558"]
+	}, {
+		"business": "[业余]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"123",
+	"endFreq": "126",
+	"footnoteS": ["5.554"],
+	"radioBusinessS": [{
+		"business": "卫星固定（空对地）",
+		"footnote": null
+	}, {
+		"business": "卫星移动（空对地）",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "卫星无线电导航",
+		"footnote": null
+	}, {
+		"business": "[射电天文]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"126",
+	"endFreq": "130",
+	"footnoteS": ["5.149","5.554"],
+	"radioBusinessS": [{
+		"business": "卫星固定（空对地）",
+		"footnote": null
+	}, {
+		"business": "卫星移动（空对地）",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "卫星无线电导航",
+		"footnote": null
+	}, {
+		"business": "[射电天文]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"130",
+	"endFreq": "134",
+	"footnoteS": ["5.149","5.562A"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（有源）",
+		"footnote": ["5.562E"]
+	}, {
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": ["5.558"]
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"134",
+	"endFreq": "136",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "业余",
+		"footnote": null
+	}, {
+		"business": "卫星业余",
+		"footnote": null
+	}, {
+		"business": "[射电天文]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"136",
+	"endFreq": "141",
+	"footnoteS": ["5.149"],
+	"radioBusinessS": [{
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "[业余]",
+		"footnote": null
+	}, {
+		"business": "[卫星业余]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"141",
+	"endFreq": "148.5",
+	"footnoteS": ["5.149"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"148.5",
+	"endFreq": "151.5",
+	"footnoteS": ["5.340"],
+	"radioBusinessS": [{
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"151.5",
+	"endFreq": "155.5",
+	"footnoteS": ["5.149"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"155.5",
+	"endFreq": "158.5",
+	"footnoteS": ["5.149","5.562F","5.562G"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": ["5.562B"]
+	}]
+}
+, {
+	"startFreq":"158.5",
+	"endFreq": "164",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "卫星移动（空对地）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"164",
+	"endFreq": "167",
+	"footnoteS": ["5.340"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"167",
+	"endFreq": "174.5",
+	"footnoteS": ["5.149"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": ["5.558"]
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"174.5",
+	"endFreq": "174.8",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": ["5.558"]
+	}]
+}
+, {
+	"startFreq":"174.8",
+	"endFreq": "182",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": ["5.562H"]
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"182",
+	"endFreq": "185",
+	"footnoteS": ["5.340"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"185",
+	"endFreq": "190",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "卫星间",
+		"footnote": ["5.562H"]
+	}, {
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"190",
+	"endFreq": "191.8",
+	"footnoteS": ["5.340"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"191.8",
+	"endFreq": "200",
+	"footnoteS": ["5.149","5.341","5.554"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星间",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": ["5.558"]
+	}, {
+		"business": "卫星移动",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "卫星无线电导航",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"200",
+	"endFreq": "209",
+	"footnoteS": ["5.340","5.341","5.563A"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"209",
+	"endFreq": "217",
+	"footnoteS": ["5.149","5.341"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"217",
+	"endFreq": "226",
+	"footnoteS": ["5.149","5.341"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": ["5.562B"]
+	}]
+}
+, {
+	"startFreq":"226",
+	"endFreq": "231.5",
+	"footnoteS": ["5.340"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"231.5",
+	"endFreq": "232",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "[无线电定位]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"232",
+	"endFreq": "235",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "[无线电定位]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"235",
+	"endFreq": "238",
+	"footnoteS": ["5.563A","5.563B"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"238",
+	"endFreq": "240",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（空对地）",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "卫星无线电导航",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"240",
+	"endFreq": "241",
+	"footnoteS": null,
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "无线电定位",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"241",
+	"endFreq": "248",
+	"footnoteS": ["5.138","5.149"],
+	"radioBusinessS": [{
+		"business": "无线电定位",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "[业余]",
+		"footnote": null
+	}, {
+		"business": "[卫星业余]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"248",
+	"endFreq": "250",
+	"footnoteS": ["5.149","CHN12"],
+	"radioBusinessS": [{
+		"business": "业余",
+		"footnote": null
+	}, {
+		"business": "卫星业余",
+		"footnote": null
+	}, {
+		"business": "[射电天文]",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"250",
+	"endFreq": "252",
+	"footnoteS": ["5.340","5.563A"],
+	"radioBusinessS": [{
+		"business": "卫星地球探测（无源）",
+		"footnote": null
+	}, {
+		"business": "空间研究（无源）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"252",
+	"endFreq": "265",
+	"footnoteS": ["5.149","5.554"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "卫星移动（地对空）",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}, {
+		"business": "无线电导航",
+		"footnote": null
+	}, {
+		"business": "卫星无线电导航",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"265",
+	"endFreq": "275",
+	"footnoteS": ["5.149","5.563A"],
+	"radioBusinessS": [{
+		"business": "固定",
+		"footnote": null
+	}, {
+		"business": "卫星固定（地对空）",
+		"footnote": null
+	}, {
+		"business": "移动",
+		"footnote": null
+	}, {
+		"business": "射电天文",
+		"footnote": null
+	}]
+}
+, {
+	"startFreq":"275",
+	"endFreq": "3000",
+	"footnoteS": ["5.565"],
+	"radioBusinessS": [{
+		"business": "未划分",
+		"footnote": null
+	}]
+}
+]

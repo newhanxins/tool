@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>大规模矩形渲染ES5版</title>
+    <style>
+        canvas {
+            border: 1px solid #ccc;
+            cursor: grab;
+        }
+        .debug-panel {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: rgba(0,0,0,0.7);
+            color: #00ff00;
+            padding: 12px;
+            font-family: monospace;
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <canvas id="canvas"></canvas>
+    <div class="debug-panel">
+        <div>FPS: <span id="fps">0</span></div>
+        <div>Visible: <span id="visible-count">0</span></div>
+        <div>Memory: <span id="memory">N/A</span></div>
+    </div>
+
+    <script>
+        // ========= 初始化阶段 =========
+        var canvas = document.getElementById('canvas');
+        var ctx = canvas.getContext('2d');
+        var dpr = window.devicePixelRatio || 1;
+        // ========= 性能优化结构 =========
+        var viewport = {
+            x: 0, 
+            y: 0,
+            scale: 1,
+            minScale: 0.2,
+            maxScale: 5,
+            width: 800,
+            height: 500
+        };
+        // 高清适配
+        canvas.width = 800 * dpr;
+        canvas.height = 500 * dpr;
+        canvas.style.width = '800px';
+        canvas.style.height = '500px';
+        ctx.scale(dpr, dpr);
+
+        // ========= 数据生成 =========
+        var RECT_COUNT = 10000;
+        var rectangles = [];
+        for (var i = 0; i < RECT_COUNT; i++) {
+            rectangles.push({
+                id: i,
+                x: Math.random() * 4000,
+                y: Math.random() * 4000,
+                width: 30 + Math.random() * 70,
+                height: 30 + Math.random() * 70,
+                color: 'hsl(' + (Math.random()*360) + ',70%,50%)'
+            });
+        }
+
+        
+ 
+
+        // 离屏文字缓存
+        var textCache = {};
+        function cacheText(text) {
+            if (!textCache[text]) {
+                var cvs = document.createElement('canvas');
+                var tctx = cvs.getContext('2d');
+                tctx.font = '14px Arial';
+                var width = tctx.measureText(text).width + 10;
+                cvs.width = width;
+                cvs.height = 20;
+                tctx.fillStyle = '#fff';
+                tctx.textAlign = 'center';
+                tctx.fillText(text, width/2, 14);
+                textCache[text] = cvs;
+            }
+            return textCache[text];
+        }
+
+        // ========= 绘制逻辑 =========
+        function getVisibleRects() {
+            var invScale = 1 / viewport.scale;
+            var left = -viewport.x * invScale;
+            var right = (-viewport.x + viewport.width) * invScale;
+            var top = -viewport.y * invScale;
+            var bottom = (-viewport.y + viewport.height) * invScale;
+            
+            return rectangles.filter(function(rect) {
+                return rect.x < right && 
+                       rect.x + rect.width > left &&
+                       rect.y < bottom && 
+                       rect.y + rect.height > top;
+            });
+        }
+
+        function draw() {
+            ctx.clearRect(0, 0, viewport.width, viewport.height);
+            
+            var visibleRects = getVisibleRects();
+            document.getElementById('visible-count').textContent = visibleRects.length;
+
+            var colorMap = visibleRects.reduce(function(acc, rect) {
+                if (!acc[rect.color]) acc[rect.color] = [];
+                acc[rect.color].push(rect);
+                return acc;
+            }, {});
+            
+            ctx.save();
+            ctx.translate(viewport.x, viewport.y);
+            ctx.scale(viewport.scale, viewport.scale);
+            console.log("ddd",colorMap)
+            Object.keys(colorMap).forEach(function(color) {
+                ctx.fillStyle = color;
+                colorMap[color].forEach(function(rect) {
+                    ctx.fillRect(rect.x, rect.y, rect.width, rect.height);
+                    var textImg = cacheText(rect.id.toString());
+                    ctx.drawImage(textImg, 
+                        rect.x + rect.width/2 - textImg.width/2, 
+                        rect.y + rect.height/2 - 10
+                    );
+                });
+            });
+
+            ctx.restore();
+            requestAnimationFrame(draw);
+            //frameCounter();
+            frameCount++;
+        }
+
+        // ========= 交互逻辑 =========
+        var isDragging = false;
+        var lastPos = {x: 0, y: 0};
+
+        canvas.addEventListener('mousedown', function(e) {
+            isDragging = true;
+            lastPos = {x: e.offsetX, y: e.offsetY};
+            canvas.style.cursor = 'grabbing';
+        });
+
+        canvas.addEventListener('mousemove', function(e) {
+            if (!isDragging) return;
+            viewport.x += e.offsetX - lastPos.x;
+            viewport.y += e.offsetY - lastPos.y;
+            lastPos = {x: e.offsetX, y: e.offsetY};
+        });
+
+        canvas.addEventListener('mouseup', function() {
+            isDragging = false;
+            canvas.style.cursor = 'grab';
+        });
+
+        canvas.addEventListener('wheel', function(e) {
+            e.preventDefault();
+            var zoom = e.deltaY < 0 ? 1.1 : 0.9;
+            var newScale = Math.min(
+                viewport.maxScale, 
+                Math.max(viewport.minScale, viewport.scale * zoom)
+            );
+            
+            var mouseX = (e.offsetX - viewport.x) * (newScale / viewport.scale);
+            var mouseY = (e.offsetY - viewport.y) * (newScale / viewport.scale);
+            viewport.x = e.offsetX - mouseX;
+            viewport.y = e.offsetY - mouseY;
+            viewport.scale = newScale;
+        });
+
+        // ========= 性能监控 =========
+        // 新增内存监控模块‌:ml-citation{ref="3" data="citationList"}
+        var memSupported = !!window.performance && !!performance.memory;
+        var frameCount = 0;
+        var lastFpsUpdate = 0;
+        var lastUpdate = Date.now();
+        /**
+         * 更新性能面板数据‌:ml-citation{ref="1,3" data="citationList"}
+         */
+        function updateStats() {
+            var now = Date.now();
+            var delta = now - lastUpdate;
+            
+            // FPS计算（每秒帧数）‌:ml-citation{ref="1" data="citationList"}
+            if (delta >= 1000) {
+                document.getElementById('fps').textContent = Math.round(frameCount * 1000 / delta);
+                frameCount = 0;
+                lastUpdate = now;
+                
+                // 内存使用量统计‌:ml-citation{ref="2" data="citationList"}
+                if (!!window.performance && !!performance.memory) {
+                    var mem = performance.memory;
+                    var usedMB = (mem.usedJSHeapSize / 1048576).toFixed(2);
+                    var totalMB = (mem.jsHeapSizeLimit / 1048576).toFixed(2);
+                    document.getElementById('memory').textContent = usedMB + 'MB / ' + totalMB + 'MB';
+                }
+            }
+            requestAnimationFrame(updateStats);
+        }
+        function frameCounter() {
+            frameCount++;
+            var now = performance.now();
+            if (now - lastFpsUpdate >= 1000) {
+                document.getElementById('fps').textContent = frameCount;
+                frameCount = 0;
+                lastFpsUpdate = now;
+            }
+        }
+
+        // 启动
+        draw();
+        updateStats();
+    </script>
+</body>
+</html>

@@ -1,0 +1,320 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenLayers三点测角工具</title>
+    <script src="https://openlayers.org/en/v5.3.0/build/ol.js"></script>
+  <link href="https://openlayers.org/en/v5.3.0/css/ol.css" rel="stylesheet">
+  
+    <style>
+        #map {
+            width: 100%;
+            height: 600px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .control-panel {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        button {
+            padding: 10px 20px;
+            background: linear-gradient(135deg, #4285f4, #34a853);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        button.active {
+            background: linear-gradient(135deg, #0d47a1, #1b5e20);
+        }
+        .angle-display {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255,255,255,0.9);
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+        }
+    </style>
+</head>
+<body>
+    <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+        <h1 style="color: #4285f4;">OpenLayers三点测角工具</h1>
+        <div class="control-panel">
+            <button id="angle-btn">测角模式</button>
+            <button id="clear-btn">清除测量</button>
+        </div>
+        <div id="map"></div>
+        <div id="angle-display" class="angle-display" style="display: none;">
+            <strong>当前角度：</strong><span id="angle-value">0</span>°
+        </div>
+    </div>
+
+    <script>
+        // 初始化地图
+        const map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({
+            source: new ol.source.XYZ({
+                url: 'http://wprd0{1-4}.is.autonavi.com/appmaptile?lang=zh_cn&size=1&style=7&x={x}&y={y}&z={z}'
+            })
+        })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([116.404, 39.915]),
+                zoom: 10
+            })
+        });
+
+        // 测量图层
+        const vectorSource = new ol.source.Vector();
+        const vectorLayer = new ol.layer.Vector({
+            source: vectorSource,
+            style: function(feature) {
+                const styles = [
+                    new ol.style.Style({
+                        stroke: new ol.style.Stroke({
+                            color: '#ff9800',
+                            width: 3
+                        }),
+                        image: new ol.style.Circle({
+                            radius: 6,
+                            fill: new ol.style.Fill({
+                                color: '#ff9800'
+                            }),
+                            stroke: new ol.style.Stroke({
+                                color: '#fff',
+                                width: 2
+                            })
+                        })
+                    })
+                ];
+
+                // 角度测量特殊样式
+                if (feature.get('isAngle')) {
+                    console.log("isangle")
+                    const coords = feature.getGeometry().getCoordinates();
+                    const p1 = coords[0], p2 = coords[1], p3 = coords[2];
+                    const angle = feature.get('angle');
+                    
+                    // 计算弧线半径
+                    const abDist = Math.sqrt(Math.pow(p1[0]-p2[0], 2) + Math.pow(p1[1]-p2[1], 2));
+                    const bcDist = Math.sqrt(Math.pow(p3[0]-p2[0], 2) + Math.pow(p3[1]-p2[1], 2));
+                    const radius = Math.min(abDist, bcDist) * 0.4;
+                    
+                    // 计算角度范围
+                    const startAngle = Math.atan2(p1[1]-p2[1], p1[0]-p2[0]);
+                    const endAngle = Math.atan2(p3[1]-p2[1], p3[0]-p2[0]);
+                    
+                    // 绘制弧线
+                    const arcPoints = [];
+                    const steps = 20;
+                    for (let i = 0; i <= steps; i++) {
+                        const theta = startAngle + (endAngle - startAngle) * (i / steps);
+                        arcPoints.push([
+                            p2[0] + radius * Math.cos(theta),
+                            p2[1] + radius * Math.sin(theta)
+                        ]);
+                    }
+                    
+                    styles.push(new ol.style.Style({
+                        geometry: new ol.geom.LineString(arcPoints),
+                        stroke: new ol.style.Stroke({
+                            color: 'rgba(255, 152, 0, 0.7)',
+                            width: 2,
+                            lineDash: [5, 5]
+                        })
+                    }));
+                    
+                    // 添加角度标签
+                    const midPoint = arcPoints[Math.floor(steps/2)];
+                    styles.push(new ol.style.Style({
+                        geometry: new ol.geom.Point(midPoint),
+                        text: new ol.style.Text({
+                            text: angle + '°',
+                            font: 'bold 16px sans-serif',
+                            fill: new ol.style.Fill({
+                                color: '#ff5722'
+                            }),
+                            offsetY: -10
+                        })
+                    }));
+                    
+                    // 添加ABC点标签
+                    styles.push(
+                        new ol.style.Style({
+                            geometry: new ol.geom.Point(p1),
+                            text: new ol.style.Text({
+                                text: 'A',
+                                font: 'bold 14px sans-serif',
+                                fill: new ol.style.Fill({
+                                    color: '#333'
+                                }),
+                                offsetY: -15
+                            })
+                        }),
+                        new ol.style.Style({
+                            geometry: new ol.geom.Point(p2),
+                            text: new ol.style.Text({
+                                text: 'B',
+                                font: 'bold 14px sans-serif',
+                                fill: new ol.style.Fill({
+                                    color: '#333'
+                                }),
+                                offsetY: -15
+                            })
+                        }),
+                        new ol.style.Style({
+                            geometry: new ol.geom.Point(p3),
+                            text: new ol.style.Text({
+                                text: 'C',
+                                font: 'bold 14px sans-serif',
+                                fill: new ol.style.Fill({
+                                    color: '#333'
+                                }),
+                                offsetY: -15
+                            })
+                        })
+                    );
+                }
+                
+                return styles;
+            }
+        });
+        map.addLayer(vectorLayer);
+
+        // 角度计算函数（顺时针0-360度）
+        function calculateAngle(p1, p2, p3) {
+            // 转换为经纬度坐标
+            const lonlat1 = ol.proj.toLonLat(p1);
+            const lonlat2 = ol.proj.toLonLat(p2);
+            const lonlat3 = ol.proj.toLonLat(p3);
+            
+            // 计算向量
+            const v1 = [lonlat1[0] - lonlat2[0], lonlat1[1] - lonlat2[1]];
+            const v2 = [lonlat3[0] - lonlat2[0], lonlat3[1] - lonlat2[1]];
+            
+            // 计算点积和叉积
+            const dot = v1[0] * v2[0] + v1[1] * v2[1];
+            const cross = v1[0] * v2[1] - v1[1] * v2[0];
+            
+            // 计算向量模长
+            const mag1 = Math.sqrt(v1[0] * v1[0] + v1[1] * v1[1]);
+            const mag2 = Math.sqrt(v2[0] * v2[0] + v2[1] * v2[1]);
+            
+            if (mag1 * mag2 === 0) return 0;
+            
+            // 计算角度（弧度）
+            let angleRad = Math.acos(Math.min(1, Math.max(-1, dot / (mag1 * mag2))));
+            let angleDeg = angleRad * 180 / Math.PI;
+            
+            // 通过叉积判断顺时针/逆时针
+            if (cross < 0) {
+                angleDeg = 360 - angleDeg; // 顺时针角度
+            }
+            console.log("角度计算",angleDeg)
+            return angleDeg.toFixed(2);
+        }
+
+        let drawInteraction, sketch;
+        document.getElementById('angle-btn').addEventListener('click', function() {
+            if (drawInteraction) {
+                map.removeInteraction(drawInteraction);
+            }
+            
+            vectorSource.clear();
+            document.getElementById('angle-display').style.display = 'none';
+            this.classList.add('active');
+            
+            drawInteraction = new ol.interaction.Draw({
+                source: vectorSource,
+                type: 'LineString',
+                maxPoints: 3,
+                style: new ol.style.Style({
+                    stroke: new ol.style.Stroke({
+                        color: 'rgba(255, 152, 0, 0.7)',
+                        width: 3
+                    }),
+                    image: new ol.style.Circle({
+                        radius: 6,
+                        fill: new ol.style.Fill({
+                            color: 'rgba(255, 152, 0, 0.7)'
+                        })
+                    })
+                })
+            });
+
+            map.addInteraction(drawInteraction);
+
+            drawInteraction.on('drawstart', function(evt) {
+                sketch = evt.feature;
+                vectorSource.clear();
+                document.getElementById('angle-display').style.display = 'block';
+                // 实时更新角度显示
+                sketch.getGeometry().on('change', function() {
+                    const coords = sketch.getGeometry().getCoordinates();
+                    if (coords.length >= 2) {
+                        // 临时计算两点间角度
+                        if (coords.length === 2) {
+                            const angle = calculateAngle(coords[0], coords[1], [
+                                coords[1][0] + 1, 
+                                coords[1][1]
+                            ]);
+                            document.getElementById('angle-value').textContent = angle;
+                        } else if (coords.length === 3) {
+                            const angle = calculateAngle(coords[0], coords[1], coords[2]);
+                            document.getElementById('angle-value').textContent = angle;
+                        }
+                    }
+                });
+            });
+            drawInteraction.on('drawend', function(evt) {
+                finishAngleMeasurement(sketch.getGeometry().getCoordinates());
+            })
+            
+            
+            // 双击结束测量
+            map.on('dblclick', function() {
+                if (sketch && sketch.getGeometry().getCoordinates().length >= 3) {
+                    //finishAngleMeasurement(sketch.getGeometry().getCoordinates());
+                    drawInteraction.finishDrawing()
+                }
+            });
+            
+            function finishAngleMeasurement(coords) {
+                const angle = calculateAngle(coords[0], coords[1], coords[2]);
+                
+                // 创建最终的角度测量结果
+                const angleFeature = new ol.Feature({
+                    geometry: new ol.geom.LineString(coords),
+                    isAngle: true,
+                    angle: angle
+                });
+                console.log("结束")
+                vectorSource.clear();
+                vectorSource.addFeature(angleFeature);
+                map.removeInteraction(drawInteraction);
+                document.getElementById('angle-btn').classList.remove('active');
+                document.getElementById('angle-display').style.display = 'none';
+            }
+        });
+
+        document.getElementById('clear-btn').addEventListener('click', function() {
+            vectorSource.clear();
+            document.getElementById('angle-btn').classList.remove('active');
+            document.getElementById('angle-display').style.display = 'none';
+            if (drawInteraction) {
+                map.removeInteraction(drawInteraction);
+            }
+        });
+    </script>
+</body>
+</html>

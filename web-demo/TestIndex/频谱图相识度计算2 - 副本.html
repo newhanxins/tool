@@ -1,0 +1,835 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>频谱分析系统 - 80MHz频段相似性分组</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+    <script src="https://cdn.jsdelivr.net/npm/lodash@4.17.21/lodash.min.js"></script>
+    <!-- 引入 ECharts -->
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.3.3/dist/echarts.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a2a6c, #2c3e50);
+            color: #ecf0f1;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            padding: 20px 0;
+            margin-bottom: 30px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: 15px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.8;
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        .control-panel {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .control-group {
+            display: flex;
+            flex-direction: column;
+            min-width: 250px;
+        }
+        
+        label {
+            margin-bottom: 8px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            color: #3498db;
+        }
+        
+        input[type="range"], input[type="number"] {
+            padding: 10px 15px;
+            border-radius: 8px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1px solid #3498db;
+            color: white;
+            font-size: 1rem;
+        }
+        
+        input[type="range"] {
+            width: 100%;
+            height: 8px;
+            accent-color: #2ecc71;
+        }
+        
+        button {
+            background: linear-gradient(90deg, #3498db, #2ecc71);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.4);
+        }
+        
+        button:active {
+            transform: translateY(1px);
+        }
+        
+        .chart-container {
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            height: 500px;
+        }
+        
+        canvas {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        
+        .results-container {
+            display: flex;
+            gap: 25px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .groups-container, .details-container {
+            flex: 1;
+            min-width: 300px;
+            background: rgba(0, 0, 0, 0.25);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-height: 400px;
+            overflow-y: auto;
+        }
+        
+        .results-title {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #2ecc71;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .results-title i {
+            font-size: 1.6rem;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+        }
+        
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        th {
+            background: rgba(52, 152, 219, 0.2);
+            color: #3498db;
+            font-weight: 600;
+        }
+        
+        tr:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+        
+        .group-color {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            margin-right: 10px;
+            vertical-align: middle;
+        }
+        
+        .stats {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .stat-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            min-width: 200px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin: 10px 0;
+            color: #2ecc71;
+        }
+        
+        .stat-label {
+            font-size: 1.1rem;
+            color: #3498db;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+        
+        @media (max-width: 768px) {
+            .results-container {
+                flex-direction: column;
+            }
+            
+            .controls {
+                flex-direction: column;
+                align-items: stretch;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>频谱分析系统</h1>
+            <p class="subtitle">1MHz - 5GHz频率范围分析 | 80MHz频段相似性分组 | 余弦相似度算法</p>
+        </header>
+        
+        <div class="control-panel">
+            <div class="controls">
+                <div class="control-group">
+                    <label for="similarityThreshold">相似度阈值 (0-1):</label>
+                    <input type="range" id="similarityThreshold" min="0" max="1" step="0.01" value="0.92">
+                    <input type="number" id="thresholdValue" min="0" max="1" step="0.01" value="0.92" style="margin-top: 10px;">
+                </div>
+                
+                <div class="control-group">
+                    <label for="noiseLevel">信号噪声级别:</label>
+                    <input type="range" id="noiseLevel" min="0" max="20" step="1" value="8">
+                </div>
+                
+                <div class="control-group">
+                    <label>&nbsp;</label>
+                    <button id="analyzeBtn">分析频谱</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="spectrumChart"></canvas>
+            
+        </div>
+        <span class="zoom-level">缩放级别: <span id="zoomValue">100%</span></span>
+        <!-- 图表容器 -->
+        <div id="spectrumCharts" style="width: 100%; height: 500px;"></div>
+        <div class="stats">
+            <div class="stat-card">
+                <div class="stat-label">总频段数量</div>
+                <div class="stat-value" id="totalBands">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">相似分组数量</div>
+                <div class="stat-value" id="groupCount">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">最大分组频段数</div>
+                <div class="stat-value" id="maxGroup">0</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-label">平均相似度</div>
+                <div class="stat-value" id="avgSimilarity">0</div>
+            </div>
+        </div>
+        
+        <div class="results-container">
+            <div class="groups-container">
+                <h2 class="results-title">频段分组结果</h2>
+                <table id="groupsTable">
+                    <thead>
+                        <tr>
+                            <th>分组ID</th>
+                            <th>频段数量</th>
+                            <th>起始频率</th>
+                            <th>结束频率</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            
+            <div class="details-container">
+                <h2 class="results-title">频段详细信息</h2>
+                <table id="detailsTable">
+                    <thead>
+                        <tr>
+                            <th>起始频率</th>
+                            <th>结束频率</th>
+                            <th>平均强度</th>
+                            <th>分组</th>
+                        </tr>
+                    </thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </div>
+        
+        <footer>
+            <p>频谱分析系统 &copy; 2025 | 1MHz-5GHz范围 | 80MHz频段相似性分组</p>
+        </footer>
+    </div>
+    
+    <script>
+        // 颜色集用于不同分组
+        const GROUP_COLORS = [
+            'rgba(255, 99, 132, 0.7)',
+            'rgba(54, 162, 235, 0.7)',
+            'rgba(255, 206, 86, 0.7)',
+            'rgba(75, 192, 192, 0.7)',
+            'rgba(153, 102, 255, 0.7)',
+            'rgba(255, 159, 64, 0.7)',
+            'rgba(199, 199, 199, 0.7)',
+            'rgba(83, 102, 255, 0.7)',
+            'rgba(40, 159, 64, 0.7)',
+            'rgba(210, 99, 132, 0.7)'
+        ];
+        
+        // DOM 元素
+        const similarityThreshold = document.getElementById('similarityThreshold');
+        const thresholdValue = document.getElementById('thresholdValue');
+        const noiseLevel = document.getElementById('noiseLevel');
+        const analyzeBtn = document.getElementById('analyzeBtn');
+        const spectrumChart = document.getElementById('spectrumChart');
+        const groupsTable = document.querySelector('#groupsTable tbody');
+        const detailsTable = document.querySelector('#detailsTable tbody');
+        const totalBandsElem = document.getElementById('totalBands');
+        const groupCountElem = document.getElementById('groupCount');
+        const maxGroupElem = document.getElementById('maxGroup');
+        const avgSimilarityElem = document.getElementById('avgSimilarity');
+        
+        // 图表变量
+        let chart = null;
+        
+        // 初始化阈值显示同步
+        thresholdValue.value = similarityThreshold.value;
+        similarityThreshold.addEventListener('input', function() {
+            thresholdValue.value = this.value;
+        });
+        
+        thresholdValue.addEventListener('change', function() {
+            similarityThreshold.value = this.value;
+            analyzeSpectrum();
+        });
+        
+        // 生成模拟频谱数据 (1MHz-5GHz)
+        function generateSpectrumData() {
+            const data = [];
+            const minFreq = 1; // 1MHz
+            const maxFreq = 5000; // 5GHz = 5000MHz
+            const step = 0.1; // 步长0.1MHz
+            const noise = parseInt(noiseLevel.value);
+            
+            // 创建一些频率特征
+            const featureFrequencies = [
+                {center: 800, width: 150, strength: 80},
+                {center: 1800, width: 120, strength: 90},
+                {center: 2400, width: 100, strength: 85},
+                {center: 3500, width: 200, strength: 95},
+                {center: 4800, width: 180, strength: 75}
+            ];
+            
+            for(let freq = minFreq; freq <= maxFreq; freq += step) {
+                // 基础信号强度
+                let strength = 30 + Math.sin(freq/150) * 20 + Math.sin(freq/400) * 15;
+                
+                // 添加特征
+                featureFrequencies.forEach(feat => {
+                    const dist = Math.abs(freq - feat.center);
+                    if(dist < feat.width) {
+                        const factor = (feat.width - dist) / feat.width;
+                        strength += factor * feat.strength * (0.8 + 0.4 * Math.random());
+                    }
+                });
+                
+                // 添加随机噪声
+                strength += Math.random() * noise - noise/2;
+                
+                // 确保在合理范围内
+                strength = Math.max(10, Math.min(100, strength));
+                
+                data.push({ freq, strength });
+            }
+            return data;
+        }
+        
+        // 计算余弦相似度
+        function cosineSimilarity(a, b) {
+            const dotProduct = a.reduce((sum, val, i) => sum + val * b[i], 0);
+            const magnitudeA = Math.sqrt(a.reduce((sum, val) => sum + val * val, 0));
+            const magnitudeB = Math.sqrt(b.reduce((sum, val) => sum + val * val, 0));
+            return dotProduct / (magnitudeA * magnitudeB);
+        }
+        
+        // 按80MHz带宽分组并计算相似度
+        function groupSimilarBands1(spectrumData, threshold) {
+            const bandwidth = 80; // 80MHz带宽
+            const bands = [];
+            
+            // 计算每个80MHz段的点数（步长0.1MHz，所以800个点）
+            const pointsPerBand = bandwidth * 10;
+            
+            // 按80MHz分段（确保没有重叠）
+            for(let i = 0; i < spectrumData.length; i += pointsPerBand) {
+                // 确保不会超出数组范围
+                const endIndex = Math.min(i + pointsPerBand, spectrumData.length);
+                const band = spectrumData.slice(i, endIndex);
+                
+                // 只添加完整的80MHz段（跳过不足的部分）
+                if (band.length >= pointsPerBand * 0.95) {
+                    bands.push(band);
+                }
+            }
+            
+            // 计算相似度并分组
+            const similarityGroups = [];
+            const similarities = [];
+            
+            bands.forEach((band, i) => {
+                const strengths = band.map(d => d.strength);
+                let added = false;
+                
+                // 检查是否与已有组相似
+                for(let group of similarityGroups) {
+                    const groupStrengths = group[0].map(d => d.strength);
+                    const similarity = cosineSimilarity1(strengths, groupStrengths);
+                    similarities.push(similarity);
+                    
+                    if(similarity >= threshold) {
+                        group.push(band);
+                        added = true;
+                        break;
+                    }
+                }
+                
+                // 如果没有相似组，创建新组
+                if(!added) {
+                    similarityGroups.push([band]);
+                }
+            });
+            
+            return {
+                groups: similarityGroups,
+                bands: bands,
+                similarities: similarities
+            };
+        }
+        
+
+
+
+        // 修改为皮尔逊相关系数计算
+        function pearsonCorrelation(a, b) {
+            // 计算均值
+            const meanA = a.reduce((sum, val) => sum + val, 0) / a.length;
+            const meanB = b.reduce((sum, val) => sum + val, 0) / b.length;
+            
+            let covariance = 0;
+            let stdDevA = 0;
+            let stdDevB = 0;
+            
+            for(let i = 0; i < a.length; i++) {
+                const devA = a[i] - meanA;
+                const devB = b[i] - meanB;
+                covariance += devA * devB;
+                stdDevA += devA * devA;
+                stdDevB += devB * devB;
+            }
+            
+            // 避免除以零
+            if(stdDevA === 0 || stdDevB === 0) return 0;
+            
+            return covariance / (Math.sqrt(stdDevA) * Math.sqrt(stdDevB));
+        }
+
+        // 修改分组函数中的相似度计算部分
+        function groupSimilarBands(spectrumData, threshold) {
+            const bandwidth = 80;
+            const bands = [];
+            const pointsPerBand = bandwidth * 10;
+            
+            for(let i = 0; i < spectrumData.length; i += pointsPerBand) {
+                const endIndex = Math.min(i + pointsPerBand, spectrumData.length);
+                const band = spectrumData.slice(i, endIndex);
+                if (band.length >= pointsPerBand * 0.95) {
+                    bands.push(band);
+                }
+            }
+            
+            const similarityGroups = [];
+            const similarities = [];
+            
+            bands.forEach((band, i) => {
+                const strengths = band.map(d => d.strength);
+                let added = false;
+                
+                for(let group of similarityGroups) {
+                    const groupStrengths = group[0].map(d => d.strength);
+                    // 使用皮尔逊相关系数替代余弦相似度
+                    const similarity = pearsonCorrelation(strengths, groupStrengths);
+                    similarities.push(similarity);
+                    
+                    if(similarity >= threshold) {
+                        group.push(band);
+                        added = true;
+                        break;
+                    }
+                }
+                
+                if(!added) {
+                    similarityGroups.push([band]);
+                }
+            });
+            
+            return {
+                groups: similarityGroups,
+                bands: bands,
+                similarities: similarities
+            };
+        }
+
+        // 渲染结果表格
+        function renderResults(groups, bands) {
+            // 清空表格
+            groupsTable.innerHTML = '';
+            detailsTable.innerHTML = '';
+            
+            // 渲染分组表格
+            groups.forEach((group, groupIndex) => {
+                const firstBand = group[0];
+                const startFreq = firstBand[0].freq;
+                const endFreq = firstBand[firstBand.length-1].freq;
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td><span class="group-color" style="background: ${GROUP_COLORS[groupIndex % GROUP_COLORS.length]}"></span>${groupIndex+1}</td>
+                    <td>${group.length}</td>
+                    <td>${startFreq.toFixed(1)}MHz</td>
+                    <td>${endFreq.toFixed(1)}MHz</td>
+                `;
+                groupsTable.appendChild(row);
+            });
+            
+            // 渲染详细信息表格
+            bands.forEach((band, bandIndex) => {
+                const startFreq = band[0].freq;
+                const endFreq = band[band.length-1].freq;
+                const avgStrength = _.meanBy(band, 'strength').toFixed(2);
+                
+                // 查找所属分组
+                let groupIndex = -1;
+                groups.forEach((group, gIndex) => {
+                    if (group.some(gBand => gBand === band)) {
+                        groupIndex = gIndex;
+                    }
+                });
+                
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${startFreq.toFixed(1)}MHz</td>
+                    <td>${endFreq.toFixed(1)}MHz</td>
+                    <td>${avgStrength}</td>
+                    <td><span class="group-color" style="background: ${GROUP_COLORS[groupIndex % GROUP_COLORS.length]}"></span>${groupIndex+1}</td>
+                `;
+                detailsTable.appendChild(row);
+            });
+        }
+        
+        // 更新统计信息
+        function updateStats(groups, similarities) {
+            totalBandsElem.textContent = groups.reduce((sum, group) => sum + group.length, 0);
+            groupCountElem.textContent = groups.length;
+            maxGroupElem.textContent = _.max(groups.map(group => group.length)) || 0;
+            avgSimilarityElem.textContent = similarities.length > 0 ? 
+                (_.sum(similarities) / similarities.length).toFixed(3) : '0';
+        }
+        
+        // 绘制频谱图
+        function drawSpectrumChart(spectrumData, groups) {
+            console.log(spectrumData,groups);
+            const ctx = spectrumChart.getContext('2d');
+            
+            // 如果已有图表，先销毁
+            if (chart) {
+                chart.destroy();
+            }
+            
+            // 准备数据集
+            const datasets = [];
+            
+            // 添加基础频谱线
+            datasets.push({
+                label: '信号强度',
+                data: spectrumData.map(d => d.strength),
+                borderColor: 'rgba(75, 192, 192, 0.5)',
+                borderWidth: 1,
+                pointRadius: 0,
+                tension: 0.1
+            });
+            
+            // 为每个分组添加背景区域
+            groups.forEach((group, groupIndex) => {
+                group.forEach(band => {
+                    const startIndex = spectrumData.indexOf(band[0]);
+                    const endIndex = spectrumData.indexOf(band[band.length-1]);
+                    
+                    datasets.push({
+                        label: `分组 ${groupIndex+1}`,
+                        data: spectrumData.map((d, i) => 
+                            i >= startIndex && i <= endIndex ? d.strength : null
+                        ),
+                        backgroundColor: GROUP_COLORS[groupIndex % GROUP_COLORS.length],
+                        borderColor: GROUP_COLORS[groupIndex % GROUP_COLORS.length],
+                        borderWidth: 0,
+                        pointRadius: 0,
+                        fill: true,
+                        tension: 0.1
+                    });
+                });
+            });
+            // 配置缩放插件
+            const zoomPlugin = {
+                id: 'zoomPlugin',
+                afterDraw: function(chart) {
+                    // 更新缩放值显示
+                    document.getElementById('zoomValue').textContent = 
+                        `${Math.round(zoomLevel * 100)}%`;
+                }
+            };
+            // 创建新图表
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: spectrumData.map(d => d.freq.toFixed(1) + 'MHz'),
+                    datasets: datasets
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        x: {
+                            title: { 
+                                display: true, 
+                                text: '频率 (MHz)',
+                                color: '#ecf0f1'
+                            },
+                            min: 1,
+                            max: 5000,
+                            ticks: {
+                                color: '#ecf0f1',
+                                maxRotation: 45,
+                                minRotation: 45,
+                                callback: function(value, index, values) {
+                                    // 只显示部分标签以避免拥挤
+                                    return index % 10 === 0 ? value : '';
+                                }
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        },
+                        y: {
+                            title: { 
+                                display: true, 
+                                text: '信号强度',
+                                color: '#ecf0f1'
+                            },
+                            min: 0,
+                            max: 100,
+                            ticks: {
+                                color: '#ecf0f1'
+                            },
+                            grid: {
+                                color: 'rgba(255, 255, 255, 0.1)'
+                            }
+                        }
+                    },
+                    plugins: {
+                        zoom: {
+                            zoom: {
+                                wheel: { enabled: true },
+                                pinch: { enabled: true },
+                                mode: 'xy',
+                                onZoom: ({ chart }) => {
+                                    // 更新缩放级别
+                                    const scale = chart.getZoomLevel();
+                                    zoomLevel = Math.max(0.1, Math.min(scale, 5));
+                                }
+                            },
+                            pan: {
+                                enabled: true,
+                                mode: 'xy',
+                                threshold: 10
+                            }
+                        },
+                        legend: {
+                            labels: {
+                                color: '#ecf0f1',
+                                boxWidth: 12,
+                                padding: 20
+                            }
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    return `频率: ${context.label} | 强度: ${context.raw}`;
+                                }
+                            }
+                        }
+                    },
+                    plugins: [zoomPlugin],
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    }
+                }
+            });
+
+
+
+            // 设置图表
+            const charts = echarts.init(document.getElementById('spectrumCharts'));
+            const options = {
+                title: {
+                    text: '80MHz Spectrum Grouping'
+                },
+                tooltip: {
+                    trigger: 'axis'
+                },
+                xAxis: {
+                    type: 'value',
+                    name: 'Frequency (MHz)',
+                    min: 1,
+                    max: 1000,
+                    axisLabel: {
+                        formatter: '{value} MHz'
+                    }
+                },
+                yAxis: {
+                    type: 'value',
+                    name: '强度'
+                },
+                series: [{
+                    data: spectrumData,
+                    type: 'line',
+                    smooth: true,  // 平滑曲线
+                    lineStyle: {
+                        color: '#1f77b4'
+                    }
+                }],
+                dataZoom: [
+                    {
+                        type: 'inside',  // 支持缩放
+                        start: 0,
+                        end: 500
+                    },
+                    {
+                        type: 'slider',  // 支持拖动
+                        show: true,
+                        bottom: 10,
+                        start: 0,
+                        end: 100
+                    }
+                ]
+            };
+
+            charts.setOption(options);
+        }
+        
+        // 分析频谱主函数
+        function analyzeSpectrum() {
+            const spectrumData = generateSpectrumData();
+            const threshold = parseFloat(thresholdValue.value);
+            const {groups, bands, similarities} = groupSimilarBands(spectrumData, threshold);
+            
+            renderResults(groups, bands);
+            updateStats(groups, similarities);
+            drawSpectrumChart(spectrumData, groups);
+        }
+        
+        // 事件监听
+        analyzeBtn.addEventListener('click', analyzeSpectrum);
+        noiseLevel.addEventListener('change', analyzeSpectrum);
+        
+        // 初始加载
+        analyzeSpectrum();
+    </script>
+</body>
+</html>

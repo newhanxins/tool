@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>频率过滤器性能对比测试</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .container { max-width: 1000px; margin: 20px auto; }
+        .chart-box { padding: 20px; border: 1px solid #eee; margin: 20px 0; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+        th, td { padding: 12px; border: 1px solid #ddd; text-align: center; }
+        button { padding: 10px 20px; background: #007bff; color: white; border: none; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>性能对比测试 (1万条数据)</h2>
+        <button onclick="runTest()">运行性能测试</button>
+        <button onclick="optimizedFilter.releaseResults(currentResults)">释放优化方案内存</button>
+
+        <div class="chart-box">
+            <canvas id="performanceChart"></canvas>
+        </div>
+
+        <table>
+            <tr>
+                <th>指标</th>
+                <th>原生方案</th>
+                <th>优化方案</th>
+                <th>提升比例</th>
+            </tr>
+            <tr>
+                <td>查询耗时</td>
+                <td id="nativeTime">-</td>
+                <td id="optimizedTime">-</td>
+                <td id="timeImprove">-</td>
+            </tr>
+            <tr>
+                <td>内存占用</td>
+                <td id="nativeMem">-</td>
+                <td id="optimizedMem">-</td>
+                <td id="memImprove">-</td>
+            </tr>
+        </table>
+    </div>
+
+<script>
+// 测试数据生成
+function generateTestData(size) {
+    return Array.from({ length: size }, (_, i) => ({
+        id: i,
+        start_freq: Math.random() * 1000,
+        end_freq: Math.random() * 1000 + 1000 // 确保end_freq > start_freq
+    }));
+}
+
+// 原生方案
+class NativeFrequencyFilter {
+    constructor(data) {
+        this.data = data;
+    }
+
+    filter(start, end) {
+        return this.data.filter(item => 
+            item.start_freq <= end && item.end_freq >= start
+        );
+    }
+}
+
+// 优化方案
+class OptimizedFrequencyFilter {
+    constructor(rawData) {
+        this.rawData = this._preprocess(rawData);
+        this.indexArray = new Float64Array(rawData.length);
+        this.pool = new Array(1000).fill(null);
+        rawData.forEach((item, i) => {
+            this.indexArray[i] = item.start_freq;
+        });
+    }
+
+    _preprocess(data) {
+        return [...data].sort((a, b) => a.start_freq - b.start_freq);
+    }
+
+    filter(filterStart, filterEnd) {
+        const startIdx = this._binarySearch(filterEnd);
+        const results = [];
+        for (let i = startIdx; i < this.rawData.length; i++) {
+            const item = this.rawData[i];
+            if (item.start_freq > filterEnd) break;
+            if (item.end_freq >= filterStart) {
+                const obj = this.pool.pop() || {};
+                obj.id = item.id;
+                obj.start_freq = item.start_freq;
+                obj.end_freq = item.end_freq;
+                results.push(obj);
+            }
+        }
+        return results;
+    }
+
+    releaseResults(results) {
+        results.forEach(obj => {
+            if (!this.pool.includes(obj) && this.pool.length < 1000) {
+                this.pool.push(obj);
+            }
+        });
+    }
+
+    _binarySearch(target) {
+        let low = 0, high = this.indexArray.length - 1;
+        while (low <= high) {
+            const mid = (low + high) >>> 1;
+            if (this.indexArray[mid] < target) {
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+        return low;
+    }
+}
+
+// 性能测试逻辑
+let optimizedFilter, currentResults;
+const testData = generateTestData(100000);
+
+function formatMemory(bytes) {
+    return (bytes / 1024 / 1024).toFixed(2) + ' MB';
+}
+
+async function runTest() {
+    // 内存基准测试
+    let memBefore = window.performance.memory.usedJSHeapSize;
+    // 优化方案测试
+    const optimizedStart = performance.now();
+    optimizedFilter = new OptimizedFrequencyFilter(testData);
+    currentResults = optimizedFilter.filter(500, 1500);
+    const optimizedTime = performance.now() - optimizedStart;
+    // 原生方案测试
+    const nativeStart = performance.now();
+    const nativeFilter = new NativeFrequencyFilter(testData);
+    const nativeResult = nativeFilter.filter(500, 1500);
+    const nativeTime = performance.now() - nativeStart;
+    
+    
+    
+    // 内存计算
+    const memAfter = window.performance.memory.usedJSHeapSize;
+    const nativeMem = memAfter - memBefore;
+    
+    // 更新界面
+    document.getElementById('nativeTime').textContent = nativeTime.toFixed(2) + 'ms';
+    document.getElementById('optimizedTime').textContent = optimizedTime.toFixed(2) + 'ms';
+    document.getElementById('timeImprove').textContent = 
+        ((1 - optimizedTime / nativeTime) * 100).toFixed(1) + '%';
+
+    document.getElementById('nativeMem').textContent = formatMemory(nativeMem);
+    document.getElementById('optimizedMem').textContent = formatMemory(optimizedFilter.indexArray.byteLength);
+    document.getElementById('memImprove').textContent = 
+        ((1 - optimizedFilter.indexArray.byteLength / nativeMem) * 100).toFixed(1) + '%';
+
+    // 更新图表
+    updateChart(nativeTime, optimizedTime, nativeMem, optimizedFilter.indexArray.byteLength);
+}
+
+// 图表初始化
+const ctx = document.getElementById('performanceChart').getContext('2d');
+const chart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['查询耗时 (ms)', '内存占用 (MB)'],
+        datasets: [{
+            label: '原生方案',
+            data: [],
+            backgroundColor: 'rgba(255, 99, 132, 0.5)'
+        }, {
+            label: '优化方案',
+            data: [],
+            backgroundColor: 'rgba(54, 162, 235, 0.5)'
+        }]
+    },
+    options: {
+        scales: {
+            y: { beginAtZero: true }
+        }
+    }
+});
+
+function updateChart(timeNative, timeOpt, memNative, memOpt) {
+    chart.data.datasets[0].data = [timeNative, memNative / 1024 / 1024];
+    chart.data.datasets[1].data = [timeOpt, memOpt / 1024 / 1024];
+    chart.update();
+}
+</script>
+</body>
+</html>
