@@ -1,0 +1,11 @@
+# 默认账号配置
+Host github.com
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa
+
+# 新账号配置
+Host github-new
+  HostName github.com
+  User git
+  IdentityFile ~/.ssh/id_rsa_new
