@@ -10,6 +10,7 @@
 ## 2. 状态查看
 - `git status`：查看工作区状态
 - `git log`：查看提交历史
+- `git log --oneline`：查看最近提交记录
 - `git diff`：查看未暂存的修改
 - `git diff --cached`：查看已暂存但未提交的修改
 - `git stash list`：列出所有暂存的修改
@@ -29,6 +30,7 @@
 - `git commit -m "msg"`：提交暂存区文件
 - `git rm <file>`：从仓库中删除文件
 - `git mv <old> <new>`：重命名文件
+- `git commit --amend --no-edit`:修改最近提交信息
 - `git restore --staged <file>`：还原暂存区文件到工作区
 - `git checkout -- <file>`：还原工作区文件到最近一次提交
 - `git checkout <commit> <file>`：回退文件到特定版本
@@ -71,6 +73,32 @@
 - `git config --global --unset user.email`:删除全局邮箱
 - `git config --unset user.name`: 删除本地仓库用户名
 - `git config --unset user.email`: 删除本地仓库邮箱
+
+## 8. 提交失败情况
+### 1. 回退到失败前状态并强制推送
+```bash
+git reset --hard HEAD~1  # 回退到失败前状态
+git rm --cached deleted_file.txt  # 移除已删除文件
+git push origin main --force  # 强制推送
+``` 
+### 2 清理暂存区并重新提交
+```bash
+git reset HEAD  # 清空暂存区
+git add .  # 重新添加所有文件
+git commit -m "重新提交"  # 生成新提交
+git push origin <分支名>  # 正常推送
+
+```
+### 3. ‌处理远程冲突‌
+```bash
+git pull --rebase origin <分支名>  # 拉取远程更改
+git status  # 检查冲突文件
+git add .  # 解决冲突后添加
+git rebase --continue  # 继续合并
+git push origin <分支名>  # 正常推送
+```
+
+
 
 代码说明：
 1. 汇总了Git核心版本控制命令，按功能分类展示
